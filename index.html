@@ -11,15 +11,17 @@
         <header>
             <h1>PremStore V PremSelect</h1>
             <div class="dropdown">
-                <button class="dropbtn"><img src="img/menu-01_generated.jpg" class="menuicon"></button>
-                <ul class="dropdown-content">
-                    <li><a href="">Főoldal</a></li>
-                    <li><a href="">Összes termék</a></li>
-                    <li><a href="">Licit</a></li>
-                    <li><a href="">Kapcsolat</a></li>
-                </ul>
+                <button class="menu-button" onclick="openNav()">☰</button>
+                <div class="menu" id="menu">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <a href="">Főoldal</a>
+                    <a href="">Összes termék</a>
+                    <a href="">Licit</a>
+                    <a href="">Kapcsolat</a>
+                </div>  
             </div>
         </header>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
