@@ -19,7 +19,7 @@ nav {
     right: 0px;
     background-color: transparent;
     transition: .4s;
-    padding: 2rem 0;
+    padding: 1.5rem 0;
 }
 
 .main-nav{
@@ -78,7 +78,7 @@ nav {
     padding-top: 60px;
   }
   
- /* .menu a {
+ .menu a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
@@ -90,13 +90,22 @@ nav {
   .menu a:hover {
     color: #f1f1f1;
   }
-  */
+  
   .menu .closebtn {
     position: absolute;
     top: 0;
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
+  }
+
+  .menu-button{
+    background-color: transparent;
+    border: none;
+    color: white;
+    width: auto;
+    height: auto;
+    font-size: 30px;
   }
 
 
