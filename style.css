@@ -30,6 +30,9 @@ nav {
     align-items: center;
     justify-content: space-between;
 }
+
+
+
 .logo{
     font-size: 1.2rem;
     font-weight: 800;
@@ -108,6 +111,10 @@ nav {
     font-size: 30px;
   }
 
+  .menu-button:hover{
+    cursor: pointer;
+  }
+
 
 
 #about {
@@ -119,4 +126,18 @@ nav {
     background-color: rgb(148, 62, 62);
     z-index: 2000;
     transition: .3s;
+  }
+
+  .sidebar-list{
+    text-decoration: none;
+    display: flex;
+    flex-flow: row nowrap;
+    left: 0;
+    right: 0;
+    gap: 15px;
+  }
+  #cart-count{
+    text-decoration: none;
+    color: white;
+    margin-left: 7px;
   }
