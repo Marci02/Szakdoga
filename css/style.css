@@ -69,6 +69,27 @@ nav {
     color: white;
 }
 
+.slideshow-container {
+  max-width:1000px;
+  position: relative;
+  margin: auto;
+  margin-left: 100px;
+}
+
+.slider {
+  animation: slideInFromRight 1s ease-in;
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .menu {
     height: 100%;
     width: 0;
