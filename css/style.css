@@ -314,3 +314,63 @@ html, body {
   background:#6a6a77;;
 }
 
+/*cart-controlls ----------------------------------------------------------------------------*/
+.drawer::part(body) {
+  padding: var(--drawer-body-padding);
+  overscroll-behavior-y: contain;
+  flex: auto;
+  align-items: start;
+  display: grid;
+  overflow-y: auto;
+}
+
+.drawer::part(content) {
+  max-height: var(--drawer-content-max-height);
+  border-radius: var(--rounded-sm);
+  background: rgb(var(--dialog-background));
+  color: rgb(var(--text-color));
+  flex-direction: column;
+  height: 100%;
+  display: flex;
+  position: relative;
+}
+
+@media screen and (min-width: 700px) {
+  .cart-drawer {
+      --drawer-footer-padding: 1.5rem 2.5rem 2.5rem 2.5rem;
+  }
+}
+
+.cart-drawer {
+  --drawer-footer-padding: 1rem 1.5rem 1.5rem 1.5rem;
+  --drawer-content-max-height: none;
+  height: 100%;
+  top: 0;
+}
+
+@media screen and (min-width: 700px) {
+  .drawer {
+      --container-outer-width: var(--spacing-10);
+      --drawer-header-padding: var(--spacing-8) var(--spacing-10);
+      --drawer-body-padding: var(--spacing-8) var(--spacing-10);
+      --drawer-footer-padding: var(--spacing-8) var(--spacing-10);
+      padding: var(--spacing-4);
+      width: 510px;
+      height: 100%;
+  }
+}
+.drawer {
+  --container-outer-width: var(--spacing-6);
+  --background: var(--dialog-background);
+  --text-color: var(--text-primary);
+  --drawer-header-padding: var(--spacing-5);
+  --drawer-body-padding: var(--spacing-5) var(--spacing-6);
+  --drawer-footer-padding: var(--spacing-6);
+  --drawer-content-max-height: none;
+  visibility: hidden;
+  padding: var(--spacing-2);
+  z-index: 999;
+  width: 100%;
+  position: fixed;
+  right: 0;
+}
