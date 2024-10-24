@@ -70,6 +70,7 @@ nav {
 
 .menu {
     height: 100%;
+    line-height: 40px;
     width: 0;
     position: fixed;
     z-index: 1000;
@@ -91,10 +92,26 @@ nav {
     color: #000000;
     display: block;
     transition: 0.3s;
+    position: relative;
   }
-  
+  .menu a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #000;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-left: 30px;
+    transition: width 0.3s;
+  }
+
+  .menu a:hover::after {
+    width: 50%;
+  }
   .menu a:hover {
-    color: #f1f1f1;
+    color: #bebebe;
   }
   
   .menu .closebtn {
