@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    overflow-x: hidden;
+    
 }
 
 li {
@@ -52,7 +52,7 @@ nav {
 }
 
 .menu-link.active {
-    color: #ffc45c;
+    color: #5a5957;
     font-weight: 600;
 }
 
@@ -61,12 +61,10 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    /*background: linear-gradient(to right, #e2e2e2, #c9d6ff);;*/
     color: #fff;
 }
 
 .content:nth-child(even){
-    /*background: linear-gradient(to right, #e2e2e2, #c9d6ff);*/
     color: white;
 }
 
@@ -74,20 +72,23 @@ nav {
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #ffffff;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
+    margin: 5px;
+    margin-bottom: 30px;
+    border-radius: 10px;
   }
   
  .menu a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: #000000;
     display: block;
     transition: 0.3s;
   }
@@ -171,7 +172,7 @@ html, body {
 .slideshow-items {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 600px;
 }
 
 .item {
@@ -234,7 +235,7 @@ html, body {
   position: absolute;
   top: 150px;
   left: -1.8%;
-  z-index: 100;
+  z-index: 1;
 }
 
 .item-header .vertical-part {
