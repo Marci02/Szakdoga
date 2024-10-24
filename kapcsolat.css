@@ -88,6 +88,7 @@ body:before {
     cursor: pointer;
     width: 450px;
     font-size: medium;
+    border-radius: 10px;
 
 }
 
@@ -97,6 +98,7 @@ body:before {
 
 #name, #email, #message{
     width: 425px;
+    border-radius: 10px;
 }
 
 a{
