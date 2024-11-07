@@ -5,41 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/login1.css">
     <title>Login or Sign in</title>
 </head>
 
 <body>
-
     <div class="container" id="container">
-        <?php
-        if(isset($_POST["submit"])) {
-            $name = $_POST["name"];
-            $email = $_POST["email"];
-            $password = $_POST["password"];
-            $confirm_password = $_POST["confirm_password"];
-            $errors = array();
-            if(empty($name) or empty($email) or empty($password) or empty($confirm_password)) {
-                array_push($errors, "Minden mező kitöltése kötelező!");
-            }
-            if(!filter_var ($email, FILTER_VALIDATE_EMAIL)) {
-                array_push($errors, "Hibás email formátum!");
-            }
-            if(strlen($password) < 8) {
-                array_push($errors, "A jelszó legalább 8 karakter hosszú kell legyen!");
-            }
-            if($password != $confirm_password) {
-                array_push($errors, "A két jelszó nem egyezik!");
-            }
-            if(count($errors) == 0) {
-                echo "<div class='success'>Sikeres regisztráció!</div>";
-            } else {
-                foreach($errors as $error) {
-                    echo "<div class='error'>$error</div>";
-                }
-            }
-        }
-        ?>
         <div class="form-container sign-up">
             <form>
                 <h1>Create Account</h1>
@@ -89,7 +60,7 @@
         </div>
     </div>
 
-    <script src="login.js"></script>
+    <script src="js/login1.js"></script>
 </body>
 
 </html>
