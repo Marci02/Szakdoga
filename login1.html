@@ -12,34 +12,6 @@
 <body>
 
     <div class="container" id="container">
-        <?php
-        if(isset($_POST["submit"])) {
-            $name = $_POST["name"];
-            $email = $_POST["email"];
-            $password = $_POST["password"];
-            $confirm_password = $_POST["confirm_password"];
-            $errors = array();
-            if(empty($name) or empty($email) or empty($password) or empty($confirm_password)) {
-                array_push($errors, "Minden mező kitöltése kötelező!");
-            }
-            if(!filter_var ($email, FILTER_VALIDATE_EMAIL)) {
-                array_push($errors, "Hibás email formátum!");
-            }
-            if(strlen($password) < 8) {
-                array_push($errors, "A jelszó legalább 8 karakter hosszú kell legyen!");
-            }
-            if($password != $confirm_password) {
-                array_push($errors, "A két jelszó nem egyezik!");
-            }
-            if(count($errors) == 0) {
-                echo "<div class='success'>Sikeres regisztráció!</div>";
-            } else {
-                foreach($errors as $error) {
-                    echo "<div class='error'>$error</div>";
-                }
-            }
-        }
-        ?>
         <div class="form-container sign-up">
             <form>
                 <h1>Create Account</h1>
