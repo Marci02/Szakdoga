@@ -49,13 +49,31 @@
               <path d="M3.5 19c1.421-2.974 4.247-5 7.5-5s6.079 2.026 7.5 5" fill="none" stroke="white" stroke-linecap="round"></path>
             </svg></a></li>
 
-                <li><a href="" data-no-instant="" class="relative sidebar-btn" aria-controls="cart-drawer" aria-expanded="false">
+                <!--<li><a href="" data-no-instant="" class="" aria-expanded="false" aria-controls="cart-drawer">
                     <span class="sr-only"></span><svg role="presentation" stroke-width="2" focusable="false" width="22" height="22" class="">
                     <path d="M11 7H3.577A2 2 0 0 0 1.64 9.497l2.051 8A2 2 0 0 0 5.63 19H16.37a2 2 0 0 0 1.937-1.503l2.052-8A2 2 0 0 0 18.422 7H11Zm0 0V1" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
                   </svg><div class="cart-counter">
                         <cart-count class="count-bubble opacity-0" id="cart-count" aria-hidden="true">0</cart-count>
                     </div>
-                  </a></li>
+                  </a></li>-->
+                  <li class="nav-item dropdown">
+                    <!-- Dropdown Toggle with Your Icon -->
+                    <button class="dropdown-toggle" type="button" id="dropdownMenuButton" aria-expanded="false">
+                        <span class="sr-only"></span>
+                        <svg role="presentation" stroke-width="2" focusable="false" width="22" height="22" class="">
+                            <path d="M11 7H3.577A2 2 0 0 0 1.64 9.497l2.051 8A2 2 0 0 0 5.63 19H16.37a2 2 0 0 0 1.937-1.503l2.052-8A2 2 0 0 0 18.422 7H11Zm0 0V1" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        <div class="cart-counter">
+                            <cart-count class="count-bubble opacity-0" id="cart-count" aria-hidden="true">0</cart-count>
+                        </div>
+                    </button>
+    
+                    <!-- Dropdown Menu -->
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <p class="dropdown-item" href="#">A kosarad üres!</p>
+                      <button class="dropdown-item" href="#">Tovább a fizetéshez</button>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>
