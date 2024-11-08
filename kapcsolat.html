@@ -5,10 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono|Montserrat:800">
     <link rel="stylesheet" href="css/kapcsolat.css">
-    <title></title>
+    <title>PremSelect</title>
 </head>
 <body>
-    <h1><a href="./index.html" target="_blank">PremSelect</a></h1>
+    <nav>
+        <div class="main-nav">
+            <button class="menu-button" onclick="openNav()">☰</button>
+            <div class="menu" id="menu" id="slide">
+                <ul class="navbar">
+                    <li class="menu-item">
+                        <a href="javascript:void(0)" class="closebtn " onclick="closeNav()">&times;</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" id="mainitem" class="menu-link">Főoldal</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" id="allitem" class="menu-link">Összes termék</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="#" id="licititem" class="menu-link">Licit</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="kapcsolat.html" id="connectitem" class="menu-link active">Kapcsolat</a>
+                    </li>
+                </ul>
+        </div>
+            <a href="index.html" class="logo">PremSelect</a>
+        <div class="sidebar">
+            <ul class="sidebar-list">
+                <li><a href="" class="sidebar-btn">
+                    <span class="sr-only"></span><svg stroke-width="2" focusable="false" width="22" height="22" class="">
+                <circle cx="11" cy="10" r="7" fill="none" stroke="white"></circle>
+                <path d="m16 15 3 3" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg></a></li>
+
+                <li><a href="login.html" target="_blank" class="sidebar-btn">
+                    <span class="sr-only"></span><svg stroke-width="2" focusable="false" width="22" height="22" class="">
+              <circle cx="11" cy="7" r="4" fill="none" stroke="white"></circle>
+              <path d="M3.5 19c1.421-2.974 4.247-5 7.5-5s6.079 2.026 7.5 5" fill="none" stroke="white" stroke-linecap="round"></path>
+            </svg></a></li>
+
+            <li><a href="" data-no-instant="" class="relative sidebar-btn" aria-controls="cart-drawer" aria-expanded="false">
+                <span class="sr-only"></span><svg role="presentation" stroke-width="2" focusable="false" width="22" height="22" class="">
+                <path d="M11 7H3.577A2 2 0 0 0 1.64 9.497l2.051 8A2 2 0 0 0 5.63 19H16.37a2 2 0 0 0 1.937-1.503l2.052-8A2 2 0 0 0 18.422 7H11Zm0 0V1" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg><div class="cart-counter">
+                    <cart-count class="count-bubble opacity-0" id="cart-count" aria-hidden="true">0</cart-count>
+                </div>
+              </a></li>
+            </ul>
+        </div>
+    </nav>
     <div class="all">
         <div class="container">
             <div class="map">
@@ -31,5 +77,6 @@
             </div>
         </div>
     </div>
+    <script src="js/kapcsolat.js"></script>
 </body>
 </html>
