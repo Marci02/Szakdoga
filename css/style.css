@@ -163,11 +163,13 @@ nav.header-sticky {
   right: 0;
   gap: 15px;
 }
+
 #cart-count {
   text-decoration: none;
   color: white;
   margin-left: 7px;
   cursor: default;
+  font-size: 13px;
 }
 
 /*Navbar dropdown*/
