@@ -4,21 +4,174 @@ body, html {
     position: relative;
     height: 100%;
     margin: 0;
-    font-family: Arial, sans-serif;
     background-image: url('https://i.pinimg.com/1200x/52/63/00/5263001ec8aec5f2dea9752963be692f.jpg');
     font-family: 'Poppins', sans-serif;
 }
 
-h1{
-    font-family: 'Poppins', sans-serif;
+li {
+    list-style: none;
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  nav {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    background-color: transparent;
+    transition: 0.4s;
+    padding: 1.5rem 0;
+    z-index: 10;
+  }
+  
+  .main-nav {
+    max-width: 1070px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .logo {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fff;
+  }
+  .menu-item {
+    padding: 0 5px;
+  }
+  
+  .menu-link {
+    color: #fff;
+    font-size: 1rem;
+    padding: 0 0.5rem;
+    font-weight: 300;
+  }
+  
+  .menu-link.active {
+    color: #5a5957;
+    font-weight: 600;
+  }
+  
+  .content {
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #fff;
+  }
+  
+  .content:nth-child(even) {
     color: white;
+  }
+  
+  .menu {
+    height: 100%;
+    line-height: 40px;
+    width: 0;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    margin: 5px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    text-align: left;
+  }
+  
+  .menu a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
     font-size: 25px;
+    color: #000000;
+    display: block;
+    transition: 0.3s;
     position: relative;
-    z-index: 3;
-}
+  }
+  .menu a::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #000;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-left: 30px;
+    transition: width 0.3s;
+  }
+  
+  #mainitem:hover::after {
+    width: 34%;
+  }
+  
+  #allitem:hover::after {
+    width: 64%;
+  }
+  
+  #licititem:hover::after {
+    width: 18%;
+  }
+  
+  #connectitem:hover::after {
+    width: 44%;
+  }
+  
+  .menu a:hover {
+    color: #bebebe;
+  }
+  
+  .menu .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    font-weight: 300;
+  }
+  
+  .menu-button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    width: auto;
+    height: auto;
+    font-size: 30px;
+  }
+  
+  .menu-button:hover {
+    cursor: pointer;
+  }
+  
+  nav.header-sticky {
+    position: fixed;
+    background-color: rgb(148, 62, 62);
+    z-index: 2000;
+    transition: 0.3s;
+  }
+  
+  .sidebar-list {
+    text-decoration: none;
+    display: flex;
+    flex-flow: row wrap;
+    left: 0;
+    right: 0;
+    gap: 15px;
+  }
+  
+  #cart-count {
+    text-decoration: none;
+    color: white;
+    margin-left: 7px;
+    cursor: default;
+  }
+
 .all{
     
     height: 450px;
