@@ -214,13 +214,20 @@ nav.header-sticky {
   display: block;
 }
 
+/*On hover, change the color to a bit darker while the cursor changes to pointer*/
+.dropdown-menu button:hover{
+  cursor: pointer;
+  background-color: rgb(218, 218, 218);
+}
+
+/*On clicking the button, while being clicked the color will turn an even darker gray*/
+.dropdown-menu button:active{
+  background-color: gray;
+}
+
 /* Show the dropdown on hover */
 .dropdown:hover .dropdown-menu {
   display: block;
-}
-
-.dropdown-item:hover {
-  background-color: none;
 }
 
 /*Main page*/
