@@ -106,12 +106,9 @@ let intervalF = setInterval(slider.nextSlide, interval);
 slider.init();
 
 /*Search bar (test)*/
-/*function search() {
+function search() {
   // Get the value from the input element
   var searchTerm = document.getElementById('search').value;
-
-  // Perform some processing or logic based on the search term
-  // For example, you can use an if-else statement or a switch statement
 
   // Simulate a simple example by checking for specific search terms
   if (searchTerm === 'apple') {
@@ -121,4 +118,24 @@ slider.init();
   } else {
     document.getElementById('output').innerHTML = 'No matching result for the search term: ' + searchTerm;
   }
-}*/
+}
+
+/*Cart button toggle*/
+function toggleFunction() {
+  var x = document.getElementById("cartBtn");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+} 
+
+/*Search button toggle*/
+function toggleSearch() {
+  var x = document.getElementById("searchBtn");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+} 

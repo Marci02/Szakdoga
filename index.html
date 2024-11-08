@@ -8,10 +8,6 @@
     <title>PremSelect</title>
 </head>
 <body>
-  <!--Search bar (test)-->
-  <!--<input type="text" id="search" placeholder="Search...">
-  <button onclick="search()">Search</button>
-  <p id="output"></p>-->
     <nav>
         <div class="main-nav">
             <button class="menu-button" onclick="openNav()">☰</button>
@@ -37,11 +33,28 @@
             <a href="#" class="logo">PremSelect</a>
         <div class="sidebar">
             <ul class="sidebar-list">
-                <li><a href="" class="sidebar-btn">
+                <!--<li><button class="sidebar-btn" onclick="toggleFunction()" id="dropdownSearchButton">
                     <span class="sr-only"></span><svg stroke-width="2" focusable="false" width="22" height="22" class="">
                 <circle cx="11" cy="10" r="7" fill="none" stroke="white"></circle>
                 <path d="m16 15 3 3" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
-              </svg></a></li>
+              </svg></button>
+            </li>-->
+                <li class="nav-item dropdown-search">
+                    <button class="dropdown-toggle-search" type="button" id="dropdownSearchButton" onclick="toggleSearch()" aria-expanded="false">
+                        <span class="sr-only"></span>
+                        <svg stroke-width="2" focusable="false" width="22" height="22" class="">
+                          <circle cx="11" cy="10" r="7" fill="none" stroke="white"></circle>
+                          <path d="m16 15 3 3" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <div class="dropdown-menu-search" id="searchBtn" aria-labelledby="dropdownSearchButton">
+                      <p class="dropdown-item-search" href="#"><input type="text" id="search" placeholder="Search...">
+                        <button onclick="search()">Search</button>
+                        <p id="output"></p></p>
+                    </div>
+                </li>
 
                 <li><a href="login.html" target="_blank" class="sidebar-btn">
                     <span class="sr-only"></span><svg stroke-width="2" focusable="false" width="22" height="22" class="">
@@ -49,6 +62,7 @@
               <path d="M3.5 19c1.421-2.974 4.247-5 7.5-5s6.079 2.026 7.5 5" fill="none" stroke="white" stroke-linecap="round"></path>
             </svg></a></li>
 
+            <!--Previous Cart icon-->
                 <!--<li><a href="" data-no-instant="" class="" aria-expanded="false" aria-controls="cart-drawer">
                     <span class="sr-only"></span><svg role="presentation" stroke-width="2" focusable="false" width="22" height="22" class="">
                     <path d="M11 7H3.577A2 2 0 0 0 1.64 9.497l2.051 8A2 2 0 0 0 5.63 19H16.37a2 2 0 0 0 1.937-1.503l2.052-8A2 2 0 0 0 18.422 7H11Zm0 0V1" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -57,8 +71,7 @@
                     </div>
                   </a></li>-->
                   <li class="nav-item dropdown">
-                    <!-- Dropdown Toggle with Your Icon -->
-                    <button class="dropdown-toggle" type="button" id="dropdownMenuButton" aria-expanded="false">
+                    <button class="dropdown-toggle" type="button" id="dropdownMenuButton" onclick="toggleFunction()" aria-expanded="false">
                         <span class="sr-only"></span>
                         <svg role="presentation" stroke-width="2" focusable="false" width="22" height="22" class="">
                             <path d="M11 7H3.577A2 2 0 0 0 1.64 9.497l2.051 8A2 2 0 0 0 5.63 19H16.37a2 2 0 0 0 1.937-1.503l2.052-8A2 2 0 0 0 18.422 7H11Zm0 0V1" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -69,7 +82,7 @@
                     </button>
     
                     <!-- Dropdown Menu -->
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div class="dropdown-menu" id="cartBtn" aria-labelledby="dropdownMenuButton">
                       <p class="dropdown-item" href="#">A kosarad üres!</p>
                       <button class="dropdown-item" href="#">Tovább a fizetéshez</button>
                     </div>

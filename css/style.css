@@ -155,6 +155,16 @@ nav.header-sticky {
   transition: 0.3s;
 }
 
+.sidebar-btn{
+  background-color: #22222a;
+  border: none;
+  cursor: pointer;
+}
+
+#Searchbar{
+  margin-top: 30px;
+}
+
 .sidebar-list {
   text-decoration: none;
   display: flex;
@@ -179,13 +189,21 @@ nav.header-sticky {
 }
 
 .dropdown-toggle {
-  border-radius: 50px; /* Pill shape */
   background-color: #22222a;
-  color: white;
   border: none;
-  text-transform: uppercase;
   display: flex;
   align-items: center;
+  cursor: pointer;
+}
+
+.dropdown-toggle::before{
+  visibility: hidden;
+}
+
+.dropdown-toggle-search{
+  background-color: #22222a;
+  border: none;
+  cursor: pointer;
 }
 
 .dropdown-menu {
@@ -393,11 +411,11 @@ body {
 }
 
 /*Search bar -------------------------------------------------------------------------------------*/
-/*input[type="text"] {
+input[type="text"] {
   padding: 5px;
   width: 200px;
   font-size: 16px;
-}*/
+}
 
 /*responsive alignment ----------------------------------------------------------------------------*/
 @media screen and (min-width: 1150px) {
