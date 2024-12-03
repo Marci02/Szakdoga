@@ -163,6 +163,28 @@ nav.header-sticky {
 
 #Searchbar{
   margin-top: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-menu-search, .dropdown-menu {
+  position: absolute;
+  z-index: 1000;
+}
+
+.cart-drawer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+#search {
+  border-radius: 10px;
+  border: none;
+}
+
+#searchbuttonToSearchBar {
+
 }
 
 .sidebar-list {

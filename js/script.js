@@ -20,7 +20,7 @@ function stickyNav() {
 
 window.addEventListener("scroll", stickyNav);
 
-//main lap
+
 const items = document.querySelectorAll(".item"),
   controls = document.querySelectorAll(".control"),
   headerItems = document.querySelectorAll(".item-header"),
@@ -41,9 +41,9 @@ const slider = {
     items[current].classList.add("active");
   },
   nextSlide: () => {
-    // Increment current slide and add active class
+    
     slider.reset();
-    if (current === items.length - 1) current = -1; // Check if current slide is last in array
+    if (current === items.length - 1) current = -1; 
     current++;
     controls[current].classList.add("active");
     items[current].classList.add("active");
@@ -51,7 +51,7 @@ const slider = {
     slider.transitionDelay(descriptionItems);
   },
   clickedControl: (e) => {
-    // Add active class to clicked control and corresponding slide
+    
     slider.reset();
     clearInterval(intervalF);
 
@@ -61,26 +61,26 @@ const slider = {
     control.classList.add("active");
     items.forEach((item, index) => {
       if (index === dataIndex) {
-        // Add active class to corresponding slide
+        
         item.classList.add("active");
       }
     });
     current = dataIndex; // Update current slide
     slider.transitionDelay(headerItems);
     slider.transitionDelay(descriptionItems);
-    intervalF = setInterval(slider.nextSlide, interval); // Fire that bad boi back up
+    intervalF = setInterval(slider.nextSlide, interval);
   },
   reset: () => {
-    // Remove active classes
+    
     items.forEach((item) => item.classList.remove("active"));
     controls.forEach((control) => control.classList.remove("active"));
   },
   transitionDelay: (items) => {
-    // Set incrementing css transition-delay for .item-header & .item-description, .vertical-part, b elements
+    
     let seconds;
 
     items.forEach((item) => {
-      const children = item.childNodes; // .vertical-part(s)
+      const children = item.childNodes;
       let count = 1,
         delay;
 
@@ -89,7 +89,7 @@ const slider = {
         : (seconds = 0.007);
 
       children.forEach((child) => {
-        // iterate through .vertical-part(s) and style b element
+
         if (child.classList) {
           item.parentNode.classList.contains("active")
             ? (delay = count * seconds + activeDelay)
@@ -105,12 +105,11 @@ const slider = {
 let intervalF = setInterval(slider.nextSlide, interval);
 slider.init();
 
-/*Search bar (test)*/
+// Search gomb
 function search() {
-  // Get the value from the input element
+
   var searchTerm = document.getElementById('search').value;
 
-  // Simulate a simple example by checking for specific search terms
   if (searchTerm === 'apple') {
     document.getElementById('output').innerHTML = 'Search term matched: apple';
   } else if (searchTerm === 'banana') {
@@ -120,22 +119,24 @@ function search() {
   }
 }
 
-/*Cart button toggle*/
-function toggleFunction() {
-  var x = document.getElementById("cartBtn");
-  if (x.style.display === "none") {
+// Search gomb megjelenítése/elrejtése
+function toggleSearch() {
+  var x = document.getElementById("searchBtn");
+  if (x.style.display === "none" || x.style.display === "") {
     x.style.display = "block";
   } else {
     x.style.display = "none";
   }
 } 
 
-/*Search button toggle*/
-function toggleSearch() {
-  var x = document.getElementById("searchBtn");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-} 
+// Alapvetően a kosár és a kereső gomb elrejtése
+document.getElementById("searchBtn").style.display = "none";
+document.getElementById("cartBtn").style.display = "none";
+
+document.getElementById("cartBtn").parentElement.addEventListener("mouseenter", function() {
+  document.getElementById("cartBtn").style.display = "block";
+});
+
+document.getElementById("cartBtn").parentElement.addEventListener("mouseleave", function() {
+  document.getElementById("cartBtn").style.display = "none";
+});
