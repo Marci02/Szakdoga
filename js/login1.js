@@ -39,10 +39,10 @@ signUpForm.addEventListener('submit', async (event) => {
         const response = await fetch('backend/register.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, password }),
+            body: JSON.stringify({ name: name, email: email, password: password }),
         });
 
-        if (response.headers.get('content-type')?.includes('application/json')) {
+        if (response.ok && response.headers.get('content-type')?.includes('application/json')) {
             const data = await response.json();
 
             if (data.success) {
@@ -74,7 +74,7 @@ signInForm.addEventListener('submit', async (event) => {
         const response = await fetch("backend/login.php", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
+            body: JSON.stringify({ email: email, password: password }),
         });
 
         if (response.ok) {

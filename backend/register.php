@@ -8,7 +8,6 @@ header("Content-Type: application/json");
 
 $data = json_decode(file_get_contents('php://input'), true);
 
-echo json_encode(['message' => 'Name: ' . $name . ', Email: ' . $email . ', Password: ' . $password]);
 
 if (!$data) {
     echo json_encode(['message' => 'Invalid JSON data']);
@@ -20,6 +19,7 @@ $name = trim($data['name'] ?? '');
 $email = trim($data['email'] ?? '');
 $password = $data['password'] ?? '';
 
+echo json_encode(['message' => 'Name: ' . $name . ', Email: ' . $email . ', Password: ' . $password]);
 
 
 if (empty($name) || empty($email) || empty($password)) {
@@ -28,7 +28,7 @@ if (empty($name) || empty($email) || empty($password)) {
 }
 
 // Check if the email already exists
-$query = "SELECT COUNT(*) FROM user WHERE email =" . $email;
+$query = "SELECT COUNT(*) FROM user WHERE email = ?";
 $stmt = mysqli_prepare($dbconn, $query);
 mysqli_stmt_bind_param($stmt, 's', $email);
 mysqli_stmt_execute($stmt);
@@ -45,7 +45,7 @@ if ($emailExists) {
 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
 // Insert the user into the database
-$query = "INSERT INTO user (name, email, password) VALUES ($name, $email, $hashedPassword)";
+$query = "INSERT INTO user (name, email, password) VALUES (?, ?, ?)";
 $stmt = mysqli_prepare($dbconn, $query);
 mysqli_stmt_bind_param($stmt, 'sss', $name, $email, $hashedPassword);
 
