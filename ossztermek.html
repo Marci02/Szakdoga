@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/ossztermek.css">
+    <title>Termékek listája</title>
+</head>
+<body>
+  <div class="container">
+    <a href="#" class="logo">PremSelect</a>
+    <div class="cardGallery">
+      <button id="uploadBtn">Upload</button>
+
+      <div id="popup" style="display:none;">
+        <div id="cardContainer" class="card-container"></div>
+        <form id="uploadForm">
+          <label for="imageUpload">Upload Image:</label>
+          <input type="file" id="imageUpload" name="imageUpload" accept="image/*"><br><br>
+          
+          <label for="cardName">Card Name:</label>
+          <input type="text" id="cardName" name="cardName"><br><br>
+          
+          <label for="cardDescription">Card Description:</label>
+          <textarea id="cardDescription" name="cardDescription"></textarea><br><br>
+          
+          <button type="submit">Create Card</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="/js/ossztermek.js"></script>
+</body>
+</html>
