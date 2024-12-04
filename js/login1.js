@@ -26,6 +26,8 @@ signUpForm.addEventListener('submit', async (event) => {
     const password = signUpForm.querySelector('input[placeholder="Password"]').value;
     const confirmPassword = signUpForm.querySelector('input[placeholder="Confirm Password"]').value;
 
+    console.log(name, email, password, confirmPassword);
+
     // Basic validation
     if (password !== confirmPassword) {
         alert("Passwords do not match!");
@@ -34,17 +36,24 @@ signUpForm.addEventListener('submit', async (event) => {
 
     try {
         // Send data to server
-        const response = await fetch('http://localhost/%C3%9Aj%20mappa/Szakdoga/backend/register.php', {
+        const response = await fetch('backend/register.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, password }),
         });
 
-        if (response.ok) {
-            alert("Registration successful!");
+        if (response.headers.get('content-type')?.includes('application/json')) {
+            const data = await response.json();
+
+            if (data.success) {
+                alert("Registration successful!");
+                console.log("User data:", data);
+            } else {
+                alert(`Registration failed: ${data.message}`);
+            }
         } else {
-            const errorData = await response.json();
-            alert(`Registration failed: ${errorData.message}`);
+            const errorText = await response.text();
+            alert(`Registration failed: ${errorText}`);
         }
     } catch (error) {
         console.error("Error during registration:", error);
@@ -62,7 +71,7 @@ signInForm.addEventListener('submit', async (event) => {
 
     try {
         // Send data to server
-        const response = await fetch("http://localhost/%C3%9Aj%20mappa/Szakdoga/backend/login.php", {
+        const response = await fetch("backend/login.php", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),
