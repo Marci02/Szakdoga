@@ -289,19 +289,24 @@ nav.header-sticky {
   padding: 10px 0;
 }
 
-.cards {
-  width: 80%;
+.product-list {
+  width: 90%;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
 
-.card {
+.product-card {
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
   width: calc(33.333% - 40px); /* Adjust based on desired card width */
   box-sizing: border-box;
+  height: 500px;
+  width: auto;
 }
