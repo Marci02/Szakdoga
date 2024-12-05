@@ -1,51 +1,57 @@
 function openNav() {
-  document.getElementById("menu").style.width = "300px";
-}
-
-function closeNav() {
-  document.getElementById("menu").style.width = "0";
-}
-
-function stickyNav() {
-  var headerHeight = document.querySelector("#about").offsetHeight / 2;
-  var navbar = document.querySelector("nav");
-  var scrollValue = window.scrollY;
-
-  if (scrollValue > headerHeight) {
-    navbar.classList.add("header-sticky");
-  } else {
-    navbar.classList.remove("header-sticky");
+    document.getElementById("menu").style.width = "300px";
   }
-}
-
-window.addEventListener("scroll", stickyNav);
-
-
-document.getElementById('uploadBtn').addEventListener('click', function() {
-    document.getElementById('popup').style.display = 'block';
-  });
-
-  document.getElementById('uploadForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const image = document.getElementById('imageUpload').files[0];
-    const name = document.getElementById('cardName').value;
-    const description = document.getElementById('cardDescription').value;
-
-    if (image && name && description) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const card = document.createElement('div');
-        card.innerHTML = `
-          <img src="${e.target.result}" alt="${name}" style="width:100px;height:100px;"><br>
-          <strong>${name}</strong><br>
-          <p>${description}</p>
-        `;
-        document.body.appendChild(card);
-        document.getElementById('popup').style.display = 'none';
-        document.getElementById('uploadForm').reset();
-      };
-      reader.readAsDataURL(image);
+  
+  function closeNav() {
+    document.getElementById("menu").style.width = "0";
+  }
+  
+  function stickyNav() {
+    var headerHeight = document.querySelector("#about").offsetHeight / 2;
+    var navbar = document.querySelector("nav");
+    var scrollValue = window.scrollY;
+  
+    if (scrollValue > headerHeight) {
+      navbar.classList.add("header-sticky");
     } else {
-      alert('Please fill out all fields and upload an image.');
+      navbar.classList.remove("header-sticky");
     }
+  }
+  
+  window.addEventListener("scroll", stickyNav);
+  
+
+  function search() {
+
+    var searchTerm = document.getElementById('search').value;
+  
+    if (searchTerm === 'apple') {
+      document.getElementById('output').innerHTML = 'Search term matched: apple';
+    } else if (searchTerm === 'banana') {
+      document.getElementById('output').innerHTML = 'Search term matched: banana';
+    } else {
+      document.getElementById('output').innerHTML = 'No matching result for the search term: ' + searchTerm;
+    }
+  }
+  
+  // Search gomb megjelenítése/elrejtése
+  function toggleSearch() {
+    var x = document.getElementById("searchBtn");
+    if (x.style.display === "none" || x.style.display === "") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  } 
+  
+  // Alapvetően a kosár és a kereső gomb elrejtése
+  document.getElementById("searchBtn").style.display = "none";
+  document.getElementById("cartBtn").style.display = "none";
+  
+  document.getElementById("cartBtn").parentElement.addEventListener("mouseenter", function() {
+    document.getElementById("cartBtn").style.display = "block";
+  });
+  
+  document.getElementById("cartBtn").parentElement.addEventListener("mouseleave", function() {
+    document.getElementById("cartBtn").style.display = "none";
   });
