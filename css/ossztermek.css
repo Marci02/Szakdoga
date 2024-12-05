@@ -16,7 +16,7 @@ li {
 a {
   text-decoration: none;
 }
-nav {
+.nav {
   position: absolute;
   left: 0px;
   right: 0px;
@@ -56,12 +56,10 @@ nav {
   font-weight: 600;
 }
 
-.content {
+.container {
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
+  width: 100%;
+  color: black;
 }
 
 .content:nth-child(even) {
@@ -266,4 +264,35 @@ nav.header-sticky {
 /* Show the dropdown on hover */
 .dropdown:hover .dropdown-menu {
   display: block;
+}
+
+
+.container {
+  margin-top: 100px; /* Adjust this value based on your nav height */
+  display: flex;
+}
+
+.sidebar-categories {
+  width: 20%;
+  background-color: #f8f9fa;
+  padding: 20px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.cards {
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: calc(33.333% - 40px); /* Adjust based on desired card width */
+  box-sizing: border-box;
 }
