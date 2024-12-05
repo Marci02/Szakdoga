@@ -167,6 +167,13 @@ nav.header-sticky {
   align-items: center;
 }
 
+#searchbuttonToSearchBar{
+  background-color: white;
+  width: 85px;
+  height: 35px;
+  border-radius: 5px;
+}
+
 .dropdown-menu-search, .dropdown-menu {
   position: absolute;
   z-index: 1000;
