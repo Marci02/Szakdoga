@@ -35,10 +35,10 @@ CREATE TABLE `admins` (
   `username` varchar(255) NOT NULL
 );
 
-ALTER TABLE `user` ADD FOREIGN KEY (`postcode`) REFERENCES `city` (`postcode_id`);
+ALTER TABLE `city` ADD FOREIGN KEY (`postcode_id`) REFERENCES `user` (`postcode`);
 
 ALTER TABLE `city` ADD FOREIGN KEY (`county_id`) REFERENCES `counties` (`id`);
 
-ALTER TABLE `user` ADD FOREIGN KEY (`id`) REFERENCES `sales` (`saler_id`);
+ALTER TABLE `sales` ADD FOREIGN KEY (`saler_id`) REFERENCES `user` (`id`);
 
-ALTER TABLE `user` ADD FOREIGN KEY (`id`) REFERENCES `sales` (`buyer_id`);
+ALTER TABLE `sales` ADD FOREIGN KEY (`buyer_id`) REFERENCES `user` (`id`);
