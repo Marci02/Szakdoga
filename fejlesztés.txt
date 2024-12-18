@@ -1,0 +1,13 @@
+kellene a trello
+remember tokennél, bool lehetőség
+tovább fejlesztés, nemzetközivé téve, ország table 
+city = település
+több táblára van szükség a counties-nál
+termék tábla, autós adatbázisból kitudjuk nézni, sok alkategória kell majd 
+lesz e alkategória cipőn vagy ruhán belül és ha lesz akkor külön tábla mindegyik
+3-4 szintnél nem kell több
+összekötni a terméket a userrel
+db számok figyelése, raktár szemlélet
+melyik usernél az adott termékből mennyi van neki eladó
+a user lehet eladó és vevő is
+vásárlás táblánál két user_id kell mert lehet vevő és eladó is 
