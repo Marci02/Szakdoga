@@ -55,3 +55,54 @@ function openNav() {
   document.getElementById("cartBtn").parentElement.addEventListener("mouseleave", function() {
     document.getElementById("cartBtn").style.display = "none";
   });
+
+  function openUploadModal() {
+    // Create modal elements
+    var modal = document.createElement("div");
+    modal.id = "uploadModal";
+    modal.style.position = "fixed";
+    modal.style.top = "50%";
+    modal.style.left = "50%";
+    modal.style.transform = "translate(-50%, -50%)";
+    modal.style.width = "400px";
+    modal.style.padding = "20px";
+    modal.style.backgroundColor = "#fff";
+    modal.style.boxShadow = "0 5px 15px rgba(0,0,0,0.3)";
+    modal.style.zIndex = "1000";
+
+    var modalContent = document.createElement("div");
+    modalContent.innerHTML = `
+      <h2>Termék feltöltése</h2>
+      <input type="file" id="fileInput">
+      <textarea id="fileDesc" rows="4" cols="50"></textarea>
+      <button onclick="closeUploadModal()">Mégse</button>
+    <button onclick="uploadFile()">Feltöltés</button>
+    `;
+
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+
+    // Create overlay
+    var overlay = document.createElement("div");
+    overlay.id = "modalOverlay";
+    overlay.style.position = "fixed";
+    overlay.style.top = "0";
+    overlay.style.left = "0";
+    overlay.style.width = "100%";
+    overlay.style.height = "100%";
+    overlay.style.backgroundColor = "rgba(0,0,0,0.5)";
+    overlay.style.zIndex = "999";
+
+    document.body.appendChild(overlay);
+  }
+
+  function closeUploadModal() {
+    var modal = document.getElementById("uploadModal");
+    var overlay = document.getElementById("modalOverlay");
+    if (modal) {
+      document.body.removeChild(modal);
+    }
+    if (overlay) {
+      document.body.removeChild(overlay);
+    }
+  }

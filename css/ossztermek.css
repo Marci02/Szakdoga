@@ -270,7 +270,7 @@ nav.header-sticky {
 
 
 .container {
-  margin-top: 100px; /* Adjust this value based on your nav height */
+  margin-top: 100px;
   display: flex;
 }
 
