@@ -87,7 +87,6 @@ function openNav() {
     modal.appendChild(modalContent);
     document.body.appendChild(modal);
 
-    // Create overlay
     var overlay = document.createElement("div");
     overlay.id = "modalOverlay";
     overlay.style.position = "fixed";
@@ -111,3 +110,38 @@ function openNav() {
       document.body.removeChild(overlay);
     }
   }
+
+
+function uploadFile() {
+  var fileTitle = document.getElementById("fileTitle").value;
+  var fileDesc = document.getElementById("fileDesc").value;
+  var fileInput = document.getElementById("fileInput").files[0];
+
+  if (fileTitle && fileDesc && fileInput) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var card = document.createElement("div");
+      card.className = "product-card";
+
+      var cardTitle = document.createElement("h3");
+      cardTitle.innerText = fileTitle;
+      card.appendChild(cardTitle);
+
+      var cardImage = document.createElement("img");
+      cardImage.src = e.target.result;
+      
+      cardImage.style.borderRadius = "5px";
+      card.appendChild(cardImage);
+
+      var cardDesc = document.createElement("p");
+      cardDesc.innerText = fileDesc;
+      card.appendChild(cardDesc);
+
+      document.getElementsByClassName("product-list").innerHTML += card;
+      closeUploadModal();
+    };
+    reader.readAsDataURL(fileInput);
+  } else {
+    alert("Kérjük, töltse ki az összes mezőt és válasszon egy fájlt.");
+  }
+}
