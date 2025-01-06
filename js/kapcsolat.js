@@ -20,3 +20,37 @@ function openNav() {
   
   window.addEventListener("scroll", stickyNav);
   
+  function search() {
+
+    var searchTerm = document.getElementById('search').value;
+  
+    if (searchTerm === 'apple') {
+      document.getElementById('output').innerHTML = 'Search term matched: apple';
+    } else if (searchTerm === 'banana') {
+      document.getElementById('output').innerHTML = 'Search term matched: banana';
+    } else {
+      document.getElementById('output').innerHTML = 'No matching result for the search term: ' + searchTerm;
+    }
+  }
+  
+  // Search gomb megjelenítése/elrejtése
+  function toggleSearch() {
+    var x = document.getElementById("searchBtn");
+    if (x.style.display === "none" || x.style.display === "") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  } 
+  
+  // Alapvetően a kosár és a kereső gomb elrejtése
+  document.getElementById("searchBtn").style.display = "none";
+  document.getElementById("cartBtn").style.display = "none";
+  
+  document.getElementById("cartBtn").parentElement.addEventListener("mouseenter", function() {
+    document.getElementById("cartBtn").style.display = "block";
+  });
+  
+  document.getElementById("cartBtn").parentElement.addEventListener("mouseleave", function() {
+    document.getElementById("cartBtn").style.display = "none";
+  });

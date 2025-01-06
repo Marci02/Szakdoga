@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono|Montserrat:800">
     <link rel="stylesheet" href="css/licit.css">
-    <title>PremSelect</title>
+    <title>Licitelés</title>
 </head>
 <body>
-    <nav>
+    <nav class="nav">
         <div class="main-nav">
             <button class="menu-button" onclick="openNav()">☰</button>
             <div class="menu" id="menu" id="slide">
@@ -17,20 +16,20 @@
                         <a href="javascript:void(0)" class="closebtn " onclick="closeNav()">&times;</a>
                     </li>
                     <li class="menu-item">
-                        <a href="#" id="mainitem" class="menu-link active">Főoldal</a>
+                        <a href="index.html" id="mainitem" class="menu-link">Főoldal</a>
                     </li>
                     <li class="menu-item">
-                        <a href="ossztermek.html" id="allitem" class="menu-link">Összes termék</a>
+                        <a href="ossztermek.html" id="allitem" class="menu-link active">Összes termék</a>
                     </li>
                     <li class="menu-item">
-                        <a href="#" id="licititem" class="menu-link">Licit</a>
+                        <a href="licit.html" id="licititem" class="menu-link">Licit</a>
                     </li>
                     <li class="menu-item">
                         <a href="kapcsolat.html" id="connectitem" class="menu-link">Kapcsolat</a>
                     </li>
                 </ul>
         </div>
-        <a href="index.html" class="logo">PremSelect</a>
+            <a href="index.html" class="logo">PremSelect</a>
         <div class="sidebar">
             <ul class="sidebar-list">
                 <li class="nav-item dropdown-search">
@@ -81,7 +80,7 @@
         <div class="sidebar-categories">
             <ul class="category-list">
                 <li class="category-item"><a href="#">Szűrő</a></li>
-                <li class="category-item"><a href="#" onclick="openUploadModal()">licit feltöltése</a></li>
+                <li class="category-item"><a href="#" onclick="openUploadModal()">Licit feltöltése</a></li>
             </ul>
         </div>
         <div class="product-list">
@@ -130,7 +129,33 @@
                 <h3>Product 9</h3>
                 <p>Product description 9</p>
             </div>
+            <div class="product-card">
+                <img src="path/to/image3.jpg" alt="Product 6">
+                <h3>Product 6</h3>
+                <p>Product description 6</p>
+            </div>
+            <div class="product-card">
+                <img src="path/to/image3.jpg" alt="Product 6">
+                <h3>Product 6</h3>
+                <p>Product description 6</p>
+            </div>
+            <div class="product-card">
+                <img src="path/to/image3.jpg" alt="Product 6">
+                <h3>Product 6</h3>
+                <p>Product description 6</p>
+            </div>
+            <div class="product-card">
+                <img src="path/to/image3.jpg" alt="Product 6">
+                <h3>Product 6</h3>
+                <p>Product description 6</p>
+            </div>
+            <div class="product-card">
+                <img src="path/to/image3.jpg" alt="Product 6">
+                <h3>Product 6</h3>
+                <p>Product description 6</p>
+            </div>
         </div>
+    </div>
     <script src="js/licit.js"></script>
 </body>
 </html>
