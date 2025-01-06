@@ -67,7 +67,7 @@ function openNav() {
     modal.style.height = "auto";
     modal.style.lineHeight = "2";
     modal.style.width = "400px";
-    modal.style.padding = "20px";
+    modal.style.padding = "40px";
     modal.style.backgroundColor = "#fff";
     modal.style.boxShadow = "0 5px 15px rgba(0,0,0,0.3)";
     modal.style.zIndex = "1000";
@@ -75,11 +75,11 @@ function openNav() {
 
     var modalContent = document.createElement("div");
     modalContent.innerHTML = `
-      <h2>Termék feltöltése</h2>
+      <h2 style="margin-bottom: 15px;">Termék feltöltése</h2>
       <input type="text" id="fileTitle" placeholder = "Termék címének megadása" style="width: 300px; padding: 5px;">
       <input type="file" id="fileInput" style="cursor: pointer;">
       <h4>Leírás:</h4>
-      <textarea id="fileDesc" rows="5" cols="50" style="padding:5px;"></textarea>
+      <textarea id="fileDesc" rows="5" cols="50" style="padding:5px; resize: none; width: 300px;" placeholder="Termék rövid leírása"></textarea>
       <button onclick="uploadFile()" style="cursor: pointer; padding:6px; color: white; background-color: black; border-radius: 5px; border: none;">Feltöltés</button>
       <button onclick="closeUploadModal()" style="cursor: pointer; padding:5px; background-color: white; border-radius: 5px;">Mégse</button>
     `;
