@@ -56,8 +56,9 @@ signUpForm.addEventListener('submit', async (event) => {
             alert(`Registration failed: ${errorText}`);
         }
     } catch (error) {
-        console.error("Error during registration:", error);
-        alert("An error occurred. Please try again later.");
+        const errorText = await response.text();
+        console.error("Registration failed response text:", errorText); 
+        alert(`Registration failed: ${errorText}`);
     }
 });
 
@@ -83,8 +84,9 @@ signInForm.addEventListener('submit', async (event) => {
             console.log("User data:", data);
             // Perform additional actions, like redirecting to another page
         } else {
-            const errorData = await response.json();
-            alert(`Login failed: ${errorData.message}`);
+            const errorText = await response.text();
+            console.error("Registration failed response text:", errorText); 
+            alert(`Registration failed: ${errorText}`);
         }
     } catch (error) {
         console.error("Error during login:", error);
