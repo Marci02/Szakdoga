@@ -309,3 +309,17 @@ nav.header-sticky {
   height: 500px;
   width: auto;
 }
+
+#upload button{
+  padding: 10px;
+  border-radius: 10px;
+  margin-left: 40px;
+  cursor: pointer;
+  background-color: transparent;
+  margin-top: 10px;
+}
+
+#upload button:active {
+  transform: translateY(2px);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.2);
+}
