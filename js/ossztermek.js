@@ -74,11 +74,13 @@ function openNav() {
 
     var modalContent = document.createElement("div");
     modalContent.innerHTML = `
-      <h2 style="margin-bottom: 15px;">Termék feltöltése</h2>
-      <input type="text" id="fileTitle" placeholder = "Termék címének megadása" style="width: 300px; padding: 5px;">
+      <h2 style="margin-bottom: 20px;">Termék feltöltése</h2>
+      <input type="text" id="fileTitle" placeholder="Termék címének megadása" style="width: 300px; padding: 5px;">
       <input type="file" id="fileInput" style="cursor: pointer;">
       <h4>Leírás:</h4>
       <textarea id="fileDesc" rows="5" cols="50" style="padding:5px; resize: none; width: 300px;" placeholder="Termék rövid leírása"></textarea>
+      <h4>Ár:</h4>
+      <input type="number" id="filePrice" placeholder="Termék ára" style="width: 300px; padding: 5px; margin-bottom: 15px;" min="0">
       <button onclick="uploadFile()" style="cursor: pointer; padding:6px; color: white; background-color: black; border-radius: 5px; border: none;">Feltöltés</button>
       <button onclick="closeUploadModal()" style="cursor: pointer; padding:5px; background-color: white; border-radius: 5px;">Mégse</button>
     `;
@@ -115,6 +117,7 @@ function uploadFile() {
   var fileTitle = document.getElementById("fileTitle").value;
   var fileDesc = document.getElementById("fileDesc").value;
   var fileInput = document.getElementById("fileInput").files[0];
+  var filePrice = document.getElementById("filePrice").value;
 
   if (fileTitle && fileDesc && fileInput) {
     var reader = new FileReader();
@@ -126,6 +129,7 @@ function uploadFile() {
       <img src="${e.target.result}" alt="${fileTitle}" style="width: 100%; height: auto;">
         <h3>${fileTitle}</h3>
         <p>${fileDesc}</p>
+        <h3>Ár: ${filePrice} Ft</h3>
       `;
       productList.appendChild(productCard);
       closeUploadModal();
