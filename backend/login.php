@@ -1,4 +1,5 @@
 <?php
+/*
 echo("Sikeres bejelentkezés!");
 $email = $_POST["email"];
 var_dump($email);
@@ -11,7 +12,7 @@ echo $hashedPassword."<br />";
 $hashedPassword2 = password_hash($input, $encrypted);
 echo $hashedPassword2."<br />";
 
-/*
+
 1.: Ellenőrizni, hogy van-e adat(történt-e login gombra kattintás)
 2.: Inputban kapott adatok szanitálása (megfelelő hosszúságúakk-e az adatok, megfelelő formátumú, string escape-elés stb)
 3.: Email cím alapján felhasználó keresése adatbázisban. Mivel password hashelve van, ezért
@@ -21,4 +22,8 @@ echo $hashedPassword2."<br />";
  eltároljuk adatbázisban majd átirányítjuk a felhasználót a megfelelő oldalra.
 4. b.: Ha nincs, akkor hibba üzenet, hogy hibás felhasználói név / jelszó
 */
+
+
+
+
 ?>
