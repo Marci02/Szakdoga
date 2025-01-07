@@ -7,7 +7,7 @@ function openNav() {
   }
   
   function stickyNav() {
-    var headerHeight = document.querySelector("#about").offsetHeight / 2;
+    var headerHeight = document.querySelector(".container").offsetHeight / 2;
     var navbar = document.querySelector("nav");
     var scrollValue = window.scrollY;
   
@@ -57,7 +57,6 @@ function openNav() {
   });
 
   function openUploadModal() {
-    // Create modal elements
     var modal = document.createElement("div");
     modal.id = "uploadModal";
     modal.style.position = "fixed";
@@ -120,28 +119,19 @@ function uploadFile() {
   if (fileTitle && fileDesc && fileInput) {
     var reader = new FileReader();
     reader.onload = function(e) {
-      var card = document.createElement("div");
-      card.className = "product-card";
-
-      var cardTitle = document.createElement("h3");
-      cardTitle.innerText = fileTitle;
-      card.appendChild(cardTitle);
-
-      var cardImage = document.createElement("img");
-      cardImage.src = e.target.result;
-      
-      cardImage.style.borderRadius = "5px";
-      card.appendChild(cardImage);
-
-      var cardDesc = document.createElement("p");
-      cardDesc.innerText = fileDesc;
-      card.appendChild(cardDesc);
-
-      document.getElementsByClassName("product-list").innerHTML += card;
+      var productList = document.querySelector(".product-list");
+      var productCard = document.createElement("div");
+      productCard.className = "product-card";
+      productCard.innerHTML = `
+      <img src="${e.target.result}" alt="${fileTitle}" style="width: 100%; height: auto;">
+        <h3>${fileTitle}</h3>
+        <p>${fileDesc}</p>
+      `;
+      productList.appendChild(productCard);
       closeUploadModal();
     };
     reader.readAsDataURL(fileInput);
   } else {
-    alert("Kérjük, töltse ki az összes mezőt és válasszon egy fájlt.");
+    alert("Minden mezőt ki kell tölteni!");
   }
 }
