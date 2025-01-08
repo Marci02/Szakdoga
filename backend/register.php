@@ -15,14 +15,15 @@ if (!$data) {
 }
 
 // Get the input data
-$name = trim($data['name'] ?? '');
+$firstname = trim($data['firstname'] ?? '');
+$lastname = trim($data['lastname'] ?? '');
 $email = trim($data['email'] ?? '');
 $password = $data['password'] ?? '';
 
-echo json_encode(['message' => 'Name: ' . $name . ', Email: ' . $email . ', Password: ' . $password]);
+echo json_encode(['message' => 'Firstname: ' . $firstname . ', Lastname: ' . $lastname . ', Email: ' . $email . ', Password: ' . $password]);
 
 
-if (empty($name) || empty($email) || empty($password)) {
+if (empty($firstname) || empty($lastname) || empty($email) || empty($password)) {
     echo json_encode(['message' => 'All fields are required']);
     exit;
 }
@@ -45,9 +46,9 @@ if ($emailExists) {
 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
 // Insert the user into the database
-$query = "INSERT INTO user (firstname, email, password) VALUES (?, ?, ?)";
+$query = "INSERT INTO user (firstname, lastname, email, password) VALUES (?, ?, ?, ?)";
 $stmt = mysqli_prepare($dbconn, $query);
-mysqli_stmt_bind_param($stmt, 'sss', $name, $email, $hashedPassword);
+mysqli_stmt_bind_param($stmt, 'ssss', $firstname, $lastname, $email, $hashedPassword);
 
 if (mysqli_stmt_execute($stmt)) {
     echo json_encode(['message' => 'User registered successfully']);

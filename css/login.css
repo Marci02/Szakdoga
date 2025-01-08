@@ -23,8 +23,11 @@ body{
     border-radius: 1vh;
     width: 28%;
     height: 25%;
-    padding: 5px;
+    padding: 3px;
+    line-height: 10px;
 }
+
+
 
 .items{
     margin: 10px;
@@ -55,3 +58,4 @@ body{
     font-family: 'Poppins', sans-serif;
     font-size: medium;
 }
+
