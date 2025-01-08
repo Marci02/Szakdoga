@@ -46,6 +46,7 @@ signUpForm.addEventListener('submit', async (event) => {
         if (response.ok && response.headers.get('content-type')?.includes('application/json')) {
             const data = await response.json();
 
+            console.log(data);
             if (data.success) {
                 alert("Registration successful!");
                 console.log("User data:", data);
@@ -53,10 +54,13 @@ signUpForm.addEventListener('submit', async (event) => {
                 alert(`Registration failed: ${data.message}`);
             }
         } else {
+            console.log(data);
             const errorText = await response.text();
             alert(`Registration failed: ${errorText}`);
+           
         }
     } catch (error) {
+        console.log(data);
         console.error("Error during registration:", error);
         alert("An error occurred. Please try again later.");
     }

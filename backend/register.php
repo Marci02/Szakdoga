@@ -20,7 +20,7 @@ $lastname = trim($data['lastname'] ?? '');
 $email = trim($data['email'] ?? '');
 $password = $data['password'] ?? '';
 
-echo json_encode(['message' => 'Firstname: ' . $firstname . ', Lastname: ' . $lastname . ', Email: ' . $email . ', Password: ' . $password]);
+//echo json_encode(['message' => 'Firstname: ' . $firstname . ', Lastname: ' . $lastname . ', Email: ' . $email . ', Password: ' . $password]);
 
 
 if (empty($firstname) || empty($lastname) || empty($email) || empty($password)) {
