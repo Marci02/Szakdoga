@@ -45,7 +45,7 @@ if ($emailExists) {
 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
 // Insert the user into the database
-$query = "INSERT INTO user (name, email, password) VALUES (?, ?, ?)";
+$query = "INSERT INTO user (firstname, email, password) VALUES (?, ?, ?)";
 $stmt = mysqli_prepare($dbconn, $query);
 mysqli_stmt_bind_param($stmt, 'sss', $name, $email, $hashedPassword);
 
