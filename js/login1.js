@@ -43,18 +43,15 @@ signUpForm.addEventListener('submit', async (event) => {
             body: JSON.stringify({firstname: firstname, lastname: lastname, email: email, password: password }),
         });
 
-        if (response.ok && response.headers.get('content-type')?.includes('application/json')) {
+        if (response.ok) {
             const data = await response.json();
-
-            if (data.success) {
-                alert("Registration successful!");
-                console.log("User data:", data);
-            } else {
-                alert(`Registration failed: ${data.message}`);
-            }
+            alert("Registration successful!");
+            console.log("User data:", data);
+            window.location.href = "../login1.html";
         } else {
             const errorText = await response.text();
-            alert(`Registration failed: ${errorText}`); 
+            console.error("Registration failed response text:", errorText); 
+            alert(`Registration failed: ${errorText}`);
         }
     } catch (error) {
         console.error("Error during registration:", error);
@@ -79,10 +76,16 @@ signInForm.addEventListener('submit', async (event) => {
         });
 
         if (response.ok) {
-            const data = await response.json();
-            alert("Login successful!");
-            console.log("User data:", data);
-            // Perform additional actions, like redirecting to another page
+            const responseText = await response.text();
+            try {
+                const data = JSON.parse(responseText);
+                alert("Login successful!");
+                console.log("User data:", data);
+                window.location.href = "index.html";
+            } catch (e) {
+                console.error("Failed to parse JSON:", responseText);
+                alert("Login failed: Invalid server response.");
+            }
         } else {
             const errorText = await response.text();
             console.error("Registration failed response text:", errorText); 

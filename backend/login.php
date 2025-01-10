@@ -23,19 +23,56 @@ echo $hashedPassword2."<br />";
 4. b.: Ha nincs, akkor hibba üzenet, hogy hibás felhasználói név / jelszó
 */
 
+session_start();
 
-require_once __DIR__ . '/../connect.php';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $input = file_get_contents("php://input");
+    $data = json_decode($input, true);
 
-header("Content-Type: application/json");
+    require_once __DIR__ . '/../connect.php';
 
-$data = json_decode(file_get_contents('php://input'), true);
+    header("Content-Type: application/json");
 
-if (!$data) {
-    echo json_encode(['message' => 'Invalid JSON data']);
-    exit;
+    if (!$data) {
+        echo json_encode(['message' => 'Invalid JSON data']);
+        exit;
+    }
+
+    $email = trim($data['email'] ?? '');
+    $password = $data['password'] ?? '';
+
+    if (empty($email) || empty($password)) {
+        echo json_encode(['message' => 'All fields are required']);
+        exit;
+    }
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        echo json_encode(['message' => 'Invalid email format']);
+        exit;
+    }
+    if(strlen($password) < 8){
+        echo json_encode(['message' => 'Password must be at least 8 characters long']);
+        exit;
+    }
+
+    $query = "SELECT id, email, password FROM user WHERE email = ?";
+
+    $stmt = mysqli_prepare($dbconn, $query);
+    mysqli_stmt_bind_param($stmt, 's', $email);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_result($stmt, $email, $hashedPassword);
+    mysqli_stmt_fetch($stmt);
+    mysqli_stmt_close($stmt);
+
+    if (password_verify($password, $hashedPassword)) {
+        die();
+    }
+    else {
+        echo json_encode(['message' => 'Invalid email or password']);
+        exit;
+    }
+    mysqli_close($dbconn);
 }
 
 
-$email = trim($data['email'] ?? '');
-$password = $data['password'] ?? '';
+
 ?>

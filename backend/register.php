@@ -53,7 +53,7 @@ $stmt = mysqli_prepare($dbconn, $query);
 mysqli_stmt_bind_param($stmt, 'ssss', $firstname, $lastname, $email, $hashedPassword);
 
 if (mysqli_stmt_execute($stmt)) {
-    header("Location: ../login1.html");
+    echo json_encode(['message' => 'Registration successful']);
     exit;
 } else {
     echo json_encode(['message' => 'Error inserting user: ' . mysqli_error($dbconn)]);
