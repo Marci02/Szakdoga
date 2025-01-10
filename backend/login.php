@@ -24,6 +24,18 @@ echo $hashedPassword2."<br />";
 */
 
 
+require_once __DIR__ . '/../connect.php';
+
+header("Content-Type: application/json");
+
+$data = json_decode(file_get_contents('php://input'), true);
+
+if (!$data) {
+    echo json_encode(['message' => 'Invalid JSON data']);
+    exit;
+}
 
 
+$email = trim($data['email'] ?? '');
+$password = $data['password'] ?? '';
 ?>

@@ -20,6 +20,8 @@ $lastname = trim($data['lastname'] ?? '');
 $email = trim($data['email'] ?? '');
 $password = $data['password'] ?? '';
 
+if (strlen($password))
+
 //echo json_encode(['message' => 'Firstname: ' . $firstname . ', Lastname: ' . $lastname . ', Email: ' . $email . ', Password: ' . $password]);
 
 
@@ -51,7 +53,8 @@ $stmt = mysqli_prepare($dbconn, $query);
 mysqli_stmt_bind_param($stmt, 'ssss', $firstname, $lastname, $email, $hashedPassword);
 
 if (mysqli_stmt_execute($stmt)) {
-    echo json_encode(['message' => 'User registered successfully']);
+    header("Location: ../login1.html");
+    exit;
 } else {
     echo json_encode(['message' => 'Error inserting user: ' . mysqli_error($dbconn)]);
 }
