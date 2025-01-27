@@ -35,6 +35,28 @@ CREATE TABLE `admins` (
   `username` varchar(255) NOT NULL
 );
 
+CREATE TABLE `products` (
+  `id` int PRIMARY KEY NOT NULL,
+  `user_id` int NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `category_id` int NOT NULL,
+  `brand_id` int NOT NULL,
+  `price` int NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `uploaded_at` datetime NOT NULL
+);
+
+CREATE TABLE `brand` (
+  `id` int PRIMARY KEY NOT NULL,
+  `brand_name` varchar(255) NOT NULL
+);
+
+CREATE TABLE `category` (
+  `id` int PRIMARY KEY NOT NULL,
+  `category_name` varchar(255) NOT NULL
+);
+
 ALTER TABLE `city` ADD FOREIGN KEY (`postcode_id`) REFERENCES `user` (`postcode`);
 
 ALTER TABLE `city` ADD FOREIGN KEY (`county_id`) REFERENCES `counties` (`id`);
@@ -42,3 +64,11 @@ ALTER TABLE `city` ADD FOREIGN KEY (`county_id`) REFERENCES `counties` (`id`);
 ALTER TABLE `sales` ADD FOREIGN KEY (`saler_id`) REFERENCES `user` (`id`);
 
 ALTER TABLE `sales` ADD FOREIGN KEY (`buyer_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `user` ADD FOREIGN KEY (`id`) REFERENCES `products` (`user_id`);
+
+ALTER TABLE `products` ADD FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
+
+ALTER TABLE `products` ADD FOREIGN KEY (`brand_id`) REFERENCES `brand` (`id`);
+
+ALTER TABLE `sales` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
