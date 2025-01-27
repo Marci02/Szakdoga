@@ -21,38 +21,36 @@ signUpForm.addEventListener('submit', async (event) => {
     event.preventDefault(); // Prevent the form from refreshing the page
 
     // Get form data
-    const name = signUpForm.querySelector('input[placeholder="Name"]').value;
+    const firstname = signUpForm.querySelector('input[placeholder="Vezetéknév"]').value;
+    const lastname = signUpForm.querySelector('input[placeholder="Keresztnév"]').value;
     const email = signUpForm.querySelector('input[placeholder="Email"]').value;
     const password = signUpForm.querySelector('input[placeholder="Password"]').value;
     const confirmPassword = signUpForm.querySelector('input[placeholder="Confirm Password"]').value;
 
-    console.log(name, email, password, confirmPassword);
+    console.log(firstname, lastname, email, password, confirmPassword);
 
     // Basic validation
     if (password !== confirmPassword) {
         alert("Passwords do not match!");
         return;
     }
-
+    
     try {
         // Send data to server
         const response = await fetch('backend/register.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name: name, email: email, password: password }),
+            body: JSON.stringify({firstname: firstname, lastname: lastname, email: email, password: password }),
         });
 
-        if (response.ok && response.headers.get('content-type')?.includes('application/json')) {
+        if (response.ok) {
             const data = await response.json();
-
-            if (data.success) {
-                alert("Registration successful!");
-                console.log("User data:", data);
-            } else {
-                alert(`Registration failed: ${data.message}`);
-            }
+            alert("Registration successful!");
+            console.log("User data:", data);
+            window.location.href = "../login1.html";
         } else {
             const errorText = await response.text();
+            console.error("Registration failed response text:", errorText); 
             alert(`Registration failed: ${errorText}`);
         }
     } catch (error) {
@@ -78,16 +76,16 @@ signInForm.addEventListener('submit', async (event) => {
         });
 
         if (response.ok) {
-            const data = await response.json();
-            if (data.success) {
-                // Perform additional actions, like redirecting to another page
-                window.location.href = "index.php";
-            } else {
-                alert(`Login failed: ${data.message}`);
+            const responseText = await response.text();
+            try {
+                const data = JSON.parse(responseText);
+                alert("Login successful!");
+                console.log("User data:", data);
+                window.location.href = "index.html";
+            } catch (e) {
+                console.error("Failed to parse JSON:", responseText);
+                alert("Login failed: Invalid server response.");
             }
-            alert("Login successful!");
-            console.log("User data:", data);
-            // Perform additional actions, like redirecting to another page
         } else {
             const errorText = await response.text();
             console.error("Registration failed response text:", errorText); 
