@@ -28,6 +28,19 @@ a {
   margin: 0;
 }
 
+.product-card {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
 .main-nav {
   max-width: 1070px;
   margin: 0 auto;
