@@ -47,7 +47,7 @@ signUpForm.addEventListener('submit', async (event) => {
             const data = await response.json();
             alert("Registration successful!");
             console.log("User data:", data);
-            window.location.href = "../login1.html";
+            window.location.href = "login1.html";
         } else {
             const errorText = await response.text();
             console.error("Registration failed response text:", errorText); 
@@ -75,21 +75,19 @@ signInForm.addEventListener('submit', async (event) => {
             body: JSON.stringify({ email: email, password: password }),
         });
 
+        const data = await response.json();
+
         if (response.ok) {
-            const responseText = await response.text();
-            try {
-                const data = JSON.parse(responseText);
-                alert("Login successful!");
-                console.log("User data:", data);
-                window.location.href = "index.html";
-            } catch (e) {
-                console.error("Failed to parse JSON:", responseText);
-                alert("Login failed: Invalid server response.");
-            }
+            alert("Login successful!");
+            console.log("User data:", data);
+
+            // Tárold a user adatait localStorage-ban (ha szükséges)
+            localStorage.setItem("user", JSON.stringify(data.user));
+
+            // Átirányítás a profil oldalra vagy főoldalra
+            window.location.href = "index.html";
         } else {
-            const errorText = await response.text();
-            console.error("Registration failed response text:", errorText); 
-            alert(`Registration failed: ${errorText}`);
+            alert(`Login failed: ${data.message}`);
         }
     } catch (error) {
         console.error("Error during login:", error);
