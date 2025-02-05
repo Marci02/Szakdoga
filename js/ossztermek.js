@@ -171,11 +171,16 @@ function uploadFile() {
         var productCard = document.createElement("div");
         productCard.className = "product-card";
         productCard.innerHTML = `
-          <img src="${e.target.result}" alt="${fileTitle}" style="width: 100%; height: auto; border-radius: 5px;">
+          <img src="${e.target.result}" alt="${fileTitle}" class="product-image">
           <h3>${fileTitle}</h3>
           <p>${fileDesc}</p>
           <h3>Ár: ${filePrice} Ft</h3>
         `;
+
+        // Kép és kártya méretezése
+        var productImage = productCard.querySelector("img");
+        productImage.style.width = "100%";  // A kép szélessége mindig a kártya szélessége
+        productImage.style.height = "200px"; // A kép magassága fix
 
         productCard.addEventListener("click", function() {
           openProductModal(fileTitle, fileDesc, filePrice, e.target.result);
