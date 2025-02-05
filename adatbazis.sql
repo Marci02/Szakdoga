@@ -6,7 +6,7 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL,
   `created` timestamp,
   `phone_number` varchar(255) NOT NULL,
-  `postcode` int NOT NULL,
+  `postcode` int NULL,
   `image` varchar(255)
 );
 
