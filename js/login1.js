@@ -68,30 +68,29 @@ signInForm.addEventListener('submit', async (event) => {
     const password = signInForm.querySelector('input[placeholder="Password"]').value;
 
     try {
-        // Send data to server
         const response = await fetch("backend/login.php", {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email: email, password: password }),
         });
 
         const data = await response.json();
 
-        if (response.ok) {
-            alert("Login successful!");
+        if (response.ok && data.message === "Login successful") {
+            alert("Sikeres bejelentkezés!");
             console.log("User data:", data);
 
-            // Tárold a user adatait localStorage-ban (ha szükséges)
+            // Tárold a user adatait a localStorage-ban
             localStorage.setItem("user", JSON.stringify(data.user));
 
-            // Átirányítás a profil oldalra vagy főoldalra
+            // Átirányítás a főoldalra
             window.location.href = "index.html";
         } else {
-            alert(`Login failed: ${data.message}`);
+            alert(`Hibás bejelentkezés: ${data.message}`);
         }
     } catch (error) {
-        console.error("Error during login:", error);
-        alert("An error occurred. Please try again later.");
+        console.error("Hálózati vagy szerverhiba:", error);
+        alert("Nem sikerült bejelentkezni. Próbáld újra később.");
     }
 });
 
