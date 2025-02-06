@@ -1,5 +1,6 @@
 // Duplikált függvény eltávolítva: uploadFile
 
+
 function stickyNav() {
   var headerHeight = document.querySelector(".container").offsetHeight / 2;
   var navbar = document.querySelector("nav");
