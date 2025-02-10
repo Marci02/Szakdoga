@@ -60,37 +60,43 @@ signUpForm.addEventListener('submit', async (event) => {
 });
 
 // Event listener for the Sign-In form
-signInForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+    const loginForm = document.querySelector(".sign-in form");
 
-    // Get form data
-    const email = signInForm.querySelector('input[placeholder="Email"]').value;
-    const password = signInForm.querySelector('input[placeholder="Password"]').value;
+    loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
 
-    try {
-        const response = await fetch("backend/login.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email: email, password: password }),
-        });
+        const email = loginForm.querySelector('input[placeholder="Email"]').value;
+        const password = loginForm.querySelector('input[placeholder="Password"]').value;
 
-        const data = await response.json();
+        try {
+            const response = await fetch("backend/login.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: email, password: password }),
+            });
 
-        if (response.ok && data.message === "Login successful") {
-            alert("Sikeres bejelentkezés!");
-            console.log("User data:", data);
+            const data = await response.json();
 
-            // Tárold a user adatait a localStorage-ban
-            localStorage.setItem("user", JSON.stringify(data.user));
+            if (data.loggedIn) {
+                alert("Sikeres bejelentkezés!");
 
-            // Átirányítás a főoldalra
-            window.location.href = "index.html";
-        } else {
-            alert(`Hibás bejelentkezés: ${data.message}`);
+                // 🔹 Ellenőrizzük, hogy van-e elmentett oldal
+                const redirectPage = localStorage.getItem("redirectAfterLogin") || "profile.html";
+
+                // 🔹 Töröljük a localStorage-ból, hogy ne navigáljon mindig vissza
+                localStorage.removeItem("redirectAfterLogin");
+
+                // 🔹 Átirányítjuk a felhasználót az előző oldalra vagy a profil oldalra
+                window.location.href = redirectPage;
+            } else {
+                alert("Hibás email vagy jelszó!");
+            }
+        } catch (error) {
+            console.error("Hiba a bejelentkezés során:", error);
+            alert("Hiba történt. Próbáld újra!");
         }
-    } catch (error) {
-        console.error("Hálózati vagy szerverhiba:", error);
-        alert("Nem sikerült bejelentkezni. Próbáld újra később.");
-    }
+    });
 });
+
 
