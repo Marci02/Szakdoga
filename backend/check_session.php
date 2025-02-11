@@ -2,17 +2,9 @@
 session_start();
 header("Content-Type: application/json");
 
-// Ellenőrizzük, hogy be van-e jelentkezve
-if (isset($_SESSION['user_id'])) {
-    echo json_encode([
-        "loggedIn" => true,
-        "user" => [
-            "id" => $_SESSION['user_id'],
-            "firstname" => $_SESSION['firstname'],
-            "lastname" => $_SESSION['lastname'],
-            "email" => $_SESSION['email']
-        ]
-    ]);
+// 🔹 Ellenőrizzük, hogy van-e bejelentkezett felhasználó
+if (!empty($_SESSION['user_id'])) {
+    echo json_encode(["loggedIn" => true, "user" => $_SESSION['user_id']]);
 } else {
     echo json_encode(["loggedIn" => false]);
 }
