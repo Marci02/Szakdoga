@@ -437,48 +437,6 @@ body {
 
 /*Search bar -------------------------------------------------------------------------------------*/
 
-/* 🔹 Popup menü alapértelmezés szerint elrejtve */
-.popup-menu {
-  position: absolute;
-  top: 50px;
-  right: 10px;
-  background-color: white;
-  border: 1px solid #ccc;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  border-radius: 5px;
-  display: none; /* 🔹 Alapból elrejtve */
-  flex-direction: column;
-  min-width: 150px;
-  z-index: 100;
-}
-
-/* 🔹 Ha az osztály aktív, akkor jelenjen meg */
-.popup-menu.active {
-  display: flex;
-}
-
-/* 🔹 Gombok */
-.popup-menu a, .popup-menu button {
-  display: block;
-  padding: 8px;
-  text-align: center;
-  text-decoration: none;
-  color: black;
-  background: none;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-.popup-menu a:hover, .popup-menu button:hover {
-  background-color: #f0f0f0;
-}
-
-
-
-
-
 /*responsive alignment ----------------------------------------------------------------------------*/
 @media screen and (min-width: 1150px) {
   :root {
