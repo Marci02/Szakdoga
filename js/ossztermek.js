@@ -72,6 +72,10 @@ function openUploadModal() {
     <textarea id="fileDesc" rows="5" cols="50" style="padding:5px; resize: none; width: 300px;" placeholder="Termék rövid leírása"></textarea>
     <h4>Ár:</h4>
     <input type="number" id="filePrice" placeholder="Termék ára" style="width: 300px; padding: 5px; margin-bottom: 15px;" min="0">
+    <h4>Darab:</h4>
+    <input type="number" id="fileQuantity" placeholder="Termék darabszáma" style="width: 300px; padding: 5px; margin-bottom: 15px;" min="1">
+    <h4>Kategória:</h4>
+    <input type="text" id="fileCategory" placeholder="Termék kategóriája" style="width: 300px; padding: 5px; margin-bottom: 15px;">
     <button onclick="uploadFile()" style="cursor: pointer; padding:6px; color: white; background-color: black; border-radius: 5px; border: none;">Feltöltés</button>
     <button onclick="closeUploadModal()" style="cursor: pointer; padding:5px; background-color: white; border-radius: 5px;">Mégse</button>
   `;
