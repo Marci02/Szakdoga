@@ -1,34 +1,48 @@
 <?php
-$servername = "localhost";
-$username = "username";
-$password = "password";
-$dbname = "database_name";
+// Include the database connection
+require_once __DIR__ . '/../connect.php';
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+header("Content-Type: application/json");
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+// JSON adatok beolvasása
+$data = json_decode(file_get_contents('php://input'), true);
+
+if (!$data) {
+    echo json_encode(['message' => 'Invalid JSON data']);
+    exit;
 }
 
-// Check if form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $fileTitle = $_POST['fileTitle'];
-    $fileImg = $_POST['fileImg'];
-    $fileDescription = $_POST['fileDescription'];
-    $filePrice = $_POST['filePrice'];
-    $fileQuantity = $_POST['fileQuantity'];
-    $fileCategory = $_POST['fileCategory'];
+// Beérkező adatok ellenőrzése
+$fileTitle = trim($data['fileTitle'] ?? '');
+$fileImg = trim($data['fileImg'] ?? '');
+$fileDescription = trim($data['fileDescription'] ?? '');
+$filePrice = filter_var($data['filePrice'] ?? null, FILTER_VALIDATE_FLOAT);
+$fileQuantity = filter_var($data['fileQuantity'] ?? null, FILTER_VALIDATE_INT);
+$fileCategory = trim($data['fileCategory'] ?? '');
 
-    $sql = "INSERT INTO cards (name, description, price) VALUES ('$fileTitle', '$fileImg', '$fileDescription', '$filePrice', '$fileQuantity', '$fileCategory')";
+// Ellenőrizzük, hogy minden mező ki van-e töltve
+if (!$fileTitle || !$fileImg || !$fileDescription || $filePrice === false || $fileQuantity === false || !$fileCategory) {
+    echo json_encode(['message' => 'All fields are required and must be valid']);
+    exit;
+}
 
-    if ($conn->query($sql) === TRUE) {
-        echo "New card added successfully";
+// SQL beszúrás előkészített utasítással
+$query = "INSERT INTO cards (name, img, description, price, quantity, category) VALUES (?, ?, ?, ?, ?, ?)";
+$stmt = mysqli_prepare($dbconn, $query);
+
+if ($stmt) {
+    mysqli_stmt_bind_param($stmt, "sssdis", $fileTitle, $fileImg, $fileDescription, $filePrice, $fileQuantity, $fileCategory);
+
+    if (mysqli_stmt_execute($stmt)) {
+        echo json_encode(['message' => 'Card added successfully']);
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo json_encode(['message' => 'Error inserting card: ' . mysqli_error($dbconn)]);
     }
+
+    mysqli_stmt_close($stmt);
+} else {
+    echo json_encode(['message' => 'Database error: ' . mysqli_error($dbconn)]);
 }
 
-$conn->close();
+mysqli_close($dbconn);
 ?>
