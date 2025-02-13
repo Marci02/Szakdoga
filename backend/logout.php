@@ -1,9 +1,8 @@
 <?php
 session_start();
-session_unset(); // Minden session változót törlünk
-session_destroy(); // Session lezárása
+session_unset();  // Törli az összes session változót
+session_destroy();  // Megszünteti a session-t
 
 header("Content-Type: application/json");
-echo json_encode(["message" => "Logged out successfully"]);
-exit;
+echo json_encode(["message" => "Sikeres kijelentkezés"]);
 ?>
