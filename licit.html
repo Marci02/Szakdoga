@@ -28,7 +28,7 @@
                         <a href="kapcsolat.html" id="connectitem" class="menu-link">Kapcsolat</a>
                     </li>
                 </ul>
-        </div>
+            </div>
             <a href="index.html" class="logo">PremSelect</a>
         <div class="sidebar">
             <ul class="sidebar-list">
@@ -80,13 +80,34 @@
         <div class="sidebar-categories">
             <ul class="category-list">
                 <li class="category-item"><a href="#">Szűrő</a></li>
-                <li class="category-item"><a href="#" onclick="openUploadModal()">Licit feltöltése</a></li>
+                <li class="category-item">
+                    <button onclick="openUploadModal()" class="upload-button">Licit feltöltése</button>
+                </li>
             </ul>
         </div>
         <div class="product-list">
             
         </div>
     </div>
+
+    <!-- Feltöltés modal -->
+    <div id="uploadModal" class="upload-modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeUploadModal()">×</span>
+            <h2>Licit feltöltése</h2>
+            <input type="text" id="fileTitle" placeholder="Licit címének megadása" style="width: 100%; padding: 5px;">
+            <input type="file" id="fileInput" style="cursor: pointer;">
+            <h4>Leírás:</h4>
+            <textarea id="fileDesc" rows="5" style="width: 100%; padding: 5px;"></textarea>
+            <h4>Ár:</h4>
+            <input type="number" id="productPrice" placeholder="Ár megadása" style="width: 100%; padding: 5px;">
+            <h4>Licit lépcső:</h4>
+            <input type="number" id="bidStep" placeholder="Licit lépcső megadása" style="width: 100%; padding: 5px;">
+            <button onclick="uploadFile()" style="cursor: pointer; padding:6px; color: white; background-color: black; border-radius: 5px; border: none;">Feltöltés</button>
+            <button onclick="closeUploadModal()" style="cursor: pointer; padding:5px; background-color: white; border-radius: 5px;">Mégse</button>
+        </div>
+    </div>
+
     <script src="js/licit.js"></script>
     <script src="js/profile.js"></script>
 </body>

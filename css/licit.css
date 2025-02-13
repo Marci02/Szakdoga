@@ -160,6 +160,7 @@ nav.header-sticky {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  color: white;
 }
 
 #Searchbar{
@@ -309,4 +310,133 @@ nav.header-sticky {
   box-sizing: border-box;
   height: 500px;
   width: auto;
+}
+
+.upload-button {
+  background-color: black;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.upload-button:hover {
+  background-color: #333;
+}
+
+#uploadModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  border-radius: 5px;
+  display: none;
+}
+
+.modal-content {
+  padding: 20px;
+  position: relative;
+  display: block;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.modal-price {
+  text-align: center;
+}
+
+.modal-bid {
+  text-align: right;
+}
+
+.product-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  margin: 15px;
+  max-width: 300px;
+  text-align: center;
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.product-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.product-card h3 {
+  margin: 10px 0;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+}
+
+.product-card p {
+  font-size: 1em;
+  color: #666;
+  padding: 0 15px;
+}
+
+.product-card .price {
+  font-size: 1.2em;
+  color: #e74c3c;
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+.product-card .button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.product-card .button:hover {
+  background-color: #2980b9;
+}
+
+.product-card .description {
+  padding: 15px;
+  font-size: 0.9em;
+  color: #333;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* Maximum lines to show */
+  overflow: hidden;
 }
