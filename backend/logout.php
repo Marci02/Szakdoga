@@ -1,8 +1,10 @@
 <?php
 session_start();
-session_unset();  // Törli az összes session változót
-session_destroy();  // Megszünteti a session-t
+$_SESSION = []; // Minden session adat törlése
+session_destroy();
+setcookie(session_name(), "", time() - 3600, "/"); // Session cookie törlése
 
 header("Content-Type: application/json");
-echo json_encode(["message" => "Sikeres kijelentkezés"]);
+echo json_encode(["success" => true]);
+exit;
 ?>
