@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    window.location.href = "login1.html"; // Visszairányít a bejelentkezési oldalra
+                    window.location.href = "index.html"; // Visszairányít a bejelentkezési oldalra
                 } else {
                     console.error("Hiba a kijelentkezéskor:", data.error);
                 }
