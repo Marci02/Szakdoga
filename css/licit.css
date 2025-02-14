@@ -437,6 +437,5 @@ nav.header-sticky {
   color: #333;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3; /* Maximum lines to show */
   overflow: hidden;
 }
