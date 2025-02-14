@@ -61,10 +61,12 @@ document.getElementById("cartBtn").parentElement.addEventListener("mouseleave", 
 function openUploadModal() {
   console.log("Popup megnyitása");
 
+  
+
   // Ha már van ilyen elem, először töröljük, hogy ne legyen duplikáció
   var existingModal = document.getElementById("uploadModal");
   if (existingModal) {
-      existingModal.remove();
+    existingModal.remove();
   }
 
   var modal = document.createElement("div");
@@ -73,25 +75,26 @@ function openUploadModal() {
   modal.style.top = "50%";
   modal.style.left = "50%";
   modal.style.transform = "translate(-50%, -50%)";
-  modal.style.height = "auto";
-  modal.style.width = "400px";
+  modal.style.width = "300px";
   modal.style.padding = "20px";
   modal.style.backgroundColor = "#fff";
-  modal.style.boxShadow = "0 5px 15px rgba(0,0,0,0.3)";
+  modal.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.1)";
+  modal.style.borderRadius = "10px";
   modal.style.zIndex = "1000";
-  modal.style.borderRadius = "5px";
+  modal.style.textAlign = "center";
 
   var modalContent = document.createElement("div");
   modalContent.innerHTML = `
-      <h2>Termék feltöltése</h2>
-      <input type="text" id="fileTitle" placeholder="Termék címének megadása" style="width: 100%; padding: 5px;">
-      <input type="file" id="fileInput" style="cursor: pointer;">
-      <h4>Leírás:</h4>
-      <textarea id="fileDesc" rows="5" style="width: 100%; padding: 5px;"></textarea>
-      <button onclick="uploadFile()" style="cursor: pointer; padding:6px; color: white; background-color: black; border-radius: 5px; border: none;">Feltöltés</button>
-      <button onclick="closeUploadModal()" style="cursor: pointer; padding:5px; background-color: white; border-radius: 5px;">Mégse</button>
+    <img src="image.jpg" alt="Product" class="popup-image">
+    <h3 class="popup-title">Termék feltöltése</h3>
+    <input type="text" id="fileTitle" placeholder="Termék címének megadása" style="width: 100%; padding: 5px; margin-top: 10px;">
+    <input type="file" id="fileInput" style="cursor: pointer; margin-top: 10px;">
+    <h4 style="margin-top: 10px;">Leírás:</h4>
+    <textarea id="fileDesc" rows="5" style="width: 100%; padding: 5px; margin-top: 10px;"></textarea>
+    <button onclick="uploadFile()" style="cursor: pointer; padding: 6px; color: white; background-color: #3498db; border-radius: 5px; border: none; margin-top: 20px; width: 100%;">Feltöltés</button>
+    <button onclick="closeUploadModal()" style="cursor: pointer; padding: 5px; background-color: white; border-radius: 5px; border: 1px solid #ccc; margin-top: 20px; width: 100%;">Mégse</button>
   `;
-  
+
   modal.appendChild(modalContent);
   document.body.appendChild(modal);
 
@@ -102,11 +105,12 @@ function openUploadModal() {
   overlay.style.left = "0";
   overlay.style.width = "100%";
   overlay.style.height = "100%";
-  overlay.style.backgroundColor = "rgba(0,0,0,0.5)";
+  overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
   overlay.style.zIndex = "999";
   overlay.onclick = closeUploadModal;
 
   document.body.appendChild(overlay);
+  document.body.style.overflow = "hidden";
 }
 
 function closeUploadModal() {
