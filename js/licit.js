@@ -203,53 +203,65 @@ function showProductDetails(title, description, imageUrl, price, bidStep) {
   modal.style.top = "50%";
   modal.style.left = "50%";
   modal.style.transform = "translate(-50%, -50%)";
-  modal.style.width = "400px";
-  modal.style.height = "auto";
+  modal.style.width = "80%";
+  modal.style.maxWidth = "600px";
   modal.style.backgroundColor = "#fff";
-  modal.style.boxShadow = "0 5px 15px rgba(0,0,0,0.3)";
+  modal.style.boxShadow = "0 10px 30px rgba(0, 0, 0, 0.1)";
   modal.style.zIndex = "1000";
-  modal.style.padding = "20px";
-  modal.style.borderRadius = "5px";
+  modal.style.padding = "30px";
+  modal.style.borderRadius = "8px";
+  modal.style.overflowY = "auto";
+  modal.style.transition = "opacity 0.3s ease-in-out";
 
   var modalContent = document.createElement("div");
 
-  // Kép és a név középen
   modalContent.innerHTML = `
-      <div style="text-align: center;">
-          <h2>${title}</h2>
-          <img src="${imageUrl}" alt="${title}" style="width: 100%; height: 200px; border-radius: 5px; margin-top: 10px;">
-      </div>
-      <p><strong>Leírás:</strong> ${description}</p>
-      <p><strong>Alap ár:</strong> <span id="originalPrice">${price} Ft</span></p>
-      <p><strong>Licit lépcső:</strong> ${bidStep} Ft</p>
-
-      <!-- Licitálás mező -->
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
-        <button onclick="placeBidInModal(${price}, ${bidStep})" style="cursor: pointer; padding: 6px 12px; background-color: black; color: white; border-radius: 5px; border: none;">Emelés</button>
-        <p id="bidAmount" style="margin-left: 10px;">Aktuális ár: <span id="newPrice">${price} Ft</span></p>
-      </div>
-
-      <!-- Zárás gomb és licit lépcső egyvonalba -->
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
-        <button onclick="closeModal()" style="cursor: pointer; padding: 6px 12px; background-color: black; color: white; border-radius: 5px; border: none;">Bezárás</button>
-      </div>
+    <div style="text-align: center; margin-bottom: 20px;">
+      <h2 style="font-size: 1.8em; font-weight: bold; color: #333;">${title}</h2>
+      <img src="${imageUrl}" alt="${title}" class="product-image" style="width: 100%; height: 300px; border-radius: 8px; object-fit: cover; margin-top: 10px;">
+    </div>
+    <p style="font-size: 1em; color: #666; text-align: justify;">${description}</p>
+    <div style="margin-top: 20px; font-size: 1.2em; font-weight: bold;">
+      <p style="color: #e74c3c;">Alap ár: <span id="originalPrice">${price} Ft</span></p>
+      <p>Licit lépcső: ${bidStep} Ft</p>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px;">
+      <button onclick="placeBidInModal(${price}, ${bidStep})" class="button" style="background-color: #3498db; color: white; border: none; padding: 12px 20px; border-radius: 5px; font-size: 1.1em; cursor: pointer; transition: background-color 0.3s ease;">
+        Licitálás
+      </button>
+      <p id="bidAmount" style="font-size: 1.2em;">Aktuális ár: <span id="newPrice">${price} Ft</span></p>
+    </div>
+    <div style="display: flex; justify-content: flex-end; margin-top: 30px;">
+      <button onclick="closeModal()" class="button" style="background-color: #e74c3c; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-size: 1.1em; transition: background-color 0.3s ease;">
+        Bezárás
+      </button>
+    </div>
   `;
   
   modal.appendChild(modalContent);
   document.body.appendChild(modal);
 
-  var overlay = document.createElement("div");
-  overlay.style.position = "fixed";
-  overlay.style.top = "0";
-  overlay.style.left = "0";
-  overlay.style.width = "100%";
-  overlay.style.height = "100%";
-  overlay.style.backgroundColor = "rgba(0,0,0,0.5)";
-  overlay.style.zIndex = "999";
-  overlay.onclick = closeModal;
-  document.body.appendChild(overlay);
+  // Modal opacity animáció beállítása
+  setTimeout(() => {
+    modal.style.opacity = "1"; // Modal megjelenítése
+    document.body.style.overflow = "hidden";  // A háttér görgetésének letiltása
+  }, 50);
 }
 
+function closeModal() {
+  var modal = document.querySelector("div[style*='position: fixed']");
+  
+  if (modal) {
+    // Az animációval lecsökkentjük az opacity-t
+    modal.style.opacity = "0";
+
+    // Az animáció után eltávolítjuk az elemet a DOM-ból
+    setTimeout(() => {
+      modal.remove();
+      document.body.style.overflow = "auto";  // A háttér görgetésének visszaállítása
+    }, 300);  // 300 ms, hogy az animáció végigfusson
+  }
+}
 // Licitálás funkció az ablakban
 let currentBidPrice = 0;  // Ez tárolja az aktuális licit árat
 
