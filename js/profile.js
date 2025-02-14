@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Ha a felhasználó a profile.html oldalon van, töltsük be az adatokat
     if (window.location.pathname.includes("profile.html")) {
-        fetch("http://localhost/Szakdoga/backend/get_profile.php")
+        fetch("backend/get_profile.php")
             .then(response => response.json())
             .then(data => {
                 if (data.error) {

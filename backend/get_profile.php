@@ -11,8 +11,8 @@ echo json_encode([
     "lastname" => $_SESSION['lastname'],
     "email" => $_SESSION['email'],
     "created" => $_SESSION['created'],
-    "phone_number" => $_SESSION['phone_number'],
-    "postcode" => $_SESSION['postcode'],
-    "image" => $_SESSION['image']
+    "phone_number" => isset($_SESSION['phone_number']) ? $_SESSION['phone_number'] : null,
+    "postcode" => isset($_SESSION['postcode']) ? $_SESSION['postcode'] : null,
+    "image" => isset($_SESSION['image']) ? $_SESSION['image'] : null
 ]);
 ?>
