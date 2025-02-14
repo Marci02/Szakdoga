@@ -3,7 +3,6 @@
 session_set_cookie_params(3600, "/");  // 3600 másodperc (1 óra), minden útvonalra érvényes
 session_start();
 
-
 require_once __DIR__ . '/../connect.php';
 header("Content-Type: application/json");
 
@@ -17,18 +16,26 @@ if (empty($email) || empty($password)) {
 }
 
 // Ellenőrizzük, hogy létezik-e a felhasználó
-$query = "SELECT id, firstname, lastname, password FROM user WHERE email = ?";
+$query = "SELECT id, firstname, lastname, email, phone_number, postcode, image, password, created 
+          FROM user WHERE email = ?";
 $stmt = mysqli_prepare($dbconn, $query);
 mysqli_stmt_bind_param($stmt, 's', $email);
 mysqli_stmt_execute($stmt);
-mysqli_stmt_bind_result($stmt, $userId, $firstname, $lastname, $hashedPassword);
+mysqli_stmt_bind_result($stmt, $userId, $firstname, $lastname, $email, $phone, $postcode, $image, $hashedPassword, $created);
 mysqli_stmt_fetch($stmt);
 mysqli_stmt_close($stmt);
 
 // Jelszó ellenőrzés
 if ($userId && password_verify($password, $hashedPassword)) {
+    // SESSION adatok beállítása
     $_SESSION['user_id'] = $userId;
-    $_SESSION['username'] = $firstname . " " . $lastname;  // Elmentjük a nevet is
+    $_SESSION['firstname'] = $firstname;
+    $_SESSION['lastname'] = $lastname;
+    $_SESSION['email'] = $email;
+    $_SESSION['phone'] = $phone;
+    $_SESSION['postcode'] = $postcode;
+    $_SESSION['image'] = $image;
+    $_SESSION['created'] = $created;
 
     echo json_encode(["message" => "Bejelentkezés sikeres!", "loggedIn" => true]);
 } else {
