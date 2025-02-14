@@ -4,8 +4,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Profil</title>
-        <script src="js/profile.js"></script>
-        <script src="js/logout.js"></script>
         <link rel="stylesheet" href="css/profile.css">
 </head>
 <body>
@@ -78,7 +76,22 @@
             </ul>
         </div>
     </nav>
-    <button id="logoutButton" style="margin-top: 120px;">Kijelentkezés</button>
+    <div class="container">
+        <h2>Profil</h2>
+        <div class="profile-picture">
+            <img id="profile-pic" src="" alt="Profilkép">
+        </div>
+        <div class="profile-info">
+            <p><strong>Név:</strong> <span id="fullname">Betöltés...</span></p>
+            <p><strong>Email:</strong> <span id="email">Betöltés...</span></p>
+            <p><strong>Csatlakozás dátuma:</strong> <span id="created">Betöltés...</span></p>
+            <p><strong>Telefonszám:</strong> <span id="phone">Betöltés...</span></p>
+            <p><strong>Irányítószám:</strong> <span id="postcode">Betöltés...</span></p>
+        </div>
+        <button id="logoutButton">Kijelentkezés</button>
+    </div>
+    <script src="js/profile.js"></script>
+    <script src="js/logout.js"></script>
     <script src="js/checkProfile.js"></script>
 </body>
 </html>
