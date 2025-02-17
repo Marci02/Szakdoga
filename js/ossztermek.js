@@ -163,6 +163,103 @@ function closeProductModal() {
 function uploadFile() {
   var fileTitle = document.getElementById("fileTitle").value;
   var fileDesc = document.getElementById("fileDesc").value;
+  var filePrice = document.getElementById("filePrice").value;
+  var fileQuantity = document.getElementById("fileQuantity").value;
+  var fileCategory = document.getElementById("fileCategory").value;
+  var fileInput = document.getElementById("fileInput").files[0];
+
+  if (fileTitle && fileDesc && filePrice && fileQuantity && fileCategory && fileInput) {
+    var formData = new FormData();
+    formData.append("fileTitle", fileTitle);
+    formData.append("fileDesc", fileDesc);
+    formData.append("filePrice", filePrice);
+    formData.append("fileQuantity", fileQuantity);
+    formData.append("fileCategory", fileCategory);
+    formData.append("fileInput", fileInput); // Fájl feltöltés
+
+    fetch("backend/ossztermekupload.php", {
+      method: "POST",
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      alert(data.message); // PHP válasz
+      closeUploadModal();
+    })
+    .catch(error => console.error("Error:", error));
+  } else {
+    alert("Minden mezőt ki kell tölteni!");
+  }
+}
+
+//Újabb uploadFile függvény
+/*function uploadFile() {
+  var fileTitle = document.getElementById("fileTitle").value;
+  var fileDesc = document.getElementById("fileDesc").value;
+  var filePrice = document.getElementById("filePrice").value;
+  var fileQuantity = document.getElementById("fileQuantity").value;
+  var fileCategory = document.getElementById("fileCategory").value;
+  var fileInput = document.getElementById("fileInput").files[0];
+
+  if (fileTitle && fileDesc && filePrice && fileQuantity && fileCategory && fileInput) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var productList = document.querySelector(".product-list");
+
+      // Ellenőrizzük, hogy létezik a product-list
+      if (productList) {
+        var productCard = document.createElement("div");
+        productCard.className = "product-card";
+        productCard.innerHTML = `
+          <img src="${e.target.result}" alt="${fileTitle}" class="product-image">
+          <h3>${fileTitle}</h3>
+          <p>${fileDesc}</p>
+          <h3>Ár: ${filePrice} Ft</h3>
+        `;
+
+        // Kép és kártya méretezése
+        var productImage = productCard.querySelector("img");
+        productImage.style.width = "100%";  // A kép szélessége mindig a kártya szélessége
+        productImage.style.height = "200px"; // A kép magassága fix
+
+        productCard.addEventListener("click", function() {
+          openProductModal(fileTitle, fileDesc, filePrice, fileQuantity, fileCategory, fileInput, e.target.result);
+        });
+
+        fetch("backend/ossztermekupload.php", { // Update with actual PHP file path
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(productData)
+        })
+        .then(response => response.json())
+        .then(data => {
+          alert(data.message); // Show response from PHP
+          closeUploadModal();
+        })
+        .catch(error => console.error("Error:", error));
+
+        productList.appendChild(productCard);
+        closeUploadModal();
+      } else {
+        console.log("A product-list nem található.");
+      }
+    };
+    reader.readAsDataURL(fileInput);
+  } else {
+    alert("Minden mezőt ki kell tölteni!");
+  }
+}*/
+
+
+
+
+
+//Original uploadFile function
+/*function uploadFile() {
+  var fileTitle = document.getElementById("fileTitle").value;
+  var fileDesc = document.getElementById("fileDesc").value;
   var fileInput = document.getElementById("fileInput").files[0];
   var filePrice = document.getElementById("filePrice").value;
 
@@ -201,4 +298,4 @@ function uploadFile() {
   } else {
     alert("Minden mezőt ki kell tölteni!");
   }
-}
+}*/
