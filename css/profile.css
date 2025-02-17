@@ -271,3 +271,105 @@ a {
   .dropdown:hover .dropdown-menu {
     display: block;
   }
+
+  .page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+  }
+
+  .container{
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 500px;
+  }
+
+  h2 {
+    text-align: center;
+    color: #333;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 20px;
+}
+.tab-button {
+  border: none;
+  font-size: 16px;
+  transition: color 0.3s;
+  background-color: #fff;
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.tab-button.active {
+  color: #333;
+  border-bottom: 2px solid #333;
+  font-weight: bold;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profile-info label {
+  font-weight: bold;
+  color: #444;
+}
+
+.profile-info input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.otherButton {
+  background-color: #333; 
+  color: white;
+  padding: 12px 24px; 
+  margin: 10px;
+  border: none;
+  border-radius: 30px; 
+  font-size: 16px; 
+  cursor: pointer;
+  transition: all 0.3s ease; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.otherButton:hover {
+  background-color: #202020; 
+  transform: translateY(-2px); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+}
+
+.otherButton:active {
+  background-color: #242323; 
+  transform: translateY(0); 
+}
+
+
+.tab-button:hover {
+  background-color: #c7c7c7;
+}
+
+  

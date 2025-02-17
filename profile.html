@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Profil</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono|Montserrat:800">
         <link rel="stylesheet" href="css/profile.css">
 </head>
 <body>
@@ -76,22 +77,47 @@
             </ul>
         </div>
     </nav>
-    <div class="container">
-        <h2>Profil</h2>
-        <div class="profile-picture">
-            <img id="profile-pic" src="" alt="Profilkép">
+    <div class="page">
+        <div class="container">
+            <h2>Profil</h2>
+            <div class="tabs">
+                <button class="tab-button active" onclick="openTab(event, 'personal')">Személyes adatok</button>
+                <button class="tab-button" onclick="openTab(event, 'address')">Szállítási cím</button>
+            </div>
+
+            <div id="personal" class="tab-content active">
+                <div class="profile-info">
+                    <label>Név:</label>
+                    <input type="text" id="username" value="" />
+                    <label>Email:</label>
+                    <input type="email" id="email" value="" />
+                    <label>Telefonszám:</label>
+                    <input type="text" id="phone" value="" />
+                    <label>Profilkép URL:</label>
+                    <input type="text" id="profile-image-url" value="" />
+                    <img id="profile-image" src="" alt="Profilkép" width="100">
+                    <button id="savePersonal" class="otherButton">Mentés</button>
+                </div>
+            </div>
+
+            <div id="address" class="tab-content">
+                <div class="profile-info">
+                    <label>Irányítószám:</label>
+                    <input type="text" id="postcode" value="" />
+                    <label>Város:</label>
+                    <input type="text" id="city" value="" />
+                    <label>Megye:</label>
+                    <input type="text" id="county" value="" />
+                    <button id="saveAddress" class="otherButton">Mentés</button>
+                </div>
+            </div>
+            
+            <button id="logoutButton" class="otherButton">Kijelentkezés</button>
         </div>
-        <div class="profile-info">
-            <p><strong>Név:</strong> <span id="fullname">Betöltés...</span></p>
-            <p><strong>Email:</strong> <span id="email">Betöltés...</span></p>
-            <p><strong>Csatlakozás dátuma:</strong> <span id="created">Betöltés...</span></p>
-            <p><strong>Telefonszám:</strong> <span id="phone">Betöltés...</span></p>
-            <p><strong>Irányítószám:</strong> <span id="postcode">Betöltés...</span></p>
-        </div>
-        <button id="logoutButton">Kijelentkezés</button>
     </div>
     <script src="js/profile.js"></script>
     <script src="js/logout.js"></script>
     <script src="js/checkProfile.js"></script>
+    <script src="js/saveProfil.js"></script>
 </body>
 </html>
