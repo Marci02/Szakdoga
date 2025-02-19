@@ -1,6 +1,3 @@
-// Duplikált függvény eltávolítva: uploadFile
-
-
 function stickyNav() {
   var headerHeight = document.querySelector(".container").offsetHeight / 2;
   var navbar = document.querySelector("nav");
@@ -66,7 +63,7 @@ function openUploadModal() {
   var modalContent = document.createElement("div");
   modalContent.innerHTML = `
     <h2 style="margin-bottom: 20px;">Termék feltöltése</h2>
-    <input type="text" id="fileTitle" placeholder="Termék címének megadása" style="width: 300px; padding: 5px;">
+    <input type="text" id="fileTitle" placeholder="Termék címe" style="width: 300px; padding: 5px;">
     <input type="file" id="fileInput" style="cursor: pointer;">
     <h4>Leírás:</h4>
     <textarea id="fileDesc" rows="5" cols="50" style="padding:5px; resize: none; width: 300px;" placeholder="Termék rövid leírása"></textarea>
@@ -76,88 +73,21 @@ function openUploadModal() {
     <input type="number" id="fileQuantity" placeholder="Termék darabszáma" style="width: 300px; padding: 5px; margin-bottom: 15px;" min="1">
     <h4>Kategória:</h4>
     <input type="text" id="fileCategory" placeholder="Termék kategóriája" style="width: 300px; padding: 5px; margin-bottom: 15px;">
+    <h4>Márka:</h4>
+    <input type="text" id="fileBrand" placeholder="Márka neve" style="width: 300px; padding: 5px; margin-bottom: 15px;">
     <button onclick="uploadFile()" style="cursor: pointer; padding:6px; color: white; background-color: black; border-radius: 5px; border: none;">Feltöltés</button>
     <button onclick="closeUploadModal()" style="cursor: pointer; padding:5px; background-color: white; border-radius: 5px;">Mégse</button>
   `;
 
   modal.appendChild(modalContent);
   document.body.appendChild(modal);
-
-  // Ellenőrizve, hogy létezik-e már az overlay
-  if (!document.getElementById("modalOverlay")) {
-    var overlay = document.createElement("div");
-    overlay.id = "modalOverlay";
-    overlay.style.position = "fixed";
-    overlay.style.top = "0";
-    overlay.style.left = "0";
-    overlay.style.width = "100%";
-    overlay.style.height = "100%";
-    overlay.style.backgroundColor = "rgba(0,0,0,0.5)";
-    overlay.style.zIndex = "999";
-    document.body.appendChild(overlay);
-  }
 }
 
 function closeUploadModal() {
   var modal = document.getElementById("uploadModal");
-  var overlay = document.getElementById("modalOverlay");
   if (modal) {
     document.body.removeChild(modal);
   }
-  if (overlay) {
-    document.body.removeChild(overlay);
-  }
-}
-
-function openProductModal(title, desc, price, imgSrc) {
-  var modal = document.createElement("div");
-  modal.id = "productModal";
-  modal.style.position = "fixed";
-  modal.style.top = "50%";
-  modal.style.left = "50%";
-  modal.style.transform = "translate(-50%, -50%)";
-  modal.style.height = "auto";
-  modal.style.width = "500px"; // Növelt szélesség
-  modal.style.padding = "30px";
-  modal.style.backgroundColor = "#fff";
-  modal.style.boxShadow = "0 5px 15px rgba(0,0,0,0.3)";
-  modal.style.zIndex = "1000";
-  modal.style.borderRadius = "10px";
-
-  var modalContent = `
-    <h2>${title}</h2>
-    <img src="${imgSrc}" alt="${title}" style="width: 100%; height: auto; border-radius: 5px;">
-    <p style="margin-top: 15px;">${desc}</p>
-    <h3>Ár: ${price} Ft</h3>
-    <button onclick="closeProductModal()" style="cursor: pointer; padding:10px; color: white; background-color: black; border-radius: 5px; border: none;">Bezárás</button>
-  `;
-
-  modal.innerHTML = modalContent;
-  document.body.appendChild(modal);
-
-  // Ellenőrizve, hogy létezik-e már az overlay
-  if (!document.getElementById("modalOverlay")) {
-    var overlay = document.createElement("div");
-    overlay.id = "modalOverlay";
-    overlay.style.position = "fixed";
-    overlay.style.top = "0";
-    overlay.style.left = "0";
-    overlay.style.width = "100%";
-    overlay.style.height = "100%";
-    overlay.style.backgroundColor = "rgba(0,0,0,0.5)";
-    overlay.style.zIndex = "999";
-    document.body.appendChild(overlay);
-  }
-
-  document.body.style.overflow = "hidden";
-}
-
-function closeProductModal() {
-  var modal = document.getElementById("productModal");
-  var overlay = document.getElementById("modalOverlay");
-  if (modal) document.body.removeChild(modal);
-  if (overlay) document.body.removeChild(overlay);
-  document.body.style.overflow = "auto";
 }
 
 function uploadFile() {
@@ -166,16 +96,18 @@ function uploadFile() {
   var filePrice = document.getElementById("filePrice").value;
   var fileQuantity = document.getElementById("fileQuantity").value;
   var fileCategory = document.getElementById("fileCategory").value;
+  var fileBrand = document.getElementById("fileBrand").value;
   var fileInput = document.getElementById("fileInput").files[0];
 
-  if (fileTitle && fileDesc && filePrice && fileQuantity && fileCategory && fileInput) {
+  if (fileTitle && fileDesc && filePrice && fileQuantity && fileCategory && fileBrand && fileInput) {
     var formData = new FormData();
     formData.append("fileTitle", fileTitle);
     formData.append("fileDesc", fileDesc);
     formData.append("filePrice", filePrice);
     formData.append("fileQuantity", fileQuantity);
     formData.append("fileCategory", fileCategory);
-    formData.append("fileInput", fileInput); // Fájl feltöltés
+    formData.append("fileBrand", fileBrand);
+    formData.append("fileInput", fileInput);
 
     fetch("backend/ossztermekupload.php", {
       method: "POST",
@@ -183,8 +115,9 @@ function uploadFile() {
     })
     .then(response => response.json())
     .then(data => {
-      alert(data.message); // PHP válasz
+      alert(data.message);
       closeUploadModal();
+      fetchProducts(); // Terméklista frissítése feltöltés után
     })
     .catch(error => console.error("Error:", error));
   } else {
@@ -192,110 +125,29 @@ function uploadFile() {
   }
 }
 
-//Újabb uploadFile függvény
-/*function uploadFile() {
-  var fileTitle = document.getElementById("fileTitle").value;
-  var fileDesc = document.getElementById("fileDesc").value;
-  var filePrice = document.getElementById("filePrice").value;
-  var fileQuantity = document.getElementById("fileQuantity").value;
-  var fileCategory = document.getElementById("fileCategory").value;
-  var fileInput = document.getElementById("fileInput").files[0];
-
-  if (fileTitle && fileDesc && filePrice && fileQuantity && fileCategory && fileInput) {
-    var reader = new FileReader();
-    reader.onload = function(e) {
+// Termékek lekérése az adatbázisból és megjelenítése az oldalon
+function fetchProducts() {
+  fetch("backend/ossztermeklekero.php") // A megfelelő PHP endpointot használd
+    .then(response => response.json())
+    .then(data => {
       var productList = document.querySelector(".product-list");
+      productList.innerHTML = ""; // Ürítjük a listát
 
-      // Ellenőrizzük, hogy létezik a product-list
-      if (productList) {
+      data.forEach(product => {
         var productCard = document.createElement("div");
         productCard.className = "product-card";
         productCard.innerHTML = `
-          <img src="${e.target.result}" alt="${fileTitle}" class="product-image">
-          <h3>${fileTitle}</h3>
-          <p>${fileDesc}</p>
-          <h3>Ár: ${filePrice} Ft</h3>
+          <img src="${product.image}" alt="${product.title}" class="product-image">
+          <h3>${product.title}</h3>
+          <p>${product.description}</p>
+          <h3>Ár: ${product.price} Ft</h3>
         `;
 
-        // Kép és kártya méretezése
-        var productImage = productCard.querySelector("img");
-        productImage.style.width = "100%";  // A kép szélessége mindig a kártya szélessége
-        productImage.style.height = "200px"; // A kép magassága fix
-
-        productCard.addEventListener("click", function() {
-          openProductModal(fileTitle, fileDesc, filePrice, fileQuantity, fileCategory, fileInput, e.target.result);
-        });
-
-        fetch("backend/ossztermekupload.php", { // Update with actual PHP file path
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(productData)
-        })
-        .then(response => response.json())
-        .then(data => {
-          alert(data.message); // Show response from PHP
-          closeUploadModal();
-        })
-        .catch(error => console.error("Error:", error));
-
         productList.appendChild(productCard);
-        closeUploadModal();
-      } else {
-        console.log("A product-list nem található.");
-      }
-    };
-    reader.readAsDataURL(fileInput);
-  } else {
-    alert("Minden mezőt ki kell tölteni!");
-  }
-}*/
+      });
+    })
+    .catch(error => console.error("Hiba a termékek lekérésekor:", error));
+}
 
-
-
-
-
-//Original uploadFile function
-/*function uploadFile() {
-  var fileTitle = document.getElementById("fileTitle").value;
-  var fileDesc = document.getElementById("fileDesc").value;
-  var fileInput = document.getElementById("fileInput").files[0];
-  var filePrice = document.getElementById("filePrice").value;
-
-  if (fileTitle && fileDesc && fileInput && filePrice) {
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      var productList = document.querySelector(".product-list");
-
-      // Ellenőrizzük, hogy létezik a product-list
-      if (productList) {
-        var productCard = document.createElement("div");
-        productCard.className = "product-card";
-        productCard.innerHTML = `
-          <img src="${e.target.result}" alt="${fileTitle}" class="product-image">
-          <h3>${fileTitle}</h3>
-          <p>${fileDesc}</p>
-          <h3>Ár: ${filePrice} Ft</h3>
-        `;
-
-        // Kép és kártya méretezése
-        var productImage = productCard.querySelector("img");
-        productImage.style.width = "100%";  // A kép szélessége mindig a kártya szélessége
-        productImage.style.height = "200px"; // A kép magassága fix
-
-        productCard.addEventListener("click", function() {
-          openProductModal(fileTitle, fileDesc, filePrice, e.target.result);
-        });
-
-        productList.appendChild(productCard);
-        closeUploadModal();
-      } else {
-        console.log("A product-list nem található.");
-      }
-    };
-    reader.readAsDataURL(fileInput);
-  } else {
-    alert("Minden mezőt ki kell tölteni!");
-  }
-}*/
+// Oldal betöltésekor hívjuk meg
+document.addEventListener("DOMContentLoaded", fetchProducts);

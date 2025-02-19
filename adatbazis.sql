@@ -5,8 +5,8 @@ CREATE TABLE `user` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `created` timestamp DEFAULT CURRENT_TIMESTAMP,
-  `phone_number` varchar(255) NOT NULL,
-  `postcode` int NOT NULL,
+  `phone_number` varchar(255) NULL,
+  `postcode` int NULL,
   `image_id` int DEFAULT NULL
 );
 
