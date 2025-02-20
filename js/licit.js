@@ -194,13 +194,6 @@ function setPriceInModal(price) {
   document.getElementById("priceValue").innerText = price + " Ft";
 }
 
-// A termék adatait megjelenítő rész (példa)
-// A termék adatait megjelenítő rész (példa)
-// A termék adatait megjelenítő rész (példa)
-// A termék adatait megjelenítő rész (példa)
-// A termék adatait megjelenítő rész (példa)
-// A termék adatait megjelenítő rész (példa)
-// A termék adatait megjelenítő rész (példa)
 function showProductDetails(title, description, imageUrl, price, bidStep) {
   var modal = document.createElement("div");
   modal.style.position = "fixed";
