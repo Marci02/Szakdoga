@@ -20,6 +20,9 @@ if (empty($email) || empty($password)) {
 $query = "SELECT id, firstname, lastname, email, phone_number, postcode, image_id, password, created 
           FROM user WHERE email = ?";
 $stmt = mysqli_prepare($dbconn, $query);
+if (!$stmt) {
+    die(json_encode(["error" => "Lekérdezés előkészítése sikertelen: " . mysqli_error($dbconn)]));
+}
 mysqli_stmt_bind_param($stmt, 's', $email);
 mysqli_stmt_execute($stmt);
 mysqli_stmt_bind_result($stmt, $userId, $firstname, $lastname, $email, $phone, $postcode, $imageId, $hashedPassword, $created);

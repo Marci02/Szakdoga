@@ -20,22 +20,35 @@ document.addEventListener("DOMContentLoaded", () => {
     // Ha a felhasználó a profile.html oldalon van, töltsük be az adatokat
     if (window.location.pathname.includes("profile.html")) {
         fetch("backend/get_profile.php")
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    window.location.href = "login1.html"; // Ha nincs bejelentkezve, irány a login
-                } else {
-                    document.getElementById("fullname").textContent = data.firstname + " " + data.lastname;
-                    document.getElementById("email").textContent = data.email;
-                    document.getElementById("created").textContent = data.created;
-                    document.getElementById("phone").textContent = data.phone_number;
-                    document.getElementById("postcode").textContent = data.postcode;
-
-                    if (data.image) {
-                        document.getElementById("profile-pic").src = "uploads/" + data.image;
-                    }
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                window.location.href = "login1.html"; // Ha nincs bejelentkezve, irány a login
+            } else {
+                console.log("Profil adatok:", data); // 🔍 Debug konzol kiírás
+    
+                const usernameEl = document.getElementById("username");
+                const emailEl = document.getElementById("email");
+                const phoneEl = document.getElementById("phone");
+                const profileImageUrlEl = document.getElementById("profile-image-url");
+                const profileImageEl = document.getElementById("profile-image");
+                const postcodeEl = document.getElementById("postcode");
+                const cityEl = document.getElementById("city");
+                const countyEl = document.getElementById("county");
+    
+                if (usernameEl) usernameEl.value = data.firstname + " " + data.lastname;
+                if (emailEl) emailEl.value = data.email;
+                if (phoneEl) phoneEl.value = data.phone_number;
+                if (postcodeEl) postcodeEl.value = data.postcode;
+                if (cityEl) cityEl.value = data.city;
+                if (countyEl) countyEl.value = data.county;
+    
+                if (profileImageEl && data.image) {
+                    profileImageUrlEl.value = data.image;
+                    profileImageEl.src = "uploads/" + data.image;
                 }
-            })
-            .catch(error => console.error("Hiba a profil betöltésekor:", error));
+            }
+        })
+        .catch(error => console.error("Hiba a profil betöltésekor:", error));
     }
 });

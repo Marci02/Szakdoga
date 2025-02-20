@@ -11,22 +11,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Felhasználói adatok betöltése
     fetch("backend/get_profile.php")
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                document.getElementById("username").value = data.firstname + " " + data.lastname;
-                document.getElementById("email").value = data.email;
-                document.getElementById("phone").value = data.phone_number;
-                document.getElementById("profile-image-url").value = data.image;
-                document.getElementById("profile-image").src = data.image;
-                document.getElementById("postcode").value = data.postcode;
-                document.getElementById("city").value = data.city;
-                document.getElementById("county").value = data.county;
-            } else {
-                console.error("Hiba a profiladatok lekérésekor");
-            }
-        })
-        .catch(error => console.error("Hálózati hiba: ", error));
+    .then(response => response.json())
+    .then(data => {
+        console.log("Backend válasz:", data); // 📌 Ellenőrzéshez
+
+        if (data.success) {
+            document.getElementById("username").value = data.firstname + " " + data.lastname;
+            document.getElementById("email").value = data.email;
+            document.getElementById("phone").value = data.phone_number;
+            document.getElementById("profile-image-url").value = data.image;
+            document.getElementById("profile-image").src = data.image;
+
+            console.log("City:", data.city); // 📌 Város ellenőrzése
+            console.log("County:", data.county); // 📌 Megye ellenőrzése
+
+            document.getElementById("postcode").value = data.postcode || "";
+            document.getElementById("city").value = data.city || "Nincs megadva";
+            document.getElementById("county").value = data.county || "Nincs megadva";
+        } else {
+            console.error("Hiba a profiladatok lekérésekor, data.success:", data.success);
+        }
+    })
+    .catch(error => console.error("Hálózati hiba: ", error));
 
     // Személyes adatok mentése
     document.getElementById("savePersonal").addEventListener("click", () => {
