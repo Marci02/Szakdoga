@@ -6,7 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
+    'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src', $vendorDir . '/phpdocumentor/reflection-common/src'),
     'phpDocumentor\\Guides\\' => array($vendorDir . '/phpdocumentor/phpdocumentor/src/Guides'),
     'phpDocumentor\\GraphViz\\PHPStan\\' => array($vendorDir . '/phpdocumentor/graphviz/src/phpDocumentor/PHPStan'),
     'phpDocumentor\\GraphViz\\' => array($vendorDir . '/phpdocumentor/graphviz/src/phpDocumentor/GraphViz'),
@@ -69,7 +69,7 @@ return array(
     'Flyfinder\\' => array($vendorDir . '/phpdocumentor/flyfinder/src'),
     'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
-    'Doctrine\\Deprecations\\' => array($vendorDir . '/doctrine/deprecations/lib/Doctrine/Deprecations'),
+    'Doctrine\\Deprecations\\' => array($vendorDir . '/doctrine/deprecations/src'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib/Doctrine/Common/Lexer'),
     'Doctrine\\Common\\' => array($vendorDir . '/doctrine/event-manager/src'),
 );

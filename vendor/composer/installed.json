@@ -2,40 +2,38 @@
     "packages": [
         {
             "name": "doctrine/deprecations",
-            "version": "1.1.3",
-            "version_normalized": "1.1.3.0",
+            "version": "1.1.4",
+            "version_normalized": "1.1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/deprecations.git",
-                "reference": "dfbaa3c2d2e9a9df1118213f3b8b0c597bb99fab"
+                "reference": "31610dbb31faa98e6b5447b62340826f54fbc4e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/dfbaa3c2d2e9a9df1118213f3b8b0c597bb99fab",
-                "reference": "dfbaa3c2d2e9a9df1118213f3b8b0c597bb99fab",
+                "url": "https://api.github.com/repos/doctrine/deprecations/zipball/31610dbb31faa98e6b5447b62340826f54fbc4e9",
+                "reference": "31610dbb31faa98e6b5447b62340826f54fbc4e9",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1 || ^8.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^9",
-                "phpstan/phpstan": "1.4.10 || 1.10.15",
-                "phpstan/phpstan-phpunit": "^1.0",
+                "doctrine/coding-standard": "^9 || ^12",
+                "phpstan/phpstan": "1.4.10 || 2.0.3",
+                "phpstan/phpstan-phpunit": "^1.0 || ^2",
                 "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5",
-                "psalm/plugin-phpunit": "0.18.4",
-                "psr/log": "^1 || ^2 || ^3",
-                "vimeo/psalm": "4.30.0 || 5.12.0"
+                "psr/log": "^1 || ^2 || ^3"
             },
             "suggest": {
                 "psr/log": "Allows logging deprecations via PSR-3 logger implementation"
             },
-            "time": "2024-01-30T19:34:25+00:00",
+            "time": "2024-12-07T21:18:45+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
-                    "Doctrine\\Deprecations\\": "lib/Doctrine/Deprecations"
+                    "Doctrine\\Deprecations\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -46,7 +44,7 @@
             "homepage": "https://www.doctrine-project.org/",
             "support": {
                 "issues": "https://github.com/doctrine/deprecations/issues",
-                "source": "https://github.com/doctrine/deprecations/tree/1.1.3"
+                "source": "https://github.com/doctrine/deprecations/tree/1.1.4"
             },
             "install-path": "../doctrine/deprecations"
         },
@@ -80,7 +78,7 @@
             },
             "time": "2022-10-12T20:51:15+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Doctrine\\Common\\": "src"
@@ -171,7 +169,7 @@
             },
             "time": "2022-02-28T11:07:21+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Doctrine\\Common\\Lexer\\": "lib/Doctrine/Common/Lexer"
@@ -226,17 +224,17 @@
         },
         {
             "name": "firebase/php-jwt",
-            "version": "v6.10.2",
-            "version_normalized": "6.10.2.0",
+            "version": "v6.11.0",
+            "version_normalized": "6.11.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "30c19ed0f3264cb660ea496895cfb6ef7ee3653b"
+                "reference": "8f718f4dfc9c5d5f0c994cdfd103921b43592712"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/30c19ed0f3264cb660ea496895cfb6ef7ee3653b",
-                "reference": "30c19ed0f3264cb660ea496895cfb6ef7ee3653b",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/8f718f4dfc9c5d5f0c994cdfd103921b43592712",
+                "reference": "8f718f4dfc9c5d5f0c994cdfd103921b43592712",
                 "shasum": ""
             },
             "require": {
@@ -254,9 +252,9 @@
                 "ext-sodium": "Support EdDSA (Ed25519) signatures",
                 "paragonie/sodium_compat": "Support EdDSA (Ed25519) signatures when libsodium is not present"
             },
-            "time": "2024-11-24T11:22:49+00:00",
+            "time": "2025-01-23T05:11:06+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Firebase\\JWT\\": "src"
@@ -286,7 +284,7 @@
             ],
             "support": {
                 "issues": "https://github.com/firebase/php-jwt/issues",
-                "source": "https://github.com/firebase/php-jwt/tree/v6.10.2"
+                "source": "https://github.com/firebase/php-jwt/tree/v6.11.0"
             },
             "install-path": "../firebase/php-jwt"
         },
@@ -314,7 +312,7 @@
             },
             "time": "2024-07-20T21:45:45+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "GrahamCampbell\\ResultType\\": "src/"
@@ -357,25 +355,25 @@
         },
         {
             "name": "jawira/plantuml",
-            "version": "v1.2024.8",
-            "version_normalized": "1.2024.8.0",
+            "version": "v1.2025.0",
+            "version_normalized": "1.2025.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jawira/plantuml.git",
-                "reference": "f15235edc4d5ac85ec5e035d7d5d998484440a3a"
+                "reference": "f96d6523a30947001d0a9cb8d591d55aac33bea6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jawira/plantuml/zipball/f15235edc4d5ac85ec5e035d7d5d998484440a3a",
-                "reference": "f15235edc4d5ac85ec5e035d7d5d998484440a3a",
+                "url": "https://api.github.com/repos/jawira/plantuml/zipball/f96d6523a30947001d0a9cb8d591d55aac33bea6",
+                "reference": "f96d6523a30947001d0a9cb8d591d55aac33bea6",
                 "shasum": ""
             },
-            "time": "2024-11-22T14:00:40+00:00",
+            "time": "2025-01-10T14:00:43+00:00",
             "bin": [
                 "bin/plantuml"
             ],
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-3.0-or-later"
@@ -395,7 +393,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jawira/plantuml/issues",
-                "source": "https://github.com/jawira/plantuml/tree/v1.2024.8"
+                "source": "https://github.com/jawira/plantuml/tree/v1.2025.0"
             },
             "install-path": "../jawira/plantuml"
         },
@@ -432,7 +430,7 @@
                     "dev-master": "1.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Jean85\\": "src/"
@@ -501,7 +499,7 @@
                 "bin/commonmark"
             ],
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "League\\CommonMark\\": "src"
@@ -606,7 +604,7 @@
                     "dev-master": "1.1-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "League\\Flysystem\\": "src/"
@@ -680,7 +678,7 @@
             },
             "time": "2024-09-21T08:32:55+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "League\\MimeTypeDetection\\": "src"
@@ -715,29 +713,28 @@
         },
         {
             "name": "league/pipeline",
-            "version": "1.0.0",
-            "version_normalized": "1.0.0.0",
+            "version": "1.1.0",
+            "version_normalized": "1.1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/pipeline.git",
-                "reference": "aa14b0e3133121f8be39e9a3b6ddd011fc5bb9a8"
+                "reference": "9069ddfdbd5582f8a563e00cffdbeffb9a0acd01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/pipeline/zipball/aa14b0e3133121f8be39e9a3b6ddd011fc5bb9a8",
-                "reference": "aa14b0e3133121f8be39e9a3b6ddd011fc5bb9a8",
+                "url": "https://api.github.com/repos/thephpleague/pipeline/zipball/9069ddfdbd5582f8a563e00cffdbeffb9a0acd01",
+                "reference": "9069ddfdbd5582f8a563e00cffdbeffb9a0acd01",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": "^8.0"
             },
             "require-dev": {
-                "leanphp/phpspec-code-coverage": "^4.2",
-                "phpspec/phpspec": "^4.3"
+                "phpunit/phpunit": "^9.0 || ^10.0 || ^11.5"
             },
-            "time": "2018-06-05T21:06:51+00:00",
+            "time": "2025-02-06T08:48:15+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "League\\Pipeline\\": "src"
@@ -769,7 +766,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/pipeline/issues",
-                "source": "https://github.com/thephpleague/pipeline/tree/master"
+                "source": "https://github.com/thephpleague/pipeline/tree/1.1.0"
             },
             "install-path": "../league/pipeline"
         },
@@ -803,7 +800,7 @@
                     "dev-master": "2.0-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "League\\Tactician\\": "src"
@@ -833,17 +830,17 @@
         },
         {
             "name": "league/tactician-bundle",
-            "version": "v1.5.1",
-            "version_normalized": "1.5.1.0",
+            "version": "v1.5.2",
+            "version_normalized": "1.5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/tactician-bundle.git",
-                "reference": "165d9fa14eb55bf84257fc40af0a69beca9c3611"
+                "reference": "8acdfffc227295cca945ff1a964f88e4f034cdf9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/tactician-bundle/zipball/165d9fa14eb55bf84257fc40af0a69beca9c3611",
-                "reference": "165d9fa14eb55bf84257fc40af0a69beca9c3611",
+                "url": "https://api.github.com/repos/thephpleague/tactician-bundle/zipball/8acdfffc227295cca945ff1a964f88e4f034cdf9",
+                "reference": "8acdfffc227295cca945ff1a964f88e4f034cdf9",
                 "shasum": ""
             },
             "require": {
@@ -874,14 +871,14 @@
                 "symfony/security": "For command security middleware",
                 "symfony/validator": "For command validator middleware"
             },
-            "time": "2024-01-30T18:43:03+00:00",
+            "time": "2025-02-19T08:17:44+00:00",
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.0-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "League\\Tactician\\Bundle\\": "src/"
@@ -917,7 +914,7 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/tactician-bundle/issues",
-                "source": "https://github.com/thephpleague/tactician-bundle/tree/v1.5.1"
+                "source": "https://github.com/thephpleague/tactician-bundle/tree/v1.5.2"
             },
             "install-path": "../league/tactician-bundle"
         },
@@ -948,7 +945,7 @@
             },
             "time": "2017-04-13T06:27:12+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "League\\Tactician\\Container\\": "src/"
@@ -1006,7 +1003,7 @@
             },
             "time": "2021-11-14T15:08:02+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "League\\Tactician\\Logger\\": "src"
@@ -1036,38 +1033,39 @@
         },
         {
             "name": "league/uri",
-            "version": "6.7.2",
-            "version_normalized": "6.7.2.0",
+            "version": "6.8.0",
+            "version_normalized": "6.8.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/uri.git",
-                "reference": "d3b50812dd51f3fbf176344cc2981db03d10fe06"
+                "reference": "a700b4656e4c54371b799ac61e300ab25a2d1d39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/uri/zipball/d3b50812dd51f3fbf176344cc2981db03d10fe06",
-                "reference": "d3b50812dd51f3fbf176344cc2981db03d10fe06",
+                "url": "https://api.github.com/repos/thephpleague/uri/zipball/a700b4656e4c54371b799ac61e300ab25a2d1d39",
+                "reference": "a700b4656e4c54371b799ac61e300ab25a2d1d39",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "league/uri-interfaces": "^2.3",
-                "php": "^7.4 || ^8.0",
-                "psr/http-message": "^1.0"
+                "php": "^8.1",
+                "psr/http-message": "^1.0.1"
             },
             "conflict": {
                 "league/uri-schemes": "^1.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^v3.3.2",
-                "nyholm/psr7": "^1.5",
-                "php-http/psr7-integration-tests": "^1.1",
-                "phpstan/phpstan": "^1.2.0",
+                "friendsofphp/php-cs-fixer": "^v3.9.5",
+                "nyholm/psr7": "^1.5.1",
+                "php-http/psr7-integration-tests": "^1.1.1",
+                "phpbench/phpbench": "^1.2.6",
+                "phpstan/phpstan": "^1.8.5",
                 "phpstan/phpstan-deprecation-rules": "^1.0",
-                "phpstan/phpstan-phpunit": "^1.0.0",
-                "phpstan/phpstan-strict-rules": "^1.1.0",
-                "phpunit/phpunit": "^9.5.10",
-                "psr/http-factory": "^1.0"
+                "phpstan/phpstan-phpunit": "^1.1.1",
+                "phpstan/phpstan-strict-rules": "^1.4.3",
+                "phpunit/phpunit": "^9.5.24",
+                "psr/http-factory": "^1.0.1"
             },
             "suggest": {
                 "ext-fileinfo": "Needed to create Data URI from a filepath",
@@ -1075,14 +1073,14 @@
                 "league/uri-components": "Needed to easily manipulate URI objects",
                 "psr/http-factory": "Needed to use the URI factory"
             },
-            "time": "2022-09-13T19:50:42+00:00",
+            "time": "2022-09-13T19:58:47+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-master": "6.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "League\\Uri\\": "src"
@@ -1126,7 +1124,7 @@
                 "docs": "https://uri.thephpleague.com",
                 "forum": "https://thephpleague.slack.com",
                 "issues": "https://github.com/thephpleague/uri/issues",
-                "source": "https://github.com/thephpleague/uri/tree/6.7.2"
+                "source": "https://github.com/thephpleague/uri/tree/6.8.0"
             },
             "funding": [
                 {
@@ -1173,7 +1171,7 @@
                     "dev-master": "2.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "League\\Uri\\": "src/"
@@ -1275,7 +1273,7 @@
                     "dev-main": "2.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Monolog\\": "src/Monolog"
@@ -1348,7 +1346,7 @@
                     "dev-master": "4.9-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "PhpParser\\": "lib/PhpParser"
@@ -1404,7 +1402,7 @@
                     "dev-master": "1.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Flyfinder\\": [
@@ -1460,7 +1458,7 @@
                     "dev-master": "2.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "phpDocumentor\\GraphViz\\": "src/phpDocumentor/GraphViz",
@@ -1584,7 +1582,7 @@
                     "dev-master": "3.0-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "phpDocumentor\\": [
@@ -1655,7 +1653,7 @@
                     "dev-5.x": "5.3.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "phpDocumentor\\": "src/phpDocumentor"
@@ -1704,7 +1702,7 @@
                     "dev-2.x": "2.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "phpDocumentor\\Reflection\\": "src/"
@@ -1737,17 +1735,17 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "5.6.0",
-            "version_normalized": "5.6.0.0",
+            "version": "5.6.1",
+            "version_normalized": "5.6.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "f3558a4c23426d12bffeaab463f8a8d8b681193c"
+                "reference": "e5e784149a09bd69d9a5e3b01c5cbd2e2bd653d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/f3558a4c23426d12bffeaab463f8a8d8b681193c",
-                "reference": "f3558a4c23426d12bffeaab463f8a8d8b681193c",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/e5e784149a09bd69d9a5e3b01c5cbd2e2bd653d8",
+                "reference": "e5e784149a09bd69d9a5e3b01c5cbd2e2bd653d8",
                 "shasum": ""
             },
             "require": {
@@ -1768,14 +1766,14 @@
                 "phpunit/phpunit": "^9.5",
                 "psalm/phar": "^5.26"
             },
-            "time": "2024-11-12T11:25:25+00:00",
+            "time": "2024-12-07T09:39:29+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-master": "5.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "phpDocumentor\\Reflection\\": "src"
@@ -1798,7 +1796,7 @@
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
             "support": {
                 "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
-                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.6.0"
+                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.6.1"
             },
             "install-path": "../phpdocumentor/reflection-docblock"
         },
@@ -1840,7 +1838,7 @@
                     "dev-1.x": "1.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "phpDocumentor\\Reflection\\": "src"
@@ -1896,7 +1894,7 @@
                     "dev-master": "1.9-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "PhpOption\\": "src/PhpOption/"
@@ -1943,17 +1941,17 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "2.0.0",
-            "version_normalized": "2.0.0.0",
+            "version": "2.1.0",
+            "version_normalized": "2.1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "c00d78fb6b29658347f9d37ebe104bffadf36299"
+                "reference": "9b30d6fd026b2c132b3985ce6b23bec09ab3aa68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/c00d78fb6b29658347f9d37ebe104bffadf36299",
-                "reference": "c00d78fb6b29658347f9d37ebe104bffadf36299",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/9b30d6fd026b2c132b3985ce6b23bec09ab3aa68",
+                "reference": "9b30d6fd026b2c132b3985ce6b23bec09ab3aa68",
                 "shasum": ""
             },
             "require": {
@@ -1970,9 +1968,9 @@
                 "phpunit/phpunit": "^9.6",
                 "symfony/process": "^5.2"
             },
-            "time": "2024-10-13T11:29:49+00:00",
+            "time": "2025-02-19T13:28:12+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "PHPStan\\PhpDocParser\\": [
@@ -1987,7 +1985,7 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.0.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.1.0"
             },
             "install-path": "../phpstan/phpdoc-parser"
         },
@@ -2016,7 +2014,7 @@
                     "dev-master": "1.0.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Psr\\Cache\\": "src/"
@@ -2063,7 +2061,7 @@
             },
             "time": "2021-11-05T16:50:12+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Psr\\Container\\": "src/"
@@ -2119,7 +2117,7 @@
                     "dev-master": "1.0.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Psr\\EventDispatcher\\": "src/"
@@ -2172,7 +2170,7 @@
                     "dev-master": "1.1.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Psr\\Http\\Message\\": "src/"
@@ -2228,7 +2226,7 @@
                     "dev-master": "1.1.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Psr\\Log\\": "Psr/Log/"
@@ -2308,7 +2306,7 @@
             },
             "time": "2024-11-04T11:43:55+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Cache\\": ""
@@ -2394,7 +2392,7 @@
             },
             "time": "2024-10-30T07:58:02+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Config\\": ""
@@ -2490,7 +2488,7 @@
             },
             "time": "2024-11-06T11:30:55+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Console\\": ""
@@ -2542,17 +2540,17 @@
         },
         {
             "name": "symfony/contracts",
-            "version": "v2.5.4",
-            "version_normalized": "2.5.4.0",
+            "version": "v2.5.5",
+            "version_normalized": "2.5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/contracts.git",
-                "reference": "55231fd5e61fbdab04a4b32a829d85f295daf7ef"
+                "reference": "4d727f81a7eede1a3021fc93f02c1cc7ccb32abd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/contracts/zipball/55231fd5e61fbdab04a4b32a829d85f295daf7ef",
-                "reference": "55231fd5e61fbdab04a4b32a829d85f295daf7ef",
+                "url": "https://api.github.com/repos/symfony/contracts/zipball/4d727f81a7eede1a3021fc93f02c1cc7ccb32abd",
+                "reference": "4d727f81a7eede1a3021fc93f02c1cc7ccb32abd",
                 "shasum": ""
             },
             "require": {
@@ -2582,14 +2580,14 @@
                 "symfony/service-implementation": "",
                 "symfony/translation-implementation": ""
             },
-            "time": "2024-11-25T09:13:00+00:00",
+            "time": "2024-11-28T08:37:04+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-main": "2.5-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "Deprecation/function.php"
@@ -2626,7 +2624,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/contracts/tree/v2.5.4"
+                "source": "https://github.com/symfony/contracts/tree/v2.5.5"
             },
             "funding": [
                 {
@@ -2692,7 +2690,7 @@
             },
             "time": "2024-11-20T10:51:57+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\DependencyInjection\\": ""
@@ -2769,7 +2767,7 @@
             },
             "time": "2021-07-23T15:54:19+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\DomCrawler\\": ""
@@ -2838,7 +2836,7 @@
             },
             "time": "2024-11-27T09:33:00+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Dotenv\\": ""
@@ -2889,35 +2887,38 @@
         },
         {
             "name": "symfony/error-handler",
-            "version": "v6.0.19",
-            "version_normalized": "6.0.19.0",
+            "version": "v6.3.12",
+            "version_normalized": "6.3.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/error-handler.git",
-                "reference": "c7df52182f43a68522756ac31a532dd5b1e6db67"
+                "reference": "93a8400a7eaaaf385b2d6f71e30e064baa639629"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/error-handler/zipball/c7df52182f43a68522756ac31a532dd5b1e6db67",
-                "reference": "c7df52182f43a68522756ac31a532dd5b1e6db67",
+                "url": "https://api.github.com/repos/symfony/error-handler/zipball/93a8400a7eaaaf385b2d6f71e30e064baa639629",
+                "reference": "93a8400a7eaaaf385b2d6f71e30e064baa639629",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0.2",
+                "php": ">=8.1",
                 "psr/log": "^1|^2|^3",
                 "symfony/var-dumper": "^5.4|^6.0"
             },
+            "conflict": {
+                "symfony/deprecation-contracts": "<2.5"
+            },
             "require-dev": {
-                "symfony/deprecation-contracts": "^2.1|^3",
+                "symfony/deprecation-contracts": "^2.5|^3",
                 "symfony/http-kernel": "^5.4|^6.0",
                 "symfony/serializer": "^5.4|^6.0"
             },
-            "time": "2023-01-01T08:36:10+00:00",
+            "time": "2024-01-23T14:35:58+00:00",
             "bin": [
                 "Resources/bin/patch-type-declarations"
             ],
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\ErrorHandler\\": ""
@@ -2943,7 +2944,7 @@
             "description": "Provides tools to manage errors and ease debugging PHP code",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/error-handler/tree/v6.0.19"
+                "source": "https://github.com/symfony/error-handler/tree/v6.3.12"
             },
             "funding": [
                 {
@@ -3005,7 +3006,7 @@
             },
             "time": "2024-09-25T14:11:13+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\EventDispatcher\\": ""
@@ -3071,7 +3072,7 @@
             },
             "time": "2024-10-04T14:55:40+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\ExpressionLanguage\\": ""
@@ -3141,7 +3142,7 @@
             },
             "time": "2024-10-22T13:05:35+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Filesystem\\": ""
@@ -3206,7 +3207,7 @@
             },
             "time": "2022-01-02T09:51:59+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Finder\\": ""
@@ -3284,7 +3285,7 @@
             "extra": {
                 "class": "Symfony\\Flex\\Flex"
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Flex\\": "src"
@@ -3431,7 +3432,7 @@
             },
             "time": "2024-10-22T13:05:35+00:00",
             "type": "symfony-bundle",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Bundle\\FrameworkBundle\\": ""
@@ -3510,7 +3511,7 @@
             },
             "time": "2024-11-13T18:58:02+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\HttpFoundation\\": ""
@@ -3626,7 +3627,7 @@
             },
             "time": "2024-11-27T12:43:17+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\HttpKernel\\": ""
@@ -3672,47 +3673,43 @@
         },
         {
             "name": "symfony/monolog-bridge",
-            "version": "v6.0.19",
-            "version_normalized": "6.0.19.0",
+            "version": "v6.4.13",
+            "version_normalized": "6.4.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/monolog-bridge.git",
-                "reference": "8932b9108765203156fa07e819d45f58e927d3c5"
+                "reference": "9d14621e59f22c2b6d030d92d37ffe5ae1e60452"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/monolog-bridge/zipball/8932b9108765203156fa07e819d45f58e927d3c5",
-                "reference": "8932b9108765203156fa07e819d45f58e927d3c5",
+                "url": "https://api.github.com/repos/symfony/monolog-bridge/zipball/9d14621e59f22c2b6d030d92d37ffe5ae1e60452",
+                "reference": "9d14621e59f22c2b6d030d92d37ffe5ae1e60452",
                 "shasum": ""
             },
             "require": {
-                "monolog/monolog": "^1.25.1|^2",
-                "php": ">=8.0.2",
-                "symfony/http-kernel": "^5.4|^6.0",
-                "symfony/service-contracts": "^1.1|^2|^3"
+                "monolog/monolog": "^1.25.1|^2|^3",
+                "php": ">=8.1",
+                "symfony/deprecation-contracts": "^2.5|^3",
+                "symfony/http-kernel": "^5.4|^6.0|^7.0",
+                "symfony/service-contracts": "^2.5|^3"
             },
             "conflict": {
                 "symfony/console": "<5.4",
                 "symfony/http-foundation": "<5.4",
-                "symfony/security-core": "<6.0"
+                "symfony/security-core": "<5.4"
             },
             "require-dev": {
-                "symfony/console": "^5.4|^6.0",
-                "symfony/http-client": "^5.4|^6.0",
-                "symfony/mailer": "^5.4|^6.0",
-                "symfony/messenger": "^5.4|^6.0",
-                "symfony/mime": "^5.4|^6.0",
-                "symfony/security-core": "^6.0",
-                "symfony/var-dumper": "^5.4|^6.0"
+                "symfony/console": "^5.4|^6.0|^7.0",
+                "symfony/http-client": "^5.4|^6.0|^7.0",
+                "symfony/mailer": "^5.4|^6.0|^7.0",
+                "symfony/messenger": "^5.4|^6.0|^7.0",
+                "symfony/mime": "^5.4|^6.0|^7.0",
+                "symfony/security-core": "^5.4|^6.0|^7.0",
+                "symfony/var-dumper": "^5.4|^6.0|^7.0"
             },
-            "suggest": {
-                "symfony/console": "For the possibility to show log messages in console commands depending on verbosity settings.",
-                "symfony/http-kernel": "For using the debugging handlers together with the response life cycle of the HTTP kernel.",
-                "symfony/var-dumper": "For using the debugging handlers like the console handler or the log server handler."
-            },
-            "time": "2023-01-01T08:36:10+00:00",
+            "time": "2024-10-14T08:49:08+00:00",
             "type": "symfony-bridge",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Bridge\\Monolog\\": ""
@@ -3738,7 +3735,7 @@
             "description": "Provides integration for Monolog with various Symfony components",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/monolog-bridge/tree/v6.0.19"
+                "source": "https://github.com/symfony/monolog-bridge/tree/v6.4.13"
             },
             "funding": [
                 {
@@ -3791,7 +3788,7 @@
                     "dev-master": "3.x-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Bundle\\MonologBundle\\": ""
@@ -3868,11 +3865,11 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -3947,11 +3944,11 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -4029,11 +4026,11 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -4114,11 +4111,11 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -4201,11 +4198,11 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -4278,11 +4275,11 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -4357,11 +4354,11 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -4440,11 +4437,11 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "bootstrap.php"
@@ -4518,7 +4515,7 @@
             },
             "time": "2022-01-24T19:35:44+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Process\\": ""
@@ -4605,7 +4602,7 @@
             },
             "time": "2024-11-12T18:20:21+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Routing\\": ""
@@ -4676,7 +4673,7 @@
             },
             "time": "2024-09-25T14:11:13+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Stopwatch\\": ""
@@ -4754,7 +4751,7 @@
             },
             "time": "2022-01-05T13:47:22+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "Resources/functions.php"
@@ -4811,45 +4808,42 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v6.0.19",
-            "version_normalized": "6.0.19.0",
+            "version": "v6.4.18",
+            "version_normalized": "6.4.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "eb980457fa6899840fe1687e8627a03a7d8a3d52"
+                "reference": "4ad10cf8b020e77ba665305bb7804389884b4837"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/eb980457fa6899840fe1687e8627a03a7d8a3d52",
-                "reference": "eb980457fa6899840fe1687e8627a03a7d8a3d52",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/4ad10cf8b020e77ba665305bb7804389884b4837",
+                "reference": "4ad10cf8b020e77ba665305bb7804389884b4837",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0.2",
+                "php": ">=8.1",
+                "symfony/deprecation-contracts": "^2.5|^3",
                 "symfony/polyfill-mbstring": "~1.0"
             },
             "conflict": {
-                "phpunit/phpunit": "<5.4.3",
                 "symfony/console": "<5.4"
             },
             "require-dev": {
                 "ext-iconv": "*",
-                "symfony/console": "^5.4|^6.0",
-                "symfony/process": "^5.4|^6.0",
-                "symfony/uid": "^5.4|^6.0",
+                "symfony/console": "^5.4|^6.0|^7.0",
+                "symfony/error-handler": "^6.3|^7.0",
+                "symfony/http-kernel": "^5.4|^6.0|^7.0",
+                "symfony/process": "^5.4|^6.0|^7.0",
+                "symfony/uid": "^5.4|^6.0|^7.0",
                 "twig/twig": "^2.13|^3.0.4"
             },
-            "suggest": {
-                "ext-iconv": "To convert non-UTF-8 strings to UTF-8 (or symfony/polyfill-iconv in case ext-iconv cannot be used).",
-                "ext-intl": "To show region name in time zone dump",
-                "symfony/console": "To use the ServerDumpCommand and/or the bin/var-dump-server script"
-            },
-            "time": "2023-01-20T17:44:14+00:00",
+            "time": "2025-01-17T11:26:11+00:00",
             "bin": [
                 "Resources/bin/var-dump-server"
             ],
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "files": [
                     "Resources/functions/dump.php"
@@ -4882,7 +4876,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v6.0.19"
+                "source": "https://github.com/symfony/var-dumper/tree/v6.4.18"
             },
             "funding": [
                 {
@@ -4902,28 +4896,31 @@
         },
         {
             "name": "symfony/var-exporter",
-            "version": "v6.0.19",
-            "version_normalized": "6.0.19.0",
+            "version": "v6.4.13",
+            "version_normalized": "6.4.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-exporter.git",
-                "reference": "df56f53818c2d5d9f683f4ad2e365ba73a3b69d2"
+                "reference": "0f605f72a363f8743001038a176eeb2a11223b51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-exporter/zipball/df56f53818c2d5d9f683f4ad2e365ba73a3b69d2",
-                "reference": "df56f53818c2d5d9f683f4ad2e365ba73a3b69d2",
+                "url": "https://api.github.com/repos/symfony/var-exporter/zipball/0f605f72a363f8743001038a176eeb2a11223b51",
+                "reference": "0f605f72a363f8743001038a176eeb2a11223b51",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0.2"
+                "php": ">=8.1",
+                "symfony/deprecation-contracts": "^2.5|^3"
             },
             "require-dev": {
-                "symfony/var-dumper": "^5.4|^6.0"
+                "symfony/property-access": "^6.4|^7.0",
+                "symfony/serializer": "^6.4|^7.0",
+                "symfony/var-dumper": "^5.4|^6.0|^7.0"
             },
-            "time": "2023-01-13T08:34:10+00:00",
+            "time": "2024-09-25T14:18:03+00:00",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\VarExporter\\": ""
@@ -4954,10 +4951,12 @@
                 "export",
                 "hydrate",
                 "instantiate",
+                "lazy-loading",
+                "proxy",
                 "serialize"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-exporter/tree/v6.0.19"
+                "source": "https://github.com/symfony/var-exporter/tree/v6.4.13"
             },
             "funding": [
                 {
@@ -5009,7 +5008,7 @@
                 "Resources/bin/yaml-lint"
             ],
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Symfony\\Component\\Yaml\\": ""
@@ -5085,7 +5084,7 @@
                     "dev-master": "2.16-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Twig_": "lib/"
@@ -5179,7 +5178,7 @@
                     "dev-master": "5.6-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Dotenv\\": "src/"
@@ -5256,7 +5255,7 @@
                     "dev-master": "1.10-dev"
                 }
             },
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Webmozart\\Assert\\": "src/"
