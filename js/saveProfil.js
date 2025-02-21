@@ -11,28 +11,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Felhasználói adatok betöltése
     fetch("backend/get_profile.php")
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Hálózati hiba: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
         console.log("Backend válasz:", data); // 📌 Ellenőrzéshez
 
         if (data.success) {
-            document.getElementById("username").value = data.firstname + " " + data.lastname;
+            document.getElementById("username").value = `${data.firstname} ${data.lastname}`;
             document.getElementById("email").value = data.email;
-            document.getElementById("phone").value = data.phone_number;
-            document.getElementById("profile-image-url").value = data.image;
-            document.getElementById("profile-image").src = data.image;
+            document.getElementById("phone").value = data.phone_number || "";
+            document.getElementById("profile-image-url").value = data.image || "";
+            document.getElementById("profile-image").src = data.image || ""; // ✔ Alapértelmezett kép, ha nincs megadva
 
-            console.log("City:", data.city); // 📌 Város ellenőrzése
-            console.log("County:", data.county); // 📌 Megye ellenőrzése
+            // 📌 Város és megye ellenőrzés
+            console.log("City:", data.city || "Nincs adat");
+            console.log("County:", data.county || "Nincs adat");
 
             document.getElementById("postcode").value = data.postcode || "";
             document.getElementById("city").value = data.city || "Nincs megadva";
             document.getElementById("county").value = data.county || "Nincs megadva";
         } else {
-            console.error("Hiba a profiladatok lekérésekor, data.success:", data.success);
+            console.error("Hiba a profiladatok lekérésekor: ", data.error || "Ismeretlen hiba");
         }
     })
-    .catch(error => console.error("Hálózati hiba: ", error));
+    .catch(error => console.error("Hálózati hiba:", error));
+
 
     // Személyes adatok mentése
     document.getElementById("savePersonal").addEventListener("click", () => {
