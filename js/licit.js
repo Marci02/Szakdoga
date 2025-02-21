@@ -75,11 +75,11 @@ function openUploadModal() {
   modal.style.top = "50%";
   modal.style.left = "50%";
   modal.style.transform = "translate(-50%, -50%)";
-  modal.style.width = "300px";
-  modal.style.padding = "20px";
+  modal.style.width = "400px";  // Növelt szélesség
+  modal.style.padding = "300px";  // Növelt padding
   modal.style.backgroundColor = "#fff";
-  modal.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.1)";
-  modal.style.borderRadius = "10px";
+  modal.style.boxShadow = "0 12px 24px rgba(0, 0, 0, 0.1)";
+  modal.style.borderRadius = "15px";
   modal.style.zIndex = "1000";
   modal.style.textAlign = "center";
 
@@ -294,6 +294,7 @@ function openUploadModal() {
   if (modal) {
       modal.style.display = "block";  // Modális ablak megjelenítése
   }
+  
 }
 
 // Feltöltés modal bezárása
