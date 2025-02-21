@@ -63,6 +63,8 @@ document.getElementById("cartBtn").parentElement.addEventListener("mouseleave", 
 function openUploadModal() {
   console.log("Popup megnyitása");
 
+  
+
   var modal = document.createElement("div");
   modal.id = "uploadModal";
   modal.style.position = "fixed";
@@ -82,23 +84,60 @@ function openUploadModal() {
   var modalContent = document.createElement("div");
   modalContent.innerHTML = `
   <h2 style="font-size: 1.8em; font-weight: bold; color: #222; margin-bottom: 20px;">Termék feltöltése</h2>
-  
-  <!-- Input mezők és textarea -->
-  <input type="text" id="fileTitle" placeholder="Termék címe" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-  
-  <input type="file" id="fileInput" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-  
-  <textarea id="fileDesc" rows="5" style="width: 100%; resize:none; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;" placeholder="Leírás"></textarea>
-  
-  <input type="number" id="filePrice" placeholder="Ár (Ft)" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-  
-  <input type="number" id="fileQuantity" placeholder="Darabszám" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-  
-  <input type="text" id="fileCategory" placeholder="Kategória" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-  
-  <input type="text" id="fileBrand" placeholder="Márka" style="width: 100%; padding: 10px; margin-bottom: 25px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-  
-  <!-- Gombok -->
+
+<!-- Input mezők és textarea -->
+<input type="text" id="fileTitle" placeholder="Termék címe" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+
+<input type="file" id="fileInput" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+
+<textarea id="fileDesc" rows="5" style="width: 100%; resize:none; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;" placeholder="Leírás"></textarea>
+
+<input type="number" id="filePrice" placeholder="Ár (Ft)" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+
+<input type="number" id="fileBidStep" placeholder="Licit lépcső (Ft)" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+
+<input type="number" id="fileQuantity" placeholder="Darabszám" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+
+<!-- Kategória választó -->
+<select id="fileCategory" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+  <option value="" disabled selected>Kategória kiválasztása</option>
+  <option value="ruhák">Ruhák</option>
+  <option value="cipők">Cipők</option>
+  <option value="kiegészítők">Kiegészítők</option>
+</select>
+
+<!-- Méret választó -->
+<select id="fileSize" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+  <option value="" disabled selected>Válassz méretet</option>
+  <option value="35">35</option>
+  <option value="36">36</option>
+  <option value="37">37</option>
+  <option value="38">38</option>
+  <option value="39">39</option>
+  <option value="40">40</option>
+  <option value="41">41</option>
+  <option value="42">42</option>
+  <option value="43">43</option>
+  <option value="44">44</option>
+  <option value="45">45</option>
+  <option value="46">46</option>
+  <option value="47">47</option>
+  <option value="48">48</option>
+</select>
+
+<!-- Állapot választó -->
+<select id="fileCondition" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+  <option value="" disabled selected>Válassz állapotot</option>
+  <option value="Új">Új</option>
+  <option value="Újszerű">Újszerű</option>
+  <option value="Használt">Használt</option>
+  <option value="Nagyon használt">Nagyon használt</option>
+</select>
+
+<input type="text" id="fileBrand" placeholder="Márka" style="width: 100%; padding: 10px; margin-bottom: 25px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+
+<!-- Gombok -->
+<div style="display: flex; justify-content: space-between;">
   <button onclick="uploadFile()" style="background-color: #22222a; color: white; padding: 12px 20px; border-radius: 8px; border: none; font-size: 16px; width: 48%; cursor: pointer; transition: background-color 0.3s ease;">
     Feltöltés
   </button>
@@ -106,7 +145,12 @@ function openUploadModal() {
   <button onclick="closeUploadModal()" style="background-color: #ecf0f1; color: #333; padding: 12px 20px; border-radius: 8px; border: 1px solid #ddd; font-size: 16px; width: 48%; cursor: pointer; transition: background-color 0.3s ease;">
     Mégse
   </button>
+</div>
+
   `;
+  
+
+  
 
   modal.appendChild(modalContent);
   document.body.appendChild(modal);
@@ -131,6 +175,8 @@ function openUploadModal() {
       overlay.style.opacity = "1";
   }, 50);
 }
+
+
 
 
 
@@ -288,6 +334,25 @@ function placeBidInModal(originalPrice, bidStep) {
   currentBidPrice = newPrice;
 
   alert("Licitálás sikeres! Az új ár: " + newPrice + " Ft");
+}
+
+function toggleCategory(categoryId) {
+  var category = document.getElementById(categoryId);
+  
+  // A kategória bontása vagy összecsukása
+  if (category.style.display === "block") {
+      category.style.display = "none";  // Ha látszik, elrejtjük
+  } else {
+      category.style.display = "block"; // Ha el van rejtve, megjelenítjük
+  }
+
+  
+}
+
+function updatePriceValue() {
+  var priceRange = document.getElementById('price-range');
+  var priceValue = document.getElementById('price-value');
+  priceValue.textContent = priceRange.value + " Ft";
 }
 
 
