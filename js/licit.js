@@ -204,8 +204,8 @@ function uploadFile() {
   var fileTitle = document.getElementById("fileTitle").value;
   var fileDesc = document.getElementById("fileDesc").value;
   var fileInput = document.getElementById("fileInput").files[0];
-  var productPrice = document.getElementById("productPrice").value;
-  var bidStep = document.getElementById("bidStep").value;
+  var productPrice = document.getElementById("filePrice").value;
+  var bidStep = document.getElementById("fileBidStep").value;
 
   if (fileTitle && fileDesc && fileInput && productPrice && bidStep) {
       var reader = new FileReader();
