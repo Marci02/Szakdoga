@@ -23,8 +23,8 @@ a {
   left: 0;
   right: 0;
   background-color: #22222a;
-  transition: 0.4s;
-  padding: 1.3rem 0;
+  transition: 0.3s;
+  padding: 1.2rem 0;
   z-index: 10;
   margin: 0;
 }
@@ -301,16 +301,6 @@ nav.header-sticky {
   gap: 20px;
 }
 
-.product-card {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  width: calc(33.333% - 40px); /* Adjust based on desired card width */
-  box-sizing: border-box;
-  height: 500px;
-  width: auto;
-}
 
 .upload-button {
   background-color: black;
@@ -324,21 +314,6 @@ nav.header-sticky {
 
 .upload-button:hover {
   background-color: #333;
-}
-
-#uploadModal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  height: auto;
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
-  border-radius: 5px;
-  display: none;
 }
 
 .modal-content {
@@ -375,7 +350,7 @@ nav.header-sticky {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  height: 500px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
   margin: 15px;
@@ -391,7 +366,7 @@ nav.header-sticky {
 
 .product-image {
   width: 100%;
-  height: 200px;
+  height: 20px;
   object-fit: cover;
   transition: opacity 0.3s ease;
 }
@@ -450,11 +425,61 @@ nav.header-sticky {
   z-index: 999;
   transition: background-color 0.3s ease;
 }
+/*ez volt a változtatás */
+.category-item {
+  margin-bottom: 15px;
+  position: relative;
+}
 
-/* Modal ablak */
+.category-item a {
+  cursor: pointer;
+  font-weight: bold;
+  color: #222;
+  font-size: 16px;
+}
 
+.subcategory {
+  display: none;
+  padding-left: 15px;
+  margin-top: 5px;
+}
 
-/* Feltöltés és Mégse gombok */
+.subcategory label {
+  display: block;
+  font-size: 14px;
+  color: #555;
+}
+
+/* Kategóriák legördülése */
+.category-item.open .subcategory {
+  display: block;
+}
+
+/* Ár csúszka */
+#price-range {
+  width: 100%;
+}
+
+#price-value {
+  display: block;
+  margin-top: 10px;
+}
+
+/* Alap gomb stílus */
+.upload-button {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.upload-button:hover {
+  background-color: #555;
+}
+
 
 
 
