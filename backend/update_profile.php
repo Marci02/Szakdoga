@@ -7,63 +7,63 @@ header("Content-Type: application/json");
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+// Adatok fogadása
 $data = json_decode(file_get_contents("php://input"), true);
 $userId = $_SESSION['user_id'] ?? null;
+
 $firstname = trim($data['firstname'] ?? '');
 $lastname = trim($data['lastname'] ?? '');
 $email = trim($data['email'] ?? '');
-$phone = trim($data['phone_number'] ?? '');
-$image = trim($data['image'] ?? '');
+$phone = trim($data['phone'] ?? '');
+$image = trim($data['image'] ?? ''); // Ha URL-t tárolunk
 
-// Ellenőrzés, hogy van-e bejelentkezett felhasználó
+// Ellenőrzés: Bejelentkezett felhasználó van-e
 if (!$userId) {
-    echo json_encode(["success" => false, "message" => "Hiányzó bejelentkezett felhasználó."]);
+    echo json_encode(["success" => false, "message" => "Nincs bejelentkezett felhasználó."]);
     exit;
 }
 
 // Ha nincs mit frissíteni
-if (empty($firstname) && empty($lastname) && empty($email) && empty($phone) && empty($image)) {
-    echo json_encode(["success" => false, "message" => "Nincs mit frissíteni."]);
+if (!$firstname && !$lastname && !$email && !$phone && !$image) {
+    echo json_encode(["success" => false, "message" => "Nincs módosítandó adat."]);
     exit;
 }
 
-// Dinamikusan építjük az SQL lekérdezést a frissítendő mezőkkel
+// Dinamikusan építjük az SQL lekérdezést
 $setClauses = [];
 $params = [];
 $paramTypes = "";
 
-// Frissítéshez szükséges mezők hozzáadása
-if ($firstname) {
+// Frissítendő mezők hozzáadása
+if (!empty($firstname)) {
     $setClauses[] = "firstname = ?";
-    $params[] = $firstname;
+    $params[] = &$firstname;
     $paramTypes .= "s";
 }
-if ($lastname) {
+if (!empty($lastname)) {
     $setClauses[] = "lastname = ?";
-    $params[] = $lastname;
+    $params[] = &$lastname;
     $paramTypes .= "s";
 }
-if ($email) {
+if (!empty($email)) {
     $setClauses[] = "email = ?";
-    $params[] = $email;
+    $params[] = &$email;
     $paramTypes .= "s";
 }
-if ($phone) {
+if (!empty($phone)) {
     $setClauses[] = "phone_number = ?";
-    $params[] = $phone;
+    $params[] = &$phone;
     $paramTypes .= "s";
 }
-if ($image) {
-    $setClauses[] = "image_id = ?";
-    $params[] = $image;
+if (!empty($image)) {
+    $setClauses[] = "image_url = ?";  // 🔹 Ha az URL-t tároljuk
+    $params[] = &$image;
     $paramTypes .= "s";
 }
 
-// SQL lekérdezés felépítése
+// SQL lekérdezés összeállítása
 $query = "UPDATE user SET " . implode(", ", $setClauses) . " WHERE id = ?";
-
-// Paraméterek hozzáadása az SQL végére
-$params[] = $userId;
+$params[] = &$userId;
 $paramTypes .= "i";
 
 // Lekérdezés előkészítése
@@ -74,32 +74,34 @@ if (!$stmt) {
 }
 
 // Paraméterek kötése
-if (!mysqli_stmt_bind_param($stmt, $paramTypes, ...$params)) {
-    echo json_encode(["success" => false, "message" => "Hiba a paraméterek kötésében."]);
-    exit;
-}
+mysqli_stmt_bind_param($stmt, $paramTypes, ...$params);
 
-// Végrehajtás
+// Lekérdezés futtatása
 $success = mysqli_stmt_execute($stmt);
-if (!$success) {
-    echo json_encode(["success" => false, "message" => "Hiba a végrehajtásban: " . mysqli_error($dbconn)]);
-    exit;
-}
-
 mysqli_stmt_close($stmt);
 
-// Ha sikeres volt a frissítés, frissítjük a session változókat is
+// Ha sikeres volt, frissítjük a SESSION változókat is
 if ($success) {
-    if ($firstname) $_SESSION['firstname'] = $firstname;
-    if ($lastname) $_SESSION['lastname'] = $lastname;
-    if ($email) $_SESSION['email'] = $email;
-    if ($phone) $_SESSION['phone_number'] = $phone;
-    if ($image) $_SESSION['image'] = $image;
+    // Friss adatokat lekérjük újra az adatbázisból
+    $query = "SELECT firstname, lastname, email, phone_number, img_url FROM user WHERE id = ?";
+    $stmt = mysqli_prepare($dbconn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $userId);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $updatedUser = mysqli_fetch_assoc($result);
+    
+    // SESSION frissítése a lekért új adatokkal
+    $_SESSION['firstname'] = $updatedUser['firstname'];
+    $_SESSION['lastname'] = $updatedUser['lastname'];
+    $_SESSION['email'] = $updatedUser['email'];
+    $_SESSION['phone'] = $updatedUser['phone_number'];
+    $_SESSION['image'] = $updatedUser['image_url'];
 
     echo json_encode(["success" => true, "message" => "Profil adatok frissítve!"]);
 } else {
-    echo json_encode(["success" => false, "message" => "Adatbázis hiba."]);
+    echo json_encode(["success" => false, "message" => "Nem történt változás vagy hiba az adatbázisban."]);
 }
 
+// Kapcsolat bezárása
 mysqli_close($dbconn);
 ?>

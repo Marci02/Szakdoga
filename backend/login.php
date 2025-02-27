@@ -14,81 +14,89 @@ if (empty($email) || empty($password)) {
     exit;
 }
 
-// Felhasználó lekérése
-$query = "SELECT id, firstname, lastname, email, phone_number, postcode, image_id, password, created 
-          FROM user WHERE email = ?";
+// 🔹 Felhasználó lekérése
+$query = "SELECT u.id, u.firstname, u.lastname, u.email, u.phone_number, u.city_id, u.image_id, u.password, u.created 
+          FROM user u WHERE u.email = ?";
 $stmt = mysqli_prepare($dbconn, $query);
 mysqli_stmt_bind_param($stmt, 's', $email);
 mysqli_stmt_execute($stmt);
-mysqli_stmt_bind_result($stmt, $userId, $firstname, $lastname, $email, $phone, $postcode, $imageId, $hashedPassword, $created);
-mysqli_stmt_fetch($stmt);
+$result = mysqli_stmt_get_result($stmt);
+$user = mysqli_fetch_assoc($result);
 mysqli_stmt_close($stmt);
 
-// Jelszó ellenőrzés
-if ($userId && password_verify($password, $hashedPassword)) {
-    // 🔹 Város és megye lekérése az irányítószám alapján
-    $city = $county = null;
-    if (!empty($postcode)) {
-        $cityQuery = "SELECT c.name AS city, co.name AS county 
-                      FROM city c 
-                      LEFT JOIN counties co ON c.county_id = co.id 
-                      WHERE c.postcode = ?";
-        $cityStmt = mysqli_prepare($dbconn, $cityQuery);
-        mysqli_stmt_bind_param($cityStmt, "i", $postcode);
-        mysqli_stmt_execute($cityStmt);
-        $cityResult = mysqli_stmt_get_result($cityStmt);
-        if ($cityRow = mysqli_fetch_assoc($cityResult)) {
-            $city = $cityRow['city'];
-            $county = $cityRow['county'];
-        }
-        mysqli_stmt_close($cityStmt);
-    }
-
-    // 🔹 Kép URL lekérése, ha van image_id
-    $imageUrl = null;
-    if (!is_null($imageId)) {
-        $imageQuery = "SELECT img_url FROM image WHERE id = ?";
-        $imgStmt = mysqli_prepare($dbconn, $imageQuery);
-        mysqli_stmt_bind_param($imgStmt, "i", $imageId);
-        mysqli_stmt_execute($imgStmt);
-        $imgResult = mysqli_stmt_get_result($imgStmt);
-        if ($imgRow = mysqli_fetch_assoc($imgResult)) {
-            $imageUrl = $imgRow['img_url'];
-        }
-        mysqli_stmt_close($imgStmt);
-    }
-
-    // 🔹 SESSION adatok beállítása
-    $_SESSION['user_id'] = $userId;
-    $_SESSION['firstname'] = $firstname;
-    $_SESSION['lastname'] = $lastname;
-    $_SESSION['email'] = $email;
-    $_SESSION['phone_number'] = $phone;
-    $_SESSION['postcode'] = $postcode;
-    $_SESSION['city'] = $city;
-    $_SESSION['county'] = $county;
-    $_SESSION['image'] = $imageUrl;
-    $_SESSION['created'] = $created;
-
-    echo json_encode([
-        "message" => "Bejelentkezés sikeres!", 
-        "loggedIn" => true,
-        "user" => [
-            "id" => $userId,
-            "firstname" => $firstname,
-            "lastname" => $lastname,
-            "email" => $email,
-            "phone_number" => $phone,
-            "postcode" => $postcode,
-            "city" => $city,
-            "county" => $county,
-            "image" => $imageUrl,
-            "created" => $created
-        ]
-    ]);
-} else {
+// Ha nincs ilyen felhasználó
+if (!$user) {
     echo json_encode(["message" => "Hibás email vagy jelszó."]);
+    exit;
 }
+
+// 🔹 Jelszó ellenőrzés
+if (!password_verify($password, $user['password'])) {
+    echo json_encode(["message" => "Hibás email vagy jelszó."]);
+    exit;
+}
+
+// 🔹 Város és megye lekérése
+$city = $county = $postcode = null;
+if (!empty($user['city_id'])) {
+    $cityQuery = "SELECT s.name AS city, s.postcode, c.name AS county 
+                  FROM settlement s
+                  LEFT JOIN counties c ON s.county_id = c.id
+                  WHERE s.id = ?";
+    $cityStmt = mysqli_prepare($dbconn, $cityQuery);
+    mysqli_stmt_bind_param($cityStmt, "i", $user['city_id']);
+    mysqli_stmt_execute($cityStmt);
+    $cityResult = mysqli_stmt_get_result($cityStmt);
+    if ($cityRow = mysqli_fetch_assoc($cityResult)) {
+        $city = $cityRow['city'];
+        $county = $cityRow['county'];
+        $postcode = $cityRow['postcode'];
+    }
+    mysqli_stmt_close($cityStmt);
+}
+
+// 🔹 Kép URL lekérése
+$imageUrl = null;
+if (!is_null($user['image_id'])) {
+    $imageQuery = "SELECT img_url FROM image WHERE id = ?";
+    $imgStmt = mysqli_prepare($dbconn, $imageQuery);
+    mysqli_stmt_bind_param($imgStmt, "i", $user['image_id']);
+    mysqli_stmt_execute($imgStmt);
+    $imgResult = mysqli_stmt_get_result($imgStmt);
+    if ($imgRow = mysqli_fetch_assoc($imgResult)) {
+        $imageUrl = $imgRow['img_url'];
+    }
+    mysqli_stmt_close($imgStmt);
+}
+
+// 🔹 SESSION adatok beállítása
+$_SESSION['user_id'] = $user['id'];
+$_SESSION['firstname'] = $user['firstname'];
+$_SESSION['lastname'] = $user['lastname'];
+$_SESSION['email'] = $user['email'];
+$_SESSION['phone_number'] = $user['phone_number'];
+$_SESSION['postcode'] = $postcode;
+$_SESSION['city'] = $city;
+$_SESSION['county'] = $county;
+$_SESSION['image'] = $imageUrl;
+$_SESSION['created'] = $user['created'];
+
+echo json_encode([
+    "message" => "Bejelentkezés sikeres!", 
+    "loggedIn" => true,
+    "user" => [
+        "id" => $user['id'],
+        "firstname" => $user['firstname'],
+        "lastname" => $user['lastname'],
+        "email" => $user['email'],
+        "phone_number" => $user['phone_number'],
+        "postcode" => $postcode,
+        "city" => $city,
+        "county" => $county,
+        "image" => $imageUrl,
+        "created" => $user['created']
+    ]
+]);
 
 mysqli_close($dbconn);
 ?>

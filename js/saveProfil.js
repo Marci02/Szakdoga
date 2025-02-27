@@ -9,37 +9,42 @@ document.addEventListener("DOMContentLoaded", () => {
     
     window.openTab = openTab;
 
-    // Felhasználói adatok betöltése
-    fetch("backend/get_profile.php")
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Hálózati hiba: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log("Backend válasz:", data); // 📌 Ellenőrzéshez
-
-        if (data.success) {
-            document.getElementById("username").value = `${data.firstname} ${data.lastname}`;
-            document.getElementById("email").value = data.email;
-            document.getElementById("phone").value = data.phone_number || "";
-            document.getElementById("profile-image-url").value = data.image || "";
-            document.getElementById("profile-image").src = data.image || ""; // ✔ Alapértelmezett kép, ha nincs megadva
-
-            // 📌 Város és megye ellenőrzés
-            console.log("City:", data.city || "Nincs adat");
-            console.log("County:", data.county || "Nincs adat");
-
-            document.getElementById("postcode").value = data.postcode || "";
-            document.getElementById("city").value = data.city || "Nincs megadva";
-            document.getElementById("county").value = data.county || "Nincs megadva";
-        } else {
-            console.error("Hiba a profiladatok lekérésekor: ", data.error || "Ismeretlen hiba");
-        }
-    })
-    .catch(error => console.error("Hálózati hiba:", error));
-
+    document.addEventListener("DOMContentLoaded", () => {
+        // Először ellenőrizzük, hogy a felhasználó be van-e jelentkezve
+        fetch("backend/check_session.php")
+            .then(response => response.json())
+            .then(sessionData => {
+                if (!sessionData.logged_in) {
+                    // Ha nincs bejelentkezve, irányítsuk át a login oldalra
+                    window.location.href = "login.html";
+                    return;
+                }
+    
+                // Ha be van jelentkezve, lekérjük a profiladatokat
+                fetch("backend/get_profile.php")
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Backend válasz:", data);
+    
+                        if (data.success) {
+                            document.getElementById("username").value = data.firstname + " " + data.lastname;
+                            document.getElementById("email").value = data.email;
+                            document.getElementById("phone").value = data.phone_number;
+                            document.getElementById("profile-image-url").value = data.image;
+                            document.getElementById("profile-image").src = data.image;
+    
+                            document.getElementById("postcode").value = data.postcode || "";
+                            document.getElementById("city").value = data.city || "Nincs megadva";
+                            document.getElementById("county").value = data.county || "Nincs megadva";
+                        } else {
+                            console.error("Hiba a profiladatok lekérésekor, data.success:", data.success);
+                        }
+                    })
+                    .catch(error => console.error("Hálózati hiba: ", error));
+            })
+            .catch(error => console.error("Hálózati hiba: ", error));
+    });
+    
 
     // Személyes adatok mentése
     document.getElementById("savePersonal").addEventListener("click", () => {
