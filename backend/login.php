@@ -14,8 +14,10 @@ if (empty($email) || empty($password)) {
     exit;
 }
 
-// 🔹 Felhasználó lekérése
-$query = "SELECT u.id, u.firstname, u.lastname, u.email, u.phone_number, u.city_id, u.image_id, u.password, u.created 
+// 🔹 Felhasználó lekérése az adatbázisból (utcával és házszámmal)
+$query = "SELECT u.id, u.firstname, u.lastname, u.email, u.phone_number, 
+                 u.city_id, u.image_id, u.password, u.created, 
+                 u.street, u.address
           FROM user u WHERE u.email = ?";
 $stmt = mysqli_prepare($dbconn, $query);
 mysqli_stmt_bind_param($stmt, 's', $email);
@@ -36,7 +38,7 @@ if (!password_verify($password, $user['password'])) {
     exit;
 }
 
-// 🔹 Város és megye lekérése
+// 🔹 Város, megye és irányítószám lekérése
 $city = $county = $postcode = null;
 if (!empty($user['city_id'])) {
     $cityQuery = "SELECT s.name AS city, s.postcode, c.name AS county 
@@ -69,12 +71,14 @@ if (!is_null($user['image_id'])) {
     mysqli_stmt_close($imgStmt);
 }
 
-// 🔹 SESSION adatok beállítása
+// 🔹 SESSION adatok beállítása (hozzáadva az utca és házszám)
 $_SESSION['user_id'] = $user['id'];
 $_SESSION['firstname'] = $user['firstname'];
 $_SESSION['lastname'] = $user['lastname'];
 $_SESSION['email'] = $user['email'];
 $_SESSION['phone_number'] = $user['phone_number'];
+$_SESSION['street'] = $user['street'] ?? ""; // ÚJ!
+$_SESSION['address'] = $user['address'] ?? ""; // ÚJ!
 $_SESSION['postcode'] = $postcode;
 $_SESSION['city'] = $city;
 $_SESSION['county'] = $county;
@@ -90,6 +94,8 @@ echo json_encode([
         "lastname" => $user['lastname'],
         "email" => $user['email'],
         "phone_number" => $user['phone_number'],
+        "street" => $user['street'] ?? "", // ÚJ!
+        "address" => $user['address'] ?? "", // ÚJ!
         "postcode" => $postcode,
         "city" => $city,
         "county" => $county,

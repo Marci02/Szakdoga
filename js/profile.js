@@ -35,6 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const postcodeEl = document.getElementById("postcode");
                 const cityEl = document.getElementById("city");
                 const countyEl = document.getElementById("county");
+                const streetEl = document.getElementById("street_address");
+                const addressEl = document.getElementById("house_number");
     
                 if (usernameEl) usernameEl.value = data.firstname + " " + data.lastname;
                 if (emailEl) emailEl.value = data.email;
@@ -42,6 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (postcodeEl) postcodeEl.value = data.postcode;
                 if (cityEl) cityEl.value = data.city;
                 if (countyEl) countyEl.value = data.county;
+                if (streetEl) streetEl.value = data.street || "N/A"; 
+                if (addressEl) addressEl.value = data.address || "N/A";
     
                 if (profileImageEl && data.image) {
                     profileImageUrlEl.value = data.image;

@@ -10,13 +10,14 @@ if (!$userId) {
     exit;
 }
 
+// 🔹 Profiladatok lekérdezése
 $query = "SELECT 
             u.firstname, 
             u.lastname, 
             u.email, 
             u.phone_number, 
             u.street,
-            u.adress,
+            u.address,  -- Itt kijavítottam az 'adress' hibát
             s.postcode, 
             s.name AS city, 
             c.name AS county,
@@ -28,11 +29,19 @@ $query = "SELECT
           WHERE u.id = ?";
 
 $stmt = mysqli_prepare($dbconn, $query);
+
+if (!$stmt) {
+    echo json_encode(["success" => false, "message" => "Lekérdezési hiba."]);
+    exit;
+}
+
 mysqli_stmt_bind_param($stmt, "i", $userId);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 if ($user = mysqli_fetch_assoc($result)) {
+
+    error_log(print_r($user, true)); 
     echo json_encode([
         "success" => true,
         "firstname" => $user['firstname'],
@@ -40,7 +49,7 @@ if ($user = mysqli_fetch_assoc($result)) {
         "email" => $user['email'],
         "phone_number" => $user['phone_number'],
         "street" => $user['street'] ?? "",
-        "adress" => $user['adress'] ?? "",
+        "address" => $user['address'] ?? "", // Javított oszlopnév
         "postcode" => $user['postcode'] ?? "",
         "city" => $user['city'] ?? "Nincs megadva",
         "county" => $user['county'] ?? "Nincs megadva",

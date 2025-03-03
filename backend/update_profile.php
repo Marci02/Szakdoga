@@ -3,7 +3,7 @@ session_start();
 require_once __DIR__ . '/../connect.php';
 header("Content-Type: application/json");
 
-// Hibák megjelenítése
+// Hibák megjelenítése (fejlesztéshez)
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
@@ -15,16 +15,18 @@ $firstname = trim($data['firstname'] ?? '');
 $lastname = trim($data['lastname'] ?? '');
 $email = trim($data['email'] ?? '');
 $phone = trim($data['phone'] ?? '');
+$street = trim($data['street'] ?? ''); // ÚJ!
+$address = trim($data['address'] ?? ''); // ÚJ!
 $image = trim($data['image'] ?? ''); // Ha URL-t tárolunk
 
-// Ellenőrzés: Bejelentkezett felhasználó van-e
+// Ellenőrzés: Be van-e jelentkezve a felhasználó?
 if (!$userId) {
     echo json_encode(["success" => false, "message" => "Nincs bejelentkezett felhasználó."]);
     exit;
 }
 
 // Ha nincs mit frissíteni
-if (!$firstname && !$lastname && !$email && !$phone && !$image) {
+if (!$firstname && !$lastname && !$email && !$phone && !$street && !$address && !$image) {
     echo json_encode(["success" => false, "message" => "Nincs módosítandó adat."]);
     exit;
 }
@@ -55,8 +57,18 @@ if (!empty($phone)) {
     $params[] = &$phone;
     $paramTypes .= "s";
 }
+if (!empty($street)) { // ÚJ!
+    $setClauses[] = "street = ?";
+    $params[] = &$street;
+    $paramTypes .= "s";
+}
+if (!empty($address)) { // ÚJ!
+    $setClauses[] = "address = ?";
+    $params[] = &$address;
+    $paramTypes .= "s";
+}
 if (!empty($image)) {
-    $setClauses[] = "image_url = ?";  // 🔹 Ha az URL-t tároljuk
+    $setClauses[] = "image_url = ?";  // Ha az URL-t tároljuk
     $params[] = &$image;
     $paramTypes .= "s";
 }
@@ -83,7 +95,7 @@ mysqli_stmt_close($stmt);
 // Ha sikeres volt, frissítjük a SESSION változókat is
 if ($success) {
     // Friss adatokat lekérjük újra az adatbázisból
-    $query = "SELECT firstname, lastname, email, phone_number, img_url FROM user WHERE id = ?";
+    $query = "SELECT firstname, lastname, email, phone_number, street, address, img_url FROM user WHERE id = ?";
     $stmt = mysqli_prepare($dbconn, $query);
     mysqli_stmt_bind_param($stmt, "i", $userId);
     mysqli_stmt_execute($stmt);
@@ -95,7 +107,9 @@ if ($success) {
     $_SESSION['lastname'] = $updatedUser['lastname'];
     $_SESSION['email'] = $updatedUser['email'];
     $_SESSION['phone'] = $updatedUser['phone_number'];
-    $_SESSION['image'] = $updatedUser['image_url'];
+    $_SESSION['street'] = $updatedUser['street']; // ÚJ!
+    $_SESSION['address'] = $updatedUser['address']; // ÚJ!
+    $_SESSION['image'] = $updatedUser['img_url'];
 
     echo json_encode(["success" => true, "message" => "Profil adatok frissítve!"]);
 } else {

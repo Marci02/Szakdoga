@@ -9,7 +9,7 @@ CREATE TABLE `user` (
   `city_id` int,
   `image_id` int DEFAULT null,
   `street` varchar(255) DEFAULT null,
-  `adress` varchar(255) DEFAULT null
+  `address` varchar(255) DEFAULT null
 );
 
 CREATE TABLE `settlement` (
