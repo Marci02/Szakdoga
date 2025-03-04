@@ -30,8 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 const usernameEl = document.getElementById("username");
                 const emailEl = document.getElementById("email");
                 const phoneEl = document.getElementById("phone");
-                const profileImageUrlEl = document.getElementById("profile-image-url");
-                const profileImageEl = document.getElementById("profile-image");
+                const profileImageUrlEl = document.getElementById("profile-image-input");
+                const profileImageEl = document.getElementById("profile-image-preview");
                 const postcodeEl = document.getElementById("postcode");
                 const cityEl = document.getElementById("city");
                 const countyEl = document.getElementById("county");
@@ -44,12 +44,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (postcodeEl) postcodeEl.value = data.postcode;
                 if (cityEl) cityEl.value = data.city;
                 if (countyEl) countyEl.value = data.county;
-                if (streetEl) streetEl.value = data.street || "N/A"; 
-                if (addressEl) addressEl.value = data.address || "N/A";
+                if (streetEl) streetEl.value = data.street || ""; 
+                if (addressEl) addressEl.value = data.address || "";
     
                 if (profileImageEl && data.image) {
-                    profileImageUrlEl.value = data.image;
-                    profileImageEl.src = "uploads/" + data.image;
+                    profileImageUrlEl.value = data.image_url;
+                    profileImageEl.src = "uploads/" + data.image_url;
                 }
             }
         })

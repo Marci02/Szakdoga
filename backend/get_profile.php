@@ -17,15 +17,14 @@ $query = "SELECT
             u.email, 
             u.phone_number, 
             u.street,
-            u.address,  -- Itt kijavítottam az 'adress' hibát
+            u.address,  
             s.postcode, 
             s.name AS city, 
             c.name AS county,
-            i.img_url AS image
+            u.image_url AS image  -- Az 'image' tábla helyett a 'user.image_url' használata
           FROM user u
           LEFT JOIN settlement s ON u.city_id = s.id
           LEFT JOIN counties c ON s.county_id = c.id
-          LEFT JOIN image i ON u.image_id = i.id
           WHERE u.id = ?";
 
 $stmt = mysqli_prepare($dbconn, $query);
@@ -40,7 +39,6 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
 if ($user = mysqli_fetch_assoc($result)) {
-
     error_log(print_r($user, true)); 
     echo json_encode([
         "success" => true,
@@ -49,7 +47,7 @@ if ($user = mysqli_fetch_assoc($result)) {
         "email" => $user['email'],
         "phone_number" => $user['phone_number'],
         "street" => $user['street'] ?? "",
-        "address" => $user['address'] ?? "", // Javított oszlopnév
+        "address" => $user['address'] ?? "",
         "postcode" => $user['postcode'] ?? "",
         "city" => $user['city'] ?? "Nincs megadva",
         "county" => $user['county'] ?? "Nincs megadva",

@@ -14,10 +14,10 @@ if (empty($email) || empty($password)) {
     exit;
 }
 
-// 🔹 Felhasználó lekérése az adatbázisból (utcával és házszámmal)
+// 🔹 Felhasználó adatainak lekérése (város ID-vel és kép ID-vel)
 $query = "SELECT u.id, u.firstname, u.lastname, u.email, u.phone_number, 
-                 u.city_id, u.image_id, u.password, u.created, 
-                 u.street, u.address
+                 u.city_id, u.password, u.created, 
+                 u.street, u.address, u.image_url
           FROM user u WHERE u.email = ?";
 $stmt = mysqli_prepare($dbconn, $query);
 mysqli_stmt_bind_param($stmt, 's', $email);
@@ -58,27 +58,16 @@ if (!empty($user['city_id'])) {
 }
 
 // 🔹 Kép URL lekérése
-$imageUrl = null;
-if (!is_null($user['image_id'])) {
-    $imageQuery = "SELECT img_url FROM image WHERE id = ?";
-    $imgStmt = mysqli_prepare($dbconn, $imageQuery);
-    mysqli_stmt_bind_param($imgStmt, "i", $user['image_id']);
-    mysqli_stmt_execute($imgStmt);
-    $imgResult = mysqli_stmt_get_result($imgStmt);
-    if ($imgRow = mysqli_fetch_assoc($imgResult)) {
-        $imageUrl = $imgRow['img_url'];
-    }
-    mysqli_stmt_close($imgStmt);
-}
+$imageUrl = $user['image_url'] ?? null;
 
-// 🔹 SESSION adatok beállítása (hozzáadva az utca és házszám)
+// 🔹 SESSION adatok beállítása
 $_SESSION['user_id'] = $user['id'];
 $_SESSION['firstname'] = $user['firstname'];
 $_SESSION['lastname'] = $user['lastname'];
 $_SESSION['email'] = $user['email'];
 $_SESSION['phone_number'] = $user['phone_number'];
-$_SESSION['street'] = $user['street'] ?? ""; // ÚJ!
-$_SESSION['address'] = $user['address'] ?? ""; // ÚJ!
+$_SESSION['street'] = $user['street'] ?? "";
+$_SESSION['address'] = $user['address'] ?? "";
 $_SESSION['postcode'] = $postcode;
 $_SESSION['city'] = $city;
 $_SESSION['county'] = $county;
@@ -94,8 +83,8 @@ echo json_encode([
         "lastname" => $user['lastname'],
         "email" => $user['email'],
         "phone_number" => $user['phone_number'],
-        "street" => $user['street'] ?? "", // ÚJ!
-        "address" => $user['address'] ?? "", // ÚJ!
+        "street" => $user['street'] ?? "",
+        "address" => $user['address'] ?? "",
         "postcode" => $postcode,
         "city" => $city,
         "county" => $county,

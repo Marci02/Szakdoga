@@ -7,7 +7,7 @@ CREATE TABLE `user` (
   `created` timestamp DEFAULT (CURRENT_TIMESTAMP),
   `phone_number` varchar(255),
   `city_id` int,
-  `image_id` int DEFAULT null,
+  `image_url` varchar(255) DEFAULT null,
   `street` varchar(255) DEFAULT null,
   `address` varchar(255) DEFAULT null
 );
@@ -79,8 +79,6 @@ CREATE TABLE `auction` (
 );
 
 ALTER TABLE `user` ADD FOREIGN KEY (`city_id`) REFERENCES `settlement` (`id`);
-
-ALTER TABLE `user` ADD FOREIGN KEY (`image_id`) REFERENCES `image` (`id`);
 
 ALTER TABLE `settlement` ADD FOREIGN KEY (`county_id`) REFERENCES `counties` (`id`);
 

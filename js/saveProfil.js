@@ -48,27 +48,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Személyes adatok mentése
     document.getElementById("savePersonal").addEventListener("click", () => {
+        const fileInput = document.getElementById("profile-image-input"); // 🔹 Itt definiáljuk
+        const formData = new FormData();
+    
         const personalData = {
-            username: document.getElementById("username").value,
-            email: document.getElementById("email").value,
-            phone: document.getElementById("phone").value,
-            image: document.getElementById("profile-image-url").value
+            username: document.getElementById("username")?.value || "",
+            email: document.getElementById("email")?.value || "",
+            phone: document.getElementById("phone")?.value || ""
         };
-
+    
+        formData.append("username", personalData.username);
+        formData.append("email", personalData.email);
+        formData.append("phone", personalData.phone);
+    
+        // 🔹 Ellenőrizd, hogy a fájlfeltöltő mező létezik és van-e benne fájl!
+        if (fileInput && fileInput.files.length > 0) {
+            formData.append("profile_image", fileInput.files[0]);
+        }
+    
         fetch("backend/update_profile.php", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(personalData)
+            body: formData
         })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
                 alert("Személyes adatok sikeresen frissítve!");
+                if (data.image_url) {
+                    const imgPreview = document.getElementById("profile-image-preview");
+                    if (imgPreview) imgPreview.src = data.image_url;
+                }
             } else {
                 alert("Hiba történt a mentés során.");
             }
+        })
+        .catch(error => {
+            console.error("Hálózati hiba: ", error);
+            alert("Hálózati hiba történt!");
         });
     });
+    
 
     // Szállítási cím mentése
     document.getElementById("saveAddress").addEventListener("click", function() {
