@@ -84,9 +84,9 @@ function openUploadModal() {
   <h2 style="font-size: 1.8em; font-weight: bold; color: #222; margin-bottom: 20px;">Termék feltöltése</h2>
 
 <!-- Input mezők és textarea -->
-<input type="text" id="fileTitle" placeholder="Termék címe" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+<input type="text" id="fileTitle" placeholder="Termék címe" maxlength="20"; style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
 
-<input type="file" id="fileInput" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+<input type="file" id="fileInput" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;" >
 
 <textarea id="fileDesc" rows="5" style="width: 100%; resize:none; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;" placeholder="Leírás"></textarea>
 
@@ -250,6 +250,8 @@ function uploadFile() {
   var fileCondition = document.getElementById("fileCondition") ? document.getElementById("fileCondition").value : "";
   var fileBrand = document.getElementById("fileBrand").value;
   var bidEndTime = document.getElementById("fileBidEnd").value;
+
+
 
   if (fileTitle && fileDesc && fileInput && productPrice && bidStep && bidEndTime) {
       var reader = new FileReader();
