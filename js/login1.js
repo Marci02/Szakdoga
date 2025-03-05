@@ -23,9 +23,9 @@ signUpForm.addEventListener('submit', async (event) => {
     // Get form data
     const firstname = signUpForm.querySelector('input[placeholder="Vezetéknév"]').value;
     const lastname = signUpForm.querySelector('input[placeholder="Keresztnév"]').value;
-    const email = signUpForm.querySelector('input[placeholder="Email"]').value;
-    const password = signUpForm.querySelector('input[placeholder="Password"]').value;
-    const confirmPassword = signUpForm.querySelector('input[placeholder="Confirm Password"]').value;
+    const email = signUpForm.querySelector('input[placeholder="E-mail"]').value;
+    const password = signUpForm.querySelector('input[placeholder="Jelszó"]').value;
+    const confirmPassword = signUpForm.querySelector('input[placeholder="Jelszó megerősítése"]').value;
 
     console.log(firstname, lastname, email, password, confirmPassword);
 
@@ -66,8 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
     loginForm.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        const email = loginForm.querySelector('input[placeholder="Email"]').value;
-        const password = loginForm.querySelector('input[placeholder="Password"]').value;
+        const email = loginForm.querySelector('input[placeholder="E-mail"]').value;
+        const password = loginForm.querySelector('input[placeholder="Jelszó"]').value;
 
         try {
             const response = await fetch("backend/login.php", {

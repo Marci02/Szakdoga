@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -87,16 +87,17 @@
 
             <div id="personal" class="tab-content active">
                 <div class="profile-info">
+                    <label for="profile-image-input" id="profile-image-label">
+                        <img id="profile-image-preview" src="uploads/default_profile.jpg" alt="" />
+                    </label>
+                    <input type="file" id="profile-image-input" accept="image/*" />
                     <label>Név:</label>
                     <input type="text" id="username" value="" disabled/>
                     <label>Email:</label>
                     <input type="email" id="email" value="" />
                     <label>Telefonszám:</label>
                     <input type="text" id="phone" value="" />
-                    <label>Profilkép feltöltése:</label>
-                    <input type="file" id="profile-image-input" accept="image/*">
-                    <img id="profile-image-preview" src="" alt="Profilkép" width="100">
-                    <button id="savePersonal" class="otherButton">Mentés</button>
+                    <button id="savePersonal" class="otherButton">Mentés</button<>
                 </div>
             </div>
 
