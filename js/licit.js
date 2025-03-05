@@ -274,7 +274,7 @@ function uploadFile() {
               });
 
               productCard.innerHTML = `
-                  <h3 style="font-size: 1.4em; font-weight: bold; color: #333; text-align: center; margin-top: 10px;">${fileTitle}</h3>
+                  <h3 style="font-size: 1.4em; font-weight: bold; color: #333; text-align: center; margin-top: 10px; ">${fileTitle}</h3>
                   <div style="text-align: center; margin-bottom: 15px;">
                       <img src="${e.target.result}" alt="${fileTitle}" class="product-image" style="width: 100%; height: 200px; object-fit: cover; border-radius: 15px;">
                   </div>
