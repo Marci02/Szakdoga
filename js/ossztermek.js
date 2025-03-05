@@ -101,6 +101,62 @@ function closeUploadModal() {
   }
 }
 
+function updateFormBasedOnCategory() {
+  var category = document.getElementById("fileCategory").value;
+  var dynamicFields = document.getElementById("dynamicFields");
+
+  // Töröljük az eddigi dinamikus mezőket
+  dynamicFields.innerHTML = '';
+
+  // Kategóriától függő mezők hozzáadása
+  if (category === "cipők") {
+    dynamicFields.innerHTML = `
+      <select id="fileSize" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+        <option value="" disabled selected>Válassz méretet</option>
+        <option value="35">35</option>
+        <option value="36">36</option>
+        <option value="37">37</option>
+        <option value="38">38</option>
+        <option value="39">39</option>
+        <option value="40">40</option>
+        <option value="41">41</option>
+        <option value="42">42</option>
+        <option value="43">43</option>
+        <option value="44">44</option>
+        <option value="45">45</option>
+        <option value="46">46</option>
+        <option value="47">47</option>
+        <option value="48">48</option>
+      </select>
+    `;
+  } else if (category === "ruhák") {
+    dynamicFields.innerHTML = `
+      <select id="fileSize" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+        <option value="" disabled selected>Válassz méretet</option>
+        <option value="XS">XS</option>
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">XL</option>
+        <option value="XXL">XXL</option>
+      </select>
+    `;
+  } else if (category === "kiegészítők") {
+    dynamicFields.innerHTML = ''; // Itt nincs extra mező
+  }
+
+  // Állapot választó minden kategóriához
+  dynamicFields.innerHTML += `
+    <select id="fileCondition" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+      <option value="" disabled selected>Válassz állapotot</option>
+      <option value="Új">Új</option>
+      <option value="Újszerű">Újszerű</option>
+      <option value="Használt">Használt</option>
+      <option value="Nagyon használt">Nagyon használt</option>
+    </select>
+  `;
+}
+
 function uploadFile() {
   var fileTitle = document.getElementById("fileTitle").value;
   var fileDesc = document.getElementById("fileDesc").value;
@@ -208,6 +264,17 @@ function closeProductModal() {
   var modal = document.getElementById("productModal");
   if (modal) {
     modal.remove();
+  }
+}
+
+function toggleCategory(categoryId) {
+  var category = document.getElementById(categoryId);
+  
+  // A kategória bontása vagy összecsukása
+  if (category.style.display === "block") {
+      category.style.display = "none";  // Ha látszik, elrejtjük
+  } else {
+      category.style.display = "block"; // Ha el van rejtve, megjelenítjük
   }
 }
 
