@@ -453,8 +453,6 @@ function toggleCategory(categoryId) {
   } else {
       category.style.display = "block"; // Ha el van rejtve, megjelenítjük
   }
-
-  
 }
 
 
