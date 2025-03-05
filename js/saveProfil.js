@@ -30,8 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             document.getElementById("username").value = data.firstname + " " + data.lastname;
                             document.getElementById("email").value = data.email;
                             document.getElementById("phone").value = data.phone_number;
-                            document.getElementById("profile-image-url").value = data.image;
-                            document.getElementById("profile-image").src = data.image;
+                            if (data.image) {
+                                document.getElementById("profile-image-preview").src = data.image_url;
+                            }
     
                             document.getElementById("postcode").value = data.postcode || "";
                             document.getElementById("city").value = data.city || "Nincs megadva";

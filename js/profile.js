@@ -46,10 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (countyEl) countyEl.value = data.county;
                 if (streetEl) streetEl.value = data.street || ""; 
                 if (addressEl) addressEl.value = data.address || "";
-    
+
                 if (profileImageEl && data.image) {
-                    profileImageUrlEl.value = data.image_url;
-                    profileImageEl.src = "uploads/" + data.image_url;
+                    profileImageEl.src = data.image;
                 }
             }
         })
