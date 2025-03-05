@@ -1,20 +1,18 @@
 <?php
 require_once __DIR__ . '/../connect.php';
-session_start(); // Start session to get logged-in user ID
+session_start();
 
-header("Content-Type: application/json");
+header('Content-Type: application/json');
 
-// Ellenőrizzük, hogy minden POST adat és fájl megérkezett
 if (isset($_FILES['fileInput'], $_POST['fileTitle'], $_POST['fileDesc'], $_POST['filePrice'], $_POST['fileQuantity'], $_POST['fileCategory'], $_POST['fileBrand'])) {
     
-    // POST adatok beolvasása és tisztítása
     $fileTitle = trim($_POST['fileTitle']);
     $fileDesc = trim($_POST['fileDesc']);
     $filePrice = filter_var($_POST['filePrice'], FILTER_VALIDATE_FLOAT);
     $fileQuantity = filter_var($_POST['fileQuantity'], FILTER_VALIDATE_INT);
     $fileCategory = trim($_POST['fileCategory']);
     $fileBrand = trim($_POST['fileBrand']);
-    $userId = $_SESSION['user_id'] ?? null; // Felhasználó ellenőrzése
+    $userId = $_SESSION['user_id'] ?? null;
 
     if (!$userId) {
         echo json_encode(['message' => 'User is not logged in']);
@@ -26,39 +24,31 @@ if (isset($_FILES['fileInput'], $_POST['fileTitle'], $_POST['fileDesc'], $_POST[
         exit;
     }
 
-    // Beviteli adatok tisztítása
     $fileTitle = htmlspecialchars($fileTitle, ENT_QUOTES, 'UTF-8');
     $fileDesc = htmlspecialchars($fileDesc, ENT_QUOTES, 'UTF-8');
     $fileCategory = htmlspecialchars($fileCategory, ENT_QUOTES, 'UTF-8');
     $fileBrand = htmlspecialchars($fileBrand, ENT_QUOTES, 'UTF-8');
 
-    // **Fájlfeltöltés kezelése**
-    $uploadDirectory = __DIR__ . '/../uploads/'; // Abszolút útvonal a feltöltésekhez
+    $uploadDirectory = __DIR__ . '/../uploads/';
 
-    // Ellenőrizzük, hogy az uploads mappa létezik-e, ha nem, akkor létrehozzuk
     if (!is_dir($uploadDirectory)) {
         mkdir($uploadDirectory, 0777, true);
     }
 
-    // Egyedi fájlnév létrehozása az ütközések elkerülése érdekében
     $fileExtension = strtolower(pathinfo($_FILES['fileInput']['name'], PATHINFO_EXTENSION));
     $uniqueFileName = time() . '_' . uniqid() . '.' . $fileExtension;
     $targetFilePath = $uploadDirectory . $uniqueFileName;
 
-    // Engedélyezett fájltípusok ellenőrzése
     $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
     if (!in_array($fileExtension, $allowedTypes)) {
         echo json_encode(['message' => 'Only image files are allowed (jpg, jpeg, png, gif)']);
         exit;
     }
 
-    // Fájl áthelyezése az uploads mappába
     if (move_uploaded_file($_FILES['fileInput']['tmp_name'], $targetFilePath)) {
 
-        // Az adatbázisban az elérési utat relatívan tároljuk
         $relativeFilePath = 'uploads/' . $uniqueFileName;
 
-        // Kép beszúrása az adatbázisba
         $imageQuery = "INSERT INTO image (img_url) VALUES (?)";
         $imageStmt = mysqli_prepare($dbconn, $imageQuery);
         if ($imageStmt) {
@@ -71,7 +61,6 @@ if (isset($_FILES['fileInput'], $_POST['fileTitle'], $_POST['fileDesc'], $_POST[
             exit;
         }
 
-        // **Kategória ID keresése vagy létrehozása**
         $categoryId = null;
         $categoryQuery = "SELECT id FROM category WHERE category_name = ?";
         $categoryStmt = mysqli_prepare($dbconn, $categoryQuery);
@@ -83,7 +72,6 @@ if (isset($_FILES['fileInput'], $_POST['fileTitle'], $_POST['fileDesc'], $_POST[
             mysqli_stmt_close($categoryStmt);
         }
 
-        // Ha a kategória nem létezik, létrehozzuk
         if (!$categoryId) {
             $insertCategoryQuery = "INSERT INTO category (category_name) VALUES (?)";
             $insertCategoryStmt = mysqli_prepare($dbconn, $insertCategoryQuery);
@@ -98,7 +86,6 @@ if (isset($_FILES['fileInput'], $_POST['fileTitle'], $_POST['fileDesc'], $_POST[
             }
         }
 
-        // **Brand ID keresése vagy létrehozása**
         $brandId = null;
         $brandQuery = "SELECT id FROM brand WHERE brand_name = ?";
         $brandStmt = mysqli_prepare($dbconn, $brandQuery);
@@ -110,7 +97,6 @@ if (isset($_FILES['fileInput'], $_POST['fileTitle'], $_POST['fileDesc'], $_POST[
             mysqli_stmt_close($brandStmt);
         }
 
-        // Ha a márka nem létezik, létrehozzuk
         if (!$brandId) {
             $insertBrandQuery = "INSERT INTO brand (brand_name) VALUES (?)";
             $insertBrandStmt = mysqli_prepare($dbconn, $insertBrandQuery);
@@ -125,7 +111,6 @@ if (isset($_FILES['fileInput'], $_POST['fileTitle'], $_POST['fileDesc'], $_POST[
             }
         }
 
-        // **Termék hozzáadása az adatbázishoz**
         $productQuery = "INSERT INTO products (user_id, name, category_id, brand_id, price, description, image_id, uploaded_at, db) 
                          VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), ?)";
 
