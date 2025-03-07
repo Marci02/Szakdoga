@@ -19,6 +19,8 @@ try {
             products.db, 
             products.category_id, 
             products.brand_id, 
+            products.condition, 
+            products.size, 
             COALESCE(image.img_url, 'no-image.jpg') AS img_url 
           FROM products 
           LEFT JOIN image ON image.id = products.image_id";
