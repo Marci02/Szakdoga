@@ -252,9 +252,16 @@ function fetchProducts() {
   fetch("backend/ossztermeklekero.php")
     .then(response => response.json())
     .then(data => {
+      console.log("Lekért adatok:", data);
+    
+      if (!Array.isArray(data)) {
+        console.error("Hiba: A visszakapott adat nem egy tömb!", data);
+        return;
+      }
+    
       var productList = document.querySelector(".product-list");
       productList.innerHTML = "";
-
+    
       data.forEach(product => {
         var productCard = document.createElement("div");
         productCard.className = "product-card";
@@ -262,22 +269,22 @@ function fetchProducts() {
         productCard.dataset.productName = product.name;
         productCard.dataset.productDescription = product.description;
         productCard.dataset.productPrice = product.price;
-        productCard.dataset.productSize = product.size;  // Új adat: méret
-        productCard.dataset.productCondition = product.condition; // Új adat: állapot
+        productCard.dataset.productSize = product.size || "N/A";  // Ha nincs size, akkor "N/A"
+        productCard.dataset.productCondition = product.condition || "N/A"; // Ha nincs condition, akkor "N/A"
         productCard.dataset.productImage = product.img_url;
-
+    
         productCard.innerHTML = `
           <img src="${product.img_url}" alt="${product.name}" class="product-image">
           <h3>${product.name}</h3>
           <p>${product.description}</p>
           <h3>Ár: ${product.price} Ft</h3>
-          ${product.size ? `<p>Méret: ${product.size}</p>` : ""}
-          ${product.condition ? `<p>Állapot: ${product.condition}</p>` : ""}
+          <p>Méret: ${product.size || "N/A"}</p>
+          <p>Állapot: ${product.condition || "N/A"}</p>
         `;
-
+    
         productList.appendChild(productCard);
       });
-
+    
       document.querySelectorAll(".product-card").forEach(card => {
         card.addEventListener("click", function () {
           openProductModal(this);
