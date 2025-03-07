@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'tesztAdat';
+$dbname = 'tesztAdat1';
 $username = 'root';
 $password = '';
 
@@ -16,9 +16,11 @@ try {
             products.name, 
             products.description, 
             products.price, 
-            products.db, 
+            products.quantity, 
             products.category_id, 
             products.brand_id, 
+            products.condition, 
+            products.size, 
             COALESCE(image.img_url, 'no-image.jpg') AS img_url 
           FROM products 
           LEFT JOIN image ON image.id = products.image_id";

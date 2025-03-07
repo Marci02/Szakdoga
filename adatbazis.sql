@@ -48,7 +48,9 @@ CREATE TABLE `products` (
   `description` varchar(255) NOT NULL,
   `image_id` int NOT NULL,
   `uploaded_at` datetime NOT NULL,
-  `db` int NOT NULL
+  `quantity` int NOT NULL,
+  `size` varchar(255) NOT NULL,
+  `condition` varchar(255) NOT NULL
 );
 
 CREATE TABLE `brand` (

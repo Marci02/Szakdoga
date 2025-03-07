@@ -4,14 +4,15 @@ session_start();
 
 header('Content-Type: application/json');
 
-if (isset($_FILES['fileInput'], $_POST['fileTitle'], $_POST['fileDesc'], $_POST['filePrice'], $_POST['fileQuantity'], $_POST['fileCategory'], $_POST['fileBrand'])) {
+if (isset($_FILES['fileInput'], $_POST['fileTitle'], $_POST['fileDesc'], $_POST['filePrice'], $_POST['fileCategory'], $_POST['fileBrand'], $_POST['fileCondition'])) {
     
     $fileTitle = trim($_POST['fileTitle']);
     $fileDesc = trim($_POST['fileDesc']);
     $filePrice = filter_var($_POST['filePrice'], FILTER_VALIDATE_FLOAT);
-    $fileQuantity = filter_var($_POST['fileQuantity'], FILTER_VALIDATE_INT);
     $fileCategory = trim($_POST['fileCategory']);
     $fileBrand = trim($_POST['fileBrand']);
+    $fileCondition = trim($_POST['fileCondition']);
+    $fileSize = isset($_POST['fileSize']) ? trim($_POST['fileSize']) : null;
     $userId = $_SESSION['user_id'] ?? null;
 
     if (!$userId) {
@@ -19,18 +20,23 @@ if (isset($_FILES['fileInput'], $_POST['fileTitle'], $_POST['fileDesc'], $_POST[
         exit;
     }
 
-    if (empty($fileTitle) || empty($fileDesc) || $filePrice === false || $fileQuantity === false || empty($fileCategory) || empty($fileBrand)) {
+    if (empty($fileTitle) || empty($fileDesc) || $filePrice === false || empty($fileCategory) || empty($fileBrand) || empty($fileCondition)) {
         echo json_encode(['message' => 'All fields are required and must be valid']);
         exit;
     }
 
+    // Adatok tisztítása
     $fileTitle = htmlspecialchars($fileTitle, ENT_QUOTES, 'UTF-8');
     $fileDesc = htmlspecialchars($fileDesc, ENT_QUOTES, 'UTF-8');
     $fileCategory = htmlspecialchars($fileCategory, ENT_QUOTES, 'UTF-8');
     $fileBrand = htmlspecialchars($fileBrand, ENT_QUOTES, 'UTF-8');
+    $fileCondition = htmlspecialchars($fileCondition, ENT_QUOTES, 'UTF-8');
+    if ($fileSize) {
+        $fileSize = htmlspecialchars($fileSize, ENT_QUOTES, 'UTF-8');
+    }
 
+    // Fájl feltöltés
     $uploadDirectory = __DIR__ . '/../uploads/';
-
     if (!is_dir($uploadDirectory)) {
         mkdir($uploadDirectory, 0777, true);
     }
@@ -46,9 +52,9 @@ if (isset($_FILES['fileInput'], $_POST['fileTitle'], $_POST['fileDesc'], $_POST[
     }
 
     if (move_uploaded_file($_FILES['fileInput']['tmp_name'], $targetFilePath)) {
-
         $relativeFilePath = 'uploads/' . $uniqueFileName;
 
+        // Kép feltöltése az adatbázisba
         $imageQuery = "INSERT INTO image (img_url) VALUES (?)";
         $imageStmt = mysqli_prepare($dbconn, $imageQuery);
         if ($imageStmt) {
@@ -61,6 +67,7 @@ if (isset($_FILES['fileInput'], $_POST['fileTitle'], $_POST['fileDesc'], $_POST[
             exit;
         }
 
+        // Kategória ID ellenőrzése és beszúrása, ha nem létezik
         $categoryId = null;
         $categoryQuery = "SELECT id FROM category WHERE category_name = ?";
         $categoryStmt = mysqli_prepare($dbconn, $categoryQuery);
@@ -86,6 +93,7 @@ if (isset($_FILES['fileInput'], $_POST['fileTitle'], $_POST['fileDesc'], $_POST[
             }
         }
 
+        // Márka ID ellenőrzése és beszúrása, ha nem létezik
         $brandId = null;
         $brandQuery = "SELECT id FROM brand WHERE brand_name = ?";
         $brandStmt = mysqli_prepare($dbconn, $brandQuery);
@@ -111,12 +119,13 @@ if (isset($_FILES['fileInput'], $_POST['fileTitle'], $_POST['fileDesc'], $_POST[
             }
         }
 
-        $productQuery = "INSERT INTO products (user_id, name, category_id, brand_id, price, description, image_id, uploaded_at, db) 
-                         VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), ?)";
+        // Termék beszúrása az adatbázisba, beleértve az új mezőket
+        $productQuery = "INSERT INTO products (user_id, name, category_id, brand_id, price, description, image_id, uploaded_at, condition, size) 
+                         VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?)";
 
         $productStmt = mysqli_prepare($dbconn, $productQuery);
         if ($productStmt) {
-            mysqli_stmt_bind_param($productStmt, "isiiisii", $userId, $fileTitle, $categoryId, $brandId, $filePrice, $fileDesc, $imageId, $fileQuantity);
+            mysqli_stmt_bind_param($productStmt, "isiiissss", $userId, $fileTitle, $categoryId, $brandId, $filePrice, $fileDesc, $imageId, $fileCondition, $fileSize);
             if (mysqli_stmt_execute($productStmt)) {
                 echo json_encode(['message' => 'Product added successfully']);
             } else {

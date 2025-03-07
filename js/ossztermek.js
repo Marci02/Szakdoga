@@ -12,7 +12,6 @@ function stickyNav() {
 
 window.addEventListener("scroll", stickyNav);
 
-// Keresés
 function search() {
   var searchTerm = document.getElementById('search').value;
 
@@ -45,42 +44,53 @@ document.getElementById("cartBtn").parentElement.addEventListener("mouseleave", 
   document.getElementById("cartBtn").style.display = "none";
 });
 
-// Feltöltési modal
 function openUploadModal() {
-  var modal = document.createElement("div");
-modal.id = "uploadModal";
-modal.style.position = "fixed";
-modal.style.top = "50%";
-modal.style.left = "50%";
-modal.style.transform = "translate(-50%, -50%)";
-modal.style.width = "400px";  // Növelt szélesség
-modal.style.padding = "30px";  // Növelt padding
-modal.style.backgroundColor = "#fff";
-modal.style.boxShadow = "0 12px 24px rgba(0, 0, 0, 0.1)";
-modal.style.borderRadius = "15px";
-modal.style.zIndex = "1000";
-modal.style.textAlign = "center";  // Középre igazított szöveg
+  console.log("Popup megnyitása");
 
-var modalContent = document.createElement("div");
-modalContent.innerHTML = `
+  var modal = document.createElement("div");
+  modal.id = "uploadModal";
+  modal.style.position = "fixed";
+  modal.style.top = "50%";
+  modal.style.left = "50%";
+  modal.style.transform = "translate(-50%, -50%)";
+  modal.style.width = "400px";
+  modal.style.padding = "30px";
+  modal.style.backgroundColor = "#fff";
+  modal.style.boxShadow = "0 5px 15px rgba(0, 0, 0, 0.3)";
+  modal.style.borderRadius = "15px";
+  modal.style.height = "auto";
+  modal.style.zIndex = "1000";
+  modal.style.textAlign = "center";
+  modal.style.display = "block"; // Megjelenítés
+
+  var modalContent = document.createElement("div");
+  modalContent.innerHTML = `
   <h2 style="font-size: 1.8em; font-weight: bold; color: #222; margin-bottom: 20px;">Termék feltöltése</h2>
-  
-  <!-- Input mezők és textarea -->
-  <input type="text" id="fileTitle" placeholder="Termék címe" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-  
-  <input type="file" id="fileInput" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-  
-  <textarea id="fileDesc" rows="5" style="width: 100%; resize:none; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;" placeholder="Leírás"></textarea>
-  
-  <input type="number" id="filePrice" placeholder="Ár (Ft)" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-  
-  <input type="number" id="fileQuantity" placeholder="Darabszám" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-  
-  <input type="text" id="fileCategory" placeholder="Kategória" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-  
-  <input type="text" id="fileBrand" placeholder="Márka" style="width: 100%; padding: 10px; margin-bottom: 25px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-  
-  <!-- Gombok -->
+
+<!-- Input mezők és textarea -->
+<input type="text" id="fileTitle" placeholder="Termék címe" maxlength="20"; style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+
+<input type="file" id="fileInput" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;" >
+
+<textarea id="fileDesc" rows="5" style="width: 100%; resize:none; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;" placeholder="Leírás"></textarea>
+
+<input type="number" id="filePrice" placeholder="Ár (Ft)" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+
+<!-- Kategória választó -->
+<select id="fileCategory" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;" onchange="updateFormBasedOnCategory()">
+  <option value="" disabled selected>Kategória kiválasztása</option>
+  <option value="ruhák">Ruhák</option>
+  <option value="cipők">Cipők</option>
+  <option value="kiegészítők">Kiegészítők</option>
+</select>
+
+<!-- Dinamikus mezők itt fognak megjelenni -->
+<div id="dynamicFields"></div>
+
+<input type="text" id="fileBrand" placeholder="Márka" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+
+<!-- Gombok -->
+<div style="display: flex; justify-content: space-between;">
   <button onclick="uploadFile()" style="background-color: #22222a; color: white; padding: 12px 20px; border-radius: 8px; border: none; font-size: 16px; width: 48%; cursor: pointer; transition: background-color 0.3s ease;">
     Feltöltés
   </button>
@@ -88,27 +98,54 @@ modalContent.innerHTML = `
   <button onclick="closeUploadModal()" style="background-color: #ecf0f1; color: #333; padding: 12px 20px; border-radius: 8px; border: 1px solid #ddd; font-size: 16px; width: 48%; cursor: pointer; transition: background-color 0.3s ease;">
     Mégse
   </button>
-`;
+</div>
 
-modal.appendChild(modalContent);
-document.body.appendChild(modal);
-}
-
-function closeUploadModal() {
-  var modal = document.getElementById("uploadModal");
-  if (modal) {
-    document.body.removeChild(modal);
+<script>
+  function checkBidEnd() {
+    const bidEndInput = document.getElementById("fileBidEnd").value;
+    const bidEndTime = new Date(bidEndInput).getTime();
+    const currentTime = new Date().getTime();
+    
+    if (bidEndTime && currentTime >= bidEndTime) {
+      document.getElementById("productCard").style.display = "none";
+    }
   }
+
+  setInterval(checkBidEnd, 1000); // Ellenőrzés minden másodpercben
+</script>
+
+  `;
+
+  modal.appendChild(modalContent);
+  document.body.appendChild(modal);
+
+  var overlay = document.createElement("div");
+  overlay.id = "modalOverlay";
+  overlay.style.position = "fixed";
+  overlay.style.top = "0";
+  overlay.style.left = "0";
+  overlay.style.width = "100%";
+  overlay.style.height = "100%";
+  overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  overlay.style.zIndex = "999";
+  overlay.style.transition = "opacity 0.3s ease-in-out";
+  overlay.style.opacity = "0";
+
+  document.body.appendChild(overlay);
+  document.body.style.overflow = "hidden";
+
+  setTimeout(() => {
+    modal.style.opacity = "1";
+    overlay.style.opacity = "1";
+  }, 50);
 }
 
 function updateFormBasedOnCategory() {
   var category = document.getElementById("fileCategory").value;
   var dynamicFields = document.getElementById("dynamicFields");
 
-  // Töröljük az eddigi dinamikus mezőket
   dynamicFields.innerHTML = '';
 
-  // Kategóriától függő mezők hozzáadása
   if (category === "cipők") {
     dynamicFields.innerHTML = `
       <select id="fileSize" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
@@ -142,10 +179,9 @@ function updateFormBasedOnCategory() {
       </select>
     `;
   } else if (category === "kiegészítők") {
-    dynamicFields.innerHTML = ''; // Itt nincs extra mező
+    dynamicFields.innerHTML = '';
   }
 
-  // Állapot választó minden kategóriához
   dynamicFields.innerHTML += `
     <select id="fileCondition" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
       <option value="" disabled selected>Válassz állapotot</option>
@@ -157,24 +193,44 @@ function updateFormBasedOnCategory() {
   `;
 }
 
+function closeUploadModal() {
+  var modal = document.getElementById("uploadModal");
+  var overlay = document.getElementById("modalOverlay");
+
+  if (modal) {
+    modal.style.opacity = "0";
+  }
+  if (overlay) {
+    overlay.style.opacity = "0";
+  }
+
+  setTimeout(() => {
+    if (modal) modal.remove();
+    if (overlay) overlay.remove();
+    document.body.style.overflow = "auto";
+  }, 300);
+}
+
 function uploadFile() {
   var fileTitle = document.getElementById("fileTitle").value;
   var fileDesc = document.getElementById("fileDesc").value;
   var filePrice = document.getElementById("filePrice").value;
-  var fileQuantity = document.getElementById("fileQuantity").value;
   var fileCategory = document.getElementById("fileCategory").value;
   var fileBrand = document.getElementById("fileBrand").value;
   var fileInput = document.getElementById("fileInput").files[0];
+  var fileSize = document.getElementById("fileSize") ? document.getElementById("fileSize").value : "";
+  var fileCondition = document.getElementById("fileCondition") ? document.getElementById("fileCondition").value : "";
 
-  if (fileTitle && fileDesc && filePrice && fileQuantity && fileCategory && fileBrand && fileInput) {
+  if (fileTitle && fileDesc && filePrice && fileCategory && fileBrand && fileInput && fileCondition) {
     var formData = new FormData();
     formData.append("fileTitle", fileTitle);
     formData.append("fileDesc", fileDesc);
     formData.append("filePrice", filePrice);
-    formData.append("fileQuantity", fileQuantity);
     formData.append("fileCategory", fileCategory);
     formData.append("fileBrand", fileBrand);
     formData.append("fileInput", fileInput);
+    formData.append("fileSize", fileSize);
+    formData.append("fileCondition", fileCondition);
 
     fetch("backend/ossztermekupload.php", {
       method: "POST",
@@ -192,14 +248,20 @@ function uploadFile() {
   }
 }
 
-// Termékek lekérése és megjelenítése
 function fetchProducts() {
   fetch("backend/ossztermeklekero.php")
     .then(response => response.json())
     .then(data => {
+      console.log("Lekért adatok:", data);
+    
+      if (!Array.isArray(data)) {
+        console.error("Hiba: A visszakapott adat nem egy tömb!", data);
+        return;
+      }
+    
       var productList = document.querySelector(".product-list");
       productList.innerHTML = "";
-
+    
       data.forEach(product => {
         var productCard = document.createElement("div");
         productCard.className = "product-card";
@@ -207,18 +269,22 @@ function fetchProducts() {
         productCard.dataset.productName = product.name;
         productCard.dataset.productDescription = product.description;
         productCard.dataset.productPrice = product.price;
+        productCard.dataset.productSize = product.size || "N/A";  // Ha nincs size, akkor "N/A"
+        productCard.dataset.productCondition = product.condition || "N/A"; // Ha nincs condition, akkor "N/A"
         productCard.dataset.productImage = product.img_url;
-
+    
         productCard.innerHTML = `
           <img src="${product.img_url}" alt="${product.name}" class="product-image">
           <h3>${product.name}</h3>
           <p>${product.description}</p>
           <h3>Ár: ${product.price} Ft</h3>
+          <p>Méret: ${product.size || "N/A"}</p>
+          <p>Állapot: ${product.condition || "N/A"}</p>
         `;
-
+    
         productList.appendChild(productCard);
       });
-
+    
       document.querySelectorAll(".product-card").forEach(card => {
         card.addEventListener("click", function () {
           openProductModal(this);
@@ -228,7 +294,6 @@ function fetchProducts() {
     .catch(error => console.error("Hiba a termékek lekérésekor:", error));
 }
 
-// Termék popup megnyitása
 function openProductModal(card) {
   var existingModal = document.getElementById("productModal");
   if (existingModal) {
@@ -259,7 +324,6 @@ function openProductModal(card) {
   document.body.appendChild(modal);
 }
 
-// Termék popup bezárása
 function closeProductModal() {
   var modal = document.getElementById("productModal");
   if (modal) {
@@ -270,13 +334,11 @@ function closeProductModal() {
 function toggleCategory(categoryId) {
   var category = document.getElementById(categoryId);
   
-  // A kategória bontása vagy összecsukása
   if (category.style.display === "block") {
-      category.style.display = "none";  // Ha látszik, elrejtjük
+      category.style.display = "none";
   } else {
-      category.style.display = "block"; // Ha el van rejtve, megjelenítjük
+      category.style.display = "block";
   }
 }
 
-// Oldal betöltésekor termékek betöltése
 document.addEventListener("DOMContentLoaded", fetchProducts);
