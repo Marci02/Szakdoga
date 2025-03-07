@@ -31,6 +31,14 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
     $image_name = time() . '_' . basename($_FILES['image']['name']);
     $target_path = __DIR__ . "/uploads/" . $image_name; // Mentési hely
 
+    // Kép MIME típus ellenőrzése
+    $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+    if (!in_array($_FILES['image']['type'], $allowed_types)) {
+        echo json_encode(["status" => "error", "message" => "A kép csak JPEG, PNG vagy GIF formátumban lehet."]);
+        exit;
+    }
+
+    // Kép feltöltése
     if (move_uploaded_file($_FILES['image']['tmp_name'], $target_path)) {
         // Kép elérési útja adatbázisba mentéshez
         $sql = "INSERT INTO image (img_url) VALUES (?)";
