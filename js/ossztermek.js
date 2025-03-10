@@ -269,8 +269,8 @@ function fetchProducts() {
         productCard.dataset.productName = product.name;
         productCard.dataset.productDescription = product.description;
         productCard.dataset.productPrice = product.price;
-        productCard.dataset.productSize = product.size || "N/A";  // Ha nincs size, akkor "N/A"
-        productCard.dataset.productCondition = product.condition || "N/A"; // Ha nincs condition, akkor "N/A"
+        productCard.dataset.productSize = product.size || "N/A";
+        productCard.dataset.productCondition = product.condition || "N/A";
         productCard.dataset.productImage = product.img_url;
     
         productCard.innerHTML = `

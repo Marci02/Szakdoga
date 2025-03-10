@@ -32,12 +32,6 @@ CREATE TABLE `sales` (
   PRIMARY KEY (`saler_id`, `buyer_id`, `product_id`)
 );
 
-CREATE TABLE `admins` (
-  `id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL
-);
-
 CREATE TABLE `products` (
   `id` bigint PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `user_id` bigint NOT NULL,
