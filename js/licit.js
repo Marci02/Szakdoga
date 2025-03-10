@@ -81,59 +81,45 @@ function openUploadModal() {
 
   var modalContent = document.createElement("div");
   modalContent.innerHTML = `
-  <h2 style="font-size: 1.8em; font-weight: bold; color: #222; margin-bottom: 20px;">Termék feltöltése</h2>
+    <h2 style="font-size: 1.8em; font-weight: bold; color: #222; margin-bottom: 20px;">Termék feltöltése</h2>
 
-<!-- Input mezők és textarea -->
-<input type="text" id="fileTitle" placeholder="Termék címe" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-
-<input type="file" id="fileInput" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-
-<textarea id="fileDesc" rows="5" style="width: 100%; resize:none; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;" placeholder="Leírás"></textarea>
-
-<input type="number" id="filePrice" placeholder="Ár (Ft)" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-
-<input type="number" id="fileBidStep" placeholder="Licit lépcső (Ft)" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-
-<!-- Kategória választó -->
-<select id="fileCategory" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;" onchange="updateFormBasedOnCategory()">
-  <option value="" disabled selected>Kategória kiválasztása</option>
-  <option value="ruhák">Ruhák</option>
-  <option value="cipők">Cipők</option>
-  <option value="kiegészítők">Kiegészítők</option>
-</select>
-
-<!-- Dinamikus mezők itt fognak megjelenni -->
-<div id="dynamicFields"></div>
-
-<input type="text" id="fileBrand" placeholder="Márka" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-
-<!-- Licit vége mező -->
-<input type="datetime-local" id="fileBidEnd" style="width: 100%; padding: 10px; margin-bottom: 25px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;" placeholder="Licit vége">
-
-<!-- Gombok -->
-<div style="display: flex; justify-content: space-between;">
-  <button onclick="uploadFile()" style="background-color: #22222a; color: white; padding: 12px 20px; border-radius: 8px; border: none; font-size: 16px; width: 48%; cursor: pointer; transition: background-color 0.3s ease;">
-    Feltöltés
-  </button>
-  
-  <button onclick="closeUploadModal()" style="background-color: #ecf0f1; color: #333; padding: 12px 20px; border-radius: 8px; border: 1px solid #ddd; font-size: 16px; width: 48%; cursor: pointer; transition: background-color 0.3s ease;">
-    Mégse
-  </button>
-</div>
-
-<script>
-  function checkBidEnd() {
-    const bidEndInput = document.getElementById("fileBidEnd").value;
-    const bidEndTime = new Date(bidEndInput).getTime();
-    const currentTime = new Date().getTime();
+    <!-- Input mezők és textarea -->
+    <input type="text" id="fileTitle" placeholder="Termék címe" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
     
-    if (bidEndTime && currentTime >= bidEndTime) {
-      document.getElementById("productCard").style.display = "none";
-    }
-  }
-
-  setInterval(checkBidEnd, 1000); // Ellenőrzés minden másodpercben
-</script>
+    <input type="file" id="fileInput" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+    
+    <textarea id="fileDesc" rows="5" style="width: 100%; resize:none; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;" placeholder="Leírás"></textarea>
+    
+    <input type="number" id="filePrice" placeholder="Ár (Ft)" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+    
+    <input type="number" id="fileBidStep" placeholder="Licit lépcső (Ft)" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+    
+    <!-- Kategória választó -->
+    <select id="fileCategory" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;" onchange="updateFormBasedOnCategory()">
+      <option value="" disabled selected>Kategória kiválasztása</option>
+      <option value="ruhák">Ruhák</option>
+      <option value="cipők">Cipők</option>
+      <option value="kiegészítők">Kiegészítők</option>
+    </select>
+    
+    <!-- Dinamikus mezők itt fognak megjelenni -->
+    <div id="dynamicFields"></div>
+    
+    <input type="text" id="fileBrand" placeholder="Márka" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+    
+    <!-- Licit vége mező -->
+    <input type="datetime-local" id="fileBidEnd" style="width: 100%; padding: 10px; margin-bottom: 25px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;" placeholder="Licit vége">
+    
+    <!-- Gombok -->
+    <div style="display: flex; justify-content: space-between;">
+      <button onclick="DataUpload()" style="background-color: #22222a; color: white; padding: 12px 20px; border-radius: 8px; border: none; font-size: 16px; width: 48%; cursor: pointer; transition: background-color 0.3s ease;">
+        Feltöltés
+      </button>
+      
+      <button onclick="closeUploadModal()" style="background-color: #ecf0f1; color: #333; padding: 12px 20px; border-radius: 8px; border: 1px solid #ddd; font-size: 16px; width: 48%; cursor: pointer; transition: background-color 0.3s ease;">
+        Mégse
+      </button>
+    </div>
 
   `;
 
@@ -217,6 +203,51 @@ function updateFormBasedOnCategory() {
     </select>
   `;
 }
+
+// A fájl feltöltése és adatok küldése
+function DataUpload() {
+  const title = document.getElementById('fileTitle').value;
+  const desc = document.getElementById('fileDesc').value;
+  const price = document.getElementById('filePrice').value;
+  const bidStep = document.getElementById('fileBidStep').value;
+  const category = document.getElementById('fileCategory').value;
+  const brand = document.getElementById('fileBrand').value;
+  const bidEnd = document.getElementById('fileBidEnd').value;
+  const size = document.getElementById('fileSize') ? document.getElementById('fileSize').value : null;
+  const condition = document.getElementById('fileCondition') ? document.getElementById('fileCondition').value : null;
+
+  const fileInput = document.getElementById('fileInput').files[0]; // Az első fájl a kiválasztott fájl
+
+  // Formdata objektum készítése
+  const formData = new FormData();
+  formData.append("fileTitle", title);
+  formData.append("fileDesc", desc);
+  formData.append("filePrice", price);
+  formData.append("fileBidStep", bidStep);
+  formData.append("fileCategory", category);
+  formData.append("fileBrand", brand);
+  formData.append("fileBidEnd", bidEnd);
+  if (size) formData.append("fileSize", size);
+  if (condition) formData.append("fileCondition", condition);
+  if (fileInput) formData.append("fileInput", fileInput); // A fájlt itt közvetlenül hozzáadjuk
+
+  // POST kérelem küldése fetch-el
+  fetch("backend/licitupload.php", {
+    method: "POST",
+    body: formData,
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Sikeres válasz:', data);
+    alert("A termék sikeresen feltöltve!");
+    closeUploadModal(); // Zárd be a modal-t a sikeres feltöltés után
+  })
+  .catch(error => {
+    console.error('Hiba történt:', error);
+    alert("Hiba történt a feltöltés során!");
+  });
+}
+
 
 // Feltöltés modal bezárása
 function closeUploadModal() {
