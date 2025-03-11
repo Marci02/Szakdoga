@@ -28,7 +28,8 @@ CREATE TABLE `sales` (
   `saler_id` bigint NOT NULL,
   `buyer_id` bigint NOT NULL,
   `product_id` bigint NOT NULL,
-  `db` int NOT NULL,
+  `quantity` int NOT NULL,
+  `sold_at` datetime NOT NULL,
   PRIMARY KEY (`saler_id`, `buyer_id`, `product_id`)
 );
 
