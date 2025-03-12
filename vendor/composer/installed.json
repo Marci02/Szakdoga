@@ -355,20 +355,20 @@
         },
         {
             "name": "jawira/plantuml",
-            "version": "v1.2025.1",
-            "version_normalized": "1.2025.1.0",
+            "version": "v1.2025.2",
+            "version_normalized": "1.2025.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jawira/plantuml.git",
-                "reference": "1cc8234c495e50342e49905ada629e799d35d2ec"
+                "reference": "13ba6ee7b4f44db546a9931847bcec1b1728b77a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jawira/plantuml/zipball/1cc8234c495e50342e49905ada629e799d35d2ec",
-                "reference": "1cc8234c495e50342e49905ada629e799d35d2ec",
+                "url": "https://api.github.com/repos/jawira/plantuml/zipball/13ba6ee7b4f44db546a9931847bcec1b1728b77a",
+                "reference": "13ba6ee7b4f44db546a9931847bcec1b1728b77a",
                 "shasum": ""
             },
-            "time": "2025-02-21T14:00:49+00:00",
+            "time": "2025-03-07T14:00:51+00:00",
             "bin": [
                 "bin/plantuml"
             ],
@@ -393,7 +393,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jawira/plantuml/issues",
-                "source": "https://github.com/jawira/plantuml/tree/v1.2025.1"
+                "source": "https://github.com/jawira/plantuml/tree/v1.2025.2"
             },
             "install-path": "../jawira/plantuml"
         },
@@ -3253,17 +3253,17 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.21.8",
-            "version_normalized": "1.21.8.0",
+            "version": "v1.22.0",
+            "version_normalized": "1.22.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "bda5f869ac51c8e985a6fe9f964c4cb78228a369"
+                "reference": "5cc985971b1a700cb74bedd9e01cfa93eb4747f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/bda5f869ac51c8e985a6fe9f964c4cb78228a369",
-                "reference": "bda5f869ac51c8e985a6fe9f964c4cb78228a369",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/5cc985971b1a700cb74bedd9e01cfa93eb4747f7",
+                "reference": "5cc985971b1a700cb74bedd9e01cfa93eb4747f7",
                 "shasum": ""
             },
             "require": {
@@ -3280,7 +3280,7 @@
                 "symfony/phpunit-bridge": "^4.4.12|^5.0|^6.0",
                 "symfony/process": "^4.4|^5.0|^6.0"
             },
-            "time": "2024-10-07T08:51:39+00:00",
+            "time": "2025-03-03T07:50:24+00:00",
             "type": "composer-plugin",
             "extra": {
                 "class": "Symfony\\Flex\\Flex"
@@ -3304,7 +3304,7 @@
             "description": "Composer plugin for Symfony",
             "support": {
                 "issues": "https://github.com/symfony/flex/issues",
-                "source": "https://github.com/symfony/flex/tree/v1.21.8"
+                "source": "https://github.com/symfony/flex/tree/v1.22.0"
             },
             "funding": [
                 {
