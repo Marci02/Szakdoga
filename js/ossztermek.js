@@ -149,6 +149,7 @@ function uploadFile() {
   formData.append("brand_id", fileBrand); // 🔹 "brand_id" kell, nem "fileBrand"
   formData.append("condition", fileCondition);
   formData.append("size", fileSize);
+  formData.append("category_id", fileCategory);
 
   fetch("backend/ossztermekupload.php", {
       method: "POST",
