@@ -189,11 +189,11 @@ function fetchProducts() {
         return;
       }
 
-      var productList = document.querySelector(".product-list");
+      let productList = document.querySelector(".product-list");
       productList.innerHTML = "";
 
       data.products.forEach(product => {
-        var productCard = document.createElement("div");
+        let productCard = document.createElement("div");
         productCard.className = "product-card";
         productCard.dataset.productId = product.id;
         productCard.dataset.productName = product.name;
@@ -226,12 +226,12 @@ function fetchProducts() {
 
 // Termék modal megnyitása
 function openProductModal(card) {
-  var existingModal = document.getElementById("productModal");
+  let existingModal = document.getElementById("productModal");
   if (existingModal) {
     existingModal.remove();
   }
 
-  var modal = document.createElement("div");
+  let modal = document.createElement("div");
   modal.id = "productModal";
   modal.style.position = "fixed";
   modal.style.top = "50%";
@@ -257,7 +257,7 @@ function openProductModal(card) {
 
 // Termék modal bezárása
 function closeProductModal() {
-  var modal = document.getElementById("productModal");
+  let modal = document.getElementById("productModal");
   if (modal) {
     modal.remove();
   }
@@ -265,7 +265,7 @@ function closeProductModal() {
 
 // Kategória megjelenítése
 function toggleCategory(categoryId) {
-  var category = document.getElementById(categoryId);
+  let category = document.getElementById(categoryId);
   
   if (category.style.display === "block") {
       category.style.display = "none";

@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'tesztAdat1';
+$dbname = 'tesztAdat';
 $username = 'root';
 $password = '';
 
@@ -13,7 +13,7 @@ if ($mysqli->connect_error) {
 }
 
 // Alapértelmezett kép útvonal
-$baseImagePath = "http://localhost/Szakdoga/";  // Az alapértelmezett kép útvonala
+$baseImagePath = "http://localhost/Szakdoga/uploads/";  // Az alapértelmezett kép útvonala
 $defaultImage = "no-image.jpg";  // Alapértelmezett kép neve
 
 // Kép elérési útvonalának beállítása

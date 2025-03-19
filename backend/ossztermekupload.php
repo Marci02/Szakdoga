@@ -113,6 +113,7 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
 }
 
 // 🔹 Termék beszúrása az adatbázisba
+//INNER JOIN kell a category táblához, mert nem a category_id-t kérjük be hanem a nevet és azt egy külön táblába tároljuk és a brand_id-vel is ugyan ezt kell csinálni.
 $query = "INSERT INTO products (user_id, name, description, price, quantity, brand_id, `condition`, size, category_id, image_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $dbconn->prepare($query);
 $stmt->bind_param("issdiissii", $user_id, $name, $description, $price, $quantity, $brand_id, $condition, $size, $category_id, $image_id);
