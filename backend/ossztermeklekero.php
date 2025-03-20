@@ -1,27 +1,9 @@
 <?php
-$host = 'localhost';
-$dbname = 'tesztAdat';
-$username = 'root';
-$password = '';
-
-// Adatbázis kapcsolat létrehozása mysqli-val
-$mysqli = new mysqli($host, $username, $password, $dbname);
-
-// Hibakezelés, ha a kapcsolat nem sikerült
-if ($mysqli->connect_error) {
-    die(json_encode(['success' => false, 'error' => 'Adatbázis kapcsolat hiba: ' . $mysqli->connect_error]));
-}
+require_once __DIR__ . '/../connect.php';
 
 // Alapértelmezett kép útvonal
 $baseImagePath = "http://localhost/Szakdoga/uploads/";  // Az alapértelmezett kép útvonala
 $defaultImage = "no-image.jpg";  // Alapértelmezett kép neve
-
-// Kép elérési útvonalának beállítása
-if (!empty($row['img_url']) && $row['img_url'] !== $defaultImage) {
-    $row['img_url'] = $baseImagePath . $row['img_url'];
-} else {
-    $row['img_url'] = $baseImagePath . $defaultImage;
-}
 
 // Termékek lekérdezése
 $query = "
@@ -41,23 +23,24 @@ $query = "
 ";
 
 // Lekérdezés előkészítése
-$stmt = $mysqli->prepare($query);
+$stmt = mysqli_prepare($dbconn, $query);
 if (!$stmt) {
-    die(json_encode(['success' => false, 'error' => 'Hiba a lekérdezés előkészítésekor: ' . $mysqli->error]));
+    echo json_encode(['success' => false, 'error' => 'Hiba a lekérdezés előkészítésekor: ' . mysqli_error($dbconn)]);
+    exit;
 }
 
 // Alapértelmezett kép beállítása
-$stmt->bind_param('s', $defaultImage);
+mysqli_stmt_bind_param($stmt, 's', $defaultImage);
 
 // Lekérdezés végrehajtása
-$stmt->execute();
+mysqli_stmt_execute($stmt);
 
 // Eredmény lekérése
-$result = $stmt->get_result();
+$result = mysqli_stmt_get_result($stmt);
 
 // Termékek tárolása egy tömbben
 $products = [];
-while ($row = $result->fetch_assoc()) {
+while ($row = mysqli_fetch_assoc($result)) {
     // Kép elérési útvonalának beállítása
     if (!empty($row['img_url']) && $row['img_url'] !== $defaultImage) {
         $row['img_url'] = $baseImagePath . $row['img_url'];
@@ -71,6 +54,6 @@ while ($row = $result->fetch_assoc()) {
 echo json_encode(['success' => true, 'products' => $products], JSON_UNESCAPED_UNICODE);
 
 // Kapcsolat bezárása
-$stmt->close();
-$mysqli->close();
+mysqli_stmt_close($stmt);
+mysqli_close($dbconn);
 ?>

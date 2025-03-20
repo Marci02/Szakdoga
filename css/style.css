@@ -447,7 +447,7 @@ body {
     --text-h4: 1.125rem;
     --text-h5: 1.125rem;
     --text-h6: 1rem;
-    --text-xs: 0.75rem;
+    --text-xs: 0.55rem;
     --text-sm: 0.875rem;
     --text-base: 1rem;
     --text-lg: 1.125rem;
@@ -475,57 +475,55 @@ body {
     flex-direction: column;
   }
 
-  /* Az összes elem konténerének beállítása (kép, cím, szöveg) */
-  .product-container {
-    display: flex;
-    flex-direction: column;  /* Az elemeket egymás alatt helyezi el */
-    justify-content: flex-start; /* Az elemek a tetejére igazítva */
-    gap: var(--spacing-4); /* Az elemek közötti távolság */
-    padding: var(--spacing-3);
-    text-align: center;  /* Igazítja az összes szöveget középre */
-  }
+  .slideshow-items {
+    display: grid;
+    grid-template-rows: 1fr; /* Egy sor, amely kitölti a képernyőt */
+    grid-template-columns: 1fr; /* Egy oszlop, amely kitölti a szélességet */
+    height: 100vh; /* Teljes képernyőmagasság */
+    width: 100%; /* Teljes szélesség */
+    place-items: center; /* Minden elem középre kerül */
+    overflow: scroll;
+}
 
-  /* Kép */
-  .product-image {
-    width: 100%;
-    height: auto;
-    max-width: 300px;  /* A kép max szélessége */
-    margin-bottom: var(--spacing-4);
-  }
-
-  /* Cím */
-  .product-title {
-    font-size: var(--text-h2);
-    margin-bottom: var(--spacing-2);
-  }
-
-  /* Leírás */
-  .product-description {
-    font-size: var(--text-base);
-    line-height: 1.4;
-    margin-bottom: var(--spacing-4);
-    position: relative;
-    width: 100%;
-    padding: 0 10px;
-    box-sizing: border-box;
-  }
-
-  .product-actions {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  .button {
-    padding: 0.75rem 1.5rem;
-    font-size: var(--text-sm);
+.item {
+    display: grid;
+    grid-template-rows: auto auto; /* Két sor: egyik a címnek, másik a szövegnek */
+    grid-template-columns: 1fr; /* Egy oszlopos elrendezés */
+    justify-items: center; /* Középre igazítás vízszintesen */
+    align-items: center; /* Középre igazítás függőlegesen */
     text-align: center;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 0.5rem;
-  }
+    gap: 10px; 
+    height: 100%;
+    margin-top: 0px;
+}
+
+.item-header {
+    grid-row: 0; /* Az első sorban van */
+    grid-column: 1; /* Az első oszlopban van */
+    font-size: var(--text-h0);
+    font-weight: bold;
+}
+
+.item-description {
+    grid-row: 1 / span 2; /* A második sorban van */
+    grid-column: 1; /* Az első oszlopban van */
+    max-width: 80%;
+    font-size: var(--text-xs);
+    position: relative;
+    margin-top: 60px;
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+
+.item-image-container{
+  grid-row: 1;
+  grid-column: 1;
+  height: 60%;
+  width: 90%;
+  margin-right: 60px;
+}
+  
 }
 
 
