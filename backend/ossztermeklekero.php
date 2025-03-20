@@ -1,16 +1,5 @@
 <?php
-$host = 'localhost';
-$dbname = 'tesztAdat1';
-$username = 'root';
-$password = '';
-
-// Adatbázis kapcsolat létrehozása mysqli-val
-$mysqli = new mysqli($host, $username, $password, $dbname);
-
-// Hibakezelés, ha a kapcsolat nem sikerült
-if ($mysqli->connect_error) {
-    die(json_encode(['success' => false, 'error' => 'Adatbázis kapcsolat hiba: ' . $mysqli->connect_error]));
-}
+require_once __DIR__ . '/../connect.php';
 
 // Alapértelmezett kép útvonal
 $baseImagePath = "http://localhost/Szakdoga/uploads/";  // Az alapértelmezett kép útvonala
