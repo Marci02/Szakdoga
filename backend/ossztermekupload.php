@@ -1,12 +1,8 @@
 <?php
 session_start();
-
 ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
 header('Content-Type: application/json; charset=utf-8');
-
 require_once __DIR__ . '/../connect.php';
 
 // 🔹 Ellenőrizzük, hogy van-e bejelentkezett felhasználó
@@ -17,116 +13,123 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// 🔹 Debug logolás
-error_log("🔍 DEBUG - Bejelentkezett user_id: " . $user_id);
-error_log("🔍 DEBUG - POST adatok: " . print_r($_POST, true));
-error_log("🔍 DEBUG - FILES adatok: " . print_r($_FILES, true));
-
-// 🔹 Kötelező mezők ellenőrzése
+// Kötelező mezők ellenőrzése
 $required_fields = ['name', 'description', 'price', 'brand_id', 'condition', 'size', 'category_id'];
-
 foreach ($required_fields as $field) {
     if (!isset($_POST[$field])) {
-        error_log("❌ Hiányzó mező: " . $field);
         echo json_encode(["success" => false, "message" => "Hiányzó adat: $field"]);
         exit;
     }
 }
 
-$name = $_POST['name'];
-$description = $_POST['description'];
-$price = $_POST['price'];
-$quantity = $_POST['quantity'] ?? 1;
-$brand_name = $_POST['brand_id']; // A POST-ban brand_name van, nem id
-$condition = $_POST['condition'];
-$size = $_POST['size'];
-$category_id = $_POST['category_id']; // 🔹 Kategória ID
+$name = trim($_POST['name']);
+$description = trim($_POST['description']);
+$price = floatval($_POST['price']);
+$quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1;
+$brand_name = trim($_POST['brand_id']);
+$condition = trim($_POST['condition']);
+$size = trim($_POST['size']);
+$category_name = trim($_POST['category_id']);
 
-$img_url = 'no-image.jpg';
-
-// 🔹 Ha a category_id nem szám, akkor kérjük le a kategória id-t
-if (!is_numeric($category_id)) {
-    $category_query = $dbconn->prepare("SELECT id FROM category WHERE category_name = ?");
-    $category_query->bind_param("s", $category_id);
-    $category_query->execute();
-    $result = $category_query->get_result();
-    if ($row = $result->fetch_assoc()) {
-        $category_id = $row['id'];
-    } else {
-        error_log("❌ Hiba: A kategória ($category_id) nem található!");
-        echo json_encode(["success" => false, "message" => "Érvénytelen kategória"]);
-        exit;
-    }
-    $category_query->close();
+$allowed_categories = ["ruhák", "cipők", "kiegészítők"];
+if (!in_array($category_name, $allowed_categories)) {
+    echo json_encode(["success" => false, "message" => "Érvénytelen kategória név"]);
+    exit;
 }
 
-// 🔹 Ha a brand_name nem szám, akkor kérjük le a brand_id-t
-if (!is_numeric($brand_name)) {
-    $brand_query = $dbconn->prepare("SELECT id FROM brand WHERE brand_name = ?");
-    $brand_query->bind_param("s", $brand_name);
-    $brand_query->execute();
-    $result = $brand_query->get_result();
-    if ($row = $result->fetch_assoc()) {
-        $brand_id = $row['id']; // Az ID-t beállítjuk
-    } else {
-        error_log("❌ Hiba: A megadott márka ($brand_name) nem található!");
-        echo json_encode(["success" => false, "message" => "Érvénytelen márka"]);
-        exit;
-    }
-    $brand_query->close();
+// 🔹 Kategória ID lekérése vagy beszúrása
+$category_query = $dbconn->prepare("SELECT id FROM category WHERE category_name = ?");
+$category_query->bind_param("s", $category_name);
+$category_query->execute();
+$result = $category_query->get_result();
+
+if ($row = $result->fetch_assoc()) {
+    $category_id = $row['id'];
 } else {
-    // Ha a brand_id szám, akkor azt használjuk
-    $brand_id = $brand_name;
+    $insert_category_query = $dbconn->prepare("INSERT INTO category (category_name) VALUES (?)");
+    $insert_category_query->bind_param("s", $category_name);
+    $insert_category_query->execute();
+    $category_id = $insert_category_query->insert_id;
+    $insert_category_query->close();
 }
+$category_query->close();
 
-// 🔹 Kép feltöltés és mentés az adatbázisba először
-$image_id = null; // Kezdetben NULL
+// 🔹 Márka ID lekérése
+$brand_query = $dbconn->prepare("SELECT id FROM brand WHERE brand_name = ?");
+$brand_query->bind_param("s", $brand_name);
+$brand_query->execute();
+$result = $brand_query->get_result();
+
+if ($row = $result->fetch_assoc()) {
+    $brand_id = $row['id'];
+} else {
+    echo json_encode(["success" => false, "message" => "Érvénytelen márka"]);
+    exit;
+}
+$brand_query->close();
+
+// 🔹 Kép feltöltés
+$image_id = null;
 if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-    $uploadDir = __DIR__ . '/uploads/';
+    $allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+    $maxSize = 2 * 1024 * 1024; // 2MB
+
+    $file = $_FILES['image'];
+    
+    if (!in_array($file["type"], $allowedTypes)) {
+        echo json_encode(["success" => false, "message" => "Csak JPG, PNG vagy GIF formátum engedélyezett."]);
+        exit;
+    }
+
+    if ($file["size"] > $maxSize) {
+        echo json_encode(["success" => false, "message" => "A fájl mérete túl nagy (max. 2MB)."]);
+        exit;
+    }
+
+    // 🔹 Feltöltési könyvtár létrehozása, ha nem létezik
+    $uploadDir = __DIR__ . "/../uploads/";
     if (!is_dir($uploadDir)) {
         mkdir($uploadDir, 0777, true);
     }
 
-    $imageName = basename($_FILES['image']['name']);
-    $targetFilePath = $uploadDir . $imageName;
+    // 🔹 Biztonságos fájlnév generálása (random hash)
+    $fileExtension = pathinfo($file["name"], PATHINFO_EXTENSION);
+    $fileName = "product_" . uniqid() . "." . $fileExtension;
+    $filePath = $uploadDir . $fileName;
 
-    if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFilePath)) {
-        $img_url = $imageName;
-        error_log("✅ Kép sikeresen feltöltve: " . $imageName);
-
-        // Kép mentése az image táblába
-        $query = "INSERT INTO image (img_url) VALUES (?)";  // image_id nem szükséges, auto-increment
-        $stmt = $dbconn->prepare($query);
-        $stmt->bind_param("s", $img_url);
-        $stmt->execute();
-        $image_id = $stmt->insert_id; // Kép ID-ja
-        $stmt->close();
-
-        error_log("✅ Kép mentve az adatbázisba: $img_url (image_id: $image_id)");
-    } else {
-        error_log("❌ Kép mentési hiba!");
-        echo json_encode(["success" => false, "message" => "Kép feltöltési hiba"]);
+    if (!move_uploaded_file($file["tmp_name"], $filePath)) {
+        error_log("Fájl feltöltési hiba! Nem sikerült áthelyezni a fájlt: " . $file["tmp_name"] . " -> " . $filePath);
+        echo json_encode(["success" => false, "message" => "Nem sikerült a fájlt áthelyezni"]);
         exit;
     }
-} else {
-    error_log("⚠ Nincs fájl feltöltve.");
+
+    // 🔹 Kép elérési út mentése az adatbázisba
+    $img_url = $fileName;
+    $query = "INSERT INTO image (img_url) VALUES (?)";
+    $stmt = $dbconn->prepare($query);
+    $stmt->bind_param("s", $img_url);
+    if ($stmt->execute()) {
+        $image_id = $stmt->insert_id;
+    } else {
+        echo json_encode(["success" => false, "message" => "Kép adatbázisba mentése sikertelen"]);
+        exit;
+    }
+    $stmt->close();
 }
 
 // 🔹 Termék beszúrása az adatbázisba
-//INNER JOIN kell a category táblához, mert nem a category_id-t kérjük be hanem a nevet és azt egy külön táblába tároljuk és a brand_id-vel is ugyan ezt kell csinálni.
-$query = "INSERT INTO products (user_id, name, description, price, quantity, brand_id, `condition`, size, category_id, image_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$query = "INSERT INTO products (user_id, name, description, price, quantity, brand_id, `condition`, size, category_id, image_id) 
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $dbconn->prepare($query);
 $stmt->bind_param("issdiissii", $user_id, $name, $description, $price, $quantity, $brand_id, $condition, $size, $category_id, $image_id);
 
 if ($stmt->execute()) {
     $productId = $stmt->insert_id;
-    error_log("✅ Termék sikeresen feltöltve, ID: $productId");
-    $stmt->close();
     echo json_encode(["success" => true, "message" => "Termék sikeresen feltöltve", "product_id" => $productId]);
 } else {
-    error_log("❌ Adatbázis hiba: " . $dbconn->error);
     echo json_encode(["success" => false, "message" => "Adatbázis hiba: " . $dbconn->error]);
 }
 
+$stmt->close();
 $dbconn->close();
 ?>
