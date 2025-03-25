@@ -83,6 +83,7 @@
             <div class="tabs">
                 <button class="tab-button active" onclick="openTab(event, 'personal')">Személyes adatok</button>
                 <button class="tab-button" onclick="openTab(event, 'address')">Szállítási cím</button>
+                <button class="tab-button" onclick="openTab(event, 'posts')">Hirdetéseim</button>
             </div>
 
             <div id="personal" class="tab-content active">
@@ -116,6 +117,12 @@
                     <button id="saveAddress" class="otherButton">Mentés</button>
                 </div>
             </div>
+
+            <div id="posts" class="tab-content">
+                <div class="profile-info">
+                    <label>Hirdetések:</label>
+                    <div id="posts-list"></div>
+                </div>
             
             
             <button id="logoutButton" class="otherButton">Kijelentkezés</button>
