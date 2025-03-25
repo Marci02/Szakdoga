@@ -121,7 +121,30 @@
             <div id="posts" class="tab-content">
                 <div class="profile-info">
                     <label>Hirdetések:</label>
-                    <div id="posts-list"></div>
+                    <div id="product-list"></div>
+                </div>
+
+
+                <div id="edit-product-modal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeEditModal()">&times;</span>
+                        <h2>Termék szerkesztése</h2>
+                        <img id="edit-product-image-preview" class="product-image">
+                        <input type="hidden" id="edit-product-id">
+                        <label>Név:</label>
+                        <input type="text" id="edit-product-name">
+                        <label>Ár:</label>
+                        <input type="number" id="edit-product-price">
+                        <label>Leírás:</label>
+                        <textarea id="edit-product-description"></textarea>
+                        <label>Mennyiség:</label>
+                        <input type="number" id="edit-product-quantity">
+                        <label>Méret:</label>
+                        <input type="text" id="edit-product-size">
+                        <label>Állapot:</label>
+                        <input type="text" id="edit-product-condition">
+                        <button onclick="saveProductChanges()">Mentés</button>
+                    </div>
                 </div>
             
             
@@ -132,5 +155,6 @@
     <script src="js/logout.js"></script>
     <script src="js/checkProfile.js"></script>
     <script src="js/saveProfil.js"></script>
+    <script src="js/products.js"></script>
 </body>
 </html>
