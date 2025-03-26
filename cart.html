@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/cart.css">
+    <title>Kosár</title>
+</head>
+<body>
+    <nav class="nav">
+        <div class="main-nav">
+            <button class="menu-button" onclick="openNav()">☰</button>
+            <div class="menu" id="menu" id="slide">
+                <ul class="navbar">
+                    <li class="menu-item">
+                        <a href="javascript:void(0)" class="closebtn " onclick="closeNav()">&times;</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="index.html" id="mainitem" class="menu-link">Főoldal</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="ossztermek.html" id="allitem" class="menu-link active">Összes termék</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="licit.html" id="licititem" class="menu-link">Licit</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="kapcsolat.html" id="connectitem" class="menu-link">Kapcsolat</a>
+                    </li>
+                </ul>
+        </div>
+            <a href="index.html" class="logo">PremSelect</a>
+        <div class="sidebar">
+            <ul class="sidebar-list">
+                <li class="nav-item dropdown-search">
+                    <button class="dropdown-toggle-search" type="button" id="dropdownSearchButton" onclick="toggleSearch()" aria-expanded="false">
+                        <span class="sr-only"></span>
+                        <svg stroke-width="2" focusable="false" width="22" height="22" class="">
+                          <circle cx="11" cy="10" r="7" fill="none" stroke="white"></circle>
+                          <path d="m16 15 3 3" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <div class="dropdown-menu-search" id="searchBtn" aria-labelledby="dropdownSearchButton">
+                      <p class="dropdown-item-search" href="#"><input type="text" id="search" placeholder="Search...">
+                        <button id="searchbuttonToSearchBar">Search</button>
+                        <p id="output"></p></p>
+                    </div>
+                </li>
+
+                <li><a href="#" class="sidebar-btn" id="profileButton">
+                    <span class="sr-only"></span><svg stroke-width="2" focusable="false" width="22" height="22" class="">
+              <circle cx="11" cy="7" r="4" fill="none" stroke="white"></circle>
+              <path d="M3.5 19c1.421-2.974 4.247-5 7.5-5s6.079 2.026 7.5 5" fill="none" stroke="white" stroke-linecap="round"></path>
+            </svg></a>
+        </li>
+
+                  <li class="nav-item dropdown">
+                    <button class="dropdown-toggle" type="button" id="dropdownMenuButton" aria-expanded="false">
+                        <span class="sr-only"></span>
+                        <svg role="presentation" stroke-width="2" focusable="false" width="22" height="22" class="">
+                            <path d="M11 7H3.577A2 2 0 0 0 1.64 9.497l2.051 8A2 2 0 0 0 5.63 19H16.37a2 2 0 0 0 1.937-1.503l2.052-8A2 2 0 0 0 18.422 7H11Zm0 0V1" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        <div class="cart-counter">
+                            <cart-count class="count-bubble opacity-0" id="cart-count" aria-hidden="true">0</cart-count>
+                        </div>
+                    </button>
+    
+                    <!-- Dropdown Menu -->
+                    <div class="dropdown-menu" id="cartBtn" aria-labelledby="dropdownMenuButton">
+                      <p class="dropdown-item" href="#">A kosarad üres!</p>
+                      <button class="dropdown-item" href="#">Tovább a fizetéshez</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <script src="js/cart.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>
