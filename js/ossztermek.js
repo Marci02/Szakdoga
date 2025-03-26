@@ -1,4 +1,3 @@
-// Sticky navigation on scroll
 function stickyNav() {
   const navbar = document.querySelector("nav");
   const headerHeight = document.querySelector(".container").offsetHeight / 2;
@@ -8,7 +7,6 @@ function stickyNav() {
 }
 window.addEventListener("scroll", stickyNav);
 
-// Search functionality
 function search() {
   const searchTerm = document.getElementById('search').value;
   const output = document.getElementById('output');
@@ -21,7 +19,6 @@ function search() {
   output.innerHTML = messages[searchTerm] || `No matching result for the search term: ${searchTerm}`;
 }
 
-// Toggle search button visibility
 function toggleSearch() {
   const searchBtn = document.getElementById("searchBtn");
   searchBtn.style.display = searchBtn.style.display === "none" ? "block" : "none";
@@ -30,12 +27,10 @@ function toggleSearch() {
 document.getElementById("searchBtn").style.display = "none";
 document.getElementById("cartBtn").style.display = "none";
 
-// Cart button hover effect
 const cartBtn = document.getElementById("cartBtn");
 cartBtn.parentElement.addEventListener("mouseenter", () => cartBtn.style.display = "block");
 cartBtn.parentElement.addEventListener("mouseleave", () => cartBtn.style.display = "none");
 
-// Open upload modal
 function openUploadModal() {
   const modal = createModal();
   document.body.appendChild(modal.modal);
@@ -48,7 +43,6 @@ function openUploadModal() {
   }, 50);
 }
 
-// Create upload modal elements
 function createModal() {
   const modal = document.createElement("div");
   modal.id = "uploadModal";
@@ -80,7 +74,6 @@ function createModal() {
   return { modal, overlay };
 }
 
-// Update form based on category selection
 function updateFormBasedOnCategory() {
   const category = document.getElementById("fileCategory").value;
   const dynamicFields = document.getElementById("dynamicFields");
@@ -88,7 +81,6 @@ function updateFormBasedOnCategory() {
   dynamicFields.innerHTML = getDynamicFieldsForCategory(category);
 }
 
-// Get dynamic fields for selected category
 function getDynamicFieldsForCategory(category) {
   const sizeOptions = {
     'cipők': `<option value="" disabled selected>Válassz méretet</option>
@@ -109,7 +101,6 @@ function getDynamicFieldsForCategory(category) {
     </select>`;
 }
 
-// Close upload modal
 function closeUploadModal() {
   const modal = document.getElementById("uploadModal");
   const overlay = document.getElementById("modalOverlay");
@@ -124,7 +115,6 @@ function closeUploadModal() {
   }, 300);
 }
 
-// Handle file upload
 function uploadFile() {
   const fileInput = document.querySelector("#fileInput");
   const fileTitle = document.querySelector("#fileTitle").value;
@@ -141,12 +131,12 @@ function uploadFile() {
   }
 
   let formData = new FormData();
-  formData.append("image", fileInput.files[0]); // 🔹 PHP "image"-et vár
-  formData.append("name", fileTitle); // 🔹 PHP "name"-et vár
+  formData.append("image", fileInput.files[0]);
+  formData.append("name", fileTitle);
   formData.append("description", fileDesc);
   formData.append("price", filePrice);
-  formData.append("quantity", 1); // 🔹 Ha nincs, alapértelmezett 1
-  formData.append("brand_id", fileBrand); // 🔹 "brand_id" kell, nem "fileBrand"
+  formData.append("quantity", 1);
+  formData.append("brand_id", fileBrand);
   formData.append("condition", fileCondition);
   formData.append("size", fileSize);
   formData.append("category_id", fileCategory);
@@ -183,7 +173,6 @@ function fetchProducts() {
     .then(data => {
       console.log("Lekért adatok:", data);
 
-      // Ellenőrizzük, hogy a data egy objektum-e és van-e benne 'products' kulcs
       if (!data || typeof data !== "object" || !Array.isArray(data.products)) {
         console.error("Hiba: A visszakapott adat nem megfelelő formátumú!", data);
         return;
@@ -224,7 +213,6 @@ function fetchProducts() {
     .catch(error => console.error("Hiba a termékek lekérésekor:", error));
 }
 
-// Termék modal megnyitása
 function openProductModal(card) {
   let existingModal = document.getElementById("productModal");
   if (existingModal) {
@@ -249,13 +237,22 @@ function openProductModal(card) {
     <img src="${card.dataset.productImage}" alt="${card.dataset.productName}" style="width:100%; max-height:200px; object-fit:cover;">
     <p>${card.dataset.productDescription}</p>
     <h3>Ár: ${card.dataset.productPrice} Ft</h3>
-    <button onclick="closeProductModal()" style="padding:8px 12px; background:red; color:white; border:none; cursor:pointer;">Bezárás</button>
+    <p>Méret: ${card.dataset.productSize}</p>
+    <p>Állapot: ${card.dataset.productCondition}</p>
+    <button onclick="addToCart(${card.dataset.productId})" style="padding:8px 12px; background:lightgray; color:white; border:none; cursor:pointer;">Kosárba</button>
+    <button onclick="closeProductModal()" style="padding:8px 12px; background:black; color:white; border:none; cursor:pointer;">Bezárás</button>
   `;
 
   document.body.appendChild(modal);
 }
 
-// Termék modal bezárása
+function addToCart(productId) {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart.push(productId);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert("Termék hozzáadva a kosárhoz!");
+}
+
 function closeProductModal() {
   let modal = document.getElementById("productModal");
   if (modal) {
@@ -263,7 +260,6 @@ function closeProductModal() {
   }
 }
 
-// Kategória megjelenítése
 function toggleCategory(categoryId) {
   let category = document.getElementById(categoryId);
   
