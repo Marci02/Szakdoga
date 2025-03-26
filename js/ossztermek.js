@@ -62,7 +62,7 @@ function createModal() {
     </select>
     <div id="dynamicFields"></div>
     <input type="text" id="fileBrand" placeholder="Márka" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd;">
-    <div style="display: flex; justify-content: space-between;">
+    <div id="upload" style="display: flex; justify-content: space-between;">
       <button onclick="uploadFile()" style="background-color: #22222a; color: white; padding: 12px 20px; border-radius: 8px; width: 48%;">Feltöltés</button>
       <button onclick="closeUploadModal()" style="background-color: #ecf0f1; color: #333; padding: 12px 20px; border-radius: 8px; width: 48%;">Mégse</button>
     </div>`;
