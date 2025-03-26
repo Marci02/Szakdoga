@@ -1,37 +1,60 @@
 <?php
-require_once __DIR__ . '/../connect.php'; // Csatlakozás az adatbázishoz
+require_once __DIR__ . '/../connect.php'; // Adatbázis kapcsolat
+session_start(); // Szükséges a session használatához
 
 header("Content-Type: application/json");
 
-file_put_contents("debug_log.txt", "POST: " . print_r($_POST, true) . "\nFILES: " . print_r($_FILES, true), FILE_APPEND);
+// Debug log készítése
+file_put_contents("debug_log.txt", "POST: " . print_r($_POST, true) . "\nFILES: " . print_r($_FILES, true) . "\nSESSION: " . print_r($_SESSION, true), FILE_APPEND);
 
-// Ellenőrizzük, hogy POST kérés érkezett-e
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    echo json_encode(["status" => "error", "message" => "Érvénytelen kérés. Csak POST engedélyezett."]);
-    exit;
-}
-
-// Ellenőrizzük, hogy minden szükséges adat megvan-e
-if (!isset($_POST['name'], $_POST['price'], $_POST['stair'], $_POST['auction_start'], $_POST['auction_end'], $_POST['fileCategory'], $_POST['fileBrand'])) {
-    echo json_encode(["status" => "error", "message" => "Hiányzó adatok."]);
+// Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
+if (!isset($_SESSION['user_id'])) {
+    echo json_encode(["status" => "error", "message" => "Nincs bejelentkezve."]);
     exit;
 }
 
 // Adatok beolvasása
+$user_id = $_SESSION['user_id']; // Sessionből vesszük
 $name = trim($_POST['name']);
 $price = (int) $_POST['price'];
 $stair = (int) $_POST['stair'];
-$auction_start = $_POST['auction_start'];
-$auction_end = $_POST['auction_end'];
-$file_category = $_POST['fileCategory'];
-$file_brand = $_POST['fileBrand'];
+$file_category = (int) $_POST['fileCategory'];
+$file_brand = (int) $_POST['fileBrand'];
 $uploaded_at = date("Y-m-d H:i:s");
+$auction_start = $uploaded_at; // Az uploaded_at-tel azonos
+$auction_end = $_POST['auction_end']; // Ezt az űrlap küldi
+
+// Ellenőrizzük, hogy minden szükséges adat megvan-e
+$required_fields = ['name', 'price', 'stair', 'auction_end', 'fileCategory', 'fileBrand'];
+$missing_fields = [];
+
+foreach ($required_fields as $field) {
+    if (!isset($_POST[$field]) || empty($_POST[$field])) {
+        $missing_fields[] = $field;
+    }
+}
+
+if (!empty($missing_fields)) {
+    echo json_encode([
+        "status" => "error",
+        "message" => "Hiányzó adatok.",
+        "missing_fields" => $missing_fields
+    ]);
+    exit;
+}
 
 // Kép feltöltése
 $image_id = null;
+$upload_dir = __DIR__ . "/../uploads/"; // Az uploads mappa a backend-en kívül van
+
+// Ha nem létezik a mappa, akkor létrehozzuk
+if (!is_dir($upload_dir)) {
+    mkdir($upload_dir, 0777, true);
+}
+
 if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
-    $image_name = time() . '_' . basename($_FILES['image']['name']);
-    $target_path = __DIR__ . "/uploads/" . $image_name; // Mentési hely
+    $image_name = time() . '_' . preg_replace('/\s+/', '', basename($_FILES['image']['name']));
+    $target_path = $upload_dir . $image_name; // Mentési hely
 
     // Kép MIME típus ellenőrzése
     $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
@@ -44,7 +67,7 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
     if (move_uploaded_file($_FILES['image']['tmp_name'], $target_path)) {
         // Kép elérési útja adatbázisba mentéshez
         $sql = "INSERT INTO image (img_url) VALUES (?)";
-        $stmt = $conn->prepare($sql);
+        $stmt = $dbconn->prepare($sql);
         if ($stmt) {
             $stmt->bind_param("s", $image_name);
             if ($stmt->execute()) {
@@ -53,19 +76,19 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
             $stmt->close();
         }
     } else {
+        file_put_contents("debug_log.txt", "Hiba move_uploaded_file-nál: " . print_r(error_get_last(), true) . "\n", FILE_APPEND);
         echo json_encode(["status" => "error", "message" => "A kép feltöltése sikertelen."]);
         exit;
     }
 }
 
 
-
 // Adatok beszúrása az auction táblába
-$sql = "INSERT INTO auction (name, price, stair, image_id, uploaded_at, auction_start, auction_end, category, brand) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-$stmt = $conn->prepare($sql);
+$sql = "INSERT INTO auction (user_id, name, price, stair, image_id, uploaded_at, auction_start, auction_end) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+$stmt = $dbconn->prepare($sql);
 if ($stmt) {
-    $stmt->bind_param("siiisssss", $name, $price, $stair, $image_id, $uploaded_at, $auction_start, $auction_end, $file_category, $file_brand);
+    $stmt->bind_param("isiiisss", $user_id, $name, $price, $stair, $image_id, $uploaded_at, $auction_start, $auction_end);
     if ($stmt->execute()) {
         echo json_encode(["status" => "success", "message" => "Aukció sikeresen létrehozva!"]);
     } else {
@@ -76,5 +99,5 @@ if ($stmt) {
     echo json_encode(["status" => "error", "message" => "SQL előkészítés sikertelen."]);
 }
 
-$conn->close();
+$dbconn->close();
 ?>

@@ -73,3 +73,240 @@ FILES: Array
         )
 
 )
+POST: Array
+(
+)
+
+FILES: Array
+(
+)
+POST: Array
+(
+)
+
+FILES: Array
+(
+)
+POST: Array
+(
+)
+
+FILES: Array
+(
+)
+POST: Array
+(
+    [name] => asdasas
+    [price] => 123
+    [stair] => 12
+    [auction_end] => 2025-03-26T18:37
+    [fileCategory] => ruhák
+    [fileBrand] => asdas
+    [fileSize] => S
+    [fileCondition] => Új
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => Duna-Drava_Nemzeti_Park.pptx
+            [type] => application/vnd.openxmlformats-officedocument.presentationml.presentation
+            [tmp_name] => C:\xampp\tmp\php19B.tmp
+            [error] => 0
+            [size] => 1413258
+        )
+
+)
+POST: Array
+(
+    [name] => asdasd
+    [price] => 12
+    [stair] => 12
+    [auction_end] => 2025-03-26T18:45
+    [fileCategory] => ruhák
+    [fileBrand] => Nike
+    [fileSize] => S
+    [fileCondition] => Újszerű
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => rovid2.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php2816.tmp
+            [error] => 0
+            [size] => 86800
+        )
+
+)
+POST: Array
+(
+    [name] => asdasd
+    [price] => 12
+    [stair] => 12
+    [auction_end] => 2025-03-26T18:45
+    [fileCategory] => ruhák
+    [fileBrand] => Nike
+    [fileSize] => S
+    [fileCondition] => Újszerű
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => rovid2.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php495B.tmp
+            [error] => 0
+            [size] => 86800
+        )
+
+)
+POST: Array
+(
+    [name] => asdas
+    [price] => 12
+    [stair] => 1
+    [auction_end] => 2025-03-26T17:48
+    [fileCategory] => ruhák
+    [fileBrand] => Nike
+    [fileSize] => M
+    [fileCondition] => Nagyon használt
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => rovid1.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php3103.tmp
+            [error] => 0
+            [size] => 95928
+        )
+
+)
+POST: Array
+(
+    [name] => asdas
+    [price] => 12
+    [stair] => 1
+    [auction_end] => 2025-03-26T20:53
+    [fileCategory] => ruhák
+    [fileBrand] => Nike
+    [fileSize] => S
+    [fileCondition] => Újszerű
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => rovid1.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php4EA.tmp
+            [error] => 0
+            [size] => 95928
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => nagymarci.0218@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-03-26 15:43:58
+)
+POST: Array
+(
+    [name] => asdas
+    [price] => 12
+    [stair] => 1
+    [auction_end] => 2025-03-26T18:58
+    [fileCategory] => ruhák
+    [fileBrand] => Nike
+    [fileSize] => M
+    [fileCondition] => Újszerű
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => rovid1.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpFA88.tmp
+            [error] => 0
+            [size] => 95928
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => nagymarci.0218@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-03-26 15:43:58
+)
+POST: Array
+(
+    [name] => asdas
+    [price] => 12
+    [stair] => 1
+    [auction_end] => 2025-03-26T20:00
+    [fileCategory] => ruhák
+    [fileBrand] => asda
+    [fileSize] => S
+    [fileCondition] => Újszerű
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => rovid2.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpDE0E.tmp
+            [error] => 0
+            [size] => 86800
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => nagymarci.0218@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-03-26 15:43:58
+)
