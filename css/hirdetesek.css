@@ -1,0 +1,62 @@
+.product-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .product-image {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 5px;
+  }
+  
+  
+  .modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+  }
+  
+  .modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    width: 50%;
+  }
+  
+  .close {
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+  }
+  
+  .product-item button{
+    height: auto;
+    width: auto;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .editButton{
+    margin-left: auto;
+    margin-right: 10px;
+    background-color: white;
+    border-radius: 7px;
+    cursor: pointer;
+  }
+  
+  .deleteButton{
+    background-color: black;
+    color: white;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+  }

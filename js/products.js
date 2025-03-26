@@ -16,8 +16,8 @@ function loadUserProducts() {
                     productItem.innerHTML = `
                         <img src="uploads/${product.img_url}" alt="${product.name}" class="product-image">
                         <h3>${product.name}</h3>
-                        <button onclick="openEditModal(${product.id}, '${product.name}', '${product.img_url}', ${product.price}, '${product.description}', ${product.quantity}, '${product.size}', '${product.condition}')">Szerkesztés</button>
-                        <button onclick="deleteProduct(${product.id})">Törlés</button>
+                        <button class="editButton" onclick="openEditModal(${product.id}, '${product.name}', '${product.img_url}', ${product.price}, '${product.description}', ${product.quantity}, '${product.size}', '${product.condition}')">Szerkesztés</button>
+                        <button class="deleteButton" onclick="deleteProduct(${product.id})">Törlés</button>
                     `;
                     productList.appendChild(productItem);
                 });
@@ -36,7 +36,10 @@ function openEditModal(id, name, img, price, description, quantity, size, condit
     document.getElementById("edit-product-quantity").value = quantity;
     document.getElementById("edit-product-size").value = size;
     document.getElementById("edit-product-condition").value = condition;
-    document.getElementById("edit-product-image-preview").src = img;
+
+    const imgInput = "uploads/" + img;
+
+    document.getElementById("edit-product-image-preview").src = imgInput;
 
     document.getElementById("edit-product-modal").style.display = "block";
 }
