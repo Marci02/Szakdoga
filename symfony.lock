@@ -24,7 +24,7 @@
         ]
     },
     "symfony/flex": {
-        "version": "1.21",
+        "version": "1.22",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",

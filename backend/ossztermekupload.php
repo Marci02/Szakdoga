@@ -1,146 +1,135 @@
 <?php
-require_once __DIR__ . '/../connect.php';
 session_start();
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+header('Content-Type: application/json; charset=utf-8');
+require_once __DIR__ . '/../connect.php';
 
-header('Content-Type: application/json');
-
-if (isset($_FILES['fileInput'], $_POST['fileTitle'], $_POST['fileDesc'], $_POST['filePrice'], $_POST['fileCategory'], $_POST['fileBrand'], $_POST['fileCondition'])) {
-    
-    $fileTitle = trim($_POST['fileTitle']);
-    $fileDesc = trim($_POST['fileDesc']);
-    $filePrice = filter_var($_POST['filePrice'], FILTER_VALIDATE_FLOAT);
-    $fileCategory = trim($_POST['fileCategory']);
-    $fileBrand = trim($_POST['fileBrand']);
-    $fileCondition = trim($_POST['fileCondition']);
-    $fileSize = isset($_POST['fileSize']) ? trim($_POST['fileSize']) : null;
-    $userId = $_SESSION['user_id'] ?? null;
-
-    if (!$userId) {
-        echo json_encode(['message' => 'User is not logged in']);
-        exit;
-    }
-
-    if (empty($fileTitle) || empty($fileDesc) || $filePrice === false || empty($fileCategory) || empty($fileBrand) || empty($fileCondition)) {
-        echo json_encode(['message' => 'All fields are required and must be valid']);
-        exit;
-    }
-
-    // Adatok tisztítása
-    $fileTitle = htmlspecialchars($fileTitle, ENT_QUOTES, 'UTF-8');
-    $fileDesc = htmlspecialchars($fileDesc, ENT_QUOTES, 'UTF-8');
-    $fileCategory = htmlspecialchars($fileCategory, ENT_QUOTES, 'UTF-8');
-    $fileBrand = htmlspecialchars($fileBrand, ENT_QUOTES, 'UTF-8');
-    $fileCondition = htmlspecialchars($fileCondition, ENT_QUOTES, 'UTF-8');
-    if ($fileSize) {
-        $fileSize = htmlspecialchars($fileSize, ENT_QUOTES, 'UTF-8');
-    }
-
-    // Fájl feltöltés
-    $uploadDirectory = __DIR__ . '/../uploads/';
-    if (!is_dir($uploadDirectory)) {
-        mkdir($uploadDirectory, 0777, true);
-    }
-
-    $fileExtension = strtolower(pathinfo($_FILES['fileInput']['name'], PATHINFO_EXTENSION));
-    $uniqueFileName = time() . '_' . uniqid() . '.' . $fileExtension;
-    $targetFilePath = $uploadDirectory . $uniqueFileName;
-
-    $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
-    if (!in_array($fileExtension, $allowedTypes)) {
-        echo json_encode(['message' => 'Only image files are allowed (jpg, jpeg, png, gif)']);
-        exit;
-    }
-
-    if (move_uploaded_file($_FILES['fileInput']['tmp_name'], $targetFilePath)) {
-        $relativeFilePath = 'uploads/' . $uniqueFileName;
-
-        // Kép feltöltése az adatbázisba
-        $imageQuery = "INSERT INTO image (img_url) VALUES (?)";
-        $imageStmt = mysqli_prepare($dbconn, $imageQuery);
-        if ($imageStmt) {
-            mysqli_stmt_bind_param($imageStmt, "s", $relativeFilePath);
-            mysqli_stmt_execute($imageStmt);
-            $imageId = mysqli_insert_id($dbconn);
-            mysqli_stmt_close($imageStmt);
-        } else {
-            echo json_encode(['message' => 'Error inserting image: ' . mysqli_error($dbconn)]);
-            exit;
-        }
-
-        // Kategória ID ellenőrzése és beszúrása, ha nem létezik
-        $categoryId = null;
-        $categoryQuery = "SELECT id FROM category WHERE category_name = ?";
-        $categoryStmt = mysqli_prepare($dbconn, $categoryQuery);
-        if ($categoryStmt) {
-            mysqli_stmt_bind_param($categoryStmt, "s", $fileCategory);
-            mysqli_stmt_execute($categoryStmt);
-            mysqli_stmt_bind_result($categoryStmt, $categoryId);
-            mysqli_stmt_fetch($categoryStmt);
-            mysqli_stmt_close($categoryStmt);
-        }
-
-        if (!$categoryId) {
-            $insertCategoryQuery = "INSERT INTO category (category_name) VALUES (?)";
-            $insertCategoryStmt = mysqli_prepare($dbconn, $insertCategoryQuery);
-            if ($insertCategoryStmt) {
-                mysqli_stmt_bind_param($insertCategoryStmt, "s", $fileCategory);
-                mysqli_stmt_execute($insertCategoryStmt);
-                $categoryId = mysqli_insert_id($dbconn);
-                mysqli_stmt_close($insertCategoryStmt);
-            } else {
-                echo json_encode(['message' => 'Error inserting category: ' . mysqli_error($dbconn)]);
-                exit;
-            }
-        }
-
-        // Márka ID ellenőrzése és beszúrása, ha nem létezik
-        $brandId = null;
-        $brandQuery = "SELECT id FROM brand WHERE brand_name = ?";
-        $brandStmt = mysqli_prepare($dbconn, $brandQuery);
-        if ($brandStmt) {
-            mysqli_stmt_bind_param($brandStmt, "s", $fileBrand);
-            mysqli_stmt_execute($brandStmt);
-            mysqli_stmt_bind_result($brandStmt, $brandId);
-            mysqli_stmt_fetch($brandStmt);
-            mysqli_stmt_close($brandStmt);
-        }
-
-        if (!$brandId) {
-            $insertBrandQuery = "INSERT INTO brand (brand_name) VALUES (?)";
-            $insertBrandStmt = mysqli_prepare($dbconn, $insertBrandQuery);
-            if ($insertBrandStmt) {
-                mysqli_stmt_bind_param($insertBrandStmt, "s", $fileBrand);
-                mysqli_stmt_execute($insertBrandStmt);
-                $brandId = mysqli_insert_id($dbconn);
-                mysqli_stmt_close($insertBrandStmt);
-            } else {
-                echo json_encode(['message' => 'Error inserting brand: ' . mysqli_error($dbconn)]);
-                exit;
-            }
-        }
-
-        // Termék beszúrása az adatbázisba, beleértve az új mezőket
-        $productQuery = "INSERT INTO products (user_id, name, category_id, brand_id, price, description, image_id, uploaded_at, condition, size) 
-                         VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?)";
-
-        $productStmt = mysqli_prepare($dbconn, $productQuery);
-        if ($productStmt) {
-            mysqli_stmt_bind_param($productStmt, "isiiissss", $userId, $fileTitle, $categoryId, $brandId, $filePrice, $fileDesc, $imageId, $fileCondition, $fileSize);
-            if (mysqli_stmt_execute($productStmt)) {
-                echo json_encode(['message' => 'Product added successfully']);
-            } else {
-                echo json_encode(['message' => 'Error inserting product: ' . mysqli_stmt_error($productStmt)]);
-            }
-            mysqli_stmt_close($productStmt);
-        } else {
-            echo json_encode(['message' => 'Database error: ' . mysqli_error($dbconn)]);
-        }
-
-        mysqli_close($dbconn);
-    } else {
-        echo json_encode(['message' => 'Error uploading file']);
-    }
-} else {
-    echo json_encode(['message' => 'Invalid request']);
+// 🔹 Ellenőrizzük, hogy van-e bejelentkezett felhasználó
+if (!isset($_SESSION['user_id'])) {
+    echo json_encode(["success" => false, "message" => "Nincs bejelentkezett felhasználó"]);
+    exit;
 }
+
+$user_id = $_SESSION['user_id'];
+
+// Kötelező mezők ellenőrzése
+$required_fields = ['name', 'description', 'price', 'brand_id', 'condition', 'size', 'category_id'];
+foreach ($required_fields as $field) {
+    if (!isset($_POST[$field])) {
+        echo json_encode(["success" => false, "message" => "Hiányzó adat: $field"]);
+        exit;
+    }
+}
+
+$name = trim($_POST['name']);
+$description = trim($_POST['description']);
+$price = floatval($_POST['price']);
+$quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 1;
+$brand_name = trim($_POST['brand_id']);
+$condition = trim($_POST['condition']);
+$size = trim($_POST['size']);
+$category_name = trim($_POST['category_id']);
+
+$allowed_categories = ["ruhák", "cipők", "kiegészítők"];
+if (!in_array($category_name, $allowed_categories)) {
+    echo json_encode(["success" => false, "message" => "Érvénytelen kategória név"]);
+    exit;
+}
+
+// 🔹 Kategória ID lekérése vagy beszúrása
+$category_query = $dbconn->prepare("SELECT id FROM category WHERE category_name = ?");
+$category_query->bind_param("s", $category_name);
+$category_query->execute();
+$result = $category_query->get_result();
+
+if ($row = $result->fetch_assoc()) {
+    $category_id = $row['id'];
+} else {
+    $insert_category_query = $dbconn->prepare("INSERT INTO category (category_name) VALUES (?)");
+    $insert_category_query->bind_param("s", $category_name);
+    $insert_category_query->execute();
+    $category_id = $insert_category_query->insert_id;
+    $insert_category_query->close();
+}
+$category_query->close();
+
+// 🔹 Márka ID lekérése
+$brand_query = $dbconn->prepare("SELECT id FROM brand WHERE brand_name = ?");
+$brand_query->bind_param("s", $brand_name);
+$brand_query->execute();
+$result = $brand_query->get_result();
+
+if ($row = $result->fetch_assoc()) {
+    $brand_id = $row['id'];
+} else {
+    echo json_encode(["success" => false, "message" => "Érvénytelen márka"]);
+    exit;
+}
+$brand_query->close();
+
+// 🔹 Kép feltöltés
+$image_id = null;
+if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+    $allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+    $maxSize = 2 * 1024 * 1024; // 2MB
+
+    $file = $_FILES['image'];
+    
+    if (!in_array($file["type"], $allowedTypes)) {
+        echo json_encode(["success" => false, "message" => "Csak JPG, PNG vagy GIF formátum engedélyezett."]);
+        exit;
+    }
+
+    if ($file["size"] > $maxSize) {
+        echo json_encode(["success" => false, "message" => "A fájl mérete túl nagy (max. 2MB)."]);
+        exit;
+    }
+
+    // 🔹 Feltöltési könyvtár létrehozása, ha nem létezik
+    $uploadDir = __DIR__ . "/../uploads/";
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
+
+    // 🔹 Biztonságos fájlnév generálása (random hash)
+    $fileExtension = pathinfo($file["name"], PATHINFO_EXTENSION);
+    $fileName = "product_" . uniqid() . "." . $fileExtension;
+    $filePath = $uploadDir . $fileName;
+
+    if (!move_uploaded_file($file["tmp_name"], $filePath)) {
+        error_log("Fájl feltöltési hiba! Nem sikerült áthelyezni a fájlt: " . $file["tmp_name"] . " -> " . $filePath);
+        echo json_encode(["success" => false, "message" => "Nem sikerült a fájlt áthelyezni"]);
+        exit;
+    }
+
+    // 🔹 Kép elérési út mentése az adatbázisba
+    $img_url = $fileName;
+    $query = "INSERT INTO image (img_url) VALUES (?)";
+    $stmt = $dbconn->prepare($query);
+    $stmt->bind_param("s", $img_url);
+    if ($stmt->execute()) {
+        $image_id = $stmt->insert_id;
+    } else {
+        echo json_encode(["success" => false, "message" => "Kép adatbázisba mentése sikertelen"]);
+        exit;
+    }
+    $stmt->close();
+}
+
+// 🔹 Termék beszúrása az adatbázisba
+$query = "INSERT INTO products (user_id, name, description, price, quantity, brand_id, `condition`, size, category_id, image_id) 
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$stmt = $dbconn->prepare($query);
+$stmt->bind_param("issdiissii", $user_id, $name, $description, $price, $quantity, $brand_id, $condition, $size, $category_id, $image_id);
+
+if ($stmt->execute()) {
+    $productId = $stmt->insert_id;
+    echo json_encode(["success" => true, "message" => "Termék sikeresen feltöltve", "product_id" => $productId]);
+} else {
+    echo json_encode(["success" => false, "message" => "Adatbázis hiba: " . $dbconn->error]);
+}
+
+$stmt->close();
+$dbconn->close();
 ?>
