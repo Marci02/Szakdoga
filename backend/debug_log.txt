@@ -1,0 +1,75 @@
+POST: Array
+(
+    [name] => dwadw
+    [price] => 12312312
+    [stair] => 312312312
+    [auction_end] => 2025-03-11T16:18
+    [fileCategory] => ruhák
+    [fileBrand] => 123123
+    [fileSize] => S
+    [fileCondition] => Újszerű
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 12.jpg
+            [full_path] => 12.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php2068.tmp
+            [error] => 0
+            [size] => 105226
+        )
+
+)
+POST: Array
+(
+    [name] => dwadw
+    [price] => 21312
+    [stair] => 312312
+    [auction_end] => 2025-03-26T12:39
+    [fileCategory] => ruhák
+    [fileBrand] => 312312
+    [fileSize] => XS
+    [fileCondition] => Újszerű
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 10.jpg
+            [full_path] => 10.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpEBF6.tmp
+            [error] => 0
+            [size] => 108502
+        )
+
+)
+POST: Array
+(
+    [name] => dwadw
+    [price] => 21312
+    [stair] => 312312
+    [auction_end] => 2025-03-26T12:39
+    [fileCategory] => ruhák
+    [fileBrand] => 312312
+    [fileSize] => XS
+    [fileCondition] => Újszerű
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 10.jpg
+            [full_path] => 10.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpFF22.tmp
+            [error] => 0
+            [size] => 108502
+        )
+
+)

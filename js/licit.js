@@ -206,47 +206,57 @@ function updateFormBasedOnCategory() {
 
 // A fájl feltöltése és adatok küldése
 function DataUpload() {
-  const title = document.getElementById('fileTitle').value;
-  const desc = document.getElementById('fileDesc').value;
-  const price = document.getElementById('filePrice').value;
-  const bidStep = document.getElementById('fileBidStep').value;
-  const category = document.getElementById('fileCategory').value;
-  const brand = document.getElementById('fileBrand').value;
-  const bidEnd = document.getElementById('fileBidEnd').value;
-  const size = document.getElementById('fileSize') ? document.getElementById('fileSize').value : null;
-  const condition = document.getElementById('fileCondition') ? document.getElementById('fileCondition').value : null;
-
-  const fileInput = document.getElementById('fileInput').files[0]; // Az első fájl a kiválasztott fájl
-
-  // Formdata objektum készítése
   const formData = new FormData();
-  formData.append("fileTitle", title);
-  formData.append("fileDesc", desc);
-  formData.append("filePrice", price);
-  formData.append("fileBidStep", bidStep);
-  formData.append("fileCategory", category);
-  formData.append("fileBrand", brand);
-  formData.append("fileBidEnd", bidEnd);
-  if (size) formData.append("fileSize", size);
-  if (condition) formData.append("fileCondition", condition);
-  if (fileInput) formData.append("fileInput", fileInput); // A fájlt itt közvetlenül hozzáadjuk
+  
+  formData.append("name", document.getElementById("fileTitle").value);
+  formData.append("price", document.getElementById("filePrice").value);
+  formData.append("stair", document.getElementById("fileBidStep").value);
+  formData.append("auction_end", document.getElementById("fileBidEnd").value);
+  formData.append("fileCategory", document.getElementById("fileCategory").value);
+  formData.append("fileBrand", document.getElementById("fileBrand").value);
 
-  // POST kérelem küldése fetch-el
+  // Ha létezik méret és állapot, adjuk hozzá
+  const size = document.getElementById("fileSize");
+  if (size) formData.append("fileSize", size.value);
+
+  const condition = document.getElementById("fileCondition");
+  if (condition) formData.append("fileCondition", condition.value);
+
+  // 📌 Kép helyes beküldése (!!! NEM .value kell, hanem maga a fájl)
+  const fileInput = document.getElementById("fileInput");
+  if (fileInput.files.length > 0) {
+    formData.append("image", fileInput.files[0]);
+  } else {
+    console.error("❌ Nincs kiválasztott kép!");
+  }
+
+  // Debug: Kiírjuk, hogy mit küld el a fetch()
+  for (let pair of formData.entries()) {
+    console.log(`📤 ${pair[0]}:`, pair[1]);
+  }
+
+  // Fetch POST küldés
   fetch("backend/licitupload.php", {
     method: "POST",
-    body: formData,
+    body: formData, // ❗ NINCS Content-Type, mert a böngésző automatikusan beállítja
   })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Sikeres válasz:', data);
-    alert("A termék sikeresen feltöltve!");
-    closeUploadModal(); // Zárd be a modal-t a sikeres feltöltés után
-  })
-  .catch(error => {
-    console.error('Hiba történt:', error);
-    alert("Hiba történt a feltöltés során!");
-  });
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("✅ Sikeres válasz:", data);
+      if (data.status === "success") {
+        alert("✅ A termék sikeresen feltöltve!");
+        closeUploadModal();
+      } else {
+        alert("❌ Hiba: " + data.message);
+      }
+    })
+    .catch((error) => {
+      console.error("❌ Hiba történt:", error);
+      alert("Hiba történt a feltöltés során!");
+    });
 }
+
+
 
 
 // Feltöltés modal bezárása

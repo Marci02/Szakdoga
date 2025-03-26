@@ -3,6 +3,8 @@ require_once __DIR__ . '/../connect.php'; // Csatlakozás az adatbázishoz
 
 header("Content-Type: application/json");
 
+file_put_contents("debug_log.txt", "POST: " . print_r($_POST, true) . "\nFILES: " . print_r($_FILES, true), FILE_APPEND);
+
 // Ellenőrizzük, hogy POST kérés érkezett-e
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     echo json_encode(["status" => "error", "message" => "Érvénytelen kérés. Csak POST engedélyezett."]);
@@ -55,6 +57,8 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
         exit;
     }
 }
+
+
 
 // Adatok beszúrása az auction táblába
 $sql = "INSERT INTO auction (name, price, stair, image_id, uploaded_at, auction_start, auction_end, category, brand) 
