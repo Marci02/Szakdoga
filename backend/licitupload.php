@@ -18,8 +18,8 @@ $user_id = $_SESSION['user_id']; // Sessionből vesszük
 $name = trim($_POST['name']);
 $price = (int) $_POST['price'];
 $stair = (int) $_POST['stair'];
-$file_category = (int) $_POST['fileCategory'];
-$file_brand = (int) $_POST['fileBrand'];
+$category_id = (int) $_POST['fileCategory'];
+$brand_id = (int) $_POST['fileBrand'];
 $uploaded_at = date("Y-m-d H:i:s");
 $auction_start = $uploaded_at; // Az uploaded_at-tel azonos
 $auction_end = $_POST['auction_end']; // Ezt az űrlap küldi
@@ -82,13 +82,12 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
     }
 }
 
-
 // Adatok beszúrása az auction táblába
-$sql = "INSERT INTO auction (user_id, name, price, stair, image_id, uploaded_at, auction_start, auction_end) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO auction (user_id, name, price, stair, image_id, category_id, brand_id, uploaded_at, auction_start, auction_end) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $dbconn->prepare($sql);
 if ($stmt) {
-    $stmt->bind_param("isiiisss", $user_id, $name, $price, $stair, $image_id, $uploaded_at, $auction_start, $auction_end);
+    $stmt->bind_param("isiiiissss", $user_id, $name, $price, $stair, $image_id, $category_id, $brand_id, $uploaded_at, $auction_start, $auction_end);
     if ($stmt->execute()) {
         echo json_encode(["status" => "success", "message" => "Aukció sikeresen létrehozva!"]);
     } else {

@@ -72,7 +72,10 @@ CREATE TABLE `auction` (
   `image_id` int NOT NULL,
   `uploaded_at` datetime NOT NULL,
   `auction_start` datetime NOT NULL,
-  `auction_end` datetime NOT NULL
+  `auction_end` datetime NOT NULL,
+  `category_id` int NOT null,
+  `brand_id` int NOT NULL
+
 );
 
 ALTER TABLE `user` ADD FOREIGN KEY (`city_id`) REFERENCES `settlement` (`id`);
@@ -96,3 +99,7 @@ ALTER TABLE `products` ADD FOREIGN KEY (`image_id`) REFERENCES `image` (`id`);
 ALTER TABLE `auction` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 ALTER TABLE `auction` ADD FOREIGN KEY (`image_id`) REFERENCES `image` (`id`);
+
+ALTER TABLE `auction` ADD FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
+
+ALTER TABLE `auction` ADD FOREIGN KEY (`brand_id`) REFERENCES `brand` (`id`);
