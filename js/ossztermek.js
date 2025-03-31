@@ -162,9 +162,6 @@ function uploadFile() {
   });
 }
 
-
-
-
 document.addEventListener("DOMContentLoaded", fetchProducts);
 
 function fetchProducts() {
