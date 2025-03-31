@@ -271,3 +271,30 @@ nav.header-sticky {
 .dropdown:hover .dropdown-menu {
   display: block;
 }
+
+/*Main page*/
+html,
+body {
+  width: 100%;
+  overflow: hidden;
+  background: #22222a;
+  -webkit-font-smoothing: antialiased;
+  font-size: 0.88rem;
+  color: #bdbdd5;
+}
+
+.container {
+  display: flex;
+  margin-top: 100px;
+}
+
+.CartTitle{
+  align-items: center;
+}
+
+h5{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}

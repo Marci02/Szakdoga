@@ -85,9 +85,10 @@ a {
 }
 
 .container {
+  display: flex;
   height: 100vh;
   width: 100%;
-  color: black;
+  margin-top: 55px;
 }
 
 .content:nth-child(even) {
@@ -367,11 +368,6 @@ nav.header-sticky {
 /* Show the dropdown on hover */
 .dropdown:hover .dropdown-menu {
   display: block;
-}
-
-.container {
-  margin-top: 55px;
-  display: flex;
 }
 
 .sidebar-categories {
