@@ -97,9 +97,9 @@ function openUploadModal() {
     <!-- Kategória választó -->
     <select id="fileCategory" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;" onchange="updateFormBasedOnCategory()">
       <option value="" disabled selected>Kategória kiválasztása</option>
-      <option value="ruhák">Ruhák</option>
-      <option value="cipők">Cipők</option>
-      <option value="kiegészítők">Kiegészítők</option>
+      <option value="1">Ruhák</option>
+      <option value="2">Cipők</option>
+      <option value="3">Kiegészítők</option>
     </select>
     
     <!-- Dinamikus mezők itt fognak megjelenni -->
@@ -149,47 +149,43 @@ function openUploadModal() {
 
 // Kategória alapján a dinamikus mezők frissítése
 function updateFormBasedOnCategory() {
-  var category = document.getElementById("fileCategory").value;
-  var dynamicFields = document.getElementById("dynamicFields");
+  const category = document.getElementById("fileCategory").value;
+  const dynamicFields = document.getElementById("dynamicFields");
 
   // Töröljük az eddigi dinamikus mezőket
   dynamicFields.innerHTML = '';
 
   // Kategóriától függő mezők hozzáadása
-  if (category === "cipők") {
-    dynamicFields.innerHTML = `
-      <select id="fileSize" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-        <option value="" disabled selected>Válassz méretet</option>
-        <option value="35">35</option>
-        <option value="36">36</option>
-        <option value="37">37</option>
-        <option value="38">38</option>
-        <option value="39">39</option>
-        <option value="40">40</option>
-        <option value="41">41</option>
-        <option value="42">42</option>
-        <option value="43">43</option>
-        <option value="44">44</option>
-        <option value="45">45</option>
-        <option value="46">46</option>
-        <option value="47">47</option>
-        <option value="48">48</option>
-      </select>
-    `;
-  } else if (category === "ruhák") {
-    dynamicFields.innerHTML = `
-      <select id="fileSize" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
-        <option value="" disabled selected>Válassz méretet</option>
-        <option value="XS">XS</option>
-        <option value="S">S</option>
-        <option value="M">M</option>
-        <option value="L">L</option>
-        <option value="XL">XL</option>
-        <option value="XXL">XXL</option>
-      </select>
-    `;
-  } else if (category === "kiegészítők") {
-    dynamicFields.innerHTML = ''; // Itt nincs extra mező
+  switch (category) {
+    case "1": // Ruhák
+      dynamicFields.innerHTML += `
+        <select id="fileSize" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+          <option value="" disabled selected>Válassz méretet</option>
+          <option value="XS">XS</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+          <option value="XXL">XXL</option>
+        </select>
+      `;
+      break;
+
+    case "2": // Cipők
+      dynamicFields.innerHTML += `
+        <select id="fileSize" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
+          <option value="" disabled selected>Válassz méretet</option>
+          ${Array.from({ length: 14 }, (_, i) => {
+            const size = 35 + i;
+            return `<option value="${size}">${size}</option>`;
+          }).join('')}
+        </select>
+      `;
+      break;
+
+    case "3": // Kiegészítők
+      // Itt nincs méret mező, semmi extra nem kell
+      break;
   }
 
   // Állapot választó minden kategóriához
@@ -207,38 +203,43 @@ function updateFormBasedOnCategory() {
 // A fájl feltöltése és adatok küldése
 function DataUpload() {
   const formData = new FormData();
-  
-  formData.append("name", document.getElementById("fileTitle").value);
-  formData.append("price", document.getElementById("filePrice").value);
-  formData.append("stair", document.getElementById("fileBidStep").value);
-  formData.append("auction_end", document.getElementById("fileBidEnd").value);
-  formData.append("fileCategory", document.getElementById("fileCategory").value);
-  formData.append("fileBrand", document.getElementById("fileBrand").value);
 
-  // Ha létezik méret és állapot, adjuk hozzá
+  formData.append("name", document.getElementById("fileTitle").value);
+  formData.append("price", parseInt(document.getElementById("filePrice").value) || 0);
+  formData.append("stair", parseInt(document.getElementById("fileBidStep").value) || 0);
+  formData.append("auction_end", document.getElementById("fileBidEnd").value);
+  
+
+  // Kategória és brand mindig számként küldése
+  const category = document.getElementById("fileCategory").value;
+  formData.append("fileCategory", category ? parseInt(category) : 0);
+
+  const brand = document.getElementById("fileBrand").value;
+  formData.append("fileBrand", brand ? parseInt(brand) : 0); // ❗ Ha nincs kiválasztva, akkor 0 lesz
+
+  // Opcionális mezők
   const size = document.getElementById("fileSize");
   if (size) formData.append("fileSize", size.value);
 
   const condition = document.getElementById("fileCondition");
   if (condition) formData.append("fileCondition", condition.value);
 
-  // 📌 Kép helyes beküldése (!!! NEM .value kell, hanem maga a fájl)
+  // Kép hozzáadása, ha van
   const fileInput = document.getElementById("fileInput");
   if (fileInput.files.length > 0) {
     formData.append("image", fileInput.files[0]);
-  } else {
-    console.error("❌ Nincs kiválasztott kép!");
   }
 
-  // Debug: Kiírjuk, hogy mit küld el a fetch()
+  // Debug log
+  console.log("📤 Feltöltött adatok:");
   for (let pair of formData.entries()) {
-    console.log(`📤 ${pair[0]}:`, pair[1]);
+    console.log(`${pair[0]}:`, pair[1]);
   }
 
   // Fetch POST küldés
   fetch("backend/licitupload.php", {
     method: "POST",
-    body: formData, // ❗ NINCS Content-Type, mert a böngésző automatikusan beállítja
+    body: formData,
   })
     .then((response) => response.json())
     .then((data) => {
@@ -255,6 +256,8 @@ function DataUpload() {
       alert("Hiba történt a feltöltés során!");
     });
 }
+
+
 
 
 
