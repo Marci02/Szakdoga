@@ -75,7 +75,13 @@ CREATE TABLE `auction` (
   `auction_end` datetime NOT NULL,
   `category_id` int NOT null,
   `brand_id` int NOT NULL
+);
 
+CREATE TABLE `cart` (
+  `user_id` bigint NOT NULL,
+  `product_id` bigint NOT NULL,
+  `quantity` INT DEFAULT 1,
+   PRIMARY KEY (`user_id`, `product_id`)
 );
 
 ALTER TABLE `user` ADD FOREIGN KEY (`city_id`) REFERENCES `settlement` (`id`);
@@ -103,3 +109,26 @@ ALTER TABLE `auction` ADD FOREIGN KEY (`image_id`) REFERENCES `image` (`id`);
 ALTER TABLE `auction` ADD FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
 
 ALTER TABLE `auction` ADD FOREIGN KEY (`brand_id`) REFERENCES `brand` (`id`);
+
+ALTER TABLE `cart` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `cart` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
+INSERT INTO category (id, category_name) VALUES
+(1, 'Ruhák'),
+(2, 'Cipő'),
+(3, 'Kiegészítők');
+
+INSERT INTO brand (id, brand_name) VALUES
+(1, 'Nike'),
+(2, 'Adidas'),
+(3, 'New Balance'),
+(4, 'Balenciaga'),
+(5, 'Gucci'),
+(6, 'Bape'),
+(7, 'Palace'),
+(8, 'Supreme'),
+(9, 'Louis Vuitton'),
+(10, 'Dior'),
+(11, 'Ralph Lauren'),
+(12, 'Zara');

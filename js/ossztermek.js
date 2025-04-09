@@ -245,10 +245,25 @@ function openProductModal(card) {
 
 function addToCart(productId) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart.push(productId);
+
+  // Ellenőrizd, hogy benne van-e már a termék
+  const existingItemIndex = cart.findIndex(item => item.productId === productId);
+
+  if (existingItemIndex !== -1) {
+    // Már benne van → növeld a mennyiséget
+    cart[existingItemIndex].quantity += 1;
+  } else {
+    // Új elem
+    cart.push({ productId: productId, quantity: 1 });
+  }
+
   localStorage.setItem("cart", JSON.stringify(cart));
   alert("Termék hozzáadva a kosárhoz!");
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  fetchProducts();
+});
 
 function closeProductModal() {
   let modal = document.getElementById("productModal");

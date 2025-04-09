@@ -292,7 +292,7 @@ body {
 
 .listitems{
   display: flex;
-  justify-content: space-between;
+  gap: 300px;
   flex-direction: row;
   margin-right: 400px;
 }
@@ -301,4 +301,79 @@ h5{
   display: flex;
   align-items: center;
   padding: 10px 0;
+}
+
+.cartitems {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 100px;
+  gap: 20px;
+}
+
+/* Egy kosár elem */
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #2e2e38;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Termék info blokk (kép + név) */
+.cart-product {
+  display: flex;
+  gap: 15px;
+  flex: 2;
+}
+
+.cart-product img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.cart-product-name {
+  font-size: 1rem;
+  font-weight: 500;
+  color: white;
+}
+
+/* Ár */
+.cart-price {
+  flex: 1;
+  margin-right: 200px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* Mennyiség */
+.cart-quantity {
+  flex: 1;
+  text-align: center;
+}
+
+.cart-quantity input {
+  width: 50px;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+}
+
+/* Összegzés (egységár × darabszám) */
+.cart-total {
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+}
+
+.itemHeader{
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
