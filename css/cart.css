@@ -280,21 +280,25 @@ body {
   background: #22222a;
   -webkit-font-smoothing: antialiased;
   font-size: 0.88rem;
-  color: #bdbdd5;
+  color: white;
 }
 
-.container {
+.Titlecontainer {
   display: flex;
+  align-items: center;
+  flex-direction: column;
   margin-top: 100px;
 }
 
-.CartTitle{
-  align-items: center;
+.listitems{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-right: 400px;
 }
 
 h5{
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 10px 0;
 }
