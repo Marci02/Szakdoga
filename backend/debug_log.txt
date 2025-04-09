@@ -853,3 +853,319 @@ SESSION: Array
     [image] => 
     [created] => 2025-04-07 08:15:39
 )
+POST: Array
+(
+    [name] => 12341234
+    [price] => 342134
+    [stair] => 21341234
+    [auction_end] => 2025-04-09T12:10
+    [fileCategory] => 1
+    [fileBrand] => 1234
+    [fileSize] => S
+    [fileCondition] => Használt
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => tablet.png
+            [full_path] => tablet.png
+            [type] => image/png
+            [tmp_name] => C:\xampp\tmp\php82C7.tmp
+            [error] => 0
+            [size] => 1739281
+        )
+
+)
+
+SESSION: Array
+(
+)
+POST: Array
+(
+    [name] => 21341234
+    [price] => 342134
+    [stair] => 21341234
+    [auction_end] => 2025-04-09T12:11
+    [fileCategory] => 1
+    [fileBrand] => 12341234
+    [fileSize] => M
+    [fileCondition] => Újszerű
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => tablet.png
+            [full_path] => tablet.png
+            [type] => image/png
+            [tmp_name] => C:\xampp\tmp\phpE1C1.tmp
+            [error] => 0
+            [size] => 1739281
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Konderla
+    [lastname] => Sámuel
+    [email] => samuel@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-07 08:15:39
+)
+POST: Array
+(
+    [name] => dwadw
+    [price] => 21342134
+    [stair] => 21341234
+    [auction_end] => 2025-04-09T12:13
+    [fileCategory] => 2
+    [fileBrand] => 21341234
+    [fileSize] => 45
+    [fileCondition] => Újszerű
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => tablet.png
+            [full_path] => tablet.png
+            [type] => image/png
+            [tmp_name] => C:\xampp\tmp\php24F0.tmp
+            [error] => 0
+            [size] => 1739281
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Konderla
+    [lastname] => Sámuel
+    [email] => samuel@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-07 08:15:39
+)
+POST: Array
+(
+    [name] => 41234
+    [price] => 1234123
+    [stair] => 42134
+    [auction_end] => 2025-04-09T12:13
+    [fileCategory] => 1
+    [fileBrand] => 12341234
+    [fileSize] => S
+    [fileCondition] => Új
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => tablet.png
+            [full_path] => tablet.png
+            [type] => image/png
+            [tmp_name] => C:\xampp\tmp\php5AA7.tmp
+            [error] => 0
+            [size] => 1739281
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Konderla
+    [lastname] => Sámuel
+    [email] => samuel@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-07 08:15:39
+)
+POST: Array
+(
+    [name] => 41234
+    [price] => 2134123
+    [stair] => 42134123
+    [auction_end] => 2025-04-09T12:13
+    [fileCategory] => 1
+    [fileBrand] => 12341234
+    [fileSize] => S
+    [fileCondition] => Új
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => tablet.png
+            [full_path] => tablet.png
+            [type] => image/png
+            [tmp_name] => C:\xampp\tmp\phpBA5C.tmp
+            [error] => 0
+            [size] => 1739281
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Konderla
+    [lastname] => Sámuel
+    [email] => samuel@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-07 08:15:39
+)
+POST: Array
+(
+    [name] => 3123
+    [price] => 123123
+    [stair] => 123123
+    [auction_end] => 2025-04-09T12:16
+    [fileCategory] => 1
+    [fileBrand] => 312312
+    [fileSize] => M
+    [fileCondition] => Használt
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => tablet.png
+            [full_path] => tablet.png
+            [type] => image/png
+            [tmp_name] => C:\xampp\tmp\php3B7A.tmp
+            [error] => 0
+            [size] => 1739281
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Konderla
+    [lastname] => Sámuel
+    [email] => samuel@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-07 08:15:39
+)
+POST: Array
+(
+    [name] => dwawd
+    [price] => 123123
+    [stair] => 123123
+    [auction_end] => 2025-04-09T12:22
+    [fileCategory] => 1
+    [fileBrand] => 12312
+    [fileSize] => S
+    [fileCondition] => Újszerű
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => tablet.png
+            [full_path] => tablet.png
+            [type] => image/png
+            [tmp_name] => C:\xampp\tmp\php248B.tmp
+            [error] => 0
+            [size] => 1739281
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Konderla
+    [lastname] => Sámuel
+    [email] => samuel@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-07 08:15:39
+)
+POST: Array
+(
+    [name] => 213123
+    [price] => 123123
+    [stair] => 123123
+    [auction_end] => 2025-04-09T12:26
+    [fileCategory] => 1
+    [fileBrand] => 123312
+    [fileSize] => M
+    [fileCondition] => Használt
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => tablet.png
+            [full_path] => tablet.png
+            [type] => image/png
+            [tmp_name] => C:\xampp\tmp\phpBB54.tmp
+            [error] => 0
+            [size] => 1739281
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Konderla
+    [lastname] => Sámuel
+    [email] => samuel@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-07 08:15:39
+)
