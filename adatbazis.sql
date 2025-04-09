@@ -74,8 +74,8 @@ CREATE TABLE `auction` (
   `auction_start` datetime NOT NULL,
   `auction_end` datetime NOT NULL,
   `category_id` int NOT null,
-  `brand_id` int NOT NULL
-);
+  `brand_id` int NOT NULL,
+  `size` varchar(255) NOT NULL
 
 CREATE TABLE `cart` (
   `user_id` bigint NOT NULL,
@@ -110,10 +110,6 @@ ALTER TABLE `auction` ADD FOREIGN KEY (`category_id`) REFERENCES `category` (`id
 
 ALTER TABLE `auction` ADD FOREIGN KEY (`brand_id`) REFERENCES `brand` (`id`);
 
-ALTER TABLE `cart` ADD FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
-
-ALTER TABLE `cart` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
-
 INSERT INTO category (id, category_name) VALUES
 (1, 'Ruhák'),
 (2, 'Cipő'),
@@ -132,3 +128,5 @@ INSERT INTO brand (id, brand_name) VALUES
 (10, 'Dior'),
 (11, 'Ralph Lauren'),
 (12, 'Zara');
+
+
