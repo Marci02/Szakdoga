@@ -390,6 +390,81 @@ function startCountdown(bidEndTime, productTitle, productCard) {
   }, 1000);
 }
 
+function fetchAllAuctions() {
+  fetch("backend/licitlekero.php")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("🎯 Aukciók lekérve:", data);
+
+      if (data.status === "success" && data.data.length > 0) {
+        const productList = document.querySelector(".product-list");
+        productList.innerHTML = ""; // Előző elemek törlése, ha újra betölt
+
+        data.data.forEach((auction) => {
+          const card = document.createElement("div");
+          card.className = "product-card";
+          card.style.borderRadius = "15px";
+          card.style.boxShadow = "0 10px 20px rgba(0, 0, 0, 0.1)";
+          card.style.marginBottom = "20px";
+          card.style.backgroundColor = "#fff";
+          card.style.overflow = "hidden";
+          card.style.cursor = "pointer";
+          card.style.transition = "transform 0.3s ease-in-out";
+
+          card.addEventListener("mouseover", function () {
+            card.style.transform = "scale(1.05)";
+          });
+          card.addEventListener("mouseout", function () {
+            card.style.transform = "scale(1)";
+          });
+
+          card.innerHTML = `
+            <h3 style="font-size: 1.4em; font-weight: bold; color: #333; text-align: center; margin-top: 10px;">${auction.name}</h3>
+            <div style="text-align: center; margin-bottom: 15px;">
+              <img src="${auction.img_url}" alt="${auction.name}" class="product-image" style="width: 100%; height: 200px; object-fit: cover; border-radius: 15px;">
+            </div>
+            <div style="text-align: left">
+              <div style="font-size: 1em; font-weight: bold; color: #555; margin-top: 10px;">
+                <p><strong>Ár:</strong> ${auction.price} Ft</p>
+              </div>
+              <div class="product-info">
+                <p><strong>Licit lépcső:</strong> ${auction.stair} Ft</p>
+                <p><strong>Méret:</strong> ${auction.size || 'N/A'}</p>
+                <p><strong>Állapot:</strong> ${auction.condition || 'N/A'}</p>
+                <p><strong>Márka:</strong> ${auction.brand_name || 'N/A'}</p>
+                <p><strong>Kategória:</strong> ${auction.category_name || 'N/A'}</p>
+              </div>
+              <div style="font-size: 1em; color: #e74c3c; margin-top: 15px;">
+                <p><strong>Licit vége:</strong> <span class="countdown" id="countdown-${auction.auction_id}">Számolás...</span></p>
+              </div>
+            </div>
+          `;
+
+          
+
+          productList.appendChild(card);
+
+          // Ha van countdown funkciód
+          if (typeof startCountdown === "function") {
+            startCountdown(auction.auction_end, auction.auction_id, card);
+          }
+        });
+      } else {
+        console.warn("❗ Nincsenek aukciók.");
+      }
+    })
+    .catch((error) => {
+      console.error("❌ Hiba az aukciók lekérésekor:", error);
+    });
+}
+
+// Indítás oldalbetöltéskor
+window.addEventListener("DOMContentLoaded", function () {
+  console.log("🔄 Oldal betöltve, aukciók lekérése...");
+  fetchAllAuctions();
+});
+
+
 
 
 
