@@ -1,6 +1,8 @@
 <?php
 header("Content-Type: application/json");
-require_once '..\..\connect.php'; // vagy ide jön a csatlakozásod
+
+// Csatlakozás beolvasása
+require_once __DIR__ . '/../connect.php'; // Ezt igazítsd a te mappastruktúrád szerint, ha szükséges
 
 $sql = "
 SELECT 
@@ -10,7 +12,7 @@ SELECT
     a.stair,
     a.auction_end,
     a.size,
-    a.condition,
+    
     i.img_url,
     b.brand_name,
     c.category_name
@@ -21,14 +23,19 @@ LEFT JOIN category c ON a.category_id = c.id
 ORDER BY a.uploaded_at DESC
 ";
 
-$result = $conn->query($sql);
+$result = $dbconn->query($sql);
 
 if ($result->num_rows > 0) {
     $auctions = [];
 
     while ($row = $result->fetch_assoc()) {
+        // Kép elérési út korrekció
+        if (!empty($row['img_url'])) {
+            $row['img_url'] = "uploads/" . $row['img_url']; // EZT HASZNÁLD
+        }
         $auctions[] = $row;
     }
+    
 
     echo json_encode([
         "status" => "success",
