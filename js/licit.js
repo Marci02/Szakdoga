@@ -440,8 +440,6 @@ function fetchAllAuctions() {
             </div>
           `;
 
-          
-
           productList.appendChild(card);
 
           // Ha van countdown funkciód
@@ -464,6 +462,8 @@ window.addEventListener("DOMContentLoaded", function () {
   fetchAllAuctions();
 });
 
+// ❗ Azonnali meghívás is, ha más komponensből dinamikusan töltötted be
+fetchAllAuctions();
 
 
 
