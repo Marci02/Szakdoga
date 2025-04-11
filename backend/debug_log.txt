@@ -1444,3 +1444,44 @@ SESSION: Array
     [image] => 
     [created] => 2025-04-07 08:15:39
 )
+POST: Array
+(
+    [name] => adsdasdas
+    [price] => 123
+    [stair] => 12
+    [auction_end] => 2025-04-11T15:49
+    [fileCategory] => 1
+    [fileBrand] => NaN
+    [fileSize] => M
+    [fileCondition] => Használt
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => default_profile.jpg
+            [full_path] => default_profile.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php5357.tmp
+            [error] => 0
+            [size] => 17436
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)

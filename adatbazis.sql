@@ -76,6 +76,7 @@ CREATE TABLE `auction` (
   `category_id` int NOT null,
   `brand_id` int NOT NULL,
   `size` varchar(255) NOT NULL
+);
 
 CREATE TABLE `cart` (
   `user_id` bigint NOT NULL,
