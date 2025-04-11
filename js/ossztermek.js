@@ -115,6 +115,7 @@ function closeUploadModal() {
   }, 300);
 }
 
+
 function uploadFile() {
   const fileInput = document.querySelector("#fileInput");
   const fileTitle = document.querySelector("#fileTitle").value;
@@ -245,6 +246,26 @@ function openProductModal(card) {
 
 function addToCart(productId) {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  fetch("backend/kosarhozad.php", {
+    method: "POST",
+    body: formData
+})
+.then(response => response.json())
+.then(data => {
+    console.log("Szerver válasza:", data);
+    if (data.success) {
+        alert("Sikeres feltöltés!");
+        closeUploadModal();
+        fetchProducts();
+    } else {
+        alert("Hiba: " + data.message);
+    }
+})
+.catch(error => {
+    console.error("Hiba a feltöltés során:", error);
+    alert("Hiba történt a fájl feltöltésekor.");
+});
 
   // Ellenőrizd, hogy benne van-e már a termék
   const existingItemIndex = cart.findIndex(item => item.productId === productId);
