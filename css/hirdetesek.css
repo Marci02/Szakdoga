@@ -211,3 +211,17 @@ label {
 .modal.show {
   display: flex;
 }
+
+@media screen and (max-width: 700px){
+  .product-item{
+    font-size: small;
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .modal-content{
+    max-height: 80vh;
+    overflow-y: auto;
+    margin-top: 0;
+  }
+}

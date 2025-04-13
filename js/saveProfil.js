@@ -129,8 +129,52 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Kijelentkezés kezelése
-    document.getElementById("logoutButton").addEventListener("click", () => {
-        fetch("backend/logout.php")
-            .then(() => window.location.href = "index.html");
+    document.getElementById("saveAddress").addEventListener("click", function() {
+        const postcode = document.getElementById("postcode").value;
+        const city = document.getElementById("city").value;
+        const county = document.getElementById("county").value;
+        const street = document.getElementById("street_address").value;
+        const houseNumber = document.getElementById("house_number").value;
+    
+        // Ellenőrizzük, hogy minden mező ki van-e töltve
+        if (!postcode || !city || !county || !street || !houseNumber) {
+            alert("Kérlek, töltsd ki az összes mezőt!");
+            return;
+        }
+    
+        fetch("backend/update_address.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                postcode: postcode,
+                city: city,
+                county: county,
+                street_address: street,
+                house_number: houseNumber
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Cím sikeresen frissítve!");
+            } else {
+                alert("Hiba történt: " + data.message);
+            }
+        })
+        .catch(error => console.error("Hálózati hiba:", error));
+    });
+
+    // Kijelentkezés kezelése
+    document.addEventListener("DOMContentLoaded", () => {
+        const logoutButtons = document.querySelectorAll(".logoutButton");
+    
+        logoutButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                fetch("backend/logout.php")
+                    .then(() => window.location.href = "index.html");
+            });
+        });
     });
 });
