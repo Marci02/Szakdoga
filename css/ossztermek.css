@@ -229,6 +229,7 @@ nav.header-sticky {
   width: 15%;
   background-color: #f8f9fa;
   padding: 20px;
+  height: 100%;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
 }
@@ -370,21 +371,6 @@ nav.header-sticky {
   display: block;
 }
 
-.sidebar-categories {
-  width: 15%;
-  background-color: #f8f9fa;
-  padding: 20px;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-}
-
-.sidebar-categories a {
-  text-decoration: none;
-  color: #333;
-  display: block;
-  padding: 10px 0;
-}
-
 .product-list {
   width: 90%;
   display: flex;
@@ -478,6 +464,71 @@ nav.header-sticky {
   display: none;
 }
 
+@media screen and (max-width: 1024px) {
+  .header {
+    padding: 1rem 3rem;
+    text-align: center;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #22222a;
+    transition: 0.4s;
+    padding: 1.3rem 0;
+    z-index: 10;
+    margin: 0;
+  }
+
+  .sidebar ul {
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .sidebar ul li {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .sidebar-categories {
+    width: 15%;
+    background-color: #f8f9fa;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    top: 60px; 
+    left: 0;
+    height: auto;
+    padding-top: 20px;
+  }
+  
+  .sidebar-categories a{
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 10px 0;
+  }
+
+  .sidebar-categories ul {
+    display: block; 
+  }
+
+  .sidebar-categories ul li a {
+    padding: 15px 10px;
+    font-size: 1rem;
+  }
+
+  .product-list{
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .content {
+    margin-left: 0;
+    padding: 10px;
+  }
+}
+
 @media screen and (max-width: 900px) {
   .header {
     padding: 1rem 3rem;
@@ -507,17 +558,17 @@ nav.header-sticky {
   }
 
   .sidebar-categories {
-    top: 60px; /* A navbar magasságához igazítva */
+    top: 60px; 
     left: 0;
-    width: 100%; /* Változtassuk meg, hogy a teljes szélességben legyen */
-    height: auto;
+    width: 50%; 
+    height: 100%;
     background-color: #f4f4f4;
     padding-top: 20px;
+    padding-bottom: none;
   }
 
-  /* Flexbox helyett, a sidebar kategóriák elemei egymás alatt */
   .sidebar-categories ul {
-    display: block; /* Ne használjunk flexboxot, hanem blokk szintű elemeket használjunk */
+    display: block; 
   }
 
   .sidebar-categories ul li a {
@@ -526,64 +577,7 @@ nav.header-sticky {
   }
 
   .product-list{
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .content {
-    margin-left: 0;
-    padding: 10px;
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  .header {
-    padding: 1rem 3rem;
-    text-align: center;
-  }
-
-  .nav {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #22222a;
-    transition: 0.4s;
-    padding: 1.3rem 0;
-    z-index: 10;
-    margin: 0;
-  }
-
-  .sidebar ul {
-    text-align: center;
-    padding-left: 0;
-  }
-
-  .sidebar ul li {
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  .sidebar-categories {
-    top: 60px; /* A navbar magasságához igazítva */
-    left: 0;
-    width: 15%; /* Változtassuk meg, hogy a teljes szélességben legyen */
-    height: auto;
-    background-color: #f4f4f4;
-    padding-top: 20px;
-  }
-
-  /* Flexbox helyett, a sidebar kategóriák elemei egymás alatt */
-  .sidebar-categories ul {
-    display: block; /* Ne használjunk flexboxot, hanem blokk szintű elemeket használjunk */
-  }
-
-  .sidebar-categories ul li a {
-    padding: 15px 10px;
-    font-size: 1rem;
-  }
-
-  .product-list{
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
   }
 
   .content {
