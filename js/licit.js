@@ -252,10 +252,6 @@ function DataUpload() {
     });
 }
 
-
-
-
-
 // Feltöltés modal bezárása
 function closeUploadModal() {
   var modal = document.getElementById("uploadModal");

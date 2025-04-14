@@ -80,13 +80,6 @@ CREATE TABLE `auction` (
   `condition` varchar(255) NOT NULL
 );
 
-CREATE TABLE `cart` (
-  `user_id` bigint NOT NULL,
-  `product_id` bigint NOT NULL,
-  `quantity` INT DEFAULT 1,
-   PRIMARY KEY (`user_id`, `product_id`)
-);
-
 ALTER TABLE `user` ADD FOREIGN KEY (`city_id`) REFERENCES `settlement` (`id`);
 
 ALTER TABLE `settlement` ADD FOREIGN KEY (`county_id`) REFERENCES `counties` (`id`);

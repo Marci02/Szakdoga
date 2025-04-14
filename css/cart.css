@@ -276,8 +276,8 @@ nav.header-sticky {
 html,
 body {
   width: 100%;
-  overflow: hidden;
   background: #22222a;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   font-size: 0.88rem;
   color: white;
