@@ -359,6 +359,18 @@ nav.header-sticky {
   }
 }
 
+ @media (max-width: 768px) {
+    #uploadModal {
+      width: 90%;
+      padding: 15px;
+      max-height: 75vh;
+    }
+    #fileCategory, #fileCondition, #fileSize, #fileBrand, #fileDesc {
+      font-size: 0.9em;
+    }
+  }
+
+  
 
 
 .upload-button {

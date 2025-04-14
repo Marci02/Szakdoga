@@ -69,7 +69,8 @@ function openUploadModal() {
   modal.style.top = "50%";
   modal.style.left = "50%";
   modal.style.transform = "translate(-50%, -50%)";
-  modal.style.width = "400px";  // Növelt szélesség
+  modal.style.width = "90%";  // Reszponzív szélesség (90% a képernyő szélességéből)
+  modal.style.maxWidth = "600px"; // Maximális szélesség (600px)
   modal.style.padding = "30px";  // Növelt padding
   modal.style.backgroundColor = "#fff";
   modal.style.boxShadow = "0 5px 15px rgba(0, 0, 0, 0.3)";
@@ -78,12 +79,12 @@ function openUploadModal() {
   modal.style.zIndex = "1000";
   modal.style.textAlign = "center";
   modal.style.display = "block"; // Megjelenítés
+  modal.style.overflowY = "auto";
 
   var modalContent = document.createElement("div");
   modalContent.innerHTML = `
     <h2 style="font-size: 1.8em; font-weight: bold; color: #222; margin-bottom: 20px;">Termék feltöltése</h2>
 
-    <!-- Input mezők és textarea -->
     <input type="text" id="fileTitle" placeholder="Termék címe" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
     
     <input type="file" id="fileInput" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
@@ -94,7 +95,6 @@ function openUploadModal() {
     
     <input type="number" id="fileBidStep" placeholder="Licit lépcső (Ft)" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
     
-    <!-- Kategória választó -->
     <select id="fileCategory" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;" onchange="updateFormBasedOnCategory()">
       <option value="" disabled selected>Kategória kiválasztása</option>
       <option value="1">Ruhák</option>
@@ -102,25 +102,21 @@ function openUploadModal() {
       <option value="3">Kiegészítők</option>
     </select>
     
-    <!-- Dinamikus mezők itt fognak megjelenni -->
     <div id="dynamicFields"></div>
     
     <input type="text" id="fileBrand" placeholder="Márka" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
     
-    <!-- Licit vége mező -->
     <input type="datetime-local" id="fileBidEnd" style="width: 100%; padding: 10px; margin-bottom: 25px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;" placeholder="Licit vége">
     
-    <!-- Gombok -->
-    <div style="display: flex; justify-content: space-between;">
-      <button onclick="DataUpload()" style="background-color: #22222a; color: white; padding: 12px 20px; border-radius: 8px; border: none; font-size: 16px; width: 48%; cursor: pointer; transition: background-color 0.3s ease;">
+    <div style="display: flex; flex-direction: column; gap: 10px; justify-content: center;">
+      <button onclick="DataUpload()" style="background-color: #22222a; color: white; padding: 12px 20px; border-radius: 8px; border: none; font-size: 16px; cursor: pointer; transition: background-color 0.3s ease;">
         Feltöltés
       </button>
       
-      <button onclick="closeUploadModal()" style="background-color: #ecf0f1; color: #333; padding: 12px 20px; border-radius: 8px; border: 1px solid #ddd; font-size: 16px; width: 48%; cursor: pointer; transition: background-color 0.3s ease;">
+      <button onclick="closeUploadModal()" style="background-color: #ecf0f1; color: #333; padding: 12px 20px; border-radius: 8px; border: 1px solid #ddd; font-size: 16px; cursor: pointer; transition: background-color 0.3s ease;">
         Mégse
       </button>
     </div>
-
   `;
 
   modal.appendChild(modalContent);
@@ -147,15 +143,12 @@ function openUploadModal() {
   }, 50);
 }
 
-// Kategória alapján a dinamikus mezők frissítése
 function updateFormBasedOnCategory() {
   const category = document.getElementById("fileCategory").value;
   const dynamicFields = document.getElementById("dynamicFields");
 
-  // Töröljük az eddigi dinamikus mezőket
   dynamicFields.innerHTML = '';
 
-  // Kategóriától függő mezők hozzáadása
   switch (category) {
     case "1": // Ruhák
       dynamicFields.innerHTML += `
@@ -184,11 +177,9 @@ function updateFormBasedOnCategory() {
       break;
 
     case "3": // Kiegészítők
-      // Itt nincs méret mező, semmi extra nem kell
       break;
   }
 
-  // Állapot választó minden kategóriához
   dynamicFields.innerHTML += `
     <select id="fileCondition" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em;">
       <option value="" disabled selected>Válassz állapotot</option>
