@@ -12,7 +12,8 @@ SELECT
     a.stair,
     a.auction_end,
     a.size,
-    
+    a.condition,
+    a.description,
     i.img_url,
     b.brand_name,
     c.category_name

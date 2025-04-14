@@ -10,7 +10,7 @@ function closeNav() {
 
 // Sticky navigáció
 function stickyNav() {
-  var headerHeight = document.querySelector("#about").offsetHeight / 2;
+  var headerHeight = document.querySelector(".container").offsetHeight / 2;
   var navbar = document.querySelector("nav");
   var scrollValue = window.scrollY;
 
@@ -204,59 +204,53 @@ function updateFormBasedOnCategory() {
 function DataUpload() {
   const formData = new FormData();
 
-  formData.append("name", document.getElementById("fileTitle").value);
-  formData.append("price", parseInt(document.getElementById("filePrice").value) || 0);
-  formData.append("stair", parseInt(document.getElementById("fileBidStep").value) || 0);
-  formData.append("auction_end", document.getElementById("fileBidEnd").value);
-  
-
-  // Kategória és brand mindig számként küldése
+  const name = document.getElementById("fileTitle").value;
+  const price = document.getElementById("filePrice").value;
+  const stair = document.getElementById("fileBidStep").value;
   const category = document.getElementById("fileCategory").value;
-  formData.append("fileCategory", category ? parseInt(category) : 0);
-
   const brand = document.getElementById("fileBrand").value;
-  formData.append("fileBrand", brand ? parseInt(brand) : 0); // ❗ Ha nincs kiválasztva, akkor 0 lesz
+  const auction_end = document.getElementById("fileBidEnd").value;
+  const image = document.getElementById("fileInput").files[0];
+  const conditionInput = document.getElementById("fileCondition");
+  const condition = conditionInput ? conditionInput.value : "";
+  const sizeInput = document.getElementById("fileSize"); // ha van ilyen
+  const size = sizeInput ? sizeInput.value : "";
+  const desc = document.getElementById("fileDesc").value;
 
-  // Opcionális mezők
-  const size = document.getElementById("fileSize");
-  if (size) formData.append("fileSize", size.value);
-
-  const condition = document.getElementById("fileCondition");
-  if (condition) formData.append("fileCondition", condition.value);
-
-  // Kép hozzáadása, ha van
-  const fileInput = document.getElementById("fileInput");
-  if (fileInput.files.length > 0) {
-    formData.append("image", fileInput.files[0]);
+  formData.append("name", name);
+  formData.append("price", price);
+  formData.append("stair", stair);
+  formData.append("fileCategory", category);
+  formData.append("fileBrand", brand);
+  formData.append("auction_end", auction_end);
+  formData.append("fileSize", size);
+  formData.append("fileCondition", condition);
+  formData.append("fileDesc", desc);
+  if (image) {
+    formData.append("image", image);
   }
 
-  // Debug log
-  console.log("📤 Feltöltött adatok:");
-  for (let pair of formData.entries()) {
-    console.log(`${pair[0]}:`, pair[1]);
-  }
-
-  // Fetch POST küldés
   fetch("backend/licitupload.php", {
     method: "POST",
     body: formData,
   })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("✅ Sikeres válasz:", data);
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
       if (data.status === "success") {
-        alert("✅ A termék sikeresen feltöltve!");
+        alert("Sikeres feltöltés!");
         closeUploadModal();
       } else {
-        alert("❌ Hiba: " + data.message);
+        alert("Hiba: " + data.message);
+        if (data.missing_fields) {
+          console.warn("Hiányzó mezők:", data.missing_fields);
+        }
       }
     })
-    .catch((error) => {
-      console.error("❌ Hiba történt:", error);
-      alert("Hiba történt a feltöltés során!");
+    .catch(error => {
+      console.error("Hiba a feltöltés során:", error);
     });
 }
-
 
 
 
@@ -279,84 +273,6 @@ function closeUploadModal() {
     if (overlay) overlay.remove();
     document.body.style.overflow = "auto";
   }, 300);
-}
-
-
-
-
-function uploadFile() {
-  var fileTitle = document.getElementById("fileTitle").value;
-  var fileDesc = document.getElementById("fileDesc").value;
-  var fileInput = document.getElementById("fileInput").files[0];
-  var productPrice = document.getElementById("filePrice").value;
-  var bidStep = document.getElementById("fileBidStep").value;
-  var fileSize = document.getElementById("fileSize") ? document.getElementById("fileSize").value : "";
-  var fileCondition = document.getElementById("fileCondition") ? document.getElementById("fileCondition").value : "";
-  var fileBrand = document.getElementById("fileBrand").value;
-  var bidEndTime = document.getElementById("fileBidEnd").value;
-
-
-
-  if (fileTitle && fileDesc && fileInput && productPrice && bidStep && bidEndTime) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-          var productList = document.querySelector(".product-list");
-
-          if (productList) {
-              var productCard = document.createElement("div");
-              productCard.className = "product-card";
-              productCard.style.borderRadius = "15px";
-              productCard.style.boxShadow = "0 10px 20px rgba(0, 0, 0, 0.1)";
-              productCard.style.marginBottom = "20px";
-              productCard.style.backgroundColor = "#fff";
-              productCard.style.overflow = "hidden";
-              productCard.style.cursor = "pointer";
-              productCard.style.transition = "transform 0.3s ease-in-out";
-              productCard.addEventListener("mouseover", function() {
-                  productCard.style.transform = "scale(1.05)";
-              });
-              productCard.addEventListener("mouseout", function() {
-                  productCard.style.transform = "scale(1)";
-              });
-
-              productCard.innerHTML = `
-                  <h3 style="font-size: 1.4em; font-weight: bold; color: #333; text-align: center; margin-top: 10px; ">${fileTitle}</h3>
-                  <div style="text-align: center; margin-bottom: 15px;">
-                      <img src="${e.target.result}" alt="${fileTitle}" class="product-image" style="width: 100%; height: 200px; object-fit: cover; border-radius: 15px;">
-                  </div>
-                  <div style="text-align: left">
-                  <div style="font-size: 1em; font-weight: bold; color: #555; margin-top: 10px;">
-                      <p><strong>Ár:</strong> ${productPrice} Ft</p>
-                  </div>
-                  <div class="product-info">
-                      <p><strong>Licit lépcső:</strong> ${bidStep} Ft</p>
-                      <p><strong>Méret:</strong> ${fileSize || 'N/A'}</p>
-                      <p><strong>Állapot:</strong> ${fileCondition || 'N/A'}</p>
-                      <p><strong>Márka:</strong> ${fileBrand || 'N/A'}</p>
-                  </div>
-                  <div style="font-size: 1em; color: #e74c3c; margin-top: 15px;">
-                      <p><strong>Licit vége:</strong> <span class="countdown" id="countdown-${fileTitle}">Számolás...</span></p>
-                  </div>
-                  </div>
-              `;
-
-              productCard.addEventListener("click", function () {
-                  if (productCard.style.pointerEvents !== 'none') {
-                      showProductDetails(fileTitle, fileDesc, e.target.result, productPrice, bidStep, fileSize, fileCondition, fileBrand);
-                  }
-              });
-
-              productList.insertBefore(productCard, productList.firstChild);
-              closeUploadModal();
-              startCountdown(bidEndTime, fileTitle, productCard);
-          } else {
-              console.error("Nem található .product-list elem!");
-          }
-      };
-      reader.readAsDataURL(fileInput);
-  } else {
-      alert("Kérjük, töltse ki az összes mezőt és válasszon egy fájlt.");
-  }
 }
 
 
@@ -440,6 +356,20 @@ function fetchAllAuctions() {
             </div>
           `;
 
+          card.addEventListener("click", function () {
+            showProductDetails(
+              auction.name,
+              auction.description || "Nincs leírás.",
+              auction.img_url,
+              auction.price,
+              auction.stair,
+              auction.size,
+              auction.condition,
+              auction.brand_name
+            );
+          });
+          
+
           productList.appendChild(card);
 
           // Ha van countdown funkciód
@@ -482,9 +412,13 @@ function placeBid() {
   }
 }
 
-function setPriceInModal(price) {
-  document.getElementById("priceValue").innerText = price + " Ft";
+function increasePrice(bidStep) {
+  var currentPrice = parseInt(document.getElementById("newPrice").textContent.replace(' Ft', ''));
+  var newPrice = currentPrice + bidStep;
+  document.getElementById("newPrice").textContent = newPrice + " Ft";
 }
+
+
 
 function showProductDetails(title, description, imageUrl, price, bidStep, size, condition, brand) {
   // Létrehozzuk az overlay-t, hogy blokkolja a háttér kattintásait
@@ -597,11 +531,7 @@ function openImageModal(imageUrl) {
 
 
 
-function increasePrice(bidStep) {
-  var currentPrice = parseInt(document.getElementById("newPrice").textContent.replace(' Ft', ''));
-  var newPrice = currentPrice + bidStep;
-  document.getElementById("newPrice").textContent = newPrice + " Ft";
-}
+
 
 function closeModal() {
   var modal = document.querySelector(".modal");

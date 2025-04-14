@@ -21,8 +21,10 @@ $uploaded_at = date("Y-m-d H:i:s");
 $auction_start = $uploaded_at;
 $auction_end = $_POST['auction_end'];
 $size = isset($_POST['fileSize']) ? trim($_POST['fileSize']) : null; // 👈 új: méret
+$condition = isset($_POST['fileCondition']) ? trim($_POST['fileCondition']) : null;
+$description = isset($_POST['fileDesc']) ? trim($_POST['fileDesc']) : null;
 
-$required_fields = ['name', 'price', 'stair', 'auction_end', 'fileCategory', 'fileBrand'];
+$required_fields = ['name', 'price', 'stair', 'auction_end', 'fileCategory', 'fileBrand', 'fileCondition', 'fileDesc'];
 $missing_fields = [];
 
 foreach ($required_fields as $field) {
@@ -100,11 +102,11 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
 }
 
 // 📝 Adatok beszúrása az adatbázisba
-$sql = "INSERT INTO auction (user_id, name, price, stair, image_id, category_id, brand_id, size, uploaded_at, auction_start, auction_end) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO auction (user_id, name, price, stair, image_id, category_id, brand_id, size, uploaded_at, auction_start, auction_end, `condition`, `description`) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $dbconn->prepare($sql);
 if ($stmt) {
-    $stmt->bind_param("isiiiisssss", $user_id, $name, $price, $stair, $image_id, $category_id, $brand_id, $size, $uploaded_at, $auction_start, $auction_end);
+    $stmt->bind_param("isiiiisssssss", $user_id, $name, $price, $stair, $image_id, $category_id, $brand_id, $size, $uploaded_at, $auction_start, $auction_end, $condition, $description);
     if ($stmt->execute()) {
         echo json_encode(["status" => "success", "message" => "Aukció sikeresen létrehozva!"]);
     } else {
