@@ -306,6 +306,7 @@ function addToCart(productId) {
     return;
   }
 
+  // Lekérjük a termék eladójának azonosítóját
   fetch(`backend/get_saler_id.php?product_id=${productId}`)
     .then(response => response.json())
     .then(data => {
@@ -313,11 +314,20 @@ function addToCart(productId) {
         throw new Error("Nem sikerült lekérni az eladó adatait.");
       }
 
+      const salerId = data.saler_id;
+      const buyerId = parseInt(document.body.dataset.userId); // A bejelentkezett felhasználó ID-ja (feltételezve, hogy a body tartalmazza)
+
+      // Ellenőrizzük, hogy a termék eladója nem egyezik-e meg a bejelentkezett felhasználóval
+      if (salerId === buyerId) {
+        alert("Nem adhatod hozzá a saját termékedet a kosárhoz.");
+        return;
+      }
+
+      // Ha nem saját termék, folytatjuk a kosárhoz adást
       const payload = {
         product_id: productId,
-        saler_id: data.saler_id,
+        saler_id: salerId,
         quantity: 1
-        // buyer_id NEM KELL!
       };
 
       return fetch("backend/kosarhozad.php", {

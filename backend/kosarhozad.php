@@ -20,6 +20,12 @@ $saler_id = (int)$data['saler_id'];
 $quantity = (int)$data['quantity'];
 $buyer_id = $_SESSION['user_id'];
 
+// Ellenőrizzük, hogy a termék eladója nem egyezik-e meg a bejelentkezett felhasználóval
+if ($saler_id === $buyer_id) {
+  echo json_encode(["success" => false, "error" => "Nem adhatod hozzá a saját termékedet a kosárhoz."]);
+  exit;
+}
+
 // sold_at nem kerül be
 $stmt = $dbconn->prepare("INSERT INTO sales (saler_id, buyer_id, product_id, quantity) VALUES (?, ?, ?, ?)");
 $stmt->bind_param("iiii", $saler_id, $buyer_id, $product_id, $quantity);
