@@ -440,8 +440,6 @@ function fetchAllAuctions() {
             </div>
           `;
 
-          
-
           productList.appendChild(card);
           card.addEventListener("click", function () {
             showProductDetails(auction);
