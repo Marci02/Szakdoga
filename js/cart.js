@@ -84,7 +84,7 @@ function displayCartItems() {
         <p>${parseInt(sale.product.price).toLocaleString("hu-HU")} Ft</p>
         <input type="number" value="${sale.quantity}" style="width: 30px;" onchange="updateQuantity(${sale.product.id}, this.value)">
         <p class="cart-total">${(sale.quantity * sale.product.price).toLocaleString("hu-HU")} Ft</p>
-        <button onclick="removeFromCart(${sale.product.id})">Eltávolítás</button>
+        <button class="cart-button" onclick="removeFromCart(${sale.product.id})">Eltávolítás</button>
       `;
 
         cartContainer.appendChild(itemDiv);
