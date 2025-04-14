@@ -39,7 +39,7 @@ $query = "
     JOIN category c ON p.category_id = c.id
     JOIN brand b ON p.brand_id = b.id
     JOIN image i ON p.image_id = i.id
-    WHERE s.buyer_id = ? -- Csak a bejelentkezett felhasználó adatai
+    WHERE s.buyer_id = ? AND s.sold_at IS NULL
     ORDER BY s.sold_at DESC
 ";
 

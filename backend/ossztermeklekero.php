@@ -22,6 +22,7 @@ $query = "
     LEFT JOIN image i ON p.image_id = i.id
     LEFT JOIN brand b ON p.brand_id = b.id
     LEFT JOIN category c ON p.category_id = c.id
+    WHERE p.isSold = 0
 ";
 
 // Lekérdezés előkészítése

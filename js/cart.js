@@ -151,6 +151,30 @@ function updateCartTotal() {
 
   
 }
+
+function checkout() {
+  fetch("backend/checkout.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({}) // Ha szükséges, itt küldhetsz adatokat
+  })
+    .then(response => response.json())
+    .then(result => {
+      if (result.success) {
+        alert("A vásárlás sikeresen befejeződött!");
+        displayCartItems(); // Frissítsük a kosár tartalmát
+      } else {
+        alert("Hiba történt a vásárlás során: " + (result.error || "Ismeretlen hiba"));
+      }
+    })
+    .catch(error => {
+      console.error("Hiba a vásárlás során:", error);
+      alert("Hiba történt a vásárlás során.");
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   displayCartItems();
 });
