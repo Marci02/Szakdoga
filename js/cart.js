@@ -74,21 +74,18 @@ function displayCartItems() {
         // Create cart item element
         const itemDiv = document.createElement("div");
         itemDiv.classList.add("cart-item");
+        
 
         itemDiv.innerHTML = `
-          <div class="cart-item-header">
-            <img src="uploads/${sale.product.image_url}" alt="${sale.product.name}" class="cart-item-image">
-            <div class="cart-item-details">
-              <h3 class="cart-item-name">${sale.product.name}</h3>
-              <p class="cart-item-price">${parseInt(sale.product.price).toLocaleString("hu-HU")} Ft</p>
-              <p class="cart-item-quantity">Mennyiség: ${sale.quantity}</p>
-            </div>
-          </div>
-          <div class="cart-item-actions">
-            <p class="cart-total">${(sale.quantity * sale.product.price).toLocaleString("hu-HU")} Ft</p>
-            <button class="cart-item-remove" onclick="removeFromCart(${sale.product.id})">Eltávolítás</button>
-          </div>
-        `;
+        <div class="itemHeader">
+          <img src="uploads/${sale.product.image_url}" alt="${sale.product.name}" style="width: 100px; height: auto;">
+          <h3>${sale.product.name}</h3>
+        </div>
+        <p>${parseInt(sale.product.price).toLocaleString("hu-HU")} Ft</p>
+        <input type="number" value="${sale.quantity}" style="width: 30px;" onchange="updateQuantity(${sale.product.id}, this.value)">
+        <p class="cart-total">${(sale.quantity * sale.product.price).toLocaleString("hu-HU")} Ft</p>
+        <button onclick="removeFromCart(${sale.product.id})">Eltávolítás</button>
+      `;
 
         cartContainer.appendChild(itemDiv);
       });
@@ -103,10 +100,27 @@ function displayCartItems() {
 }
 
 function removeFromCart(productId) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart = cart.filter(item => item.productId !== productId);
-  localStorage.setItem("cart", JSON.stringify(cart));
-  displayCartItems();
+  // Küldjünk törlési kérést a backendnek
+  fetch("backend/kosarboltorol.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ product_id: productId })
+  })
+    .then(response => response.json())
+    .then(result => {
+      if (result.success) {
+        alert("A termék sikeresen törölve a kosárból.");
+        displayCartItems(); // Frissítsük a kosár tartalmát
+      } else {
+        alert("Hiba történt a törlés során: " + (result.error || "Ismeretlen hiba"));
+      }
+    })
+    .catch(error => {
+      console.error("Hiba a törlés során:", error);
+      alert("Hiba történt a törlés során.");
+    });
 }
 
 function updateQuantity(productId, newQuantity) {
@@ -137,6 +151,30 @@ function updateCartTotal() {
 
   
 }
+
+function checkout() {
+  fetch("backend/checkout.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({}) // Ha szükséges, itt küldhetsz adatokat
+  })
+    .then(response => response.json())
+    .then(result => {
+      if (result.success) {
+        alert("A vásárlás sikeresen befejeződött!");
+        displayCartItems(); // Frissítsük a kosár tartalmát
+      } else {
+        alert("Hiba történt a vásárlás során: " + (result.error || "Ismeretlen hiba"));
+      }
+    })
+    .catch(error => {
+      console.error("Hiba a vásárlás során:", error);
+      alert("Hiba történt a vásárlás során.");
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   displayCartItems();
 });
