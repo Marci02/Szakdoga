@@ -75,8 +75,9 @@ CREATE TABLE `auction` (
   `auction_end` datetime NOT NULL,
   `category_id` int NOT null,
   `brand_id` int NOT NULL,
-  `size` varchar(255) NOT NULL
-  ``
+  `size` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `condition` varchar(255) NOT NULL
 );
 
 CREATE TABLE `cart` (

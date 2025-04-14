@@ -2119,3 +2119,44 @@ SESSION: Array
     [image] => 
     [created] => 2025-04-11 10:49:06
 )
+POST: Array
+(
+    [name] => asdasdas
+    [price] => 12
+    [stair] => 1
+    [fileCategory] => 1
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-14T19:46
+    [fileSize] => S
+    [fileCondition] => Újszerű
+    [fileDesc] => asdasfasdawerwae
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => zsiger.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php84F7.tmp
+            [error] => 0
+            [size] => 27195
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 14:45:54
+)
