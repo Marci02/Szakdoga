@@ -213,7 +213,7 @@ function DataUpload() {
   const image = document.getElementById("fileInput").files[0];
   const conditionInput = document.getElementById("fileCondition");
   const condition = conditionInput ? conditionInput.value : "";
-  const sizeInput = document.getElementById("fileSize"); // ha van ilyen
+  const sizeInput = document.getElementById("fileSize");
   const size = sizeInput ? sizeInput.value : "";
   const desc = document.getElementById("fileDesc").value;
 
@@ -237,15 +237,12 @@ function DataUpload() {
     .then(res => res.json())
     .then(data => {
       console.log(data);
-      if (data.status === "success") {
-        alert("Sikeres feltöltés!");
         closeUploadModal();
-      } else {
-        alert("Hiba: " + data.message);
-        if (data.missing_fields) {
-          console.warn("Hiányzó mezők:", data.missing_fields);
-        }
-      }
+
+        // 🔁 Frissítjük a terméklistát
+        fetchAllAuctions();
+      
+      
     })
     .catch(error => {
       console.error("Hiba a feltöltés során:", error);
@@ -346,9 +343,7 @@ function fetchAllAuctions() {
               <div class="product-info">
                 <p><strong>Licit lépcső:</strong> ${auction.stair} Ft</p>
                 <p><strong>Méret:</strong> ${auction.size || 'N/A'}</p>
-                <p><strong>Állapot:</strong> ${auction.condition || 'N/A'}</p>
-                <p><strong>Márka:</strong> ${auction.brand_name || 'N/A'}</p>
-                <p><strong>Kategória:</strong> ${auction.category_name || 'N/A'}</p>
+                
               </div>
               <div style="font-size: 1em; color: #e74c3c; margin-top: 15px;">
                 <p><strong>Licit vége:</strong> <span class="countdown" id="countdown-${auction.auction_id}">Számolás...</span></p>
@@ -421,7 +416,7 @@ function increasePrice(bidStep) {
 
 
 function showProductDetails(title, description, imageUrl, price, bidStep, size, condition, brand) {
-  // Létrehozzuk az overlay-t, hogy blokkolja a háttér kattintásait
+  // Létrehozzuk az overlay-t
   var overlay = document.createElement("div");
   overlay.classList.add("overlay");
   overlay.style.position = "fixed";
@@ -430,8 +425,8 @@ function showProductDetails(title, description, imageUrl, price, bidStep, size, 
   overlay.style.width = "100%";
   overlay.style.height = "100%";
   overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-  overlay.style.zIndex = "999"; // Alap modal mögé kerül
-  overlay.style.pointerEvents = "all"; // Biztosítja, hogy ne lehessen átugrani az overlay-t
+  overlay.style.zIndex = "999";
+  overlay.style.pointerEvents = "all";
 
   // Létrehozzuk a modal-t
   var modal = document.createElement("div");
@@ -440,17 +435,17 @@ function showProductDetails(title, description, imageUrl, price, bidStep, size, 
   modal.style.top = "50%";
   modal.style.left = "50%";
   modal.style.transform = "translate(-50%, -50%)";
-  modal.style.width = "70%"; // Növelt szélesség
-  modal.style.maxWidth = "600px"; // Maximális szélesség
   modal.style.backgroundColor = "#fff";
   modal.style.boxShadow = "0 10px 30px rgba(0, 0, 0, 0.1)";
   modal.style.zIndex = "1000";
   modal.style.padding = "20px";
   modal.style.borderRadius = "15px";
-  modal.style.overflow = "hidden";  // Nem szükséges görgetés
-  modal.style.maxHeight = "110vh";  // Növelt maximális magasság
+  modal.style.overflow = "hidden";
+  modal.style.maxWidth = "90%"; // Kisebb képernyőkön dinamikusan csökkenthető
+  modal.style.width = "55%"; // Növelt szélesség
+  modal.style.maxHeight = "80vh"; // Maximális magasság csökkentve
   modal.style.transition = "opacity 0.3s ease-in-out";
-  
+
   var modalContent = document.createElement("div");
 
   modalContent.innerHTML = `
@@ -489,6 +484,9 @@ function showProductDetails(title, description, imageUrl, price, bidStep, size, 
         </button>
     </div>
   `;
+
+  modalContent.style.maxHeight = "60vh"; // Maximális magasság beállítása
+  modalContent.style.overflowY = "auto"; // Ha túl hosszú, görgethető lesz
 
   modal.appendChild(modalContent);
 
