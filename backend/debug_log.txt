@@ -1485,3 +1485,637 @@ SESSION: Array
     [image] => 
     [created] => 2025-04-11 10:49:06
 )
+POST: Array
+(
+    [name] => asdasdas
+    [price] => 12
+    [stair] => 1
+    [auction_end] => 2025-04-14T13:09
+    [fileCategory] => 1
+    [fileBrand] => NaN
+    [fileSize] => S
+    [fileCondition] => Használt
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => default_profile.jpg
+            [full_path] => default_profile.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php8FDA.tmp
+            [error] => 0
+            [size] => 17436
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
+POST: Array
+(
+    [name] => asdasdas
+    [price] => 12
+    [stair] => 1
+    [auction_end] => 2025-04-14T08:24
+    [fileCategory] => 1
+    [fileBrand] => NaN
+    [fileSize] => S
+    [fileCondition] => Újszerű
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => default_profile.jpg
+            [full_path] => default_profile.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php9DC9.tmp
+            [error] => 0
+            [size] => 17436
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
+POST: Array
+(
+)
+
+FILES: Array
+(
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
+POST: Array
+(
+)
+
+FILES: Array
+(
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
+POST: Array
+(
+)
+
+FILES: Array
+(
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
+POST: Array
+(
+)
+
+FILES: Array
+(
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
+POST: Array
+(
+)
+
+FILES: Array
+(
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
+POST: Array
+(
+)
+
+FILES: Array
+(
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
+POST: Array
+(
+)
+
+FILES: Array
+(
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
+POST: Array
+(
+    [name] => asdasdas
+    [price] => 12
+    [stair] => 1
+    [auction_end] => 2025-04-14T13:23
+    [fileCategory] => 1
+    [fileBrand] => NaN
+    [fileSize] => S
+    [fileCondition] => Újszerű
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => default_profile.jpg
+            [full_path] => default_profile.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php5E2E.tmp
+            [error] => 0
+            [size] => 17436
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
+POST: Array
+(
+)
+
+FILES: Array
+(
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
+POST: Array
+(
+    [name] => asdasd
+    [price] => 12
+    [stair] => 1
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-14T13:30
+    [fileSize] => 46
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => default_profile.jpg
+            [full_path] => default_profile.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php9E76.tmp
+            [error] => 0
+            [size] => 17436
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
+POST: Array
+(
+    [name] => asdsad
+    [price] => 123
+    [stair] => 12
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-14T12:49
+    [fileSize] => 44
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => default_profile.jpg
+            [full_path] => default_profile.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php59A1.tmp
+            [error] => 0
+            [size] => 17436
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
+POST: Array
+(
+    [name] => asdasd
+    [price] => 12
+    [stair] => 12
+    [fileCategory] => 1
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-14T13:58
+    [fileSize] => M
+    [fileCondition] => Használt
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => default_profile.jpg
+            [full_path] => default_profile.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php7467.tmp
+            [error] => 0
+            [size] => 17436
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
+POST: Array
+(
+    [name] => asdasd
+    [price] => 12
+    [stair] => 12
+    [fileCategory] => 1
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-14T13:58
+    [fileSize] => M
+    [fileCondition] => Használt
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => default_profile.jpg
+            [full_path] => default_profile.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpAA7B.tmp
+            [error] => 0
+            [size] => 17436
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
+POST: Array
+(
+    [name] => asdasd
+    [price] => 31
+    [stair] => 3423
+    [fileCategory] => 1
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-14T12:59
+    [fileSize] => M
+    [fileCondition] => Újszerű
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => default_profile.jpg
+            [full_path] => default_profile.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php79C3.tmp
+            [error] => 0
+            [size] => 17436
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
+POST: Array
+(
+    [name] => asdasdas
+    [price] => 12
+    [stair] => 1
+    [fileCategory] => 3
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-14T14:01
+    [fileSize] => 
+    [fileCondition] => Használt
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => default_profile.jpg
+            [full_path] => default_profile.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php4760.tmp
+            [error] => 0
+            [size] => 17436
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
+POST: Array
+(
+    [name] => asdasdas
+    [price] => 12
+    [stair] => 1
+    [fileCategory] => 1
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-14T13:02
+    [fileSize] => S
+    [fileCondition] => Új
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => default_profile.jpg
+            [full_path] => default_profile.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php5362.tmp
+            [error] => 0
+            [size] => 17436
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
+POST: Array
+(
+    [name] => asdasdassjdhbcs
+    [price] => 1423
+    [stair] => 32
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-14T15:07
+    [fileSize] => 42
+    [fileCondition] => Használt
+    [fileDesc] => aősdugfjasdbvcuauzdbcf
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => letöltés.jpg
+            [full_path] => letöltés.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpC89F.tmp
+            [error] => 0
+            [size] => 8838
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+)
