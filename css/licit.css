@@ -18,7 +18,7 @@ a {
   text-decoration: none;
 }
 .nav {
-  position: absolute;
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
@@ -143,6 +143,7 @@ a {
   width: auto;
   height: auto;
   font-size: 30px;
+  margin-left: px;
 }
 
 .menu-button:hover {
@@ -280,11 +281,43 @@ nav.header-sticky {
 }
 
 .sidebar-categories {
-  width: 15%;
+  width: 250px; /* A sidebar szélessége */
   background-color: #f8f9fa;
+  margin-top: -100px;
   padding: 20px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
+  overflow-y: auto; /* Ha a sidebar túl hosszú, görgethető */
+  height: 100vh; /* A sidebar magassága a képernyő teljes magasságát kitölti */
+  position: fixed; /* Most nem fixált, hanem a dokumentum áramlásában */
+  flex-shrink: 0; /* Megakadályozza, hogy a sidebar összenyomódjon a képernyő szűkítésénél */
+}
+
+/* Reszponzív beállítások a sidebarhoz */
+@media (max-width: 1024px) {
+  .sidebar-categories {
+    width: 25%; /* Kisebb képernyőkön több hely */
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar-categories {
+    width: 30%; /* Még kisebb képernyőkön */
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar-categories {
+    width: 35%; /* Mobilon kisebb szélesség */
+    margin-bottom: 20px; /* Elválasztás a terméklistától */
+  }
+}
+
+/* Szövegkezelés a sidebarban, hogy ne lógjon ki */
+.sidebar-categories p {
+  word-wrap: break-word; /* Ha túl hosszú egy szó, törjön */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Hosszú szövegek levágása, ha nem fér el */
 }
 
 .sidebar-categories a{
@@ -295,15 +328,37 @@ nav.header-sticky {
 }
 
 .product-list {
-  width: 90%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
+  margin-top: -100px;
+  margin-left: 270px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(4, 1fr); /* alapértelmezett: 4 oszlop */
+  gap: 20px; /* távolság a kártyák között */
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
+
+@media (max-width: 1024px) {
+  .product-list {
+    margin-left: 185px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .product-list {
+    margin-left: 230px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .product-list {
+    margin-left: 135px;
+    grid-template-columns: 1fr;
+  }
+}
+
 
 
 .upload-button {
