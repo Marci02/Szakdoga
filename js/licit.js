@@ -443,6 +443,9 @@ function fetchAllAuctions() {
           
 
           productList.appendChild(card);
+          card.addEventListener("click", function () {
+            showProductDetails(auction);
+          });
 
           // Ha van countdown funkciód
           if (typeof startCountdown === "function") {
@@ -463,6 +466,116 @@ window.addEventListener("DOMContentLoaded", function () {
   console.log("🔄 Oldal betöltve, aukciók lekérése...");
   fetchAllAuctions();
 });
+
+function createAuctionModal() {
+  if (document.getElementById("auctionModal")) return; // Ne hozza létre többször
+
+  const modal = document.createElement("div");
+  modal.id = "auctionModal";
+  modal.style.cssText = `
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+  `;
+
+  modal.innerHTML = `
+    <div id="modalContent" style="
+      background-color: white;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 20px;
+      width: 80%;
+      max-width: 600px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      position: relative;
+    ">
+      <span class="close" style="
+        position: absolute;
+        top: 15px;
+        right: 25px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      ">&times;</span>
+      <h2 id="modalTitle" style="text-align: center;"></h2>
+      <img id="modalImage" src="" alt="" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 15px; margin: 20px 0; cursor: zoom-in;">
+      <div id="modalDetails" style="font-size: 1em; color: #333;"></div>
+      <button id="bidButton" style="
+        display: block;
+        margin: 20px auto 0;
+        background-color: #27ae60;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 1em;
+        cursor: pointer;
+      ">Licitálok</button>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  // Modal zárás gomb
+  modal.querySelector(".close").onclick = () => {
+    modal.style.display = "none";
+  };
+
+  // Külső kattintásra is zárja be
+  window.addEventListener("click", function (e) {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  // Kép nagyítás külön ablakban
+  modal.querySelector("#modalImage").onclick = function () {
+    const bigImg = window.open();
+    bigImg.document.write(`<img src="${this.src}" style="width:100%">`);
+  };
+}
+
+
+function showProductDetails(auction) {
+  createAuctionModal(); // biztosan létrehozza, ha nincs
+
+  const modal = document.getElementById("auctionModal");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalImage = document.getElementById("modalImage");
+  const modalDetails = document.getElementById("modalDetails");
+  const bidButton = document.getElementById("bidButton");
+
+  modalTitle.textContent = auction.name;
+  modalImage.src = auction.img_url;
+  modalDetails.innerHTML = `
+    <p><strong>Leírás:</strong> ${auction.description || 'Nincs leírás.'}</p>
+    <p><strong>Jelenlegi ár:</strong> <span id="modalPrice">${auction.price}</span> Ft</p>
+    <p><strong>Licit lépcső:</strong> ${auction.stair} Ft</p>
+    <p><strong>Méret:</strong> ${auction.size || 'N/A'}</p>
+    <p><strong>Állapot:</strong> ${auction.condition || 'N/A'}</p>
+    <p><strong>Márka:</strong> ${auction.brand_name || 'N/A'}</p>
+    <p><strong>Kategória:</strong> ${auction.category_name || 'N/A'}</p>
+    <p><strong>Licit vége:</strong> ${auction.auction_end}</p>
+  `;
+
+  bidButton.onclick = function () {
+    const priceEl = document.getElementById("modalPrice");
+    let currentPrice = parseInt(priceEl.textContent);
+    currentPrice += parseInt(auction.stair);
+    priceEl.textContent = currentPrice;
+
+    // Ide jöhetne egy fetch POST szerverre, ha szeretnél
+    console.log(`🔼 Új licit: ${currentPrice} Ft`);
+  };
+
+  modal.style.display = "block";
+}
 
 
 
