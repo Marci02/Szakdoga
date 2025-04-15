@@ -69,14 +69,14 @@ function openUploadModal() {
   modal.style.top = "50%";
   modal.style.left = "50%";
   modal.style.transform = "translate(-50%, -50%)";
-  modal.style.width = "90%";  // Reszponzív szélesség (90% a képernyő szélességéből)
-  modal.style.maxWidth = "600px"; // Maximális szélesség (600px)
+  modal.style.width = "70%";  // Reszponzív szélesség (90% a képernyő szélességéből)
+  modal.style.maxWidth = "500px"; // Maximális szélesség (600px)
   modal.style.padding = "30px";  // Növelt padding
   modal.style.backgroundColor = "#fff";
   modal.style.boxShadow = "0 5px 15px rgba(0, 0, 0, 0.3)";
   modal.style.borderRadius = "15px";
-  modal.style.height = "auto";
-  modal.style.zIndex = "1000";
+  modal.style.height = "870px";
+  modal.style.zIndex = "1100";
   modal.style.textAlign = "center";
   modal.style.display = "block"; // Megjelenítés
   modal.style.overflowY = "auto";
@@ -329,15 +329,15 @@ function fetchAllAuctions() {
             </div>
             <div style="text-align: left">
               <div style="font-size: 1em; font-weight: bold; color: #555; margin-top: 10px;">
-                <p><strong>Ár:</strong> ${auction.price} Ft</p>
               </div>
               <div class="product-info">
-                <p><strong>Licit lépcső:</strong> ${auction.stair} Ft</p>
-                <p><strong>Méret:</strong> ${auction.size || 'N/A'}</p>
-                
+              <p>Licit lépcső: ${auction.stair} Ft</p>
+              <p>Méret: ${auction.size || 'N/A'}</p>
+              
               </div>
+              <p id="price">${formatPrice(auction.price)} Ft</p>
               <div style="font-size: 1em; color: #e74c3c; margin-top: 15px;">
-                <p><strong>Licit vége:</strong> <span class="countdown" id="countdown-${auction.auction_id}">Számolás...</span></p>
+              <p>Licit vége: <span class="countdown" id="countdown-${auction.auction_id}">Számolás...</span></p>
               </div>
             </div>
           `;
@@ -372,194 +372,119 @@ function fetchAllAuctions() {
     });
 }
 
+function formatPrice(price) {
+  // Biztosítjuk, hogy a price string típusú legyen
+  const cleanPrice = String(price).replace(/\D/g, '');  // A nem szám karaktereket eltávolítjuk
+  // Visszafordítjuk a számot és szóközökkel tagoljuk
+  const formattedPrice = cleanPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  return formattedPrice;
+}
+
 // Indítás oldalbetöltéskor
 window.addEventListener("DOMContentLoaded", function () {
   console.log("🔄 Oldal betöltve, aukciók lekérése...");
   fetchAllAuctions();
 });
 
-function createAuctionModal() {
-  if (document.getElementById("auctionModal")) return; // Ne hozza létre többször
+function showProductDetails(title, description, imageUrl, price, bidStep, size, condition, brand) {
+  // Ha már nyitva van modal, töröljük
+  let existingModal = document.getElementById("productModalOverlay");
+  if (existingModal) {
+    existingModal.remove();
+    document.body.style.overflow = "";
+  }
 
+  // Háttér scroll tiltása
+  document.body.style.overflow = "hidden";
+
+  // Háttér overlay
+  const modalOverlay = document.createElement("div");
+  modalOverlay.id = "productModalOverlay";
+  modalOverlay.style.position = "fixed";
+  modalOverlay.style.top = 0;
+  modalOverlay.style.left = 0;
+  modalOverlay.style.width = "100vw";
+  modalOverlay.style.height = "100vh";
+  modalOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  modalOverlay.style.display = "flex";
+  modalOverlay.style.justifyContent = "center";
+  modalOverlay.style.alignItems = "center";
+  modalOverlay.style.zIndex = "9999";
+
+  // Modal doboz
   const modal = document.createElement("div");
-  modal.id = "auctionModal";
-  modal.style.cssText = `
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.6);
-  `;
+  modal.id = "productModal";
+  modal.style.backgroundColor = "#fff";
+  modal.style.borderRadius = "20px";
+  modal.style.maxWidth = "500px";
+  modal.style.width = "90%";
+  modal.style.padding = "24px";
+  modal.style.boxShadow = "0 20px 50px rgba(0,0,0,0.25)";
+  modal.style.fontFamily = "Arial, sans-serif";
+  modal.style.color = "#333";
 
+  // Tartalom beszúrása
   modal.innerHTML = `
-    <div id="modalContent" style="
-      background-color: white;
-      margin: 5% auto;
-      padding: 20px;
-      border-radius: 20px;
-      width: 80%;
-      max-width: 600px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      position: relative;
-    ">
-      <span class="close" style="
-        position: absolute;
-        top: 15px;
-        right: 25px;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-      ">&times;</span>
-      <h2 id="modalTitle" style="text-align: center;"></h2>
-      <img id="modalImage" src="" alt="" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 15px; margin: 20px 0; cursor: zoom-in;">
-      <div id="modalDetails" style="font-size: 1em; color: #333;"></div>
-      <button id="bidButton" style="
-        display: block;
-        margin: 20px auto 0;
-        background-color: #27ae60;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 10px;
-        font-size: 1em;
-        cursor: pointer;
-      ">Licitálok</button>
-    </div>
-  `;
+  <h2 style="text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 16px;">
+    ${title}
+  </h2>
 
-  document.body.appendChild(modal);
+  <img src="${imageUrl}" alt="${title}" onclick="openImageModal('${imageUrl}')"
+    style="width: 100%; max-height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; cursor: pointer;">
 
-  // Modal zárás gomb
-  modal.querySelector(".close").onclick = () => {
-    modal.style.display = "none";
-  };
+  <p style="margin: 0; font-size: 17px;"><strong>Alapár:</strong> ${formatPrice(price)} Ft</p>
+  <p><strong>Licit lépcső:</strong> ${formatPrice(bidStep)} Ft</p>
+  <p><strong>Méret:</strong> ${size}</p>
+  <p><strong>Állapot:</strong> ${condition}</p>
+  <p><strong>Márka:</strong> ${brand}</p>
+  
+  <textarea id="note" rows="5" style="width: 100%; resize: none; padding: 10px; margin-top: 10px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em; overflow-wrap: break-word; word-wrap: break-word; white-space: pre-wrap;" readonly>${description}</textarea>
+  
+  <p style="margin: 0;  font-size: 20px; margin-top:10px;"><strong>Aktuális ár:</strong> <span id="highestPrice">${formatPrice(price)}</span> Ft</p>
+  <div style="display: flex; gap: 12px; justify-content: space-between; margin-top: 12px;">
+    <button onclick="increaseModalPrice(${bidStep})"
+      style="flex: 1; padding: 12px 0; background-color: #000; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
+      Licitálás
+    </button>
+    <button onclick="closeProductModal()"
+      style="flex: 1; padding: 12px 0; background-color: #e5e7eb; color: #111827; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
+      Bezárás
+    </button>
+  </div>
+`;
 
-  // Külső kattintásra is zárja be
-  window.addEventListener("click", function (e) {
-    if (e.target === modal) {
-      modal.style.display = "none";
-    }
-  });
-
-  // Kép nagyítás külön ablakban
-  modal.querySelector("#modalImage").onclick = function () {
-    const bigImg = window.open();
-    bigImg.document.write(`<img src="${this.src}" style="width:100%">`);
-  };
+  // Hozzáadás a DOM-hoz
+  modalOverlay.appendChild(modal);
+  document.body.appendChild(modalOverlay);
 }
 
-// Licitálás funkció
-function placeBid() {
-  var bidStep = document.getElementById("bidStep").value;
-  var currentPrice = parseInt(document.getElementById("priceValue").innerText.replace(" Ft", ""));
 
-  if (bidStep && !isNaN(bidStep)) {
-      var newPrice = currentPrice + parseInt(bidStep);
-      document.getElementById("priceValue").innerText = newPrice + " Ft";
-      alert("Licitálás sikeres! Az új ár: " + newPrice + " Ft");
-  } else {
-      alert("Kérjük, adja meg a licit lépést!");
+function closeProductModal() {
+  const overlay = document.getElementById("productModalOverlay");
+  const modal = document.getElementById("productModal");
+
+  if (overlay && modal) {
+    // Animáció az eltűnéshez
+    overlay.style.opacity = "0";
+    modal.style.opacity = "0";
+
+    // Az elemek eltávolítása az animáció után
+    setTimeout(() => {
+      overlay.remove();
+      modal.remove();
+      document.body.style.overflow = "auto"; // Görgetés visszaállítása
+    }, 300); // Az animáció időtartamával szinkronban
   }
 }
 
-function increasePrice(bidStep) {
-  var currentPrice = parseInt(document.getElementById("newPrice").textContent.replace(' Ft', ''));
-  var newPrice = currentPrice + bidStep;
-  document.getElementById("newPrice").textContent = newPrice + " Ft";
+function increaseModalPrice(bidStep) {
+  const highestPriceElement = document.getElementById("highestPrice");
+  if (highestPriceElement) {
+    let currentPrice = parseInt(highestPriceElement.textContent.replace(" Ft", ""));
+    currentPrice += bidStep;
+    highestPriceElement.textContent = currentPrice; // Frissítjük a legmagasabb árat
+  }
 }
-
-
-
-function showProductDetails(title, description, imageUrl, price, bidStep, size, condition, brand) {
-  // Létrehozzuk az overlay-t
-  var overlay = document.createElement("div");
-  overlay.classList.add("overlay");
-  overlay.style.position = "fixed";
-  overlay.style.top = "0";
-  overlay.style.left = "0";
-  overlay.style.width = "100%";
-  overlay.style.height = "100%";
-  overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-  overlay.style.zIndex = "999";
-  overlay.style.pointerEvents = "all";
-
-  // Létrehozzuk a modal-t
-  var modal = document.createElement("div");
-  modal.classList.add("modal");
-  modal.style.position = "fixed";
-  modal.style.top = "50%";
-  modal.style.left = "50%";
-  modal.style.transform = "translate(-50%, -50%)";
-  modal.style.backgroundColor = "#fff";
-  modal.style.boxShadow = "0 10px 30px rgba(0, 0, 0, 0.1)";
-  modal.style.zIndex = "1000";
-  modal.style.padding = "20px";
-  modal.style.borderRadius = "15px";
-  modal.style.overflow = "hidden";
-  modal.style.maxWidth = "90%"; // Kisebb képernyőkön dinamikusan csökkenthető
-  modal.style.width = "55%"; // Növelt szélesség
-  modal.style.maxHeight = "80vh"; // Maximális magasság csökkentve
-  modal.style.transition = "opacity 0.3s ease-in-out";
-
-  var modalContent = document.createElement("div");
-
-  modalContent.innerHTML = `
-    <div style="text-align: center; margin-bottom: 20px;">
-        <h2 style="font-size: 1.8em; font-weight: bold; color: #333; margin-bottom: 15px;">${title}</h2>
-        <!-- Kép kattintás esemény -->
-        <img src="${imageUrl}" alt="${title}" class="product-image" style="width: 100%; height: 250px; border-radius: 15px; object-fit: cover; margin-top: 10px; cursor: pointer;" onclick="openImageModal('${imageUrl}')">
-    </div>
-    <div style="font-size: 1.2em; font-weight: normal; color: #555; margin-top: 10px;">
-        <p><strong>Alap ár:</strong> <span id="originalPrice">${price} Ft</span></p>
-        <p><strong>Licit lépcső:</strong> ${bidStep} Ft</p>
-    </div>
-
-    <!-- Kategória adatok -->
-    <div style="font-size: 1.1em; color: #555; margin-top: 15px;">
-        <p><strong>Méret:</strong> ${size || 'N/A'}</p>
-        <p><strong>Állapot:</strong> ${condition || 'N/A'}</p>
-        <p><strong>Márka:</strong> ${brand || 'N/A'}</p>
-    </div>
-
-    <div style="display: flex; justify-content: flex-start; align-items: center; margin-top: 20px;">
-        <button onclick="increasePrice(${bidStep})" style="background-color: #bdc3c7; color: #fff; padding: 8px 12px; border-radius: 8px; border: none; font-size: 1.2em; cursor: pointer; transition: background-color 0.3s ease; display: flex; align-items: center;">
-            <span style="font-size: 1.2em;">+</span>
-        </button>
-        <p id="bidAmount" style="font-size: 1.1em; color: #555; margin-left: 10px;">Aktuális ár: <span id="newPrice">${price} Ft</span></p>
-    </div>
-
-    <div style="font-size: 1em; color: #555; margin-top: 20px;">
-        <label for="note" style="font-weight: bold;">Megjegyzés:</label>
-        <textarea id="note" rows="5" style="width: 100%; resize: none; padding: 10px; margin-top: 10px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em; overflow-wrap: break-word; word-wrap: break-word; white-space: pre-wrap;" readonly>${description}</textarea>
-    </div>
-
-    <div style="display: flex; justify-content: center; margin-top: 20px;">
-        <button onclick="closeModal()" style="background-color: #ecf0f1; color: #333; padding: 10px 15px; border-radius: 8px; border: 1px solid #ddd; font-size: 16px; width: 48%; cursor: pointer; transition: background-color 0.3s ease;">
-            Bezárás
-        </button>
-    </div>
-  `;
-
-  modalContent.style.maxHeight = "60vh"; // Maximális magasság beállítása
-  modalContent.style.overflowY = "auto"; // Ha túl hosszú, görgethető lesz
-
-  modal.appendChild(modalContent);
-
-  // A modal és az overlay hozzáadása a dokumentumhoz
-  document.body.appendChild(overlay); // Overlay hozzáadása először
-  document.body.appendChild(modal);   // Modal hozzáadása
-
-  setTimeout(() => {
-    modal.style.opacity = "1";
-    overlay.style.opacity = "1";
-    document.body.style.overflow = "hidden";
-  }, 50);
-}
-
 // Kép modal funkció
 function openImageModal(imageUrl) {
   var imageModal = document.createElement("div");
@@ -569,7 +494,7 @@ function openImageModal(imageUrl) {
   imageModal.style.width = "100%";
   imageModal.style.height = "100%";
   imageModal.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
-  imageModal.style.zIndex = "2000";
+  imageModal.style.zIndex = "10000";
   imageModal.style.display = "flex";
   imageModal.style.justifyContent = "center";
   imageModal.style.alignItems = "center";

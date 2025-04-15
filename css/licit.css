@@ -18,14 +18,14 @@ a {
   text-decoration: none;
 }
 .nav {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   background-color: #22222a;
   transition: 0.3s;
   padding: 1.2rem 0;
-  z-index: 10;
+  z-index: 20;
   margin: 0;
 }
 
@@ -280,38 +280,8 @@ nav.header-sticky {
   display: flex;
 }
 
-.sidebar-categories {
-  width: 250px; /* A sidebar szélessége */
-  background-color: #f8f9fa;
-  margin-top: -100px;
-  padding: 20px;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  overflow-y: auto; /* Ha a sidebar túl hosszú, görgethető */
-  height: 100vh; /* A sidebar magassága a képernyő teljes magasságát kitölti */
-  position: fixed; /* Most nem fixált, hanem a dokumentum áramlásában */
-  flex-shrink: 0; /* Megakadályozza, hogy a sidebar összenyomódjon a képernyő szűkítésénél */
-}
-
 /* Reszponzív beállítások a sidebarhoz */
-@media (max-width: 1024px) {
-  .sidebar-categories {
-    width: 25%; /* Kisebb képernyőkön több hely */
-  }
-}
 
-@media (max-width: 768px) {
-  .sidebar-categories {
-    width: 30%; /* Még kisebb képernyőkön */
-  }
-}
-
-@media (max-width: 480px) {
-  .sidebar-categories {
-    width: 35%; /* Mobilon kisebb szélesség */
-    margin-bottom: 20px; /* Elválasztás a terméklistától */
-  }
-}
 
 /* Szövegkezelés a sidebarban, hogy ne lógjon ki */
 .sidebar-categories p {
@@ -327,51 +297,62 @@ nav.header-sticky {
   padding: 10px 0;
 }
 
-.product-list {
-  margin-top: -100px;
-  margin-left: 270px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* alapértelmezett: 4 oszlop */
-  gap: 20px; /* távolság a kártyák között */
+.sidebar-categories {
+  width: 270px; /* A sidebar szélessége */
+  background-color: #f8f9fa;
   padding: 20px;
-  width: 100%;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow-y: auto; /* Görgethetővé teszi, ha túl hosszú */
+  height: calc(100vh - 87.59px); /* A navbar magasságának levonása */
+  position: fixed; /* Fixált pozíció */
+  top: 87.59px; /* A navbar magassága */
+  left: 0;
+  z-index: 10; /* A navbar mögé kerülés elkerülése */
+}
+
+/* Product list stílus */
+.product-list {
+  margin-left: 270px; /* A sidebar szélességének megfelelő margó */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 oszlop teljes képernyőn */
+  padding: 20px;
+  width: calc(100% - 270px);
   box-sizing: border-box;
+}
+
+/* Reszponzív elrendezés tabletekhez */
+@media (max-width: 1200px) {
+  .product-list {
+    grid-template-columns: repeat(3, 1fr); /* 3 oszlop nagyobb tableteken */
+  }
 }
 
 @media (max-width: 1024px) {
   .product-list {
-    margin-left: 185px;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* 2 oszlop kisebb tableteken */
+    margin-left: 220px; /* A sidebar szélessége kisebb tableteken */
+  }
+  .sidebar-categories {
+    width: 220px; /* Kisebb sidebar szélesség tableteken */
   }
 }
 
+/* Reszponzív elrendezés mobiltelefonokhoz */
 @media (max-width: 768px) {
   .product-list {
-    margin-left: 230px;
-    grid-template-columns: repeat(2, 1fr);
+    margin-left: 0; /* A sidebar eltűnik, így nincs margó */
+    grid-template-columns: 1fr; /* 1 oszlop mobilon */
+    width: 100%; /* A teljes szélességet kitölti */
+  }
+  .sidebar-categories {
+    position: relative; /* A sidebar már nem fixált */
+    width: 50%; /* A teljes szélességet kitölti */
+    height: auto; /* A magasság automatikusan igazodik */
+    margin-bottom: 20px; /* Távolság a terméklistától */
+    top: 0; /* A navbar magasságának figyelmen kívül hagyása */
   }
 }
-
-@media (max-width: 480px) {
-  .product-list {
-    margin-left: 135px;
-    grid-template-columns: 1fr;
-  }
-}
-
- @media (max-width: 768px) {
-    #uploadModal {
-      width: 90%;
-      padding: 15px;
-      max-height: 75vh;
-    }
-    #fileCategory, #fileCondition, #fileSize, #fileBrand, #fileDesc {
-      font-size: 0.9em;
-    }
-  }
-
-  
-
 
 .upload-button {
   background-color: black;
@@ -418,72 +399,45 @@ nav.header-sticky {
 }
 
 .product-card {
-  background-color: #fff;
+  background-color: white;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: 500px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px;
+  width: auto;
+  box-sizing: border-box;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s;
   cursor: pointer;
-  margin: 15px;
-  max-width: 300px;
-  text-align: center;
-  position: relative;
-}
-
-.product-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
 .product-image {
   width: 100%;
-  height: 20px;
+  height: 200px;
   object-fit: cover;
-  transition: opacity 0.3s ease;
+  border-radius: 15px;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
 }
 
 .product-card h3 {
-  margin: 10px 0;
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #333;
+  font-size: 23px;
+  margin: 10px 0 5px;
 }
 
 .product-card p {
-  font-size: 1em;
-  color: #666;
-  padding: 0 15px;
+  margin: 4px 0;
+  font-size: 15px;
+  color: #797676;
 }
 
-.product-card .price {
-  font-size: 1.2em;
-  color: #e74c3c;
-  font-weight: bold;
-  padding: 10px 0;
-}
-
-.product-card .button {
-  background-color: #3498db;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.3s ease;
-}
-
-.product-card .button:hover {
-  background-color: #2980b9;
-}
-
-.product-card .description {
-  padding: 15px;
-  font-size: 0.9em;
-  color: #333;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+#price{
+  font-size: 20px;
+  color: #524f4f;
 }
 
 #modalOverlay {
@@ -552,23 +506,23 @@ nav.header-sticky {
 }
 
 .message-box {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #f8d7da;
-  color: #721c24;
-  padding: 15px;
-  border: 1px solid #f5c6cb;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  display: none; /* Alapértelmezés szerint rejtve */
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: none; /* Alapértelmezés szerint rejtve */
 }
 .message-box.success {
-  background-color: #d4edda;
-  color: #155724;
-  border-color: #c3e6cb;
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
 }
 .message-box.show {
-  display: block; /* Megjelenítéshez */
+    display: block; /* Megjelenítéshez */
 }
