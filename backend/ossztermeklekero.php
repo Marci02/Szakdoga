@@ -2,24 +2,27 @@
 require_once __DIR__ . '/../connect.php';
 
 // Alapértelmezett kép útvonal
-$baseImagePath = "http://localhost/Szakdoga/uploads/";  // Az alapértelmezett kép útvonala
-$defaultImage = "no-image.jpg";  // Alapértelmezett kép neve
+$baseImagePath = "http://localhost/Szakdoga/uploads/";
+$defaultImage = "no-image.jpg";
 
-// Termékek lekérdezése
+// Termékek lekérdezése (brand, category, image csatlakoztatva)
 $query = "
     SELECT 
-        products.id,
-        products.name, 
-        products.description, 
-        products.price, 
-        products.quantity, 
-        products.category_id, 
-        products.brand_id, 
-        products.condition, 
-        products.size, 
-        COALESCE(image.img_url, ?) AS img_url 
-    FROM products 
-    LEFT JOIN image ON image.id = products.image_id
+        p.id,
+        p.name,
+        p.description,
+        p.price,
+        p.quantity,
+        p.size,
+        p.condition,
+        COALESCE(i.img_url, ?) AS img_url,
+        b.brand_name,
+        c.category_name
+    FROM products p
+    LEFT JOIN image i ON p.image_id = i.id
+    LEFT JOIN brand b ON p.brand_id = b.id
+    LEFT JOIN category c ON p.category_id = c.id
+    WHERE p.isSold = 0
 ";
 
 // Lekérdezés előkészítése
@@ -38,22 +41,18 @@ mysqli_stmt_execute($stmt);
 // Eredmény lekérése
 $result = mysqli_stmt_get_result($stmt);
 
-// Termékek tárolása egy tömbben
+// Termékek tömbbe rendezése
 $products = [];
 while ($row = mysqli_fetch_assoc($result)) {
-    // Kép elérési útvonalának beállítása
-    if (!empty($row['img_url']) && $row['img_url'] !== $defaultImage) {
-        $row['img_url'] = $baseImagePath . $row['img_url'];
-    } else {
-        $row['img_url'] = $baseImagePath . $defaultImage;
-    }
+    // Teljes kép elérési útvonal összeállítása
+    $row['img_url'] = $baseImagePath . $row['img_url'];
     $products[] = $row;
 }
 
-// JSON válasz küldése
+// JSON válasz
 echo json_encode(['success' => true, 'products' => $products], JSON_UNESCAPED_UNICODE);
 
-// Kapcsolat bezárása
+// Erőforrások felszabadítása
 mysqli_stmt_close($stmt);
 mysqli_close($dbconn);
 ?>

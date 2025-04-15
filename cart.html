@@ -19,7 +19,7 @@
                         <a href="index.html" id="mainitem" class="menu-link">Főoldal</a>
                     </li>
                     <li class="menu-item">
-                        <a href="ossztermek.html" id="allitem" class="menu-link active">Összes termék</a>
+                        <a href="ossztermek.html" id="allitem" class="menu-link">Összes termék</a>
                     </li>
                     <li class="menu-item">
                         <a href="licit.html" id="licititem" class="menu-link">Licit</a>
@@ -70,7 +70,7 @@
                     <!-- Dropdown Menu -->
                     <div class="dropdown-menu" id="cartBtn" aria-labelledby="dropdownMenuButton">
                       <p class="dropdown-item" href="#">A kosarad üres!</p>
-                      <button class="dropdown-item" href="#">Tovább a fizetéshez</button>
+                      <a href="#"><button class="dropdown-item">Tovább a fizetéshez</button></a>
                     </div>
                 </li>
             </ul>
@@ -96,7 +96,7 @@
     <div class="cart-summary-container">
         <div class="cart-summary">
             <h3>Végösszeg: <span id="totalAmount">0 Ft</span></h3>
-            <button class="checkout-button">Fizetés</button>
+            <button class="cart-button" onclick="checkout()">Fizetés</button>
         </div>
     </div>
     

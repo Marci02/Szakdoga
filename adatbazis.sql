@@ -45,7 +45,8 @@ CREATE TABLE `products` (
   `uploaded_at` datetime NOT NULL,
   `quantity` int NOT NULL,
   `size` varchar(255) NOT NULL,
-  `condition` varchar(255) NOT NULL
+  `condition` varchar(255) NOT NULL,
+  `isSold` tinyint(1) NOT NULL
 );
 
 CREATE TABLE `brand` (
@@ -73,16 +74,11 @@ CREATE TABLE `auction` (
   `uploaded_at` datetime NOT NULL,
   `auction_start` datetime NOT NULL,
   `auction_end` datetime NOT NULL,
-  `category_id` int NOT null,
+  `category_id` int NOT NULL,
   `brand_id` int NOT NULL,
-  `size` varchar(255) NOT NULL
-);
-
-CREATE TABLE `cart` (
-  `user_id` bigint NOT NULL,
-  `product_id` bigint NOT NULL,
-  `quantity` INT DEFAULT 1,
-   PRIMARY KEY (`user_id`, `product_id`)
+  `size` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `condition` varchar(255) NOT NULL
 );
 
 ALTER TABLE `user` ADD FOREIGN KEY (`city_id`) REFERENCES `settlement` (`id`);
@@ -110,24 +106,3 @@ ALTER TABLE `auction` ADD FOREIGN KEY (`image_id`) REFERENCES `image` (`id`);
 ALTER TABLE `auction` ADD FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
 
 ALTER TABLE `auction` ADD FOREIGN KEY (`brand_id`) REFERENCES `brand` (`id`);
-
-INSERT INTO category (id, category_name) VALUES
-(1, 'Ruhák'),
-(2, 'Cipő'),
-(3, 'Kiegészítők');
-
-INSERT INTO brand (id, brand_name) VALUES
-(1, 'Nike'),
-(2, 'Adidas'),
-(3, 'New Balance'),
-(4, 'Balenciaga'),
-(5, 'Gucci'),
-(6, 'Bape'),
-(7, 'Palace'),
-(8, 'Supreme'),
-(9, 'Louis Vuitton'),
-(10, 'Dior'),
-(11, 'Ralph Lauren'),
-(12, 'Zara');
-
-

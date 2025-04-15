@@ -12,7 +12,8 @@ SELECT
     a.stair,
     a.auction_end,
     a.size,
-    
+    a.condition,
+    a.description,
     i.img_url,
     b.brand_name,
     c.category_name
@@ -20,6 +21,7 @@ FROM auction a
 LEFT JOIN image i ON a.image_id = i.id
 LEFT JOIN brand b ON a.brand_id = b.id
 LEFT JOIN category c ON a.category_id = c.id
+WHERE a.auction_end > NOW() -- 🔥 Csak a jövőbeli licitek
 ORDER BY a.uploaded_at DESC
 ";
 

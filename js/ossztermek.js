@@ -165,6 +165,14 @@ function uploadFile() {
 
 document.addEventListener("DOMContentLoaded", fetchProducts);
 
+function formatPrice(price) {
+  // Biztosítjuk, hogy a price string típusú legyen
+  const cleanPrice = String(price).replace(/\D/g, '');  // A nem szám karaktereket eltávolítjuk
+  // Visszafordítjuk a számot és szóközökkel tagoljuk
+  const formattedPrice = cleanPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  return formattedPrice;
+}
+
 function fetchProducts() {
   fetch("backend/ossztermeklekero.php")
     .then(response => response.json())
@@ -189,14 +197,18 @@ function fetchProducts() {
         productCard.dataset.productSize = product.size || "N/A";
         productCard.dataset.productCondition = product.condition || "N/A";
         productCard.dataset.productImage = product.img_url;
+        productCard.dataset.productBrand = product.brand_name || "Ismeretlen";
+        productCard.dataset.productCategory = product.category_name || "Ismeretlen";
+
+        // Formázzuk az árat a szóközökkel tagolt verzióra
+        const formattedPrice = formatPrice(product.price);
 
         productCard.innerHTML = `
           <img src="${product.img_url}" alt="${product.name}" class="product-image">
           <h3>${product.name}</h3>
-          <p>${product.description}</p>
-          <h3>Ár: ${product.price} Ft</h3>
           <p>Méret: ${product.size || "N/A"}</p>
           <p>Állapot: ${product.condition || "N/A"}</p>
+          <p id="price">${formattedPrice} Ft</p>
         `;
 
         productList.appendChild(productCard);
@@ -211,85 +223,146 @@ function fetchProducts() {
     .catch(error => console.error("Hiba a termékek lekérésekor:", error));
 }
 
+
+
 function openProductModal(card) {
-  let existingModal = document.getElementById("productModal");
+  // Ha már nyitva van modal, töröljük
+  let existingModal = document.getElementById("productModalOverlay");
   if (existingModal) {
     existingModal.remove();
+    document.body.style.overflow = "";
   }
 
-  let modal = document.createElement("div");
-  modal.id = "productModal";
-  modal.style.position = "fixed";
-  modal.style.top = "50%";
-  modal.style.left = "50%";
-  modal.style.transform = "translate(-50%, -50%)";
-  modal.style.width = "400px";
-  modal.style.padding = "20px";
-  modal.style.backgroundColor = "#fff";
-  modal.style.boxShadow = "0 5px 15px rgba(0,0,0,0.3)";
-  modal.style.zIndex = "1000";
-  modal.style.borderRadius = "8px";
+  // Háttér scroll tiltása
+  document.body.style.overflow = "hidden";
 
+  // Háttér overlay
+  const modalOverlay = document.createElement("div");
+  modalOverlay.id = "productModalOverlay";
+  modalOverlay.style.position = "fixed";
+  modalOverlay.style.top = 0;
+  modalOverlay.style.left = 0;
+  modalOverlay.style.width = "100vw";
+  modalOverlay.style.height = "100vh";
+  modalOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  modalOverlay.style.display = "flex";
+  modalOverlay.style.justifyContent = "center";
+  modalOverlay.style.alignItems = "center";
+  modalOverlay.style.zIndex = "9999";
+
+  // Modal doboz
+  const modal = document.createElement("div");
+  modal.id = "productModal";
+  modal.style.backgroundColor = "#fff";
+  modal.style.borderRadius = "20px";
+  modal.style.maxWidth = "500px";
+  modal.style.width = "90%";
+  modal.style.padding = "24px";
+  modal.style.boxShadow = "0 20px 50px rgba(0,0,0,0.25)";
+  modal.style.fontFamily = "Arial, sans-serif";
+  modal.style.color = "#333";
+
+  // Tartalom beszúrása
   modal.innerHTML = `
-    <h2>${card.dataset.productName}</h2>
-    <img src="${card.dataset.productImage}" alt="${card.dataset.productName}" style="width:100%; max-height:200px; object-fit:cover;">
-    <p>${card.dataset.productDescription}</p>
-    <h3>Ár: ${card.dataset.productPrice} Ft</h3>
-    <p>Méret: ${card.dataset.productSize}</p>
-    <p>Állapot: ${card.dataset.productCondition}</p>
-    <button onclick="addToCart(${card.dataset.productId})" style="padding:8px 12px; background:lightgray; color:white; border:none; cursor:pointer;">Kosárba</button>
-    <button onclick="closeProductModal()" style="padding:8px 12px; background:black; color:white; border:none; cursor:pointer;">Bezárás</button>
+    <h2 style="text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 16px;">
+      ${card.dataset.productName}
+    </h2>
+
+    <img src="${card.dataset.productImage}" alt="${card.dataset.productName}"
+      style="width: 100%; max-height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 16px;">
+
+      
+      <h3 style="margin: 12px 0;"><strong>Ár:</strong> ${formatPrice(card.dataset.productPrice)} Ft</h3>
+      <p><strong>Méret:</strong> ${card.dataset.productSize}</p>
+      <p><strong>Állapot:</strong> ${card.dataset.productCondition}</p>
+
+      <p><strong>Márka:</strong> ${card.dataset.productBrand}</p>
+
+      <p><strong>Márka:</strong> ${card.dataset.productCaategory}</p>
+
+      
+      <textarea id="note" rows="5" style="width: 100%; resize: none; padding: 10px; margin-top: 10px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em; overflow-wrap: break-word; word-wrap: break-word; white-space: pre-wrap;" readonly>${card.dataset.productDescription}</textarea>
+      <div style="display: flex; gap: 12px; justify-content: space-between; margin-top: 24px;">
+      <button onclick="addToCart(${card.dataset.productId})"
+      style="flex: 1; padding: 12px 0; background-color: #4b5563; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
+      Kosárba
+      </button>
+      <button onclick="closeProductModal()"
+        style="flex: 1; padding: 12px 0; background-color: #e5e7eb; color: #111827; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
+        Bezárás
+      </button>
+    </div>
   `;
 
-  document.body.appendChild(modal);
+  // Hozzáadás a DOM-hoz
+  modalOverlay.appendChild(modal);
+  document.body.appendChild(modalOverlay);
 }
 
 function addToCart(productId) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  fetch("backend/kosarhozad.php", {
-    method: "POST",
-    body: formData
-})
-.then(response => response.json())
-.then(data => {
-    console.log("Szerver válasza:", data);
-    if (data.success) {
-        alert("Sikeres feltöltés!");
-        closeUploadModal();
-        fetchProducts();
-    } else {
-        alert("Hiba: " + data.message);
-    }
-})
-.catch(error => {
-    console.error("Hiba a feltöltés során:", error);
-    alert("Hiba történt a fájl feltöltésekor.");
-});
-
-  // Ellenőrizd, hogy benne van-e már a termék
-  const existingItemIndex = cart.findIndex(item => item.productId === productId);
-
-  if (existingItemIndex !== -1) {
-    // Már benne van → növeld a mennyiséget
-    cart[existingItemIndex].quantity += 1;
-  } else {
-    // Új elem
-    cart.push({ productId: productId, quantity: 1 });
+  const card = document.querySelector(`.product-card[data-product-id="${productId}"]`);
+  if (!card) {
+    console.error("Termékkártya nem található.");
+    return;
   }
 
-  localStorage.setItem("cart", JSON.stringify(cart));
-  alert("Termék hozzáadva a kosárhoz!");
+  // Lekérjük a termék eladójának azonosítóját
+  fetch(`backend/get_saler_id.php?product_id=${productId}`)
+    .then(response => response.json())
+    .then(data => {
+      if (!data || !data.saler_id) {
+        throw new Error("Nem sikerült lekérni az eladó adatait.");
+      }
+
+      const salerId = data.saler_id;
+      const buyerId = parseInt(document.body.dataset.userId); // A bejelentkezett felhasználó ID-ja (feltételezve, hogy a body tartalmazza)
+
+      // Ellenőrizzük, hogy a termék eladója nem egyezik-e meg a bejelentkezett felhasználóval
+      if (salerId === buyerId) {
+        alert("Nem adhatod hozzá a saját termékedet a kosárhoz.");
+        return;
+      }
+
+      // Ha nem saját termék, folytatjuk a kosárhoz adást
+      const payload = {
+        product_id: productId,
+        saler_id: salerId,
+        quantity: 1
+      };
+
+      return fetch("backend/kosarhozad.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+    })
+    .then(response => response.json())
+    .then(result => {
+      if (result.success) {
+        alert("A termék sikeresen hozzáadva a vásárlásokhoz!");
+        closeProductModal();
+      } else {
+        alert("Hiba a vásárlás során: " + (result.error || "Ismeretlen hiba"));
+      }
+    })
+    .catch(error => {
+      console.error("Hiba:", error);
+      alert("Hiba történt a művelet során.");
+    });
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchProducts();
 });
 
 function closeProductModal() {
-  let modal = document.getElementById("productModal");
-  if (modal) {
-    modal.remove();
+  const overlay = document.getElementById("productModalOverlay");
+  if (overlay) {
+    overlay.remove();
+    document.body.style.overflow = ""; // Re-enable scroll
   }
 }
 
