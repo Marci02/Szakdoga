@@ -3378,3 +3378,47 @@ SESSION: Array
     [image] => 
     [created] => 2025-04-14 13:47:58
 )
+POST: Array
+(
+    [name] => asdasdas
+    [price] => 132
+    [stair] => 123
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-15T15:17
+    [fileSize] => 46
+    [fileCondition] => Újszerű
+    [fileDesc] => asdasdasdasdas
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => default_profile.jpg
+            [full_path] => default_profile.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php1A76.tmp
+            [error] => 0
+            [size] => 17436
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád megye
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+    [street_address] => Árpád utca
+    [house_number] => 31
+)

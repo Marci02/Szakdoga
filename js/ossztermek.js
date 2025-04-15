@@ -127,8 +127,8 @@ function uploadFile() {
   const fileSize = document.querySelector("#fileSize").value || "";
 
   if (!fileInput.files.length) {
-    alert("Kérjük, válasszon ki egy fájlt a feltöltéshez!");
-    return;
+      showMessage("Kérjük, válasszon ki egy fájlt a feltöltéshez!", 'error');
+      return;
   }
 
   let formData = new FormData();
@@ -150,16 +150,16 @@ function uploadFile() {
   .then(data => {
       console.log("Szerver válasza:", data);
       if (data.success) {
-          alert("Sikeres feltöltés!");
+          showMessage("Sikeres feltöltés!", 'success');
           closeUploadModal();
           fetchProducts();
       } else {
-          alert("Hiba: " + data.message);
+          showMessage("Hiba: " + data.message, 'error');
       }
   })
   .catch(error => {
       console.error("Hiba a feltöltés során:", error);
-      alert("Hiba történt a fájl feltöltésekor.");
+      showMessage("Hiba történt a fájl feltöltésekor.", 'error');
   });
 }
 
@@ -302,57 +302,58 @@ function openProductModal(card) {
 function addToCart(productId) {
   const card = document.querySelector(`.product-card[data-product-id="${productId}"]`);
   if (!card) {
-    console.error("Termékkártya nem található.");
-    return;
+      console.error("Termékkártya nem található.");
+      showMessage("Hiba: Termékkártya nem található.", 'error');
+      return;
   }
 
   // Lekérjük a termék eladójának azonosítóját
   fetch(`backend/get_saler_id.php?product_id=${productId}`)
-    .then(response => response.json())
-    .then(data => {
-      if (!data || !data.saler_id) {
-        throw new Error("Nem sikerült lekérni az eladó adatait.");
-      }
+      .then(response => response.json())
+      .then(data => {
+          if (!data || !data.saler_id) {
+              throw new Error("Nem sikerült lekérni az eladó adatait.");
+          }
 
-      const salerId = data.saler_id;
-      const buyerId = parseInt(document.body.dataset.userId); // A bejelentkezett felhasználó ID-ja (feltételezve, hogy a body tartalmazza)
+          const salerId = data.saler_id;
+          const buyerId = parseInt(document.body.dataset.userId); // A bejelentkezett felhasználó ID-ja (feltételezve, hogy a body tartalmazza)
 
-      // Ellenőrizzük, hogy a termék eladója nem egyezik-e meg a bejelentkezett felhasználóval
-      if (salerId === buyerId) {
-        alert("Nem adhatod hozzá a saját termékedet a kosárhoz.");
-        return;
-      }
+          // Ellenőrizzük, hogy a termék eladója nem egyezik-e meg a bejelentkezett felhasználóval
+          if (salerId === buyerId) {
+              showMessage("Nem adhatod hozzá a saját termékedet a kosárhoz.", 'error');
+              return;
+          }
 
-      // Ha nem saját termék, folytatjuk a kosárhoz adást
-      const payload = {
-        product_id: productId,
-        saler_id: salerId,
-        quantity: 1
-      };
+          // Ha nem saját termék, folytatjuk a kosárhoz adást
+          const payload = {
+              product_id: productId,
+              saler_id: salerId,
+              quantity: 1
+          };
 
-      return fetch("backend/kosarhozad.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
+          return fetch("backend/kosarhozad.php", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify(payload)
+          });
+      })
+      .then(response => response.json())
+      .then(result => {
+          if (result.success) {
+              showMessage("A termék sikeresen hozzáadva a kosárhoz!", 'success');
+              closeProductModal();
+          } else {
+              showMessage("Hiba a kosárhoz adás során: " + (result.error || "Ismeretlen hiba"), 'error');
+              closeProductModal();
+          }
+      })
+      .catch(error => {
+          console.error("Hiba:", error);
+          showMessage("Hiba történt a művelet során.", 'error');
       });
-    })
-    .then(response => response.json())
-    .then(result => {
-      if (result.success) {
-        alert("A termék sikeresen hozzáadva a vásárlásokhoz!");
-        closeProductModal();
-      } else {
-        alert("Hiba a vásárlás során: " + (result.error || "Ismeretlen hiba"));
-      }
-    })
-    .catch(error => {
-      console.error("Hiba:", error);
-      alert("Hiba történt a művelet során.");
-    });
 }
-
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchProducts();
@@ -374,4 +375,20 @@ function toggleCategory(categoryId) {
   } else {
       category.style.display = "block";
   }
+}
+
+function showMessage(message, type = 'error', duration = 3000) {
+  const messageBox = document.getElementById('message-box');
+  if (!messageBox) {
+      console.error("A 'message-box' elem nem található!");
+      return;
+  }
+
+  messageBox.textContent = message;
+  messageBox.className = `message-box ${type} show`;
+
+  // Az üzenet eltüntetése a megadott idő után
+  setTimeout(() => {
+      messageBox.classList.remove('show');
+  }, duration);
 }

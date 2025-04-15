@@ -140,3 +140,33 @@ document.getElementById("cartBtn").parentElement.addEventListener("mouseenter", 
 document.getElementById("cartBtn").parentElement.addEventListener("mouseleave", function() {
   document.getElementById("cartBtn").style.display = "none";
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Ellenőrizzük, hogy van-e tárolt üzenet a localStorage-ban
+  const logoutMessage = localStorage.getItem("logoutMessage");
+
+  if (logoutMessage) {
+      // Üzenet megjelenítése
+      showMessage(logoutMessage, 'success');
+
+      // Üzenet eltávolítása a localStorage-ból
+      localStorage.removeItem("logoutMessage");
+  }
+});
+
+function showMessage(message, type = 'error', duration = 3000) {
+  const messageBox = document.getElementById('message-box');
+  if (!messageBox) {
+      console.error("A 'message-box' elem nem található!");
+      return;
+  }
+
+  messageBox.textContent = message;
+  messageBox.className = `message-box ${type} show`;
+
+  // Az üzenet eltüntetése a megadott idő után
+  setTimeout(() => {
+      messageBox.classList.remove('show');
+  }, duration);
+}

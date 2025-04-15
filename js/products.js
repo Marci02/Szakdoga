@@ -83,15 +83,15 @@ async function saveProductChanges() {
         const result = await response.json();
 
         if (result.success) {
-            alert("Termék sikeresen frissítve!");
+            showMessage("Termék sikeresen frissítve!", 'success');
             closeEditModal();
             loadUserProducts(); // Terméklista újratöltése
         } else {
-            alert("Hiba történt: " + (result.message || "Ismeretlen hiba"));
+            showMessage("Hiba történt: " + (result.message || "Ismeretlen hiba"), 'error');
         }
     } catch (error) {
         console.error("Hálózati hiba:", error);
-        alert("Hálózati hiba történt!");
+        showMessage("Hálózati hiba történt!", 'error');
     } finally {
         isSaving = false; // Mentsük el, hogy a mentés véget ért
     }
@@ -109,15 +109,34 @@ function deleteProduct(productId) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert("A termék törölve lett.");
+                showMessage("A termék törölve lett.", 'success');
                 loadUserProducts();
             } else {
-                alert("Hiba történt: " + data.message);
+                showMessage("Hiba történt: " + data.message, 'error');
             }
         })
-        .catch(error => console.error("Hálózati hiba:", error));
+        .catch(error => {
+            console.error("Hálózati hiba:", error);
+            showMessage("Hálózati hiba történt!", 'error');
+        });
     }
 }
 
 // Hozzáadjuk a mentés gombhoz az eseményfigyelőt
 document.querySelector(".save-button").addEventListener("click", saveProductChanges);
+
+function showMessage(message, type = 'error', duration = 3000) {
+    const messageBox = document.getElementById('message-box');
+    if (!messageBox) {
+        console.error("A 'message-box' elem nem található!");
+        return;
+    }
+
+    messageBox.textContent = message;
+    messageBox.className = `message-box ${type} show`;
+
+    // Az üzenet eltüntetése a megadott idő után
+    setTimeout(() => {
+        messageBox.classList.remove('show');
+    }, duration);
+}

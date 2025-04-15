@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Személyes adatok mentése
     document.getElementById("savePersonal").addEventListener("click", () => {
-        const fileInput = document.getElementById("profile-image-input"); // 🔹 Itt definiáljuk
+        const fileInput = document.getElementById("profile-image-input");
         const formData = new FormData();
     
         const personalData = {
@@ -62,7 +62,6 @@ document.addEventListener("DOMContentLoaded", () => {
         formData.append("email", personalData.email);
         formData.append("phone", personalData.phone);
     
-        // 🔹 Ellenőrizd, hogy a fájlfeltöltő mező létezik és van-e benne fájl!
         if (fileInput && fileInput.files.length > 0) {
             formData.append("profile_image", fileInput.files[0]);
         }
@@ -74,18 +73,18 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert("Személyes adatok sikeresen frissítve!");
+                showMessage("Személyes adatok sikeresen frissítve!", 'success');
                 if (data.image_url) {
                     const imgPreview = document.getElementById("profile-image-preview");
                     if (imgPreview) imgPreview.src = data.image_url;
                 }
             } else {
-                alert("Hiba történt a mentés során.");
+                showMessage("Hiba történt a mentés során.", 'error');
             }
         })
         .catch(error => {
             console.error("Hálózati hiba: ", error);
-            alert("Hálózati hiba történt!");
+            showMessage("Hálózati hiba történt!", 'error');
         });
     });
     
@@ -100,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
         // Ellenőrizzük, hogy minden mező ki van-e töltve
         if (!postcode || !city || !county || !street || !houseNumber) {
-            alert("Kérlek, töltsd ki az összes mezőt!");
+            showMessage("Kérlek, töltsd ki az összes mezőt!", 'error');
             return;
         }
     
@@ -120,61 +119,43 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert("Cím sikeresen frissítve!");
+                showMessage("Cím sikeresen frissítve!", 'success');
             } else {
-                alert("Hiba történt: " + data.message);
+                showMessage("Hiba történt: " + data.message, 'error');
             }
         })
-        .catch(error => console.error("Hálózati hiba:", error));
-    });
-
-    // Kijelentkezés kezelése
-    document.getElementById("saveAddress").addEventListener("click", function() {
-        const postcode = document.getElementById("postcode").value;
-        const city = document.getElementById("city").value;
-        const county = document.getElementById("county").value;
-        const street = document.getElementById("street_address").value;
-        const houseNumber = document.getElementById("house_number").value;
-    
-        // Ellenőrizzük, hogy minden mező ki van-e töltve
-        if (!postcode || !city || !county || !street || !houseNumber) {
-            alert("Kérlek, töltsd ki az összes mezőt!");
-            return;
-        }
-    
-        fetch("backend/update_address.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                postcode: postcode,
-                city: city,
-                county: county,
-                street_address: street,
-                house_number: houseNumber
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert("Cím sikeresen frissítve!");
-            } else {
-                alert("Hiba történt: " + data.message);
-            }
-        })
-        .catch(error => console.error("Hálózati hiba:", error));
-    });
-
-    // Kijelentkezés kezelése
-    document.addEventListener("DOMContentLoaded", () => {
-        const logoutButtons = document.querySelectorAll(".logoutButton");
-    
-        logoutButtons.forEach(button => {
-            button.addEventListener("click", () => {
-                fetch("backend/logout.php")
-                    .then(() => window.location.href = "index.html");
-            });
+        .catch(error => {
+            console.error("Hálózati hiba:", error);
+            showMessage("Hálózati hiba történt!", 'error');
         });
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Ellenőrizzük, hogy van-e tárolt üzenet a localStorage-ban
+    const loginMessage = localStorage.getItem("loginMessage");
+
+    if (loginMessage) {
+        // Üzenet megjelenítése
+        showMessage(loginMessage, 'success');
+
+        // Üzenet eltávolítása a localStorage-ból
+        localStorage.removeItem("loginMessage");
+    }
+});
+
+function showMessage(message, type = 'error', duration = 3000) {
+    const messageBox = document.getElementById('message-box');
+    if (!messageBox) {
+        console.error("A 'message-box' elem nem található!");
+        return;
+    }
+
+    messageBox.textContent = message;
+    messageBox.className = `message-box ${type} show`;
+
+    // Az üzenet eltüntetése a megadott idő után
+    setTimeout(() => {
+        messageBox.classList.remove('show');
+    }, duration);
+}

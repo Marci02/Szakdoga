@@ -31,7 +31,7 @@ signUpForm.addEventListener('submit', async (event) => {
 
     // Basic validation
     if (password !== confirmPassword) {
-        alert("Passwords do not match!");
+        showMessage("Passwords do not match!", 'error');
         return;
     }
     
@@ -40,25 +40,25 @@ signUpForm.addEventListener('submit', async (event) => {
         const response = await fetch('backend/register.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({firstname: firstname, lastname: lastname, email: email, password: password }),
+            body: JSON.stringify({ firstname, lastname, email, password }),
         });
 
-        if (response.ok) {
-            const data = await response.json();
-            alert("Registration successful!");
+        const data = await response.json(); // Parse the JSON response
+
+        if (response.ok && data.success) {
+            showMessage(data.message, 'success'); // Use 'success' for successful registration
             console.log("User data:", data);
-            window.location.href = "login1.html";
+            setTimeout(() => {
+                window.location.href = "login1.html"; // Redirect after showing the message
+            }, 3000); // Wait 3 seconds before redirecting
         } else {
-            const errorText = await response.text();
-            console.error("Registration failed response text:", errorText); 
-            alert(`Registration failed: ${errorText}`);
+            showMessage(data.message, 'error'); // Show error message if registration fails
         }
     } catch (error) {
         console.error("Error during registration:", error);
-        alert("An error occurred. Please try again later.");
+        showMessage('Hiba a regisztráció során! Próbáld újra', 'error');
     }
 });
-
 // Event listener for the Sign-In form
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.querySelector(".sign-in form");
@@ -79,24 +79,28 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = await response.json();
 
             if (data.loggedIn) {
-                alert("Sikeres bejelentkezés!");
+                // Üzenet tárolása a localStorage-ban
+                localStorage.setItem("loginMessage", "Sikeres bejelentkezés!");
 
-                // 🔹 Ellenőrizzük, hogy van-e elmentett oldal
-                const redirectPage = localStorage.getItem("redirectAfterLogin") || "profile.html";
-
-                // 🔹 Töröljük a localStorage-ból, hogy ne navigáljon mindig vissza
-                localStorage.removeItem("redirectAfterLogin");
-
-                // 🔹 Átirányítjuk a felhasználót az előző oldalra vagy a profil oldalra
-                window.location.href = redirectPage;
+                // Átirányítás a profile.html-re
+                window.location.href = "profile.html";
             } else {
-                alert("Hibás email vagy jelszó!");
+                showMessage("Hibás email vagy jelszó!", 'error');
             }
         } catch (error) {
             console.error("Hiba a bejelentkezés során:", error);
-            alert("Hiba történt. Próbáld újra!");
+            showMessage("Hiba történt. Próbáld újra!", 'error');
         }
     });
 });
 
+function showMessage(message, type = 'error', duration = 3000) {
+    const messageBox = document.getElementById('message-box');
+    messageBox.textContent = message;
+    messageBox.className = `message-box ${type} show`;
 
+    // Az üzenet eltüntetése a megadott idő után
+    setTimeout(() => {
+        messageBox.classList.remove('show');
+    }, duration);
+}

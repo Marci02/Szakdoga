@@ -26,7 +26,7 @@ if (strlen($password))
 
 
 if (empty($firstname) || empty($lastname) || empty($email) || empty($password)) {
-    echo json_encode(['message' => 'All fields are required']);
+    echo json_encode(['message' => 'Kérlek töltsd ki az összes mezőt!']);
     exit;
 }
 
@@ -40,7 +40,7 @@ mysqli_stmt_fetch($stmt);
 mysqli_stmt_close($stmt);
 
 if ($emailExists) {
-    echo json_encode(['message' => 'Email already registered']);
+    echo json_encode(['message' => 'Email már létezik']);
     exit;
 }
 
@@ -53,12 +53,19 @@ $stmt = mysqli_prepare($dbconn, $query);
 mysqli_stmt_bind_param($stmt, 'ssss', $firstname, $lastname, $email, $hashedPassword);
 
 if (mysqli_stmt_execute($stmt)) {
-    echo json_encode(['message' => 'Registration successful']);
+    echo json_encode([
+        'success' => true,
+        'message' => 'Sikeres regisztráció!',
+        'redirect' => '/ossztermek.html' // Az oldal, ahová átirányítod a felhasználót
+    ]);
     exit;
 } else {
-    echo json_encode(['message' => 'Error inserting user: ' . mysqli_error($dbconn)]);
+    echo json_encode([
+        'success' => false,
+        'message' => 'Hiba a regisztráció során' . mysqli_error($dbconn)
+    ]);
+    exit;
 }
-
 mysqli_stmt_close($stmt);
 mysqli_close($dbconn);
 ?>
