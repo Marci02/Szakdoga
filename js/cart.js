@@ -102,25 +102,25 @@ function displayCartItems() {
 function removeFromCart(productId) {
   // Küldjünk törlési kérést a backendnek
   fetch("backend/kosarboltorol.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ product_id: productId })
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ product_id: productId })
   })
-    .then(response => response.json())
-    .then(result => {
+  .then(response => response.json())
+  .then(result => {
       if (result.success) {
-        alert("A termék sikeresen törölve a kosárból.");
-        displayCartItems(); // Frissítsük a kosár tartalmát
+          showMessage("A termék sikeresen törölve a kosárból.", 'success');
+          displayCartItems(); // Frissítsük a kosár tartalmát
       } else {
-        alert("Hiba történt a törlés során: " + (result.error || "Ismeretlen hiba"));
+          showMessage("Hiba történt a törlés során: " + (result.error || "Ismeretlen hiba"), 'error');
       }
-    })
-    .catch(error => {
+  })
+  .catch(error => {
       console.error("Hiba a törlés során:", error);
-      alert("Hiba történt a törlés során.");
-    });
+      showMessage("Hiba történt a törlés során.", 'error');
+  });
 }
 
 function updateQuantity(productId, newQuantity) {
@@ -154,27 +154,43 @@ function updateCartTotal() {
 
 function checkout() {
   fetch("backend/checkout.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({}) // Ha szükséges, itt küldhetsz adatokat
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json"
+      },
+      body: JSON.stringify({}) // Ha szükséges, itt küldhetsz adatokat
   })
-    .then(response => response.json())
-    .then(result => {
+  .then(response => response.json())
+  .then(result => {
       if (result.success) {
-        alert("A vásárlás sikeresen befejeződött!");
-        displayCartItems(); // Frissítsük a kosár tartalmát
+          showMessage("A vásárlás sikeresen befejeződött!", 'success');
+          displayCartItems(); // Frissítsük a kosár tartalmát
       } else {
-        alert("Hiba történt a vásárlás során: " + (result.error || "Ismeretlen hiba"));
+          showMessage("Hiba történt a vásárlás során: " + (result.error || "Ismeretlen hiba"), 'error');
       }
-    })
-    .catch(error => {
+  })
+  .catch(error => {
       console.error("Hiba a vásárlás során:", error);
-      alert("Hiba történt a vásárlás során.");
-    });
+      showMessage("Hiba történt a vásárlás során.", 'error');
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   displayCartItems();
 });
+
+function showMessage(message, type = 'error', duration = 3000) {
+  const messageBox = document.getElementById('message-box');
+  if (!messageBox) {
+      console.error("A 'message-box' elem nem található!");
+      return;
+  }
+
+  messageBox.textContent = message;
+  messageBox.className = `message-box ${type} show`;
+
+  // Az üzenet eltüntetése a megadott idő után
+  setTimeout(() => {
+      messageBox.classList.remove('show');
+  }, duration);
+}

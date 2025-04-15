@@ -7,19 +7,40 @@ function loadUserProducts() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                const productList = document.getElementById("product-list");
-                productList.innerHTML = "";
+                const availableProductsContainer = document.getElementById("product-list");
+                const soldProductsContainer = document.getElementById("sold-list");
 
-                data.products.forEach(product => {
+                // Töröljük a korábbi tartalmat
+                availableProductsContainer.innerHTML = "";
+                soldProductsContainer.innerHTML = "";
+
+                // Elérhető termékek megjelenítése
+                data.availableProducts.forEach(product => {
                     const productItem = document.createElement("div");
                     productItem.classList.add("product-item");
                     productItem.innerHTML = `
                         <img src="uploads/${product.img_url}" alt="${product.name}" class="product-image">
                         <h3>${product.name}</h3>
+                        <p>Ár: ${product.price} Ft</p>
                         <button class="editButton" onclick="openEditModal(${product.id}, '${product.name}', '${product.img_url}', ${product.price}, '${product.description}', ${product.quantity}, '${product.size}', '${product.condition}')">Szerkesztés</button>
                         <button class="deleteButton" onclick="deleteProduct(${product.id})">Törlés</button>
                     `;
-                    productList.appendChild(productItem);
+                    availableProductsContainer.appendChild(productItem);
+                });
+
+                // Eladott termékek megjelenítése
+                data.soldProducts.forEach(product => {
+                    const productItem = document.createElement("div");
+                    productItem.classList.add("product-item");
+                    productItem.style.display = "flex";
+                    productItem.style.justifyContent = "space-between";
+                    productItem.innerHTML = `
+                        <img src="uploads/${product.img_url}" alt="${product.name}" class="product-image">
+                        <h3>${product.name}</h3>
+                        <p style="margin-left: 10px">Ár: ${product.price} Ft</p>
+                        <p style="color: red;">Eladott</p>
+                    `;
+                    soldProductsContainer.appendChild(productItem);
                 });
             } else {
                 console.error("Hiba a termékek lekérésekor:", data.message);
