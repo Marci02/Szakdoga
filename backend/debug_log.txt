@@ -3466,3 +3466,45 @@ SESSION: Array
     [street_address] => Árpád utca
     [house_number] => 31
 )
+POST: Array
+(
+    [name] => Nocta 
+    [price] => 132
+    [stair] => 3
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-15T15:45
+    [fileSize] => 44
+    [fileCondition] => Használt
+    [fileDesc] => asdasd d a dasd as
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => letöltés.jpg
+            [full_path] => letöltés.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpD69B.tmp
+            [error] => 0
+            [size] => 8838
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 6
+    [firstname] => teszt
+    [lastname] => adat
+    [email] => teszt2@gmail.com
+    [phone_number] => 06203524679
+    [street] => Árpád utca
+    [address] => 26
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád megye
+    [image] => uploads/profile_6.jpg
+    [created] => 2025-04-15 09:18:58
+)

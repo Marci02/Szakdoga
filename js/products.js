@@ -140,3 +140,51 @@ function showMessage(message, type = 'error', duration = 3000) {
         messageBox.classList.remove('show');
     }, duration);
 }
+
+let productToDelete = null; // Globális változó a törlendő termék ID-jának tárolására
+
+function deleteProduct(productId) {
+    // Tároljuk a törlendő termék ID-ját
+    productToDelete = productId;
+
+    // Megjelenítjük a megerősítő modalt
+    const deleteModal = document.getElementById("delete-confirm-modal");
+    deleteModal.style.display = "flex";
+
+    // Eseményfigyelők a modal gombjaihoz
+    const confirmButton = document.getElementById("confirm-delete-button");
+    const cancelButton = document.getElementById("cancel-delete-button");
+
+    // Ha a felhasználó megerősíti a törlést
+    confirmButton.onclick = () => {
+        fetch("backend/delete_Product.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ product_id: productToDelete })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showMessage("A termék törölve lett.", 'success');
+                loadUserProducts(); // Terméklista újratöltése
+            } else {
+                showMessage("Hiba történt: " + data.message, 'error');
+            }
+        })
+        .catch(error => {
+            console.error("Hálózati hiba:", error);
+            showMessage("Hálózati hiba történt!", 'error');
+        })
+        .finally(() => {
+            // Bezárjuk a modalt
+            deleteModal.style.display = "none";
+            productToDelete = null;
+        });
+    };
+
+    // Ha a felhasználó megszakítja a törlést
+    cancelButton.onclick = () => {
+        deleteModal.style.display = "none";
+        productToDelete = null;
+    };
+}

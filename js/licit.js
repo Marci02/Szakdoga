@@ -353,9 +353,6 @@ function fetchAllAuctions() {
           
 
           productList.appendChild(card);
-          card.addEventListener("click", function () {
-            showProductDetails(auction);
-          });
 
           // Ha van countdown funkciód
           if (typeof startCountdown === "function") {
@@ -450,46 +447,6 @@ function createAuctionModal() {
     bigImg.document.write(`<img src="${this.src}" style="width:100%">`);
   };
 }
-
-
-function showProductDetails(auction) {
-  createAuctionModal(); // biztosan létrehozza, ha nincs
-
-  const modal = document.getElementById("auctionModal");
-  const modalTitle = document.getElementById("modalTitle");
-  const modalImage = document.getElementById("modalImage");
-  const modalDetails = document.getElementById("modalDetails");
-  const bidButton = document.getElementById("bidButton");
-
-  modalTitle.textContent = auction.name;
-  modalImage.src = auction.img_url;
-  modalDetails.innerHTML = `
-    <p><strong>Leírás:</strong> ${auction.description || 'Nincs leírás.'}</p>
-    <p><strong>Jelenlegi ár:</strong> <span id="modalPrice">${auction.price}</span> Ft</p>
-    <p><strong>Licit lépcső:</strong> ${auction.stair} Ft</p>
-    <p><strong>Méret:</strong> ${auction.size || 'N/A'}</p>
-    <p><strong>Állapot:</strong> ${auction.condition || 'N/A'}</p>
-    <p><strong>Márka:</strong> ${auction.brand_name || 'N/A'}</p>
-    <p><strong>Kategória:</strong> ${auction.category_name || 'N/A'}</p>
-    <p><strong>Licit vége:</strong> ${auction.auction_end}</p>
-  `;
-
-  bidButton.onclick = function () {
-    const priceEl = document.getElementById("modalPrice");
-    let currentPrice = parseInt(priceEl.textContent);
-    currentPrice += parseInt(auction.stair);
-    priceEl.textContent = currentPrice;
-
-    // Ide jöhetne egy fetch POST szerverre, ha szeretnél
-    console.log(`🔼 Új licit: ${currentPrice} Ft`);
-  };
-
-  modal.style.display = "block";
-}
-
-
-
-
 
 // Licitálás funkció
 function placeBid() {
