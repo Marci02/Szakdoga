@@ -3422,3 +3422,47 @@ SESSION: Array
     [street_address] => Árpád utca
     [house_number] => 31
 )
+POST: Array
+(
+    [name] => Nike Air Jordan 1
+    [price] => 31224
+    [stair] => 12
+    [fileCategory] => 1
+    [fileBrand] => Adidas
+    [auction_end] => 2025-04-15T10:29
+    [fileSize] => M
+    [fileCondition] => Használt
+    [fileDesc] => asdasd as das das as da
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => letöltés.jpg
+            [full_path] => letöltés.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php6AC2.tmp
+            [error] => 0
+            [size] => 8838
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => teszt@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád megye
+    [image] => 
+    [created] => 2025-04-11 10:49:06
+    [street_address] => Árpád utca
+    [house_number] => 31
+)
