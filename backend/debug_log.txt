@@ -3508,3 +3508,339 @@ SESSION: Array
     [image] => uploads/profile_6.jpg
     [created] => 2025-04-15 09:18:58
 )
+POST: Array
+(
+    [name] => Adidas boost
+    [price] => 12314451
+    [stair] => 123412
+    [fileCategory] => 2
+    [fileBrand] => Adidas
+    [auction_end] => 2025-04-15T18:08
+    [fileSize] => 44
+    [fileCondition] => Használt
+    [fileDesc] => haudfhjkasjd asld fjkosdj faslk sdjk akjs
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => default_profile.jpg
+            [full_path] => default_profile.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpC978.tmp
+            [error] => 0
+            [size] => 17436
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 6
+    [firstname] => teszt
+    [lastname] => adat
+    [email] => teszt2@gmail.com
+    [phone_number] => 06203524679
+    [street] => Árpád utca
+    [address] => 26
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád megye
+    [image] => uploads/profile_6.jpg
+    [created] => 2025-04-15 09:18:58
+)
+POST: Array
+(
+    [name] => Anyad
+    [price] => 3124
+    [stair] => 132
+    [fileCategory] => 2
+    [fileBrand] => Adidas
+    [auction_end] => 2025-04-15T13:21
+    [fileSize] => 41
+    [fileCondition] => Használt
+    [fileDesc] => asdfhagsdcasdbcashdcasd sdjf aio
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => default_profile.jpg
+            [full_path] => default_profile.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpACAE.tmp
+            [error] => 0
+            [size] => 17436
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 6
+    [firstname] => teszt
+    [lastname] => adat
+    [email] => teszt2@gmail.com
+    [phone_number] => 06203524679
+    [street] => Árpád utca
+    [address] => 26
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád megye
+    [image] => uploads/profile_6.jpg
+    [created] => 2025-04-15 09:18:58
+)
+POST: Array
+(
+    [name] => asdasdas
+    [price] => 123
+    [stair] => 1
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-15T13:19
+    [fileSize] => 43
+    [fileCondition] => Használt
+    [fileDesc] => 1323125ads
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => default_profile.jpg
+            [full_path] => default_profile.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php5B3F.tmp
+            [error] => 0
+            [size] => 17436
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 6
+    [firstname] => teszt
+    [lastname] => adat
+    [email] => teszt2@gmail.com
+    [phone_number] => 06203524679
+    [street] => Árpád utca
+    [address] => 26
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád megye
+    [image] => uploads/profile_6.jpg
+    [created] => 2025-04-15 09:18:58
+)
+POST: Array
+(
+    [name] => asdasd
+    [price] => 123
+    [stair] => 1
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-15T13:20
+    [fileSize] => 44
+    [fileCondition] => Használt
+    [fileDesc] => asdasdasd
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => letöltés.jpg
+            [full_path] => letöltés.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php28C.tmp
+            [error] => 0
+            [size] => 8838
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 6
+    [firstname] => teszt
+    [lastname] => adat
+    [email] => teszt2@gmail.com
+    [phone_number] => 06203524679
+    [street] => Árpád utca
+    [address] => 26
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád megye
+    [image] => uploads/profile_6.jpg
+    [created] => 2025-04-15 09:18:58
+)
+POST: Array
+(
+    [name] => asdasdasd
+    [price] => 123
+    [stair] => 12
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-15T17:21
+    [fileSize] => 44
+    [fileCondition] => Újszerű
+    [fileDesc] => asdasda sd asd as
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => default_profile.jpg
+            [full_path] => default_profile.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpD8C4.tmp
+            [error] => 0
+            [size] => 17436
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 6
+    [firstname] => teszt
+    [lastname] => adat
+    [email] => teszt2@gmail.com
+    [phone_number] => 06203524679
+    [street] => Árpád utca
+    [address] => 26
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád megye
+    [image] => uploads/profile_6.jpg
+    [created] => 2025-04-15 09:18:58
+)
+POST: Array
+(
+    [name] => asdasdas
+    [price] => 312
+    [stair] => 12
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-15T15:24
+    [fileSize] => 40
+    [fileCondition] => Használt
+    [fileDesc] => asdadas
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => default_profile.jpg
+            [full_path] => default_profile.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php2CA8.tmp
+            [error] => 0
+            [size] => 17436
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 6
+    [firstname] => teszt
+    [lastname] => adat
+    [email] => teszt2@gmail.com
+    [phone_number] => 06203524679
+    [street] => Árpád utca
+    [address] => 26
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád megye
+    [image] => uploads/profile_6.jpg
+    [created] => 2025-04-15 09:18:58
+)
+POST: Array
+(
+    [name] => asdasda
+    [price] => 312
+    [stair] => 1
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-15T15:26
+    [fileSize] => 44
+    [fileCondition] => Használt
+    [fileDesc] => asdasda asf asdas 
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => letöltés.jpg
+            [full_path] => letöltés.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php7560.tmp
+            [error] => 0
+            [size] => 8838
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 6
+    [firstname] => teszt
+    [lastname] => adat
+    [email] => teszt2@gmail.com
+    [phone_number] => 06203524679
+    [street] => Árpád utca
+    [address] => 26
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád megye
+    [image] => uploads/profile_6.jpg
+    [created] => 2025-04-15 09:18:58
+)
+POST: Array
+(
+    [name] => adfhads
+    [price] => 31
+    [stair] => 1
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-15T13:36
+    [fileSize] => 43
+    [fileCondition] => Használt
+    [fileDesc] => saadf as
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => default_profile.jpg
+            [full_path] => default_profile.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php779B.tmp
+            [error] => 0
+            [size] => 17436
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 6
+    [firstname] => teszt
+    [lastname] => adat
+    [email] => teszt2@gmail.com
+    [phone_number] => 06203524679
+    [street] => Árpád utca
+    [address] => 26
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád megye
+    [image] => uploads/profile_6.jpg
+    [created] => 2025-04-15 09:18:58
+)

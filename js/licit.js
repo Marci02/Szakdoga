@@ -218,26 +218,30 @@ function DataUpload() {
   formData.append("fileCondition", condition);
   formData.append("fileDesc", desc);
   if (image) {
-    formData.append("image", image);
+      formData.append("image", image);
   }
 
   fetch("backend/licitupload.php", {
     method: "POST",
     body: formData,
-  })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
+})
+.then(res => res.json())
+.then(data => {
+    console.log("Backend válasz:", data); // Ellenőrizd a konzolban a backend válaszát
+    if (data.status === "success") {
+        showMessage(data.message || "A termék sikeresen feltöltve!", 'success');
         closeUploadModal();
-
-        // 🔁 Frissítjük a terméklistát
-        fetchAllAuctions();
-      
-      
-    })
-    .catch(error => {
-      console.error("Hiba a feltöltés során:", error);
-    });
+        fetchAllAuctions(); // Frissítjük a terméklistát
+    } else {
+        showMessage("Hiba történt a feltöltés során: " + (data.message || "Ismeretlen hiba"), 'error');
+        closeUploadModal();
+    }
+})
+.catch(error => {
+    console.error("Hiba a feltöltés során:", error);
+    showMessage("Hiba történt a feltöltés során.", 'error');
+    closeUploadModal();
+});
 }
 
 // Feltöltés modal bezárása
@@ -582,7 +586,21 @@ function openImageModal(imageUrl) {
   document.body.appendChild(imageModal);
 }
 
+function showMessage(message, type = 'error', duration = 3000) {
+  const messageBox = document.getElementById('message-box');
+  if (!messageBox) {
+      console.error("A 'message-box' elem nem található!");
+      return;
+  }
 
+  messageBox.textContent = message;
+  messageBox.className = `message-box ${type} show`;
+
+  // Az üzenet eltüntetése a megadott idő után
+  setTimeout(() => {
+      messageBox.classList.remove('show');
+  }, duration);
+}
 
 
 
