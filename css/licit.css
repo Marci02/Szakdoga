@@ -440,6 +440,21 @@ nav.header-sticky {
   color: #524f4f;
 }
 
+@keyframes cardAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.card-appear {
+  animation: cardAppear 0.5s ease-out;
+}
+
 #modalOverlay {
   position: fixed;
   top: 0;

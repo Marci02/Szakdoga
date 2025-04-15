@@ -20,7 +20,7 @@ $brand_name = trim($_POST['fileBrand']);
 $uploaded_at = date("Y-m-d H:i:s");
 $auction_start = $uploaded_at;
 $auction_end = $_POST['auction_end'];
-$size = isset($_POST['fileSize']) ? trim($_POST['fileSize']) : null; // 👈 új: méret
+$size = isset($_POST['fileSize']) ? trim($_POST['fileSize']) : null;
 $condition = isset($_POST['fileCondition']) ? trim($_POST['fileCondition']) : null;
 $description = isset($_POST['fileDesc']) ? trim($_POST['fileDesc']) : null;
 
@@ -102,11 +102,29 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
 }
 
 // 📝 Adatok beszúrása az adatbázisba
-$sql = "INSERT INTO auction (user_id, name, price, stair, image_id, category_id, brand_id, size, uploaded_at, auction_start, auction_end, `condition`, `description`) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO auction (user_id, name, price, ho, ho_id, stair, image_id, category_id, brand_id, size, uploaded_at, auction_start, auction_end, `condition`, `description`) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $dbconn->prepare($sql);
 if ($stmt) {
-    $stmt->bind_param("isiiiisssssss", $user_id, $name, $price, $stair, $image_id, $category_id, $brand_id, $size, $uploaded_at, $auction_start, $auction_end, $condition, $description);
+    $stmt->bind_param(
+        "isiiiiissssssss",
+        $user_id,        // user_id
+        $name,           // name
+        $price,          // price
+        $price,          // ho (aktuális ár)
+        $user_id,        // ho_id (aktuális felhasználó azonosítója)
+        $stair,          // stair
+        $image_id,       // image_id
+        $category_id,    // category_id
+        $brand_id,       // brand_id
+        $size,           // size
+        $uploaded_at,    // uploaded_at
+        $auction_start,  // auction_start
+        $auction_end,    // auction_end
+        $condition,      // condition
+        $description     // description
+    );
+
     if ($stmt->execute()) {
         echo json_encode(["status" => "success", "message" => "Aukció sikeresen létrehozva!"]);
     } else {

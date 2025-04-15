@@ -3844,3 +3844,1083 @@ SESSION: Array
     [image] => uploads/profile_6.jpg
     [created] => 2025-04-15 09:18:58
 )
+POST: Array
+(
+    [name] => 12341234
+    [price] => 2143123
+    [stair] => 412341234
+    [fileCategory] => 1
+    [fileBrand] => 12341234
+    [auction_end] => 2025-04-15T17:07
+    [fileSize] => M
+    [fileCondition] => Újszerű
+    [fileDesc] => 431243
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => számla.jfif
+            [full_path] => számla.jfif
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php996E.tmp
+            [error] => 0
+            [size] => 25677
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 41234
+    [price] => 1431234
+    [stair] => 12341234
+    [fileCategory] => 1
+    [fileBrand] => 431243
+    [auction_end] => 2025-04-15T17:15
+    [fileSize] => S
+    [fileCondition] => Újszerű
+    [fileDesc] => 341243
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 12.jpg
+            [full_path] => 12.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php4656.tmp
+            [error] => 0
+            [size] => 105226
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => Nike Air Jordan 1
+    [price] => 12000
+    [stair] => 150
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-15T23:27
+    [fileSize] => 45
+    [fileCondition] => Újszerű
+    [fileDesc] => Szia
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => számla.jfif
+            [full_path] => számla.jfif
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpA43E.tmp
+            [error] => 0
+            [size] => 25677
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => dwadw
+    [price] => 12000
+    [stair] => 150
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-15T22:28
+    [fileSize] => 47
+    [fileCondition] => Új
+    [fileDesc] => 123123
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 11.jpg
+            [full_path] => 11.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php8C8B.tmp
+            [error] => 0
+            [size] => 105420
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 12414
+    [price] => 12000
+    [stair] => 120
+    [fileCategory] => 1
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-15T23:32
+    [fileSize] => M
+    [fileCondition] => Újszerű
+    [fileDesc] => 4124
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => en.jpg
+            [full_path] => en.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpE32A.tmp
+            [error] => 0
+            [size] => 85713
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 42134
+    [price] => 14123
+    [stair] => 412341234
+    [fileCategory] => 1
+    [fileBrand] => 34124
+    [auction_end] => 2025-04-15T22:20
+    [fileSize] => S
+    [fileCondition] => Újszerű
+    [fileDesc] => 342143
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 12.jpg
+            [full_path] => 12.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpB812.tmp
+            [error] => 0
+            [size] => 105226
+        )
+
+)
+
+SESSION: Array
+(
+)
+POST: Array
+(
+    [name] => 431241
+    [price] => 134123
+    [stair] => 412341234
+    [fileCategory] => 1
+    [fileBrand] => 431243
+    [auction_end] => 2025-04-15T22:21
+    [fileSize] => S
+    [fileCondition] => Használt
+    [fileDesc] => 43124
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 10.jpg
+            [full_path] => 10.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpA5A.tmp
+            [error] => 0
+            [size] => 108502
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 41234
+    [price] => 123412
+    [stair] => 341234
+    [fileCategory] => 2
+    [fileBrand] => 431243
+    [auction_end] => 2025-04-15T23:04
+    [fileSize] => 47
+    [fileCondition] => Újszerű
+    [fileDesc] => 341243
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 462569078_544513308497082_4231232690415948069_n.jpg
+            [full_path] => 462569078_544513308497082_4231232690415948069_n.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php66E0.tmp
+            [error] => 0
+            [size] => 80269
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 41234
+    [price] => 123412
+    [stair] => 341234123
+    [fileCategory] => 1
+    [fileBrand] => 413243
+    [auction_end] => 2025-04-15T23:11
+    [fileSize] => M
+    [fileCondition] => Újszerű
+    [fileDesc] => 43124
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 11.jpg
+            [full_path] => 11.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpEDAC.tmp
+            [error] => 0
+            [size] => 105420
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 423412
+    [price] => 123412
+    [stair] => 34123412
+    [fileCategory] => 2
+    [fileBrand] => 41234
+    [auction_end] => 2025-04-15T23:17
+    [fileSize] => 46
+    [fileCondition] => Újszerű
+    [fileDesc] => 41234
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 10.jpg
+            [full_path] => 10.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php3B29.tmp
+            [error] => 0
+            [size] => 108502
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 3214123
+    [price] => 341234
+    [stair] => 12341234
+    [fileCategory] => 1
+    [fileBrand] => 412341
+    [auction_end] => 2025-04-15T23:16
+    [fileSize] => M
+    [fileCondition] => Újszerű
+    [fileDesc] => 4312412
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 11.jpg
+            [full_path] => 11.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpB125.tmp
+            [error] => 0
+            [size] => 105420
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 41234123
+    [price] => 41234
+    [stair] => 12341234
+    [fileCategory] => 1
+    [fileBrand] => 4312431
+    [auction_end] => 2025-04-15T23:19
+    [fileSize] => M
+    [fileCondition] => Használt
+    [fileDesc] => 43124213
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 11.jpg
+            [full_path] => 11.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php2A25.tmp
+            [error] => 0
+            [size] => 105420
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 4123413
+    [price] => 134134
+    [stair] => 12341234
+    [fileCategory] => 2
+    [fileBrand] => 4321431
+    [auction_end] => 2025-04-15T23:20
+    [fileSize] => 47
+    [fileCondition] => Újszerű
+    [fileDesc] => 341243
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 12.jpg
+            [full_path] => 12.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpB29B.tmp
+            [error] => 0
+            [size] => 105226
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 41234123
+    [price] => 4213
+    [stair] => 21341234
+    [fileCategory] => 1
+    [fileBrand] => 3142341
+    [auction_end] => 2025-04-15T23:23
+    [fileSize] => S
+    [fileCondition] => Újszerű
+    [fileDesc] => 3412341
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 462569078_544513308497082_4231232690415948069_n.jpg
+            [full_path] => 462569078_544513308497082_4231232690415948069_n.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpE489.tmp
+            [error] => 0
+            [size] => 80269
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 421342
+    [price] => 1234
+    [stair] => 12341234
+    [fileCategory] => 1
+    [fileBrand] => 4312431
+    [auction_end] => 2025-04-15T23:23
+    [fileSize] => M
+    [fileCondition] => Újszerű
+    [fileDesc] => 341243
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 462569078_544513308497082_4231232690415948069_n.jpg
+            [full_path] => 462569078_544513308497082_4231232690415948069_n.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpCBEC.tmp
+            [error] => 0
+            [size] => 80269
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 412341
+    [price] => 341234
+    [stair] => 12342134
+    [fileCategory] => 2
+    [fileBrand] => 341234
+    [auction_end] => 2025-04-15T23:24
+    [fileSize] => 46
+    [fileCondition] => Újszerű
+    [fileDesc] => 4123412
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 12.jpg
+            [full_path] => 12.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php195D.tmp
+            [error] => 0
+            [size] => 105226
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 4123412341
+    [price] => 341234
+    [stair] => 12341234
+    [fileCategory] => 2
+    [fileBrand] => 4321431
+    [auction_end] => 2025-04-15T05:33
+    [fileSize] => 48
+    [fileCondition] => Újszerű
+    [fileDesc] => 4123412
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 12.jpg
+            [full_path] => 12.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpCA73.tmp
+            [error] => 0
+            [size] => 105226
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 42314123
+    [price] => 14123
+    [stair] => 412341234
+    [fileCategory] => 1
+    [fileBrand] => 4312431
+    [auction_end] => 2025-04-15T23:41
+    [fileSize] => XS
+    [fileCondition] => Új
+    [fileDesc] => 431243
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 12.jpg
+            [full_path] => 12.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpD8A3.tmp
+            [error] => 0
+            [size] => 105226
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 2314123
+    [price] => 12341234
+    [stair] => 12341234
+    [fileCategory] => 1
+    [fileBrand] => 431243
+    [auction_end] => 2025-04-15T23:45
+    [fileSize] => S
+    [fileCondition] => Újszerű
+    [fileDesc] => 341234
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 12.jpg
+            [full_path] => 12.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpC623.tmp
+            [error] => 0
+            [size] => 105226
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 423141
+    [price] => 1234123
+    [stair] => 41234123
+    [fileCategory] => 1
+    [fileBrand] => 41234
+    [auction_end] => 2025-04-15T23:54
+    [fileSize] => S
+    [fileCondition] => Használt
+    [fileDesc] => 41234
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 12.jpg
+            [full_path] => 12.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpCD4C.tmp
+            [error] => 0
+            [size] => 105226
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 2314123
+    [price] => 123412
+    [stair] => 341234123
+    [fileCategory] => 1
+    [fileBrand] => 431243
+    [auction_end] => 2025-04-15T04:51
+    [fileSize] => S
+    [fileCondition] => Használt
+    [fileDesc] => 41234
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 462569078_544513308497082_4231232690415948069_n.jpg
+            [full_path] => 462569078_544513308497082_4231232690415948069_n.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php53AE.tmp
+            [error] => 0
+            [size] => 80269
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 12341234
+    [price] => 42134
+    [stair] => 21341234
+    [fileCategory] => 1
+    [fileBrand] => 412341
+    [auction_end] => 2025-04-15T23:56
+    [fileSize] => M
+    [fileCondition] => Használt
+    [fileDesc] => 4123431
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 462569078_544513308497082_4231232690415948069_n.jpg
+            [full_path] => 462569078_544513308497082_4231232690415948069_n.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php58CB.tmp
+            [error] => 0
+            [size] => 80269
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 41234
+    [price] => 21341234
+    [stair] => 12341234
+    [fileCategory] => 1
+    [fileBrand] => 412341
+    [auction_end] => 2025-04-15T23:59
+    [fileSize] => M
+    [fileCondition] => Újszerű
+    [fileDesc] => 431243
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 12.jpg
+            [full_path] => 12.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpA07A.tmp
+            [error] => 0
+            [size] => 105226
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 42134123
+    [price] => 14314
+    [stair] => 12341234
+    [fileCategory] => 1
+    [fileBrand] => 412431
+    [auction_end] => 2025-04-15T23:59
+    [fileSize] => S
+    [fileCondition] => Újszerű
+    [fileDesc] => 41243
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 462569078_544513308497082_4231232690415948069_n.jpg
+            [full_path] => 462569078_544513308497082_4231232690415948069_n.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpD00.tmp
+            [error] => 0
+            [size] => 80269
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 4213412
+    [price] => 13412
+    [stair] => 34123412
+    [fileCategory] => 2
+    [fileBrand] => 4123341
+    [auction_end] => 2025-04-16T00:06
+    [fileSize] => 46
+    [fileCondition] => Használt
+    [fileDesc] => 41234
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 11.jpg
+            [full_path] => 11.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpBF18.tmp
+            [error] => 0
+            [size] => 105420
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)
+POST: Array
+(
+    [name] => 431241
+    [price] => 12341234
+    [stair] => 12341234
+    [fileCategory] => 1
+    [fileBrand] => 4123412
+    [auction_end] => 2025-04-16T00:06
+    [fileSize] => XS
+    [fileCondition] => Újszerű
+    [fileDesc] => 41234
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 11.jpg
+            [full_path] => 11.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php1826.tmp
+            [error] => 0
+            [size] => 105420
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Sámuel
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-14 13:47:58
+)

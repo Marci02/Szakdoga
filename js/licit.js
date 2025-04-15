@@ -306,7 +306,8 @@ function fetchAllAuctions() {
 
         data.data.forEach((auction) => {
           const card = document.createElement("div");
-          card.className = "product-card";
+          card.className = "product-card card-appear";
+          card.style.animation = "cardAppear 0.5s ease-out";
           card.style.borderRadius = "15px";
           card.style.boxShadow = "0 10px 20px rgba(0, 0, 0, 0.1)";
           card.style.marginBottom = "20px";
@@ -322,6 +323,7 @@ function fetchAllAuctions() {
             card.style.transform = "scale(1)";
           });
 
+          // Frissített HTML, hogy az aktuális ár (ho) jelenjen meg
           card.innerHTML = `
             <h3 style="font-size: 1.4em; font-weight: bold; color: #333; text-align: center; margin-top: 10px;">${auction.name}</h3>
             <div style="text-align: center; margin-bottom: 15px;">
@@ -331,30 +333,31 @@ function fetchAllAuctions() {
               <div style="font-size: 1em; font-weight: bold; color: #555; margin-top: 10px;">
               </div>
               <div class="product-info">
-              <p>Licit lépcső: ${auction.stair} Ft</p>
+              <p>Licit lépcső: ${formatPrice(auction.stair)} Ft</p>
               <p>Méret: ${auction.size || 'N/A'}</p>
-              
               </div>
-              <p id="price">${formatPrice(auction.price)} Ft</p>
+              <p id="price-${auction.auction_id}">${formatPrice(auction.price)} Ft</p> <!-- Az aktuális ár (ho) jelenik meg -->
               <div style="font-size: 1em; color: #e74c3c; margin-top: 15px;">
               <p>Licit vége: <span class="countdown" id="countdown-${auction.auction_id}">Számolás...</span></p>
               </div>
             </div>
           `;
 
+          // Kattintás esemény a részletek megjelenítéséhez
           card.addEventListener("click", function () {
             showProductDetails(
               auction.name,
               auction.description || "Nincs leírás.",
               auction.img_url,
-              auction.price,
+              auction.price, // Az aktuális ár (ho)
               auction.stair,
               auction.size,
               auction.condition,
-              auction.brand_name
+              auction.brand_name,
+              auction.auction_id, // auctionId
+              auction.user_id // userId
             );
           });
-          
 
           productList.appendChild(card);
 
@@ -386,7 +389,7 @@ window.addEventListener("DOMContentLoaded", function () {
   fetchAllAuctions();
 });
 
-function showProductDetails(title, description, imageUrl, price, bidStep, size, condition, brand) {
+function showProductDetails(title, description, imageUrl, price, bidStep, size, condition, brand, auctionId, userId,) {
   // Ha már nyitva van modal, töröljük
   let existingModal = document.getElementById("productModalOverlay");
   if (existingModal) {
@@ -423,35 +426,41 @@ function showProductDetails(title, description, imageUrl, price, bidStep, size, 
   modal.style.fontFamily = "Arial, sans-serif";
   modal.style.color = "#333";
 
+  // Az aktuális ár frissítése a kártyáról
+  const cardPriceElement = document.querySelector(`#price-${auctionId}`);
+  const currentPrice = cardPriceElement
+    ? parseInt(cardPriceElement.textContent.replace(/\D/g, ""))
+    : price; // Ha nincs kártya, használjuk az eredeti árat
+
   // Tartalom beszúrása
   modal.innerHTML = `
-  <h2 style="text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 16px;">
-    ${title}
-  </h2>
+    <h2 style="text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 16px;">
+      ${title}
+    </h2>
 
-  <img src="${imageUrl}" alt="${title}" onclick="openImageModal('${imageUrl}')"
-    style="width: 100%; max-height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; cursor: pointer;">
+    <img src="${imageUrl}" alt="${title}" onclick="openImageModal('${imageUrl}')"
+      style="width: 100%; max-height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; cursor: pointer;">
 
-  <p style="margin: 0; font-size: 17px;"><strong>Alapár:</strong> ${formatPrice(price)} Ft</p>
-  <p><strong>Licit lépcső:</strong> ${formatPrice(bidStep)} Ft</p>
-  <p><strong>Méret:</strong> ${size}</p>
-  <p><strong>Állapot:</strong> ${condition}</p>
-  <p><strong>Márka:</strong> ${brand}</p>
-  
-  <textarea id="note" rows="5" style="width: 100%; resize: none; padding: 10px; margin-top: 10px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em; overflow-wrap: break-word; word-wrap: break-word; white-space: pre-wrap;" readonly>${description}</textarea>
-  
-  <p style="margin: 0;  font-size: 20px; margin-top:10px;"><strong>Aktuális ár:</strong> <span id="highestPrice">${formatPrice(price)}</span> Ft</p>
-  <div style="display: flex; gap: 12px; justify-content: space-between; margin-top: 12px;">
-    <button onclick="increaseModalPrice(${bidStep})"
-      style="flex: 1; padding: 12px 0; background-color: #000; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
-      Licitálás
-    </button>
-    <button onclick="closeProductModal()"
-      style="flex: 1; padding: 12px 0; background-color: #e5e7eb; color: #111827; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
-      Bezárás
-    </button>
-  </div>
-`;
+    <p style="margin: 0; font-size: 17px;"><strong>Alapár:</strong> ${formatPrice(price)} Ft</p>
+    <p><strong>Licit lépcső:</strong> ${formatPrice(bidStep)} Ft</p>
+    <p><strong>Méret:</strong> ${size}</p>
+    <p><strong>Állapot:</strong> ${condition}</p>
+    <p><strong>Márka:</strong> ${brand}</p>
+    
+    <textarea id="note" rows="5" style="width: 100%; resize: none; padding: 10px; margin-top: 10px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em; overflow-wrap: break-word; word-wrap: break-word; white-space: pre-wrap;" readonly>${description}</textarea>
+    
+    <p style="margin: 0;  font-size: 20px; margin-top:10px;"><strong>Aktuális ár:</strong> <span id="highestPrice">${formatPrice(currentPrice)}</span> Ft</p>
+    <div style="display: flex; gap: 12px; justify-content: space-between; margin-top: 12px;">
+      <button onclick="increaseModalPrice(${bidStep}, ${auctionId}, ${userId})"
+        style="flex: 1; padding: 12px 0; background-color: #000; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
+        Licitálás
+      </button>
+      <button onclick="closeProductModal()"
+        style="flex: 1; padding: 12px 0; background-color: #e5e7eb; color: #111827; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
+        Bezárás
+      </button>
+    </div>
+  `;
 
   // Hozzáadás a DOM-hoz
   modalOverlay.appendChild(modal);
@@ -477,15 +486,106 @@ function closeProductModal() {
   }
 }
 
-function increaseModalPrice(bidStep) {
+function increaseModalPrice(bidStep, auctionId, userId) {
+  console.log("Licitálás indítása:", { bidStep, auctionId, userId });
+
   const highestPriceElement = document.getElementById("highestPrice");
-  if (highestPriceElement) {
-    let currentPrice = parseInt(highestPriceElement.textContent.replace(" Ft", ""));
+  const bidButton = document.querySelector(`button[onclick="increaseModalPrice(${bidStep}, ${auctionId}, ${userId})"]`);
+
+  if (highestPriceElement && bidButton) {
+    // Eltávolítjuk a nem szám karaktereket a jelenlegi árból
+    let currentPrice = parseInt(highestPriceElement.textContent.replace(/\D/g, ""));
+    console.log("Jelenlegi ár (currentPrice):", currentPrice);
+
+    // Hozzáadjuk a licitlépcsőt
     currentPrice += bidStep;
-    highestPriceElement.textContent = currentPrice; // Frissítjük a legmagasabb árat
+    console.log("Új ár (currentPrice + bidStep):", currentPrice);
+
+    // CSS animáció létrehozása
+    const style = document.createElement("style");
+    style.innerHTML = `
+      @keyframes priceUpdate {
+        0% {
+          transform: translateY(100%);
+          opacity: 0;
+          color: green; /* Kezdő szín */
+        }
+        50% {
+          transform: translateY(0);
+          opacity: 1;
+          color: green; /* Animáció közben zöld */
+        }
+        100% {
+          transform: translateY(-100%);
+          opacity: 0;
+          color: inherit; /* Visszaáll az eredeti színre */
+        }
+      }
+      .price-update {
+        display: inline-block;
+        animation: priceUpdate 0.5s ease-in-out;
+      }
+    `;
+    document.head.appendChild(style);
+
+    // Animáció az aktuális ár frissítéséhez
+    highestPriceElement.classList.add("price-update");
+    setTimeout(() => {
+      highestPriceElement.textContent = `${currentPrice.toLocaleString()}`;
+      highestPriceElement.classList.remove("price-update");
+    }, 500); // Az animáció időtartamával szinkronban
+
+    // Frissítjük a kártyán megjelenő árat
+    const cardPriceElement = document.querySelector(`#price-${auctionId}`);
+    if (cardPriceElement) {
+      cardPriceElement.classList.add("price-update");
+      setTimeout(() => {
+        cardPriceElement.textContent = `${currentPrice.toLocaleString()} Ft`;
+        cardPriceElement.classList.remove("price-update");
+      }, 500); // Az animáció időtartamával szinkronban
+    }
+
+    // Letiltjuk a gombot, hogy ne lehessen többször kattintani
+    bidButton.disabled = true;
+    bidButton.style.cursor = "not-allowed";
+    bidButton.style.opacity = "0.6";
+
+    // Küldjük az adatokat a backendnek
+    fetch("backend/updatePrice.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        auctionId: auctionId,
+        currentPrice: currentPrice,
+        userId: userId,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "success") {
+          console.log("Ár és felhasználó sikeresen frissítve az adatbázisban.");
+        } else {
+          console.error("Hiba történt az ár frissítésekor:", data.message);
+          // Ha hiba történt, engedélyezzük újra a gombot
+          bidButton.disabled = false;
+          bidButton.style.cursor = "pointer";
+          bidButton.style.opacity = "1";
+        }
+      })
+      .catch((error) => {
+        console.error("Hiba a backend kérés során:", error);
+        // Ha hiba történt, engedélyezzük újra a gombot
+        bidButton.disabled = false;
+        bidButton.style.cursor = "pointer";
+        bidButton.style.opacity = "1";
+      });
+  } else {
+    console.error("Hiányzó elemek a licitáláshoz.");
   }
 }
-// Kép modal funkció
+
 function openImageModal(imageUrl) {
   var imageModal = document.createElement("div");
   imageModal.style.position = "fixed";
