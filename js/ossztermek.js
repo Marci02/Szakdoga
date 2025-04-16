@@ -278,7 +278,7 @@ function openProductModal(card) {
 
       <p><strong>Márka:</strong> ${card.dataset.productBrand}</p>
 
-      <p><strong>Márka:</strong> ${card.dataset.productCaategory}</p>
+      <p><strong>Kategória:</strong> ${card.dataset.productCategory}</p>
 
       
       <textarea id="note" rows="5" style="width: 100%; resize: none; padding: 10px; margin-top: 10px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em; overflow-wrap: break-word; word-wrap: break-word; white-space: pre-wrap;" readonly>${card.dataset.productDescription}</textarea>
