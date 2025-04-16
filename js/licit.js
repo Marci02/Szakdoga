@@ -323,18 +323,23 @@ function fetchAllAuctions() {
             card.style.transform = "scale(1)";
           });
 
-          // Frissített HTML, hogy az alapár és az aktuális ár külön jelenjen meg
+          // Frissített HTML, hogy az aktuális ár (ho) jelenjen meg
           card.innerHTML = `
             <h3 style="font-size: 1.4em; font-weight: bold; color: #333; text-align: center; margin-top: 10px;">${auction.name}</h3>
             <div style="text-align: center; margin-bottom: 15px;">
               <img src="${auction.img_url}" alt="${auction.name}" class="product-image" style="width: 100%; height: 200px; object-fit: cover; border-radius: 15px;">
             </div>
             <div style="text-align: left">
-              <p style="font-size: 1em; font-weight: bold; color: #555; margin-top: 10px;">Alapár: ${formatPrice(auction.price)} Ft</p>
-              <p style="font-size: 1em; font-weight: bold; color: #e74c3c;">Aktuális ár: <span id="price-${auction.auction_id}">${formatPrice(auction.ho || auction.price)} Ft</span></p>
+              <div style="font-size: 1em; font-weight: bold; color: #555; margin-top: 10px;">
+              </div>
+              <div class="product-info">
               <p>Licit lépcső: ${formatPrice(auction.stair)} Ft</p>
               <p>Méret: ${auction.size || 'N/A'}</p>
+              </div>
+              <p id="price-${auction.auction_id}">${formatPrice(auction.price)} Ft</p> <!-- Az aktuális ár (ho) jelenik meg -->
+              <div style="font-size: 1em; color: #e74c3c; margin-top: 15px;">
               <p>Licit vége: <span class="countdown" id="countdown-${auction.auction_id}">Számolás...</span></p>
+              </div>
             </div>
           `;
 
@@ -344,8 +349,7 @@ function fetchAllAuctions() {
               auction.name,
               auction.description || "Nincs leírás.",
               auction.img_url,
-              auction.price, // Az alapár
-              auction.ho || auction.price, // Az aktuális ár
+              auction.price, // Az aktuális ár (ho)
               auction.stair,
               auction.size,
               auction.condition,
@@ -582,6 +586,7 @@ function increaseModalPrice(bidStep, auctionId, userId) {
   }
 }
 
+// Kép modal funkció
 function openImageModal(imageUrl) {
   var imageModal = document.createElement("div");
   imageModal.style.position = "fixed";
