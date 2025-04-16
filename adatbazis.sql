@@ -78,7 +78,9 @@ CREATE TABLE `auction` (
   `brand_id` int NOT NULL,
   `size` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `condition` varchar(255) NOT NULL
+  `condition` varchar(255) NOT NULL,
+  `ho` int NOT NULL,
+  `ho_id` int NOT NULL
 );
 
 ALTER TABLE `user` ADD FOREIGN KEY (`city_id`) REFERENCES `settlement` (`id`);
