@@ -100,6 +100,13 @@
                     <button id="cancel-delete-button" class="cancel-button">Mégse</button>
                 </div>
             </div>
+            <div id="delete-profile-modal" class="modal">
+                <div class="modal-content">
+                    <p>Biztosan törölni szeretnéd a fiókodat?</p>
+                    <button id="confirm-profile-delete-button" class="confirm-button">Igen</button>
+                    <button id="cancel-profile-delete-button" class="cancel-button">Mégse</button>
+                </div>
+            </div>
             <h2>Profil</h2>
             <div class="tabs">
                 <button class="tab-button active" onclick="openTab(event, 'personal')">Személyes adatok</button>
@@ -120,7 +127,10 @@
                     <label>Telefonszám:</label>
                     <input type="text" id="phone" value="" />
                     <button id="savePersonal" class="otherButton">Mentés</button>
-                    <button class="logoutButton otherButton">Kijelentkezés</button>
+                    <div class="buttons">
+                        <button class="logoutButton otherButton">Kijelentkezés</button>
+                        <button class="deleteProfile otherButton">Fiók törlése</button>
+                    </div>
                 </div>
             </div>
 
@@ -137,7 +147,11 @@
                     <label>Házszám:</label>
                     <input type="text" id="house_number" value="" />
                     <button id="saveAddress" class="otherButton">Mentés</button>
-                    <button class="logoutButton otherButton">Kijelentkezés</button>
+                    <div class="buttons">
+                        <button class="logoutButton otherButton">Kijelentkezés</button>
+                        <button class="deleteProfile otherButton">Fiók törlése</button>
+                    </div>
+
                 </div>
             </div>
 
@@ -183,7 +197,10 @@
                 
                 
 
-                <button class="logoutButton otherButton">Kijelentkezés</button>
+                <div class="buttons">
+                    <button class="logoutButton otherButton">Kijelentkezés</button>
+                    <button class="otherButton deleteProfile">Fiók törlése</button>
+                </div>
             </div>
         </div>
         <script src="js/profile.js"></script>
@@ -191,6 +208,7 @@
         <script src="js/checkProfile.js"></script>
         <script src="js/saveProfil.js"></script>
         <script src="js/products.js"></script>
+        <script src="js/deleteProfile.js"></script>
 </body>
 
 </html>

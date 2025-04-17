@@ -155,6 +155,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  // Ellenőrizzük, hogy van-e tárolt üzenet a localStorage-ban
+  const deleteMessage = localStorage.getItem("deleteMessage");
+
+  if (deleteMessage) {
+      // Üzenet megjelenítése
+      const messageBox = document.getElementById("message-box");
+      if (messageBox) {
+          messageBox.textContent = deleteMessage;
+          messageBox.classList.add("success"); // Stílus hozzáadása
+          messageBox.style.display = "block";
+
+          // Az üzenet eltüntetése néhány másodperc után
+          setTimeout(() => {
+              messageBox.style.display = "none";
+              localStorage.removeItem("deleteMessage"); // Üzenet törlése a localStorage-ból
+          }, 5000);
+      }
+  }
+});
+
 function showMessage(message, type = 'error', duration = 3000) {
   const messageBox = document.getElementById('message-box');
   if (!messageBox) {
