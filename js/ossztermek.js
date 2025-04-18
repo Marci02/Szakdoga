@@ -7,21 +7,66 @@ function stickyNav() {
 }
 window.addEventListener("scroll", stickyNav);
 
-function search() {
-  const searchTerm = document.getElementById('search').value;
-  const output = document.getElementById('output');
-  
-  const messages = {
-    'apple': 'Search term matched: apple',
-    'banana': 'Search term matched: banana',
-  };
+let allProducts = [];
 
-  output.innerHTML = messages[searchTerm] || `No matching result for the search term: ${searchTerm}`;
+function search() {
+  const searchTerm = document.getElementById("search").value.toLowerCase();
+  const products = document.querySelectorAll(".product-card");
+
+  let found = false;
+
+  products.forEach(product => {
+    const name = product.dataset.productName.toLowerCase();
+    if (name.includes(searchTerm)) {
+      product.style.display = "block";
+      found = true;
+    } else {
+      product.style.display = "none";
+    }
+  });
+
+  const output = document.getElementById("output");
+  output.textContent = found ? "" : `Nincs találat a(z) "${searchTerm}" keresésre.`;
 }
 
 function toggleSearch() {
   const searchBtn = document.getElementById("searchBtn");
   searchBtn.style.display = searchBtn.style.display === "none" ? "block" : "none";
+}
+
+function renderProducts(products) {
+  let productList = document.querySelector(".product-list");
+  productList.innerHTML = "";
+
+  products.forEach(product => {
+    let productCard = document.createElement("div");
+    productCard.className = "product-card";
+    productCard.dataset.productId = product.id;
+    productCard.dataset.productName = product.name;
+    productCard.dataset.productDescription = product.description;
+    productCard.dataset.productPrice = product.price;
+    productCard.dataset.productSize = product.size || "N/A";
+    productCard.dataset.productCondition = product.condition || "N/A";
+    productCard.dataset.productImage = product.img_url;
+    productCard.dataset.productBrand = product.brand_name || "Ismeretlen";
+    productCard.dataset.productCategory = product.category_name || "Ismeretlen";
+
+    const formattedPrice = formatPrice(product.price);
+
+    productCard.innerHTML = `
+      <img src="${product.img_url}" alt="${product.name}" class="product-image">
+      <h3>${product.name}</h3>
+      <p>Méret: ${product.size || "N/A"}</p>
+      <p>Állapot: ${product.condition || "N/A"}</p>
+      <p id="price">${formattedPrice} Ft</p>
+    `;
+
+    productCard.addEventListener("click", function () {
+      openProductModal(this);
+    });
+
+    productList.appendChild(productCard);
+  });
 }
 
 document.getElementById("searchBtn").style.display = "none";
@@ -183,6 +228,10 @@ function fetchProducts() {
         console.error("Hiba: A visszakapott adat nem megfelelő formátumú!", data);
         return;
       }
+
+      allProducts = data.products; // Mentjük az összes terméket
+
+      renderProducts(allProducts);
 
       let productList = document.querySelector(".product-list");
       productList.innerHTML = "";
@@ -357,6 +406,8 @@ function addToCart(productId) {
 
 document.addEventListener("DOMContentLoaded", () => {
   fetchProducts();
+
+  document.getElementById("searchbuttonToSearchBar").addEventListener("click", search);
 });
 
 function closeProductModal() {
