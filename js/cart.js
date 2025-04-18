@@ -152,27 +152,17 @@ function updateCartTotal() {
   
 }
 
-function checkout() {
-  fetch("backend/checkout.php", {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json"
-      },
-      body: JSON.stringify({}) // Ha szükséges, itt küldhetsz adatokat
-  })
-  .then(response => response.json())
-  .then(result => {
-      if (result.success) {
-          showMessage("A vásárlás sikeresen befejeződött!", 'success');
-          displayCartItems(); // Frissítsük a kosár tartalmát
-      } else {
-          showMessage("Hiba történt a vásárlás során: " + (result.error || "Ismeretlen hiba"), 'error');
-      }
-  })
-  .catch(error => {
-      console.error("Hiba a vásárlás során:", error);
-      showMessage("Hiba történt a vásárlás során.", 'error');
-  });
+function toCheckout() {
+  const cartItems = document.querySelectorAll(".cart-item"); // Ellenőrizzük a kosár elemeit
+
+  if (cartItems.length === 0) {
+      // Ha a kosár üres, megjelenítjük az üzenetet
+      showMessage("Üres kosárral nem lehet továbbmenni!", 'error');
+      return; // Megszakítjuk a függvény futását
+  }
+
+  // Ha van termék a kosárban, átirányítjuk a checkout oldalra
+  window.location.href = "checkout.html";
 }
 
 document.addEventListener("DOMContentLoaded", () => {

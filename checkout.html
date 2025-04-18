@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/cart.css">
-    <title>Kosár</title>
+    <link rel="stylesheet" href="css/checkout.css">
+    <title>Fizetés</title>
 </head>
 <body>
     <nav class="nav">
@@ -70,46 +70,100 @@
                     <!-- Dropdown Menu -->
                     <div class="dropdown-menu" id="cartBtn" aria-labelledby="dropdownMenuButton">
                       <p class="dropdown-item" href="#">A kosarad üres!</p>
-                      <button class="dropdown-item">Tovább a fizetéshez</button>
+                      <a href="#"><button class="dropdown-item">Tovább a fizetéshez</button></a>
                     </div>
                 </li>
             </ul>
         </div>
     </nav>
-    <div id="message-box" class="message-box"></div>
-    <div class="Titlecontainer">
-        <h1>A kosarad</h1>
-    </div>
-    <div class="listitems">
-        <br>
-        <h5>Termék</h5>
-        <h5>Ár</h5>
-        <h5 style="margin-left: 25px;">Mennyiség</h5>
-        <h5 style="margin-left: 10px;">Összegzés</h5>
-    </div>
-    
-    <hr>
-    <div class="cartitems" id="cartItems">
+</div>
+<header class="checkout-header">
+    <ul class="breadcrumb">
+        <li>1. Kosár</li>
+        <li>2. Szállítás</li>
+        <li class="active">3. Fizetés</li>
+        <li>4. Kész!</li>
+    </ul>
+</header>
+    <main class="checkout-wrapper">
+        <!-- Szállítási adatok -->
+        <section class="checkout-form-section">
+            <h2>Szállítási adatok</h2>
+            <form id="shippingForm">
+                <label for="name">Teljes név:</label>
+                <input type="text" id="name" name="name" placeholder="Teljes név" required>
 
-    </div>
-    <hr>
-    <div class="cart-summary-container">
-        <div class="cart-summary">
-            <h3>Végösszeg: <span id="totalAmount">0 Ft</span></h3>
-            <button class="cart-button" onclick="toCheckout()">Fizetés</button>
-        </div>
-    </div>
-    
-    <script>
-        function openNav() {
-            document.getElementById("menu").style.width = "300px";
-        }
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" placeholder="E-mail cím" required>
 
-        function closeNav() {
-            document.getElementById("menu").style.width = "0";
-        }
-    </script>
-    <script src="js/cart.js"></script>
+                <label for="phone">Telefonszám:</label>
+                <input type="tel" id="phone" name="phone" placeholder="Telefonszám" required>
+
+                <div class="form-inline">
+                    <div class="form-group">
+                        <label for="zip">Irányítószám:</label>
+                        <input type="text" id="zip" name="zip" placeholder="Irányítószám" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Város:</label>
+                        <input type="text" id="city" name="city" placeholder="Város" required>
+                    </div>
+                </div>
+
+                <label for="address">Cím:</label>
+                <input type="text" id="address" name="address" placeholder="Utca, házszám" required>
+
+                <label for="shippingMethod">Szállítási mód:</label>
+                <select id="shippingMethod" name="shippingMethod" required>
+                    <option value="standard">Normál szállítás</option>
+                    <option value="express">Expressz szállítás</option>
+                </select>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="billingSameAsShipping" name="billingSameAsShipping">
+                    <label for="billingSameAsShipping">Számlázási adatok megegyeznek a szállításival</label>
+                </div>
+            </form>
+        </section>
+
+        <!-- Rendelés összegzés -->
+        <section class="summary-section">
+            <h2>Rendelés összegzése</h2>
+            <div class="order-summary">
+                <div class="item-row">
+                    <span>Termék</span>
+                    <span>10 000 Ft</span>
+                </div>
+                <div class="item-row">
+                    <span>Termék</span>
+                    <span>10 000 Ft</span>
+                </div>
+                <div class="item-row">
+                    <span>Termék</span>
+                    <span>10 000 Ft</span>
+                </div>
+                <div class="item-row">
+                    <span>Szállítás</span>
+                    <span>1 000 Ft</span>
+                </div>
+                <div class="total">
+                    <span>Végösszeg</span>
+                    <span>31 000 Ft</span>
+                </div>
+            </div>
+
+            <button type="submit" form="shippingForm">Megrendelés leadása</button>
+            <div class="secure-payment">100% biztonságos fizetés</div>
+        </section>
+    </main>
+
+    <footer class="checkout-footer">
+        <p>&copy; 2025 PremSelect. Minden jog fenntartva.</p>
+    </footer>
+      
+      
+
+    <script src="js/checkout.js"></script>
     <script src="js/profile.js"></script>
 </body>
 </html>
