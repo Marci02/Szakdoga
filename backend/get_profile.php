@@ -49,8 +49,8 @@ if ($user = mysqli_fetch_assoc($result)) {
         "street" => $user['street'] ?? "",
         "address" => $user['address'] ?? "",
         "postcode" => $user['postcode'] ?? "",
-        "city" => $user['city'] ?? "Nincs megadva",
-        "county" => $user['county'] ?? "Nincs megadva",
+        "city" => $user['city'] ?? "",
+        "county" => $user['county'] ?? "",
         "image" => $user['image'] ?? null
     ]);
 } else {
