@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
 $buyer_id = $_SESSION['user_id'];
 
 // Frissítsük a sales táblában az eladás idejét
-$salesUpdateQuery = "
+$salesUpdateQuery = "í
     UPDATE sales 
     SET sold_at = NOW() 
     WHERE buyer_id = ? AND sold_at IS NULL

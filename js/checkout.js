@@ -121,7 +121,7 @@ function formatPrice(price) {
   return formattedPrice;
 }
 
-/*function checkout() {
+function checkout() {
     fetch("backend/checkout.php", {
         method: "POST",
         headers: {
@@ -146,4 +146,4 @@ function formatPrice(price) {
   
   document.addEventListener("DOMContentLoaded", () => {
     displayCartItems();
-  });*/
+  });
