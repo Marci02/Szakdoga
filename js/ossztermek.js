@@ -69,6 +69,12 @@ function renderProducts(products) {
   });
 }
 
+document.getElementById("search").addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    search();
+  }
+});
+
 document.getElementById("searchBtn").style.display = "none";
 document.getElementById("cartBtn").style.display = "none";
 
@@ -160,6 +166,27 @@ function closeUploadModal() {
   }, 300);
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const productId = urlParams.get("id");
+
+  if (productId) {
+    fetch(`backend/getProduct.php?id=${productId}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          const product = data.product;
+          document.getElementById("product-name").textContent = product.name;
+          document.getElementById("product-price").textContent = `${formatPrice(product.price)} Ft`;
+          document.getElementById("product-description").textContent = product.description;
+          document.getElementById("product-image").src = product.img_url;
+        } else {
+          console.error("Hiba: Nem sikerült lekérni a termék adatait.");
+        }
+      })
+      .catch(error => console.error("Hiba a termék lekérésekor:", error));
+  }
+});
 
 function uploadFile() {
   const fileInput = document.querySelector("#fileInput");

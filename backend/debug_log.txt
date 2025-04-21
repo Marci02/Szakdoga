@@ -5302,3 +5302,75 @@ SESSION: Array
     [image] => 
     [created] => 2025-04-18 19:56:57
 )
+POST: Array
+(
+    [name] => testdata
+    [price] => 31990
+    [stair] => 1000
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-22T21:03
+    [fileSize] => 46
+    [fileCondition] => Újszerű
+    [fileDesc] => testdesc
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => jordan1.jpg
+            [full_path] => jordan1.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\Xampp\tmp\php646D.tmp
+            [error] => 0
+            [size] => 665704
+        )
+
+)
+
+SESSION: Array
+(
+)
+POST: Array
+(
+    [name] => testdata
+    [price] => 31990
+    [stair] => 1000
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-22T21:04
+    [fileSize] => 44
+    [fileCondition] => Újszerű
+    [fileDesc] => testdesc
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => jordan1.jpg
+            [full_path] => jordan1.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\Xampp\tmp\phpFBCC.tmp
+            [error] => 0
+            [size] => 665704
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Verebes
+    [lastname] => Bálint
+    [email] => test@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-18 19:56:57
+)

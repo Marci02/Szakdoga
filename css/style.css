@@ -16,14 +16,16 @@ li {
 a {
   text-decoration: none;
 }
-nav {
+.nav {
   position: absolute;
-  left: 0px;
-  right: 0px;
-  background-color: transparent;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #22222a;
   transition: 0.4s;
-  padding: 1.5rem 0;
-  z-index: 10;
+  padding: 1.3rem 0;
+  z-index: 20;
+  margin: 0;
 }
 
 .main-nav {
@@ -546,5 +548,17 @@ body {
   display: block; /* Megjelenítéshez */
 }
 
+#searchResultsPopup h4 {
+  margin: 0;
+  font-size: 16px;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
 
+#searchResultsPopup p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
+}
 

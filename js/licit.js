@@ -23,18 +23,71 @@ function stickyNav() {
 
 window.addEventListener("scroll", stickyNav);
 
-// Keresési funkció
-function search() {
-  var searchTerm = document.getElementById('search').value;
+let allProducts = []; // Ensure this is declared globally to store all products
 
-  if (searchTerm === 'apple') {
-      document.getElementById('output').innerHTML = 'Search term matched: apple';
-  } else if (searchTerm === 'banana') {
-      document.getElementById('output').innerHTML = 'Search term matched: banana';
-  } else {
-      document.getElementById('output').innerHTML = 'No matching result for the search term: ' + searchTerm;
-  }
+function search() {
+  const searchTerm = document.getElementById("search").value.toLowerCase();
+
+  // Filter products based on the search term
+  const filteredProducts = allProducts.filter(product =>
+    product.name.toLowerCase().includes(searchTerm)
+  );
+
+  // Render the filtered products
+  renderProducts(filteredProducts);
+
+  // Display a message if no products match the search term
+  const output = document.getElementById("output");
+  output.textContent = filteredProducts.length
+    ? ""
+    : `Nincs találat a(z) "${searchTerm}" keresésre.`;
 }
+
+function renderProducts(products) {
+  const productList = document.querySelector(".product-list");
+  productList.innerHTML = ""; // Clear the product list
+
+  products.forEach(product => {
+    const productCard = document.createElement("div");
+    productCard.className = "product-card";
+    productCard.dataset.productName = product.name;
+
+    productCard.innerHTML = `
+      <img src="${product.img_url}" alt="${product.name}" class="product-image">
+      <h3>${product.name}</h3>
+      <p>Méret: ${product.size || "N/A"}</p>
+      <p>Állapot: ${product.condition || "N/A"}</p>
+      <p>${formatPrice(product.price)} Ft</p>
+    `;
+
+    productList.appendChild(productCard);
+  });
+}
+
+function fetchProducts() {
+  fetch("backend/licitlekero.php")
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === "success" && Array.isArray(data.data)) {
+        allProducts = data.data; // Store all products in the global array
+        renderProducts(allProducts); // Render all products initially
+      } else {
+        console.error("Hiba: Nem sikerült lekérni a termékeket.");
+      }
+    })
+    .catch(error => console.error("Hiba a termékek lekérésekor:", error));
+}
+
+document.addEventListener("DOMContentLoaded", fetchProducts);
+
+document.getElementById("searchbuttonToSearchBar").addEventListener("click", search);
+
+// Optionally, trigger search on Enter key press
+document.getElementById("search").addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    search();
+  }
+});
 
 // Kereső gomb megjelenítése/elrejtése
 function toggleSearch() {
