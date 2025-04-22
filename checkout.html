@@ -77,11 +77,12 @@
         </div>
     </nav>
 </div>
+<div id="message-box" class="message-box"></div>
 <header class="checkout-header">
     <ul class="breadcrumb">
-        <li>1. Kosár</li>
-        <li class="active">2. Fizetés</li>
-        <li>3. Kész!</li>
+        <li id="progress1">1. Kosár</li>
+        <li class="active" id="progress2">2. Fizetés</li>
+        <li id="progress3">3. Kész!</li>
     </ul>
 </header>
     <main class="checkout-wrapper">
@@ -158,6 +159,12 @@
             <div class="secure-payment">100% biztonságos fizetés</div>
         </section>
     </main>
+
+    <div id="successMessage" class="hidden">
+        <h2>Sikeres vásárlás!</h2>
+        <p>Köszönjük, hogy nálunk vásároltál!</p>
+        <button onclick="window.location.href='index.html'" class="backButton">Vissza a főoldalra</button>
+    </div>
 
     <footer class="checkout-footer">
         <p>&copy; 2025 PremSelect. Minden jog fenntartva.</p>

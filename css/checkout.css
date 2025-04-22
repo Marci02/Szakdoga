@@ -434,3 +434,65 @@ footer.checkout-footer {
     color: white;
     margin-top: 20px;
 }
+
+.hidden {
+  display: none !important;
+}
+
+#successMessage {
+  text-align: center;
+  margin-top: 20px;
+  padding: 20px;
+  border: 2px solid #4CAF50;
+  background-color: #f9fff9;
+  color: #4CAF50;
+  border-radius: 5px;
+}
+
+.backButton {
+  margin-top: 20px;
+  padding: 12px 20px;
+  border: 2px solid #4CAF50;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.backButton:hover {
+  background-color: #45a049; /* Sötétebb zöld árnyalat */
+  border-color: #45a049;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.backButton:active {
+  background-color: #3e8e41; /* Még sötétebb zöld árnyalat kattintáskor */
+  border-color: #3e8e41;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.message-box {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: none; /* Alapértelmezés szerint rejtve */
+}
+.message-box.success {
+  background-color: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+}
+.message-box.show {
+  display: block; /* Megjelenítéshez */
+}

@@ -144,7 +144,7 @@ function checkout(event) {
 
     // Ellenőrzés: minden mező ki van-e töltve
     if (!name || !email || !phone || !zip || !city || !address || !shippingMethod || !county) {
-        alert("Kérlek, töltsd ki az összes mezőt a vásárlás folytatásához!");
+        showMessage("Kérlek, töltsd ki az összes mezőt a vásárlás folytatásához!", "error");
         return;
     }
 
@@ -158,7 +158,7 @@ function checkout(event) {
         street = match[1].trim(); // Az utca neve
         houseNumber = match[2].trim(); // A házszám
     } else {
-        alert("Kérlek, add meg az utcát és a házszámot helyesen (pl. 'Árpád utca 31.')!");
+        showMessage("Kérlek, add meg az utcát és a házszámot helyesen (pl. 'Árpád utca 31.')!", "error");
         return;
     }
 
@@ -189,12 +189,12 @@ function checkout(event) {
             // Ha az adatok sikeresen frissültek, folytatjuk a vásárlást
             finalizeCheckout();
         } else {
-            alert("Hiba történt az adatok frissítésekor: " + data.message);
+            showMessage("Hiba történt az adatok frissítésekor: " + data.message, "error");
         }
     })
     .catch(error => {
         console.error("Hálózati hiba:", error); // A hiba részletei a konzolban
-        alert("Hálózati hiba történt. Kérlek, próbáld újra!");
+        showMessage("Hálózati hiba történt. Kérlek, próbáld újra!", "error");
     });
 }
 
@@ -210,14 +210,34 @@ function finalizeCheckout() {
     .then(response => response.json())
     .then(result => {
         if (result.success) {
-            alert("A vásárlás sikeresen befejeződött!");
-            window.location.href = "index.html"; // Átirányítás a sikeres vásárlás oldalára
+            document.querySelector(".checkout-wrapper").classList.add("hidden");
+            document.getElementById("successMessage").classList.remove("hidden");
+            document.getElementById("progress2").classList.remove("active");
+            document.getElementById("progress3").classList.add("active");
+            showMessage("A vásárlás sikeresen befejeződött!", "success");
         } else {
-            alert("Hiba történt a vásárlás során: " + (result.error || "Ismeretlen hiba"));
+            showMessage("Hiba történt a vásárlás során: " + (result.error || "Ismeretlen hiba"), "error");
         }
     })
     .catch(error => {
         console.error("Hiba a vásárlás során:", error);
-        alert("Hiba történt a vásárlás során. Kérlek, próbáld újra!");
+        showMessage("Hiba történt a vásárlás során. Kérlek, próbáld újra!", "error");
     });
 }
+
+function showMessage(message, type = 'error', duration = 3000) {
+    const messageBox = document.getElementById('message-box');
+    if (!messageBox) {
+        console.error("A 'message-box' elem nem található!");
+        return;
+    }
+  
+    messageBox.textContent = message;
+    messageBox.className = `message-box ${type} show`;
+  
+    // Az üzenet eltüntetése a megadott idő után
+    setTimeout(() => {
+        messageBox.classList.remove('show');
+    }, duration);
+  }
+  
