@@ -50,6 +50,7 @@ function stickyNav() {
                 document.getElementById("phone").value = data.phone_number || "";
                 document.getElementById("zip").value = data.postcode || "";
                 document.getElementById("city").value = data.city || "";
+                document.getElementById("county").value = data.county || "";
 
                 // Utca és házszám összefűzése az address mezőhöz
                 const street = data.street && data.street !== "" ? data.street : "";
@@ -111,17 +112,94 @@ function stickyNav() {
         .catch(error => {
             console.error("Hálózati hiba a kosár betöltésekor:", error);
         });
-});
 
+    // Az űrlap beküldésének kezelése
+    const checkoutButton = document.getElementById("shippingForm");
+    if (checkoutButton) {
+        checkoutButton.addEventListener("submit", checkout);
+    } else {
+        console.error("Nem található a checkoutButton azonosítójú elem a DOM-ban.");
+    }
+});
 function formatPrice(price) {
-  // Biztosítjuk, hogy a price string típusú legyen
-  const cleanPrice = String(price).replace(/\D/g, '');  // A nem szám karaktereket eltávolítjuk
-  // Visszafordítjuk a számot és szóközökkel tagoljuk
-  const formattedPrice = cleanPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-  return formattedPrice;
+    // Biztosítjuk, hogy a price string típusú legyen
+    const cleanPrice = String(price).replace(/\D/g, ''); // A nem szám karaktereket eltávolítjuk
+    // Visszafordítjuk a számot és szóközökkel tagoljuk
+    const formattedPrice = cleanPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return formattedPrice;
 }
 
-function checkout() {
+function checkout(event) {
+    event.preventDefault(); // Az alapértelmezett viselkedés megakadályozása
+
+    // Az űrlap mezőinek lekérése
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const zip = document.getElementById("zip").value.trim();
+    const city = document.getElementById("city").value.trim();
+    const county = document.getElementById("county").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const shippingMethod = document.getElementById("shippingMethod").value;
+
+    // Ellenőrzés: minden mező ki van-e töltve
+    if (!name || !email || !phone || !zip || !city || !address || !shippingMethod || !county) {
+        alert("Kérlek, töltsd ki az összes mezőt a vásárlás folytatásához!");
+        return;
+    }
+
+    // Az address mező szétbontása reguláris kifejezéssel
+    const addressRegex = /^(.*)\s+(\S+)$/; // Az utolsó szóköz utáni rész lesz a házszám
+    const match = address.match(addressRegex);
+    let street = "";
+    let houseNumber = "";
+
+    if (match) {
+        street = match[1].trim(); // Az utca neve
+        houseNumber = match[2].trim(); // A házszám
+    } else {
+        alert("Kérlek, add meg az utcát és a házszámot helyesen (pl. 'Árpád utca 31.')!");
+        return;
+    }
+
+    // Adatok frissítése az adatbázisban
+    const userData = {
+        name,
+        email,
+        phone,
+        zip,
+        city,
+        county,
+        street,
+        houseNumber
+    };
+
+    console.log("Küldött adatok:", userData); // Debug: Ellenőrizd a küldött adatokat
+
+    fetch("backend/checkout_Update.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(userData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Ha az adatok sikeresen frissültek, folytatjuk a vásárlást
+            finalizeCheckout();
+        } else {
+            alert("Hiba történt az adatok frissítésekor: " + data.message);
+        }
+    })
+    .catch(error => {
+        console.error("Hálózati hiba:", error); // A hiba részletei a konzolban
+        alert("Hálózati hiba történt. Kérlek, próbáld újra!");
+    });
+}
+
+function finalizeCheckout() {
+    // Vásárlás véglegesítése
     fetch("backend/checkout.php", {
         method: "POST",
         headers: {
@@ -132,18 +210,14 @@ function checkout() {
     .then(response => response.json())
     .then(result => {
         if (result.success) {
-            showMessage("A vásárlás sikeresen befejeződött!", 'success');
-            displayCartItems(); // Frissítsük a kosár tartalmát
+            alert("A vásárlás sikeresen befejeződött!");
+            window.location.href = "index.html"; // Átirányítás a sikeres vásárlás oldalára
         } else {
-            showMessage("Hiba történt a vásárlás során: " + (result.error || "Ismeretlen hiba"), 'error');
+            alert("Hiba történt a vásárlás során: " + (result.error || "Ismeretlen hiba"));
         }
     })
     .catch(error => {
         console.error("Hiba a vásárlás során:", error);
-        showMessage("Hiba történt a vásárlás során.", 'error');
+        alert("Hiba történt a vásárlás során. Kérlek, próbáld újra!");
     });
-  }
-  
-  document.addEventListener("DOMContentLoaded", () => {
-    displayCartItems();
-  });
+}
