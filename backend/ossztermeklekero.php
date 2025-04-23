@@ -8,7 +8,7 @@ require_once __DIR__ . '/../connect.php';
 $baseImagePath = "http://localhost/Szakdoga/uploads/";
 $defaultImage = "no-image.jpg";
 
-// Termékek lekérdezése (brand, category, image csatlakoztatva)
+// Termékek lekérdezése (brand, category, image csatlakoztatva), rendezve az uploaded_at szerint
 $query = "
     SELECT 
         p.id,
@@ -20,12 +20,14 @@ $query = "
         p.condition,
         COALESCE(i.img_url, ?) AS img_url,
         b.brand_name,
-        c.category_name
+        c.category_name,
+        p.uploaded_at
     FROM products p
     LEFT JOIN image i ON p.image_id = i.id
     LEFT JOIN brand b ON p.brand_id = b.id
     LEFT JOIN category c ON p.category_id = c.id
     WHERE p.isSold = 0
+    ORDER BY p.uploaded_at DESC
 ";
 
 // Lekérdezés előkészítése

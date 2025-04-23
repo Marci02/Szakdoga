@@ -34,11 +34,20 @@ function toggleSearch() {
   searchBtn.style.display = searchBtn.style.display === "none" ? "block" : "none";
 }
 
-function renderProducts(products) {
-  let productList = document.querySelector(".product-list");
+let currentPage = 1; // Kezdő oldal
+const itemsPerPage = 8; // Egy oldalon megjelenő termékek száma
+
+function renderPaginatedProducts(products) {
+  const productList = document.querySelector(".product-list");
   productList.innerHTML = "";
 
-  products.forEach(product => {
+  // Számoljuk ki az aktuális oldal termékeit
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentProducts = products.slice(startIndex, endIndex);
+
+  // Megjelenítjük az aktuális oldal termékeit
+  currentProducts.forEach(product => {
     let productCard = document.createElement("div");
     productCard.className = "product-card";
     productCard.dataset.productId = product.id;
@@ -67,7 +76,35 @@ function renderProducts(products) {
 
     productList.appendChild(productCard);
   });
+
+  // Frissítjük a lapozó gombokat
+  updatePagination(products.length);
 }
+
+function updatePagination(totalItems) {
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const paginationInfo = document.getElementById("pagination-info");
+    const prevButton = document.getElementById("prevPage");
+    const nextButton = document.getElementById("nextPage");
+
+    paginationInfo.textContent = `Oldal ${currentPage} / ${totalPages}`;
+    prevButton.disabled = currentPage === 1;
+    nextButton.disabled = currentPage === totalPages;
+}
+
+document.getElementById("prevPage").addEventListener("click", () => {
+    if (currentPage > 1) {
+        currentPage--;
+        renderPaginatedProducts(allProducts);
+    }
+});
+
+document.getElementById("nextPage").addEventListener("click", () => {
+    if (currentPage < Math.ceil(allProducts.length / itemsPerPage)) {
+        currentPage++;
+        renderPaginatedProducts(allProducts);
+    }
+});
 
 document.getElementById("search").addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
@@ -199,8 +236,8 @@ function uploadFile() {
   const fileSize = document.querySelector("#fileSize").value || "";
 
   if (!fileInput.files.length) {
-      showMessage("Kérjük, válasszon ki egy fájlt a feltöltéshez!", 'error');
-      return;
+    showMessage("Kérjük, válasszon ki egy fájlt a feltöltéshez!", 'error');
+    return;
   }
 
   let formData = new FormData();
@@ -215,24 +252,29 @@ function uploadFile() {
   formData.append("category_id", fileCategory);
 
   fetch("backend/ossztermekupload.php", {
-      method: "POST",
-      body: formData
+    method: "POST",
+    body: formData
   })
-  .then(response => response.json())
-  .then(data => {
+    .then(response => response.json())
+    .then(data => {
       console.log("Szerver válasza:", data);
       if (data.success) {
-          showMessage("Sikeres feltöltés!", 'success');
-          closeUploadModal();
-          fetchProducts();
+        showMessage("Sikeres feltöltés!", 'success');
+        closeUploadModal();
+
+        // Állítsuk az aktuális oldalt az utolsó oldalra
+        currentPage = Math.ceil((allProducts.length + 1) / itemsPerPage);
+
+        // Frissítsük a termékeket
+        fetchProducts();
       } else {
-          showMessage("Hiba: " + data.message, 'error');
+        showMessage("Hiba: " + data.message, 'error');
       }
-  })
-  .catch(error => {
+    })
+    .catch(error => {
       console.error("Hiba a feltöltés során:", error);
       showMessage("Hiba történt a fájl feltöltésekor.", 'error');
-  });
+    });
 }
 
 document.addEventListener("DOMContentLoaded", fetchProducts);
@@ -258,43 +300,16 @@ function fetchProducts() {
 
       allProducts = data.products; // Mentjük az összes terméket
 
-      renderProducts(allProducts);
+      // Számoljuk ki az oldalak számát
+      const totalPages = Math.ceil(allProducts.length / itemsPerPage);
 
-      let productList = document.querySelector(".product-list");
-      productList.innerHTML = "";
+      // Ha az aktuális oldal meghaladja az összes oldalt, állítsuk az utolsó oldalra
+      if (currentPage > totalPages) {
+        currentPage = totalPages;
+      }
 
-      data.products.forEach(product => {
-        let productCard = document.createElement("div");
-        productCard.className = "product-card";
-        productCard.dataset.productId = product.id;
-        productCard.dataset.productName = product.name;
-        productCard.dataset.productDescription = product.description;
-        productCard.dataset.productPrice = product.price;
-        productCard.dataset.productSize = product.size || "N/A";
-        productCard.dataset.productCondition = product.condition || "N/A";
-        productCard.dataset.productImage = product.img_url;
-        productCard.dataset.productBrand = product.brand_name || "Ismeretlen";
-        productCard.dataset.productCategory = product.category_name || "Ismeretlen";
-
-        // Formázzuk az árat a szóközökkel tagolt verzióra
-        const formattedPrice = formatPrice(product.price);
-
-        productCard.innerHTML = `
-          <img src="${product.img_url}" alt="${product.name}" class="product-image">
-          <h3>${product.name}</h3>
-          <p>Méret: ${product.size || "N/A"}</p>
-          <p>Állapot: ${product.condition || "N/A"}</p>
-          <p id="price">${formattedPrice} Ft</p>
-        `;
-
-        productList.appendChild(productCard);
-      });
-
-      document.querySelectorAll(".product-card").forEach(card => {
-        card.addEventListener("click", function () {
-          openProductModal(this);
-        });
-      });
+      // Rendereljük az aktuális oldalt
+      renderPaginatedProducts(allProducts);
     })
     .catch(error => console.error("Hiba a termékek lekérésekor:", error));
 }

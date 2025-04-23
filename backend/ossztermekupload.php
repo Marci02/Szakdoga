@@ -118,13 +118,14 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
 }
 
 // 🔹 Termék beszúrása az adatbázisba
-$query = "INSERT INTO products (user_id, name, description, price, quantity, brand_id, `condition`, size, category_id, image_id, isSold) 
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$query = "INSERT INTO products (user_id, name, description, price, quantity, brand_id, `condition`, size, category_id, image_id, isSold, uploaded_at) 
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $dbconn->prepare($query);
 
 $isSold = 0;
+$uploaded_at = date("Y-m-d H:i:s"); // Aktuális időpont
 
-$stmt->bind_param("issdiissiii", $user_id, $name, $description, $price, $quantity, $brand_id, $condition, $size, $category_id, $image_id, $isSold);
+$stmt->bind_param("issdiissiiis", $user_id, $name, $description, $price, $quantity, $brand_id, $condition, $size, $category_id, $image_id, $isSold, $uploaded_at);
 
 if ($stmt->execute()) {
     $productId = $stmt->insert_id;
