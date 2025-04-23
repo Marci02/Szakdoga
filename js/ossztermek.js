@@ -470,3 +470,4 @@ function showMessage(message, type = 'error', duration = 3000) {
       messageBox.classList.remove('show');
   }, duration);
 }
+

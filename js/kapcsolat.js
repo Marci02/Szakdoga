@@ -54,3 +54,11 @@ function openNav() {
   document.getElementById("cartBtn").parentElement.addEventListener("mouseleave", function() {
     document.getElementById("cartBtn").style.display = "none";
   });
+
+  function formatPrice(price) {
+    // Biztosítjuk, hogy a price string típusú legyen
+    const cleanPrice = String(price).replace(/\D/g, '');  // A nem szám karaktereket eltávolítjuk
+    // Visszafordítjuk a számot és szóközökkel tagoljuk
+    const formattedPrice = cleanPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return formattedPrice;
+  }
