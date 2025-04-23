@@ -310,6 +310,7 @@ function fetchProducts() {
 
       // Rendereljük az aktuális oldalt
       renderPaginatedProducts(allProducts);
+      updateCart();
     })
     .catch(error => console.error("Hiba a termékek lekérésekor:", error));
 }
@@ -435,6 +436,7 @@ function addToCart(productId) {
           if (result.success) {
               showMessage("A termék sikeresen hozzáadva a kosárhoz!", 'success');
               closeProductModal();
+              updateCart();
           } else {
               showMessage("Hiba a kosárhoz adás során: " + (result.error || "Ismeretlen hiba"), 'error');
               closeProductModal();

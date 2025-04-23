@@ -41,7 +41,11 @@ function openNav() {
     } else {
       x.style.display = "none";
     }
-  } 
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    updateCart();
+  });
   
   // Alapvetően a kosár és a kereső gomb elrejtése
   document.getElementById("searchBtn").style.display = "none";

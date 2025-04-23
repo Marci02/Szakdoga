@@ -21,6 +21,7 @@ function stickyNav() {
 window.addEventListener("scroll", stickyNav);
 
 
+
 const items = document.querySelectorAll(".item"),
   controls = document.querySelectorAll(".control"),
   headerItems = document.querySelectorAll(".item-header"),
@@ -234,6 +235,8 @@ function fetchProducts() {
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Fetching products...");
   fetchProducts();
+
+  updateCart(); 
 });
 
 console.log("All products after fetch:", allProducts);

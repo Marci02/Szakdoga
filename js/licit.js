@@ -440,6 +440,8 @@ function formatPrice(price) {
 window.addEventListener("DOMContentLoaded", function () {
   console.log("🔄 Oldal betöltve, aukciók lekérése...");
   fetchAllAuctions();
+
+  updateCart();
 });
 
 function showProductDetails(title, description, imageUrl, price, bidStep, size, condition, brand, auctionId, userId,) {
