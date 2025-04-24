@@ -5374,3 +5374,93 @@ SESSION: Array
     [image] => 
     [created] => 2025-04-18 19:56:57
 )
+POST: Array
+(
+    [name] => Nike Air force 1
+    [price] => 31412
+    [stair] => 21
+    [fileCategory] => 2
+    [fileBrand] => North Face
+    [auction_end] => 2025-04-24T00:05
+    [fileSize] => 44
+    [fileCondition] => Újszerű
+    [fileDesc] => asdasd asd as
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => north_faceKabat.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpBF61.tmp
+            [error] => 0
+            [size] => 4922
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 2
+    [firstname] => Konderla
+    [lastname] => Samuel
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád Vármegye
+    [image] => 
+    [created] => 2025-04-24 20:04:05
+    [street_address] => Kossúth utca
+    [house_number] => 42.
+    [name] => Konderla Samuel
+    [phone] => 06203522651
+)
+POST: Array
+(
+    [name] => Nike Air force 1
+    [price] => 3124
+    [stair] => 21
+    [fileCategory] => 2
+    [fileBrand] => North Face
+    [auction_end] => 2025-04-25T06:08
+    [fileSize] => 44
+    [fileCondition] => Használt
+    [fileDesc] => asdsd ad as
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => adidas ultraboost.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php5EB0.tmp
+            [error] => 0
+            [size] => 59588
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 2
+    [firstname] => Konderla
+    [lastname] => Samuel
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád Vármegye
+    [image] => 
+    [created] => 2025-04-24 20:04:05
+    [street_address] => Kossúth utca
+    [house_number] => 42.
+    [name] => Konderla Samuel
+    [phone] => 06203522651
+)
