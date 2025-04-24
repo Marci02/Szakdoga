@@ -65,8 +65,8 @@ function renderPaginatedProducts(products) {
     productCard.innerHTML = `
       <img src="${product.img_url}" alt="${product.name}" class="product-image">
       <h3>${product.name}</h3>
-      <p>Méret: ${product.size || "N/A"}</p>
-      <p>Állapot: ${product.condition || "N/A"}</p>
+      <p>Méret: ${product.size || "Nincs megadva!"}</p>
+      <p>Állapot: ${product.condition || "Nincs megadva!"}</p>
       <p id="price">${formattedPrice} Ft</p>
     `;
 
@@ -138,7 +138,7 @@ function createModal() {
   
   modal.innerHTML = `
     <h2 style="font-size: 1.8em; font-weight: bold; color: #222; margin-bottom: 20px;">Termék feltöltése</h2>
-    <input type="text" id="fileTitle" placeholder="Termék címe" maxlength="20" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd;">
+    <input type="text" id="fileTitle" placeholder="Termék címe" maxlength="50" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd;">
     <input type="file" id="fileInput" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd;">
     <textarea id="fileDesc" rows="5" style="width: 100%; resize:none; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd;" placeholder="Leírás"></textarea>
     <input type="number" id="filePrice" placeholder="Ár (Ft)" style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 2px solid #ddd;">
