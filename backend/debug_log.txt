@@ -6212,3 +6212,44 @@ SESSION: Array
     [created] => 2025-04-24 21:01:36
 >>>>>>> 9f733acdca1353a79e973a0b60d92d7cb022e5b0
 )
+POST: Array
+(
+    [name] => Nike Air force 1
+    [price] => 123213
+    [stair] => 123
+    [fileCategory] => 2
+    [fileBrand] => 312312
+    [auction_end] => 2025-04-25T02:21
+    [fileSize] => 44
+    [fileCondition] => Használt
+    [fileDesc] => asdasdas
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => Air_Jordan.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpA0A9.tmp
+            [error] => 0
+            [size] => 4331
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Nagy
+    [lastname] => Marcell
+    [email] => nagy.marcell@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-24 20:03:05
+)

@@ -412,7 +412,7 @@ function fetchAllAuctions() {
               auction.brand_name,
               auction.auction_id, // auctionId
               loggedInUserId, // userId
-              auction.ownerId
+              auction.owner_id
             );
           });
 
@@ -448,7 +448,7 @@ window.addEventListener("DOMContentLoaded", function () {
   updateCart();
 });
 
-function showProductDetails(title, description, imageUrl, originalPrice, price, bidStep, size, condition, brand, auctionId, userId, ownerId) {
+function showProductDetails(title, description, imageUrl, originalPrice, price, bidStep, size, condition, brand, auctionId, userId, owner_id) {
   // Ha már nyitva van modal, töröljük
   let existingModal = document.getElementById("productModalOverlay");
   if (existingModal) {
@@ -524,8 +524,8 @@ function showProductDetails(title, description, imageUrl, originalPrice, price, 
   // Hozzáadás a DOM-hoz
   modalOverlay.appendChild(modal);
   document.body.appendChild(modalOverlay);
-  const isOwner = userId === ownerId;
-  console.log("isOwner:", isOwner, "userId:", userId, "ownerId:", ownerId);
+  const isOwner = parseInt(userId) === parseInt(owner_id);
+  console.log("isOwner:", isOwner, "userId:", userId, "ownerId:", owner_id);
 
   const bidButton = modal.querySelector("#bidButton");
   if (isOwner && bidButton) {
