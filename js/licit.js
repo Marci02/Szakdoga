@@ -30,17 +30,93 @@ function search() {
 
   // Filter products based on the search term
   const filteredProducts = allProducts.filter(product =>
-    product.name.toLowerCase().includes(searchTerm)
+      product.name.toLowerCase().includes(searchTerm)
   );
 
-  // Render the filtered products
-  renderProducts(filteredProducts);
+  // Display the search results in a popup
+  showSearchResultsPopup(filteredProducts);
 
   // Display a message if no products match the search term
-  const output = document.getElementById("output");
-  output.textContent = filteredProducts.length
-    ? ""
-    : `Nincs találat a(z) "${searchTerm}" keresésre.`;
+  if (filteredProducts.length === 0) {
+      showMessage(`Nincs találat a(z) "${searchTerm}" keresésre.`, 'error');
+  }
+}
+
+function showSearchResultsPopup(products) {
+  // Remove any existing popup
+  const existingPopup = document.getElementById("searchResultsPopup");
+  if (existingPopup) {
+      existingPopup.remove();
+  }
+
+  // Get the search bar element
+  const searchBar = document.getElementById("search");
+  const searchBarRect = searchBar.getBoundingClientRect();
+
+  // Create the popup container
+  const popup = document.createElement("div");
+  popup.id = "searchResultsPopup";
+  popup.style.position = "absolute";
+  popup.style.top = `${searchBarRect.bottom + window.scrollY + 10}px`; // Position below the search bar
+  popup.style.left = `${searchBarRect.left + window.scrollX}px`; // Align with the search bar
+  popup.style.width = `${searchBar.offsetWidth}px`; // Match the search bar's width
+  popup.style.backgroundColor = "#fff";
+  popup.style.boxShadow = "0 5px 15px rgba(0, 0, 0, 0.3)";
+  popup.style.borderRadius = "10px";
+  popup.style.padding = "10px";
+  popup.style.zIndex = "1000";
+  popup.style.overflowY = "auto";
+  popup.style.maxHeight = "300px";
+
+  // Add a close button
+  const closeButton = document.createElement("button");
+  closeButton.textContent = "Bezárás";
+  closeButton.style.display = "block";
+  closeButton.style.margin = "10px auto";
+  closeButton.style.backgroundColor = "#22222a";
+  closeButton.style.color = "#fff";
+  closeButton.style.border = "none";
+  closeButton.style.borderRadius = "5px";
+  closeButton.style.padding = "5px 10px";
+  closeButton.style.cursor = "pointer";
+  closeButton.addEventListener("click", () => popup.remove());
+  popup.appendChild(closeButton);
+
+  // Add the search results
+  if (products.length > 0) {
+      products.forEach(product => {
+          const productCard = document.createElement("a");
+          productCard.href = `ossztermek.html?id=${product.id}`; // Redirect to the product page with the product ID
+          productCard.style.textDecoration = "none";
+          productCard.style.color = "inherit";
+
+          productCard.style.border = "1px solid #ddd";
+          productCard.style.borderRadius = "5px";
+          productCard.style.marginBottom = "10px";
+          productCard.style.padding = "10px";
+          productCard.style.display = "flex";
+          productCard.style.alignItems = "center";
+
+          productCard.innerHTML = `
+              <img src="${product.img_url}" alt="${product.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin-right: 10px;">
+              <div>
+                  <h4 style="margin: 0; font-size: 16px;">${product.name}</h4>
+                  <p style="margin: 0; font-size: 14px; color: #555;">${formatPrice(product.price)} Ft</p>
+              </div>
+          `;
+
+          popup.appendChild(productCard);
+      });
+  } else {
+      const noResults = document.createElement("p");
+      noResults.textContent = "Nincs találat.";
+      noResults.style.textAlign = "center";
+      noResults.style.color = "#555";
+      popup.appendChild(noResults);
+  }
+
+  // Append the popup to the body
+  document.body.appendChild(popup);
 }
 
 function renderProducts(products) {
