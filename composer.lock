@@ -1346,16 +1346,16 @@
         },
         {
             "name": "league/tactician-logger",
-            "version": "v0.11.0",
+            "version": "v0.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/tactician-logger.git",
-                "reference": "c2d0977445d18d7e3d85adccef7dc14948707ea9"
+                "reference": "586a9f9781e9481a527010561ae80c0403d3f23d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/tactician-logger/zipball/c2d0977445d18d7e3d85adccef7dc14948707ea9",
-                "reference": "c2d0977445d18d7e3d85adccef7dc14948707ea9",
+                "url": "https://api.github.com/repos/thephpleague/tactician-logger/zipball/586a9f9781e9481a527010561ae80c0403d3f23d",
+                "reference": "586a9f9781e9481a527010561ae80c0403d3f23d",
                 "shasum": ""
             },
             "require": {
@@ -1392,9 +1392,9 @@
             ],
             "support": {
                 "issues": "https://github.com/thephpleague/tactician-logger/issues",
-                "source": "https://github.com/thephpleague/tactician-logger/tree/v0.11.0"
+                "source": "https://github.com/thephpleague/tactician-logger/tree/v0.11.1"
             },
-            "time": "2021-11-14T15:08:02+00:00"
+            "time": "2025-04-18T13:03:20+00:00"
         },
         {
             "name": "league/uri",

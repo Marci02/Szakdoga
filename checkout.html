@@ -68,20 +68,23 @@
                     </button>
     
                     <!-- Dropdown Menu -->
-                    <div class="dropdown-menu" id="cartBtn" aria-labelledby="dropdownMenuButton">
-                      <p class="dropdown-item" href="#">A kosarad üres!</p>
-                      <a href="#"><button class="dropdown-item">Tovább a fizetéshez</button></a>
+                    <div id="cartBtn" aria-labelledby="dropdownMenuButton">
+                        <div class="dropdown-menu">
+                            <p class="dropdown-item">A kosarad üres!</p>
+                            <a href="cart.html"><button class="dropdown-item">Tovább a fizetéshez</button></a>
+                        </div>
                     </div>
                 </li>
             </ul>
         </div>
     </nav>
 </div>
+<div id="message-box" class="message-box"></div>
 <header class="checkout-header">
     <ul class="breadcrumb">
-        <li>1. Kosár</li>
-        <li class="active">2. Fizetés</li>
-        <li>3. Kész!</li>
+        <li id="progress1">1. Kosár</li>
+        <li class="active" id="progress2">2. Fizetés</li>
+        <li id="progress3">3. Kész!</li>
     </ul>
 </header>
     <main class="checkout-wrapper">
@@ -97,6 +100,9 @@
 
                 <label for="phone">Telefonszám:</label>
                 <input type="tel" id="phone" name="phone" placeholder="Telefonszám" required>
+
+                <label for="county">Vármegye:</label>
+                <input type="text" id="county" name="county" placeholder="Vármegye" required>
 
                 <div class="form-inline">
                     <div class="form-group">
@@ -156,6 +162,12 @@
         </section>
     </main>
 
+    <div id="successMessage" class="hidden">
+        <h2>Sikeres vásárlás!</h2>
+        <p>Köszönjük, hogy nálunk vásároltál!</p>
+        <button onclick="window.location.href='index.html'" class="backButton">Vissza a főoldalra</button>
+    </div>
+
     <footer class="checkout-footer">
         <p>&copy; 2025 PremSelect. Minden jog fenntartva.</p>
     </footer>
@@ -164,5 +176,6 @@
 
     <script src="js/checkout.js"></script>
     <script src="js/profile.js"></script>
+    <script src="js/cart_counter.js"></script>
 </body>
 </html>

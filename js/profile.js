@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     const profileButton = document.getElementById("profileButton");
 
+    updateCart();
+
     // Ha van profileButton (például navbarban), akkor ellenőrizzük a bejelentkezést
     if (profileButton) {
         fetch("backend/check_session.php")
@@ -55,3 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(error => console.error("Hiba a profil betöltésekor:", error));
     }
 });
+
+function formatPrice(price) {
+    // Biztosítjuk, hogy a price string típusú legyen
+    const cleanPrice = String(price).replace(/\D/g, '');  // A nem szám karaktereket eltávolítjuk
+    // Visszafordítjuk a számot és szóközökkel tagoljuk
+    const formattedPrice = cleanPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return formattedPrice;
+  }

@@ -146,24 +146,8 @@ function toggleSearch() {
       x.style.display = "block";
   } else {
       x.style.display = "none";
-  }
-}
-
-document.getElementById("searchbuttonToSearchBar").addEventListener("click", search);
-
-document.getElementById("search").addEventListener("keypress", function (e) {
-  if (e.key === "Enter") {
-      search();
-  }
-});
-
-function formatPrice(price) {
-  // Ensure the price is a string
-  const cleanPrice = String(price).replace(/\D/g, ''); // Remove non-numeric characters
-  // Format the number with spaces as thousand separators
-  const formattedPrice = cleanPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-  return formattedPrice;
-}
+    }
+  } 
   
   // Alapvetően a kosár és a kereső gomb elrejtése
   document.getElementById("searchBtn").style.display = "none";
@@ -176,3 +160,11 @@ function formatPrice(price) {
   document.getElementById("cartBtn").parentElement.addEventListener("mouseleave", function() {
     document.getElementById("cartBtn").style.display = "none";
   });
+
+  function formatPrice(price) {
+    // Biztosítjuk, hogy a price string típusú legyen
+    const cleanPrice = String(price).replace(/\D/g, '');  // A nem szám karaktereket eltávolítjuk
+    // Visszafordítjuk a számot és szóközökkel tagoljuk
+    const formattedPrice = cleanPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return formattedPrice;
+  }

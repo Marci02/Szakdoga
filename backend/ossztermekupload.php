@@ -61,10 +61,19 @@ $brand_query->execute();
 $result = $brand_query->get_result();
 
 if ($row = $result->fetch_assoc()) {
+    // Ha a márka létezik, lekérjük az ID-t
     $brand_id = $row['id'];
 } else {
-    echo json_encode(["success" => false, "message" => "Érvénytelen márka"]);
-    exit;
+    // Ha a márka nem létezik, beszúrjuk az adatbázisba
+    $insert_brand_query = $dbconn->prepare("INSERT INTO brand (brand_name) VALUES (?)");
+    $insert_brand_query->bind_param("s", $brand_name);
+    if ($insert_brand_query->execute()) {
+        $brand_id = $insert_brand_query->insert_id; // Az újonnan beszúrt márka ID-ja
+    } else {
+        echo json_encode(["success" => false, "message" => "Márka beszúrása sikertelen: " . $dbconn->error]);
+        exit;
+    }
+    $insert_brand_query->close();
 }
 $brand_query->close();
 
@@ -118,13 +127,14 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
 }
 
 // 🔹 Termék beszúrása az adatbázisba
-$query = "INSERT INTO products (user_id, name, description, price, quantity, brand_id, `condition`, size, category_id, image_id, isSold) 
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$query = "INSERT INTO products (user_id, name, description, price, quantity, brand_id, `condition`, size, category_id, image_id, isSold, uploaded_at) 
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt = $dbconn->prepare($query);
 
 $isSold = 0;
+$uploaded_at = date("Y-m-d H:i:s"); // Aktuális időpont
 
-$stmt->bind_param("issdiissiii", $user_id, $name, $description, $price, $quantity, $brand_id, $condition, $size, $category_id, $image_id, $isSold);
+$stmt->bind_param("issdiissiiis", $user_id, $name, $description, $price, $quantity, $brand_id, $condition, $size, $category_id, $image_id, $isSold, $uploaded_at);
 
 if ($stmt->execute()) {
     $productId = $stmt->insert_id;

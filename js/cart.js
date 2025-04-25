@@ -82,7 +82,7 @@ function displayCartItems() {
           <h3>${sale.product.name}</h3>
         </div>
         <p>${parseInt(sale.product.price).toLocaleString("hu-HU")} Ft</p>
-        <input type="number" value="${sale.quantity}" style="width: 30px;" onchange="updateQuantity(${sale.product.id}, this.value)">
+        <input type="number" value="${sale.quantity}" style="width: 30px;" max="${sale.product.quantity}" onchange="updateQuantity(${sale.product.id}, this.value)">
         <p class="cart-total">${(sale.quantity * sale.product.price).toLocaleString("hu-HU")} Ft</p>
         <button class="cart-button" onclick="removeFromCart(${sale.product.id})">Eltávolítás</button>
       `;
