@@ -150,7 +150,7 @@ function showSearchResultsPopup(products) {
   popup.style.position = "absolute";
   popup.style.top = `${searchBarRect.bottom + window.scrollY + 10}px`; // Position below the search bar
   popup.style.left = `${searchBarRect.left + window.scrollX}px`; // Align with the search bar
-  popup.style.width = `${searchBar.offsetWidth}px`; // Match the search bar's width
+  popup.style.width = "auto";
   popup.style.backgroundColor = "#fff";
   popup.style.boxShadow = "0 5px 15px rgba(0, 0, 0, 0.3)";
   popup.style.borderRadius = "10px";
