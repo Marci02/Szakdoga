@@ -6253,3 +6253,45 @@ SESSION: Array
     [image] => 
     [created] => 2025-04-24 20:03:05
 )
+POST: Array
+(
+    [name] => 41234
+    [price] => 12000
+    [stair] => 120
+    [fileCategory] => 1
+    [fileBrand] => Nike
+    [auction_end] => 2025-05-02T22:34
+    [fileSize] => XS
+    [fileCondition] => Újszerű
+    [fileDesc] => 123412
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 10.jpg
+            [full_path] => 10.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpE70B.tmp
+            [error] => 0
+            [size] => 108502
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 2
+    [firstname] => papa
+    [lastname] => mama
+    [email] => samuelkonderla1@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-24 21:01:36
+)

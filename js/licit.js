@@ -387,15 +387,16 @@ function fetchAllAuctions() {
               <div style="font-size: 1em; font-weight: bold; color: #555; margin-top: 10px;">
               </div>
               <div class="product-info">
-              <p>Licit lépcső: ${formatPrice(auction.stair)} Ft</p>
+              <p id="price-${auction.auction_id}" style="font-size: 1.3em;"> 
+              <strong>Jelenlegi ár: </strong>${formatPrice(auction.price)} Ft
+              </p> <!-- Az aktuális ár (ho) jelenik meg -->
+              <p style="font-size: 1em;">Licit lépcső: ${formatPrice(auction.stair)} Ft</p>
               <p>Méret: ${auction.size || 'N/A'}</p>
               </div>
-              <p id="price-${auction.auction_id}"> <strong>Jelenlegi ár:</strong>${formatPrice(auction.price)} Ft</p> <!-- Az aktuális ár (ho) jelenik meg -->
-              <p><strong>Alapár:</strong> ${formatPrice(auction.original_price)} Ft</p>
               <div style="font-size: 1em; color: #e74c3c; margin-top: 15px;">
               <p>Licit vége: <span class="countdown" id="countdown-${auction.auction_id}">Számolás...</span></p>
               </div>
-            </div>
+              </div>
           `;
 
           // Kattintás esemény a részletek megjelenítéséhez
