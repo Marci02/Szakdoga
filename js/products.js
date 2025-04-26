@@ -39,6 +39,7 @@ function loadUserProducts() {
                         <h3>${product.name}</h3>
                         <p style="margin-left: 10px">Ár: ${product.price} Ft</p>
                         <p style="color: red;">Eladott</p>
+                        <button class="view-address-button" onclick="openBuyerAddressModal(${product.id})">Cím</button>
                     `;
                     soldProductsContainer.appendChild(productItem);
                 });
@@ -208,4 +209,33 @@ function deleteProduct(productId) {
         deleteModal.style.display = "none";
         productToDelete = null;
     };
+}
+
+function openBuyerAddressModal(productId) {
+    // AJAX kérés a vásárló szállítási címének lekéréséhez
+    fetch(`backend/getBuyerAddress.php?product_id=${productId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Töltsük be az adatokat a modalba
+                document.getElementById("buyer-name-new").textContent = `${data.buyer.firstname} ${data.buyer.lastname}`;
+                document.getElementById("buyer-postcode-new").textContent = data.buyer.postcode;
+                document.getElementById("buyer-city-new").textContent = data.buyer.city;
+                document.getElementById("buyer-street-new").textContent = data.buyer.street;
+                document.getElementById("buyer-house-number-new").textContent = data.buyer.address;
+
+                // Modal megjelenítése
+                document.getElementById("buyer-address-modal-new").style.display = "block";
+            } else {
+                alert("Nem sikerült lekérni a vásárló szállítási címét.");
+            }
+        })
+        .catch(error => {
+            console.error("Hiba történt a vásárló címének lekérésekor:", error);
+        });
+}
+
+function closeBuyerAddressModalNew() {
+    // Modal elrejtése
+    document.getElementById("buyer-address-modal-new").style.display = "none";
 }

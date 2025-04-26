@@ -290,3 +290,89 @@ label {
   cursor: pointer;
   border-radius: 5px;
 }
+
+.modal-new {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content-new {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  border-radius: 8px;
+  text-align: center; /* Szöveg középre igazítása */
+  display: flex;
+  flex-direction: column; /* Tartalom oszlopos elrendezése */
+  align-items: center; /* Középre igazítás vízszintesen */
+  justify-content: center; /* Középre igazítás függőlegesen */
+}
+
+.modal-content-new .close-new {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: black; /* Fekete szín */
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.modal-content-new .close-new:hover {
+  color: #555; /* Világosabb fekete hover */
+}
+
+.close-button-new {
+  background-color: #000000; /* Fekete háttér */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.close-button-new:hover {
+  background-color: #333333; /* Sötétszürke hover */
+  transform: scale(1.05); /* Kicsit nagyobb hover */
+}
+
+.close-button-new:active {
+  background-color: #555555; /* Világosabb szürke kattintáskor */
+  transform: scale(0.95); /* Kicsit kisebb kattintáskor */
+}
+
+.view-address-button {
+  background-color: #000000; /* Fekete háttér */
+  color: white; /* Fehér szöveg */
+  border: none; /* Nincs keret */
+  padding: 10px 15px; /* Kényelmes méret */
+  border-radius: 5px; /* Lekerekített sarkok */
+  font-size: 14px; /* Kisebb betűméret */
+  font-weight: bold; /* Félkövér szöveg */
+  cursor: pointer; /* Mutató kurzor */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Animáció */
+}
+
+.view-address-button:hover {
+  background-color: #333333; /* Sötétszürke hover */
+  transform: scale(1.05); /* Kicsit nagyobb hover */
+}
+
+.view-address-button:active {
+  background-color: #555555; /* Világosabb szürke kattintáskor */
+  transform: scale(0.95); /* Kicsit kisebb kattintáskor */
+}
