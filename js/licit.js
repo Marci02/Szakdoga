@@ -30,38 +30,138 @@ function search() {
 
   // Filter products based on the search term
   const filteredProducts = allProducts.filter(product =>
-    product.name.toLowerCase().includes(searchTerm)
+      product.name.toLowerCase().includes(searchTerm)
   );
 
-  // Render the filtered products
-  renderProducts(filteredProducts);
+  // Display the search results in a popup
+  showSearchResultsPopup(filteredProducts);
 
   // Display a message if no products match the search term
-  const output = document.getElementById("output");
-  output.textContent = filteredProducts.length
-    ? ""
-    : `Nincs találat a(z) "${searchTerm}" keresésre.`;
+  if (filteredProducts.length === 0) {
+      showMessage(`Nincs találat a(z) "${searchTerm}" keresésre.`, 'error');
+  }
+}
+
+function showSearchResultsPopup(products) {
+  // Remove any existing popup
+  const existingPopup = document.getElementById("searchResultsPopup");
+  if (existingPopup) {
+      existingPopup.remove();
+  }
+
+  // Get the search bar element
+  const searchBar = document.getElementById("search");
+  const searchBarRect = searchBar.getBoundingClientRect();
+
+  // Create the popup container
+  const popup = document.createElement("div");
+  popup.id = "searchResultsPopup";
+  popup.style.position = "absolute";
+  popup.style.top = `${searchBarRect.bottom + window.scrollY + 10}px`; // Position below the search bar
+  popup.style.left = `${searchBarRect.left + window.scrollX}px`; // Align with the search bar
+  popup.style.width = `${searchBar.offsetWidth}px`; // Match the search bar's width
+  popup.style.backgroundColor = "#fff";
+  popup.style.boxShadow = "0 5px 15px rgba(0, 0, 0, 0.3)";
+  popup.style.borderRadius = "10px";
+  popup.style.padding = "10px";
+  popup.style.zIndex = "1000";
+  popup.style.overflowY = "auto";
+  popup.style.maxHeight = "300px";
+
+  // Add a close button
+  const closeButton = document.createElement("button");
+  closeButton.textContent = "Bezárás";
+  closeButton.style.display = "block";
+  closeButton.style.margin = "10px auto";
+  closeButton.style.backgroundColor = "#22222a";
+  closeButton.style.color = "#fff";
+  closeButton.style.border = "none";
+  closeButton.style.borderRadius = "5px";
+  closeButton.style.padding = "5px 10px";
+  closeButton.style.cursor = "pointer";
+  closeButton.addEventListener("click", () => popup.remove());
+  popup.appendChild(closeButton);
+
+  // Add the search results
+  if (products.length > 0) {
+      products.forEach(product => {
+          const productCard = document.createElement("a");
+          productCard.href = `ossztermek.html?id=${product.id}`; // Redirect to the product page with the product ID
+          productCard.style.textDecoration = "none";
+          productCard.style.color = "inherit";
+
+          productCard.style.border = "1px solid #ddd";
+          productCard.style.borderRadius = "5px";
+          productCard.style.marginBottom = "10px";
+          productCard.style.padding = "10px";
+          productCard.style.display = "flex";
+          productCard.style.alignItems = "center";
+
+          productCard.innerHTML = `
+              <img src="${product.img_url}" alt="${product.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin-right: 10px;">
+              <div>
+                  <h4 style="margin: 0; font-size: 16px;">${product.name}</h4>
+                  <p style="margin: 0; font-size: 14px; color: #555;">${formatPrice(product.price)} Ft</p>
+              </div>
+          `;
+
+          popup.appendChild(productCard);
+      });
+  } else {
+      const noResults = document.createElement("p");
+      noResults.textContent = "Nincs találat.";
+      noResults.style.textAlign = "center";
+      noResults.style.color = "#555";
+      popup.appendChild(noResults);
+  }
+
+  // Append the popup to the body
+  document.body.appendChild(popup);
 }
 
 function renderProducts(products) {
-  const productList = document.querySelector(".product-list");
-  productList.innerHTML = ""; // Clear the product list
+    const productList = document.querySelector(".product-list");
+    productList.innerHTML = ""; // Clear the product list
 
-  products.forEach(product => {
-    const productCard = document.createElement("div");
-    productCard.className = "product-card";
-    productCard.dataset.productName = product.name;
+    if (products.length === 0) {
+        productList.innerHTML = "<p>Nincs találat a szűrési feltételek alapján.</p>";
+        return;
+    }
 
-    productCard.innerHTML = `
-      <img src="${product.img_url}" alt="${product.name}" class="product-image">
-      <h3>${product.name}</h3>
-      <p>Méret: ${product.size || "N/A"}</p>
-      <p>Állapot: ${product.condition || "N/A"}</p>
-      <p>${formatPrice(product.price)} Ft</p>
-    `;
+    products.forEach(product => {
+        const productCard = document.createElement("div");
+        productCard.className = "product-card card-appear";
+        productCard.style.animation = "cardAppear 0.5s ease-out";
+        productCard.style.cursor = "pointer";
 
-    productList.appendChild(productCard);
-  });
+        // Add click event listener to the card
+        productCard.addEventListener("click", () => {
+            showProductDetails(
+                product.name,
+                product.description || "Nincs leírás.",
+                product.img_url,
+                product.original_price,
+                product.price,
+                product.stair,
+                product.size,
+                product.condition,
+                product.brand,
+                product.id,
+                product.user_id,
+                product.owner_id
+            );
+        });
+
+        productCard.innerHTML = `
+            <img src="${product.img_url}" alt="${product.name}" class="product-image">
+            <h3>${product.name}</h3>
+            <p>Méret: ${product.size || "N/A"}</p>
+            <p>Állapot: ${product.condition || "N/A"}</p>
+            <p>${formatPrice(product.price)} Ft</p>
+        `;
+
+        productList.appendChild(productCard);
+    });
 }
 
 function fetchProducts() {
@@ -354,6 +454,7 @@ function fetchAllAuctions() {
       console.log("🎯 Aukciók lekérve:", data);
 
       if (data.status === "success" && data.data.length > 0) {
+        const loggedInUserId = data.loggedInUserId; // Bejelentkezett felhasználó ID-ja
         const productList = document.querySelector(".product-list");
         productList.innerHTML = ""; // Előző elemek törlése, ha újra betölt
 
@@ -386,14 +487,16 @@ function fetchAllAuctions() {
               <div style="font-size: 1em; font-weight: bold; color: #555; margin-top: 10px;">
               </div>
               <div class="product-info">
-              <p>Licit lépcső: ${formatPrice(auction.stair)} Ft</p>
+              <p id="price-${auction.auction_id}" style="font-size: 1.3em;"> 
+              <strong>Jelenlegi ár: </strong>${formatPrice(auction.price)} Ft
+              </p> <!-- Az aktuális ár (ho) jelenik meg -->
+              <p style="font-size: 1em;">Licit lépcső: ${formatPrice(auction.stair)} Ft</p>
               <p>Méret: ${auction.size || 'N/A'}</p>
               </div>
-              <p id="price-${auction.auction_id}">${formatPrice(auction.price)} Ft</p> <!-- Az aktuális ár (ho) jelenik meg -->
               <div style="font-size: 1em; color: #e74c3c; margin-top: 15px;">
               <p>Licit vége: <span class="countdown" id="countdown-${auction.auction_id}">Számolás...</span></p>
               </div>
-            </div>
+              </div>
           `;
 
           // Kattintás esemény a részletek megjelenítéséhez
@@ -402,13 +505,15 @@ function fetchAllAuctions() {
               auction.name,
               auction.description || "Nincs leírás.",
               auction.img_url,
+              auction.original_price,
               auction.price, // Az aktuális ár (ho)
               auction.stair,
               auction.size,
               auction.condition,
               auction.brand_name,
               auction.auction_id, // auctionId
-              auction.user_id // userId
+              loggedInUserId, // userId
+              auction.owner_id
             );
           });
 
@@ -444,7 +549,7 @@ window.addEventListener("DOMContentLoaded", function () {
   updateCart();
 });
 
-function showProductDetails(title, description, imageUrl, price, bidStep, size, condition, brand, auctionId, userId,) {
+function showProductDetails(title, description, imageUrl, originalPrice, price, bidStep, size, condition, brand, auctionId, userId, owner_id) {
   // Ha már nyitva van modal, töröljük
   let existingModal = document.getElementById("productModalOverlay");
   if (existingModal) {
@@ -496,7 +601,7 @@ function showProductDetails(title, description, imageUrl, price, bidStep, size, 
     <img src="${imageUrl}" alt="${title}" onclick="openImageModal('${imageUrl}')"
       style="width: 100%; max-height: 250px; object-fit: cover; border-radius: 12px; margin-bottom: 16px; cursor: pointer;">
 
-    <p style="margin: 0; font-size: 17px;"><strong>Alapár:</strong> ${formatPrice(price)} Ft</p>
+    <p style="margin: 0; font-size: 17px;"><strong>Alapár:</strong> ${formatPrice(originalPrice)} Ft</p>
     <p><strong>Licit lépcső:</strong> ${formatPrice(bidStep)} Ft</p>
     <p><strong>Méret:</strong> ${size}</p>
     <p><strong>Állapot:</strong> ${condition}</p>
@@ -504,9 +609,9 @@ function showProductDetails(title, description, imageUrl, price, bidStep, size, 
     
     <textarea id="note" rows="5" style="width: 100%; resize: none; padding: 10px; margin-top: 10px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em; overflow-wrap: break-word; word-wrap: break-word; white-space: pre-wrap;" readonly>${description}</textarea>
     
-    <p style="margin: 0;  font-size: 20px; margin-top:10px;"><strong>Aktuális ár:</strong> <span id="highestPrice">${formatPrice(currentPrice)}</span> Ft</p>
+    <p style="margin: 0; font-size: 20px; margin-top:10px;"><strong>Aktuális ár:</strong> <span id="highestPrice">${formatPrice(currentPrice)}</span> Ft</p>
     <div style="display: flex; gap: 12px; justify-content: space-between; margin-top: 12px;">
-      <button onclick="increaseModalPrice(${bidStep}, ${auctionId}, ${userId})"
+      <button id="bidButton" onclick="increaseModalPrice(${bidStep}, ${auctionId}, ${userId})"
         style="flex: 1; padding: 12px 0; background-color: #000; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
         Licitálás
       </button>
@@ -520,8 +625,19 @@ function showProductDetails(title, description, imageUrl, price, bidStep, size, 
   // Hozzáadás a DOM-hoz
   modalOverlay.appendChild(modal);
   document.body.appendChild(modalOverlay);
-}
+  const isOwner = parseInt(userId) === parseInt(owner_id);
+  console.log("isOwner:", isOwner, "userId:", userId, "ownerId:", owner_id);
 
+  const bidButton = modal.querySelector("#bidButton");
+  if (isOwner && bidButton) {
+    bidButton.disabled = true;
+    bidButton.style.cursor = "not-allowed";
+    bidButton.style.opacity = "0.6";
+    bidButton.textContent = "Nem licitálhatsz a saját termékedre";
+  } else if (!bidButton) {
+    console.error("A 'bidButton' elem nem található!");
+  }
+}
 
 function closeProductModal() {
   const overlay = document.getElementById("productModalOverlay");
@@ -595,7 +711,7 @@ function increaseModalPrice(bidStep, auctionId, userId) {
     if (cardPriceElement) {
       cardPriceElement.classList.add("price-update");
       setTimeout(() => {
-        cardPriceElement.textContent = `${currentPrice.toLocaleString()} Ft`;
+        cardPriceElement.textContent = `${currentPrice.toLocaleString()}`;
         cardPriceElement.classList.remove("price-update");
       }, 500); // Az animáció időtartamával szinkronban
     }
@@ -683,7 +799,62 @@ function showMessage(message, type = 'error', duration = 3000) {
   }, duration);
 }
 
+function applyFilters() {
+  const selectedCategories = [];
+  const selectedBrands = [];
+  const selectedSizes = [];
+  const selectedConditions = [];
+  let selectedPrice = document.getElementById("price-range").value;
 
+  // Collect selected categories
+  document.querySelectorAll("#category1 input[type='checkbox']").forEach(checkbox => {
+      if (checkbox.checked) {
+          selectedCategories.push(checkbox.parentElement.textContent.trim().toLowerCase());
+      }
+  });
+
+  // Collect selected brands
+  document.querySelectorAll("#brand input[type='checkbox']").forEach(checkbox => {
+      if (checkbox.checked) {
+          selectedBrands.push(checkbox.parentElement.textContent.trim().toLowerCase());
+      }
+  });
+
+  // Collect selected sizes
+  document.querySelectorAll("#size input[type='checkbox']").forEach(checkbox => {
+      if (checkbox.checked) {
+          selectedSizes.push(checkbox.value.toLowerCase());
+      }
+  });
+
+  // Collect selected conditions
+  document.querySelectorAll("#condition input[type='checkbox']").forEach(checkbox => {
+      if (checkbox.checked) {
+          selectedConditions.push(checkbox.parentElement.textContent.trim().toLowerCase());
+      }
+  });
+
+  // Filter products based on selected filters
+  const filteredProducts = allProducts.filter(product => {
+      const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(product.category.toLowerCase());
+      const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(product.brand.toLowerCase());
+      const matchesSize = selectedSizes.length === 0 || selectedSizes.includes(product.size.toLowerCase());
+      const matchesCondition = selectedConditions.length === 0 || selectedConditions.includes(product.condition.toLowerCase());
+      const matchesPrice = !selectedPrice || product.price <= parseInt(selectedPrice);
+
+      return matchesCategory && matchesBrand && matchesSize && matchesCondition && matchesPrice;
+  });
+
+  // Render the filtered products
+  renderProducts(filteredProducts);
+}
+
+document.querySelectorAll(".subcategory input[type='checkbox']").forEach(checkbox => {
+  checkbox.addEventListener("change", applyFilters);
+});
+
+// Attach event listener for the price range slider
+document.getElementById("price-range").addEventListener("input", applyFilters);
 
 function closeModal() {
   var modal = document.querySelector(".modal");
@@ -713,4 +884,7 @@ function toggleCategory(categoryId) {
   }
 }
 
-
+function updatePriceValue() {
+    const priceValue = document.getElementById("price-range").value;
+    document.getElementById("price-value").textContent = `${priceValue} Ft`;
+}

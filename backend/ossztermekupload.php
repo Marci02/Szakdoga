@@ -61,10 +61,19 @@ $brand_query->execute();
 $result = $brand_query->get_result();
 
 if ($row = $result->fetch_assoc()) {
+    // Ha a márka létezik, lekérjük az ID-t
     $brand_id = $row['id'];
 } else {
-    echo json_encode(["success" => false, "message" => "Érvénytelen márka"]);
-    exit;
+    // Ha a márka nem létezik, beszúrjuk az adatbázisba
+    $insert_brand_query = $dbconn->prepare("INSERT INTO brand (brand_name) VALUES (?)");
+    $insert_brand_query->bind_param("s", $brand_name);
+    if ($insert_brand_query->execute()) {
+        $brand_id = $insert_brand_query->insert_id; // Az újonnan beszúrt márka ID-ja
+    } else {
+        echo json_encode(["success" => false, "message" => "Márka beszúrása sikertelen: " . $dbconn->error]);
+        exit;
+    }
+    $insert_brand_query->close();
 }
 $brand_query->close();
 

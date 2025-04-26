@@ -80,8 +80,12 @@ CREATE TABLE `auction` (
   `description` varchar(255) NOT NULL,
   `condition` varchar(255) NOT NULL,
   `ho` int NOT NULL,
-  `ho_id` int NOT NULL
+  `ho_id` bigint NOT NULL
 );
+
+ALTER TABLE `auction` 
+ADD CONSTRAINT `fk_auction_ho_id_user_id`
+FOREIGN KEY (`ho_id`) REFERENCES `user` (`id`);
 
 ALTER TABLE `user` ADD FOREIGN KEY (`city_id`) REFERENCES `settlement` (`id`);
 

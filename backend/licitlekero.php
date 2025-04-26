@@ -1,15 +1,16 @@
 <?php
 header("Content-Type: application/json");
+session_start(); // Session indítása a bejelentkezett felhasználó azonosítójához
 
 // Csatlakozás beolvasása
-require_once __DIR__ . '/../connect.php'; // Ezt igazítsd a te mappastruktúrád szerint, ha szükséges
+require_once __DIR__ . '/../connect.php';
 
 $sql = "
 SELECT 
     a.id AS auction_id,
-    a.user_id,
+    a.user_id AS owner_id, -- A terméket feltöltő felhasználó azonosítója
     a.name,
-    a.price,
+    a.price AS original_price, -- Eredeti ár
     a.ho AS price, -- Aktuális ár
     a.ho_id, -- Az aktuális licitáló felhasználó azonosítója
     a.stair,
@@ -43,12 +44,14 @@ if ($result->num_rows > 0) {
 
     echo json_encode([
         "status" => "success",
-        "data" => $auctions
+        "data" => $auctions,
+        "loggedInUserId" => $_SESSION['user_id'] ?? null // Bejelentkezett felhasználó ID-ja (ha van)
     ]);
 } else {
     echo json_encode([
         "status" => "success",
-        "data" => []
+        "data" => [],
+        "loggedInUserId" => $_SESSION['user_id'] ?? null // Bejelentkezett felhasználó ID-ja (ha van)
     ]);
 }
 

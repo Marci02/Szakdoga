@@ -23,7 +23,7 @@ function updateCart() {
                 data.sales.forEach(item => {
                     const itemElement = document.createElement("p");
                     itemElement.className = "dropdown-item";
-                    itemElement.textContent = `${item.product.name} - ${formatPrice(item.product.price)} Ft`;
+                    itemElement.innerHTML = `${item.product.name} -<br>${formatPrice(item.product.price)} Ft`;
                     dropdownMenu.appendChild(itemElement);
                 });
 

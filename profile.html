@@ -37,22 +37,20 @@
             <div class="sidebar">
                 <ul class="sidebar-list">
                     <li class="nav-item dropdown-search">
-                        <button class="dropdown-toggle-search" type="button" id="dropdownSearchButton"
-                            onclick="toggleSearch()" aria-expanded="false">
+                        <button class="dropdown-toggle-search" type="button" id="dropdownSearchButton" onclick="toggleSearch()" aria-expanded="false">
                             <span class="sr-only"></span>
                             <svg stroke-width="2" focusable="false" width="22" height="22" class="">
                                 <circle cx="11" cy="10" r="7" fill="none" stroke="white"></circle>
-                                <path d="m16 15 3 3" stroke="white" stroke-linecap="round" stroke-linejoin="round">
-                                </path>
+                                <path d="m16 15 3 3" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
                         </button>
-
+                    
                         <!-- Dropdown Menu -->
                         <div class="dropdown-menu-search" id="searchBtn" aria-labelledby="dropdownSearchButton">
-                            <p class="dropdown-item-search" href="#"><input type="text" id="search"
-                                    placeholder="Search...">
-                                <button id="searchbuttonToSearchBar">Search</button>
-                            <p id="output"></p>
+                            <p class="dropdown-item-search">
+                                <input type="text" id="search" placeholder="Keresés..." style="padding: 4px;">
+                                <button id="searchbuttonToSearchBar">Keresés</button>
+                                <p id="output"></p>
                             </p>
                         </div>
                     </li>
@@ -67,7 +65,7 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <button class="dropdown-toggle" type="button" id="dropdownMenuButton" onclick="toggleFunction()"
+                        <button class="dropdown-toggle" type="button" id="dropdownMenuButton"
                             aria-expanded="false">
                             <span class="sr-only"></span>
                             <svg role="presentation" stroke-width="2" focusable="false" width="22" height="22" class="">
