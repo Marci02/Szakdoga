@@ -6295,3 +6295,75 @@ SESSION: Array
     [image] => 
     [created] => 2025-04-24 21:01:36
 )
+POST: Array
+(
+    [name] => testdata
+    [price] => 30000
+    [stair] => 1000
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-27T20:23
+    [fileSize] => 43
+    [fileCondition] => Új
+    [fileDesc] => testdata
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => jordan1.jpg
+            [full_path] => jordan1.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\Xampp\tmp\phpE6E0.tmp
+            [error] => 0
+            [size] => 665704
+        )
+
+)
+
+SESSION: Array
+(
+)
+POST: Array
+(
+    [name] => testdata
+    [price] => 30000
+    [stair] => 1000
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-27T20:28
+    [fileSize] => 48
+    [fileCondition] => Új
+    [fileDesc] => test
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => jordan1.jpg
+            [full_path] => jordan1.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\Xampp\tmp\php616D.tmp
+            [error] => 0
+            [size] => 665704
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Verebes
+    [lastname] => Bálint
+    [email] => test@gmail.com
+    [phone_number] => 06705201788
+    [street] => Gárdonyi út
+    [address] => 2/a
+    [postcode] => 2659
+    [city] => Érsekvadkert
+    [county] => Nógrád
+    [image] => 
+    [created] => 2025-04-18 19:56:57
+)
