@@ -362,12 +362,6 @@ nav.header-sticky {
     margin-bottom: 20px; /* Távolság a terméklistától */
     top: 0; /* A navbar magasságának figyelmen kívül hagyása */
   }
-  .showproductdetails {
-    max-height: 400px; /* Maximális magasság mobilon */
-    overflow-y: auto; /* Görgethetővé teszi, ha a tartalom túl hosszú */
-    padding: 10px; /* Csökkentett padding */
-    font-size: 14px; /* Kisebb betűméret */
-  }
   .pagination {
     margin-top: 0; /* Távolság eltávolítása mobilon */
     width: 100%; /* A teljes szélességet kitölti */
@@ -426,7 +420,7 @@ nav.header-sticky {
   margin: 10px;
   width: auto;
   box-sizing: border-box;
-  height: 450px;
+  height: 625px;
   display: flex;
   flex-direction: column;
   transition: transform 0.2s;
@@ -588,4 +582,5 @@ nav.header-sticky {
   background-color: #ccc;
   cursor: not-allowed;
 }
+
 

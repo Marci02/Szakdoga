@@ -147,6 +147,8 @@ function updateBidButtons(loggedInUserId) {
     const highestBidderId = card.getAttribute("data-highest-bidder-id");
 
     const bidButton = card.querySelector(`#bidButton-${auctionId}`);
+    bidButton.style.borderRadius = "50px";
+    bidButton.style.backgroundColor = "#22222a";
 
     if (!bidButton) return;
 
@@ -197,8 +199,10 @@ function renderPaginatedProducts(products, loggedInUserId) {
   paginatedProducts.forEach(auction => {
     const productCard = document.createElement("div");
     productCard.className = "product-card";
+    productCard.style.position = "relative";
     productCard.style.border = "1px solid #ddd";
     productCard.style.borderRadius = "15px";
+    productCard.style.margin = "20px";
     productCard.style.padding = "15px";
     productCard.style.marginBottom = "20px";
     productCard.style.boxShadow = "0 5px 15px rgba(0, 0, 0, 0.1)";
@@ -266,7 +270,7 @@ function renderPaginatedProducts(products, loggedInUserId) {
 
 setInterval(() => {
   fetchAllAuctions();
-}, 5000); // 10 másodpercenként frissít
+}, 800); // 10 másodpercenként frissít
 
 function updatePaginationInfo(totalItems) {
   const paginationInfo = document.getElementById("pagination-info");
@@ -592,7 +596,7 @@ function startCountdown(bidEndTime, auctionId) {
 
       countdownElement.innerHTML = `${days} nap ${hours} óra ${minutes} perc ${seconds} másodperc`;
     }
-  }, 1000);
+  }, 1);
 }
 
 let loggedInUserId; // Globális változó a bejelentkezett felhasználó ID-jához

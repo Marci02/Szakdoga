@@ -844,3 +844,45 @@ SESSION: Array
     [image] => 
     [created] => 2025-04-27 18:34:22
 )
+POST: Array
+(
+    [name] => 41234
+    [price] => 123421
+    [stair] => 341234
+    [fileCategory] => 2
+    [fileBrand] => 4312431
+    [auction_end] => 2025-04-27T20:42
+    [fileSize] => 47
+    [fileCondition] => Újszerű
+    [fileDesc] => 41234
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => Palace.jpg
+            [full_path] => Palace.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php7C.tmp
+            [error] => 0
+            [size] => 3767
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 3
+    [firstname] => lala
+    [lastname] => kaka
+    [email] => samuelkonderla2@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-27 19:33:15
+)
