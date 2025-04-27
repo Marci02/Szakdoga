@@ -138,6 +138,41 @@ function showSearchResultsPopup(products) {
   document.body.appendChild(popup);
 }
 
+function updateBidButtons(loggedInUserId) {
+  const productCards = document.querySelectorAll(".product-card");
+
+  productCards.forEach(card => {
+    const auctionId = card.getAttribute("data-auction-id");
+    const ownerId = card.getAttribute("data-owner-id");
+    const highestBidderId = card.getAttribute("data-highest-bidder-id");
+
+    const bidButton = card.querySelector(`#bidButton-${auctionId}`);
+
+    if (!bidButton) return;
+
+    const isOwner = parseInt(loggedInUserId) === parseInt(ownerId);
+    const isHighestBidder = parseInt(loggedInUserId) === parseInt(highestBidderId);
+
+    if (isOwner) {
+      bidButton.disabled = true;
+      bidButton.style.cursor = "not-allowed";
+      bidButton.style.opacity = "0.6";
+      bidButton.textContent = "Nem licitálhatsz a saját termékedre";
+    } else if (isHighestBidder) {
+      bidButton.disabled = true;
+      bidButton.style.cursor = "not-allowed";
+      bidButton.style.opacity = "0.6";
+      bidButton.textContent = "Tied a legmagasabb licit";
+    } else {
+      bidButton.disabled = false;
+      bidButton.style.cursor = "pointer";
+      bidButton.style.opacity = "1";
+      bidButton.textContent = "Licitálás";
+    }
+  });
+}
+
+
 let allProducts = []; // Az összes termék tárolása
 let filteredProducts = []; // A szűrt termékek tárolása
 let currentPage = 1; // Az aktuális oldal
@@ -170,6 +205,11 @@ function renderPaginatedProducts(products, loggedInUserId) {
     productCard.style.backgroundColor = "#fff";
     productCard.style.cursor = "pointer"; // Mutatja, hogy kattintható
 
+    // Adatok hozzáadása a DOM-hoz
+    productCard.setAttribute("data-auction-id", auction.auction_id);
+    productCard.setAttribute("data-owner-id", auction.owner_id);
+    productCard.setAttribute("data-highest-bidder-id", auction.ho_id);
+
     productCard.innerHTML = `
       <h3 style="font-size: 1.4em; font-weight: bold; color: #333; text-align: center; margin-top: 10px;">${auction.name}</h3>
       <div style="text-align: center; margin-bottom: 15px;">
@@ -187,6 +227,9 @@ function renderPaginatedProducts(products, loggedInUserId) {
           <p>Licit vége: <span class="countdown" id="countdown-${auction.auction_id}">Számolás...</span></p>
         </div>
       </div>
+      <button id="bidButton-${auction.auction_id}" style="margin-top: 10px; padding: 10px; background-color: #000; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
+        Licitálás
+      </button>
     `;
 
     // Eseménykezelő hozzáadása a kártyához
@@ -216,7 +259,14 @@ function renderPaginatedProducts(products, loggedInUserId) {
 
   // Frissítjük a lapozási információkat
   updatePaginationInfo(products.length);
+
+  // Frissítjük a gombok állapotát
+  updateBidButtons(loggedInUserId);
 }
+
+setInterval(() => {
+  fetchAllAuctions();
+}, 500); // 10 másodpercenként frissít
 
 function updatePaginationInfo(totalItems) {
   const paginationInfo = document.getElementById("pagination-info");
@@ -552,6 +602,9 @@ function fetchAllAuctions() {
         allProducts = data.data; // Az összes termék tárolása
         loggedInUserId = data.loggedInUserId; // Bejelentkezett felhasználó ID-jának tárolása
         renderPaginatedProducts(allProducts, loggedInUserId); // Lapozott termékek megjelenítése
+
+        // Frissítjük a gombok állapotát
+        updateBidButtons(loggedInUserId);
       } else {
         console.warn("❗ Nincsenek aukciók.");
         const productList = document.querySelector(".product-list");
