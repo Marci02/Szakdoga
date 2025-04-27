@@ -68,9 +68,11 @@ a {
 }
 
 .container {
-  height: 100vh;
+  height: auto;
   width: 100%;
   color: black;
+  margin-top: 100px;
+  display: flex;
 }
 
 .content:nth-child(even) {
@@ -283,10 +285,7 @@ nav.header-sticky {
   display: block;
 }
 
-.container {
-  margin-top: 100px;
-  display: flex;
-}
+
 
 /* Reszponzív beállítások a sidebarhoz */
 
@@ -327,6 +326,7 @@ nav.header-sticky {
   padding: 20px;
   width: calc(100% - 270px);
   box-sizing: border-box;
+  height: auto; /* A magasság automatikusan igazodik a tartalomhoz */
 }
 
 /* Reszponzív elrendezés tabletekhez */
@@ -352,6 +352,8 @@ nav.header-sticky {
     margin-left: 0; /* A sidebar eltűnik, így nincs margó */
     grid-template-columns: 1fr; /* 1 oszlop mobilon */
     width: 100%; /* A teljes szélességet kitölti */
+    margin-bottom: 20px; /* Hely a lapozónak */
+    height: auto; /* A magasság automatikusan igazodik a tartalomhoz */
   }
   .sidebar-categories {
     position: relative; /* A sidebar már nem fixált */
@@ -365,6 +367,10 @@ nav.header-sticky {
     overflow-y: auto; /* Görgethetővé teszi, ha a tartalom túl hosszú */
     padding: 10px; /* Csökkentett padding */
     font-size: 14px; /* Kisebb betűméret */
+  }
+  .pagination {
+    margin-top: 0; /* Távolság eltávolítása mobilon */
+    width: 100%; /* A teljes szélességet kitölti */
   }
 }
 
@@ -562,6 +568,10 @@ nav.header-sticky {
   align-items: center;
   margin-top: 20px;
   gap: 10px;
+  clear: both; /* Biztosítja, hogy a lapozó a termékek alatt legyen */
+  position: relative; /* Alapértelmezett pozíció */
+  z-index: 1; /* Biztosítja, hogy a lapozó ne kerüljön a termékek mögé */
+  width: 100%; /* A teljes szélességet kitölti */
 }
 
 .pagination-btn {
