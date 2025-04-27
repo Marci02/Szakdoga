@@ -74,7 +74,7 @@ function showSearchResultsPopup(products) {
   popup.style.padding = "10px";
   popup.style.zIndex = "1000";
   popup.style.overflowY = "auto";
-  popup.style.maxHeight = "300px";
+  popup.style.maxHeight = "400px";
 
   // Add a close button
   const closeButton = document.createElement("button");
@@ -530,10 +530,12 @@ function startCountdown(bidEndTime, auctionId) {
           console.error("Hiba a licit lejáratának kezelése során:", error);
         });
     } else {
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
       const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
       const seconds = Math.floor((timeLeft / 1000) % 60);
-      countdownElement.innerHTML = `${hours} óra ${minutes} perc ${seconds} másodperc`;
+
+      countdownElement.innerHTML = `${days} nap ${hours} óra ${minutes} perc ${seconds} másodperc`;
     }
   }, 1000);
 }
