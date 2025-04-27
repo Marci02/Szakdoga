@@ -214,17 +214,100 @@ label {
   display: flex;
 }
 
-@media screen and (max-width: 700px){
-  .product-item{
-    font-size: small;
+/* Nagyobb képernyők (1024px felett) */
+@media (min-width: 1024px) {
+  .product-item {
     display: flex;
-    flex-flow: row wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    margin: 15px 0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
 
-  .modal-content{
-    max-height: 80vh;
-    overflow-y: auto;
-    margin-top: 0;
+  .product-title {
+    font-size: 18px;
+    font-weight: bold;
+    flex: 1;
+    margin-right: 20px;
+  }
+
+  .product-actions button {
+    width: auto; /* Gombok alapértelmezett szélessége */
+    padding: 10px 20px;
+  }
+}
+
+/* Közepes képernyők (768px - 1024px) */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .product-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-title {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    width: 100%; /* Cím teljes szélességű */
+  }
+
+  .product-actions button {
+    width: 100%; /* Gombok teljes szélességűek */
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .product-item button{
+    width: 90%; /* Gombok teljes szélességűek */
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .editButton{
+    margin-left: 10px;
+  }
+}
+
+/* Kis képernyők (768px alatt) */
+@media (max-width: 768px) {
+  .product-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px; /* Növelt belső margó */
+    margin: 15px 0; /* Növelt külső margó a termékek között */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .product-title {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px; /* Növelt távolság a cím és a többi tartalom között */
+    width: 100%; /* Cím teljes szélességű */
+  }
+
+  .product-item button {
+    width: 90%; /* Gombok teljes szélességűek */
+    padding: 10px;
+    margin-bottom: 15px; /* Növelt távolság a gombok között */
+  }
+
+  .editButton {
+    margin-left: 10px;
   }
 }
 

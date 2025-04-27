@@ -21,7 +21,6 @@ function loadUserProducts() {
                     productItem.innerHTML = `
                         <img src="uploads/${product.img_url}" alt="${product.name}" class="product-image">
                         <h3>${product.name}</h3>
-                        <p>Ár: ${product.price} Ft</p>
                         <button class="editButton" onclick="openEditModal(${product.id}, '${product.name}', '${product.img_url}', ${product.price}, '${product.description}', ${product.quantity}, '${product.size}', '${product.condition}')">Szerkesztés</button>
                         <button class="deleteButton" onclick="deleteProduct(${product.id})">Törlés</button>
                     `;
@@ -37,7 +36,6 @@ function loadUserProducts() {
                     productItem.innerHTML = `
                         <img src="uploads/${product.img_url}" alt="${product.name}" class="product-image">
                         <h3>${product.name}</h3>
-                        <p style="margin-left: 10px">Ár: ${product.price} Ft</p>
                         <p style="color: red;">Eladott</p>
                         <button class="view-address-button" onclick="openBuyerAddressModal(${product.id})">Cím</button>
                     `;
@@ -212,19 +210,16 @@ function deleteProduct(productId) {
 }
 
 function openBuyerAddressModal(productId) {
-    // AJAX kérés a vásárló szállítási címének lekéréséhez
     fetch(`backend/getBuyerAddress.php?product_id=${productId}`)
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Töltsük be az adatokat a modalba
                 document.getElementById("buyer-name-new").textContent = `${data.buyer.firstname} ${data.buyer.lastname}`;
                 document.getElementById("buyer-postcode-new").textContent = data.buyer.postcode;
                 document.getElementById("buyer-city-new").textContent = data.buyer.city;
                 document.getElementById("buyer-street-new").textContent = data.buyer.street;
                 document.getElementById("buyer-house-number-new").textContent = data.buyer.address;
-
-                // Modal megjelenítése
+                document.getElementById("buyer-phone-new").textContent = data.buyer.phone; // Telefonszám megjelenítése
                 document.getElementById("buyer-address-modal-new").style.display = "block";
             } else {
                 alert("Nem sikerült lekérni a vásárló szállítási címét.");

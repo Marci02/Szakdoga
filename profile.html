@@ -106,7 +106,7 @@
                     <label>Email:</label>
                     <input type="email" id="email" value="" />
                     <label>Telefonszám:</label>
-                    <input type="text" id="phone" value="" />
+                    <input type="tel" id="phone" value="" maxlength="11"/>
                     <button id="savePersonal" class="otherButton">Mentés</button>
                     <div class="buttons">
                         <button class="logoutButton otherButton">Kijelentkezés</button>
@@ -185,6 +185,7 @@
                         <p><strong>Város:</strong> <span id="buyer-city-new"></span></p>
                         <p><strong>Utca:</strong> <span id="buyer-street-new"></span></p>
                         <p><strong>Házszám:</strong> <span id="buyer-house-number-new"></span></p>
+                        <p><strong>Telefonszám:</strong> <span id="buyer-phone-new"></span></p> <!-- Telefonszám hozzáadása -->
                         <button onclick="closeBuyerAddressModalNew()" class="close-button-new">Bezárás</button>
                     </div>
                 </div>

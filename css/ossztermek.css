@@ -675,7 +675,7 @@ nav.header-sticky {
 
   .nav .menu {
     flex-direction: column;
-    width: 100%;
+    width: 0;
     gap: 10px;
   }
 

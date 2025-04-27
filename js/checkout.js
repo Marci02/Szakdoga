@@ -221,6 +221,7 @@ function finalizeCheckout() {
             document.getElementById("successMessage").classList.remove("hidden");
             document.getElementById("progress2").classList.remove("active");
             document.getElementById("progress3").classList.add("active");
+            document.querySelector(".checkout-footer").style.display = "none";
             showMessage("A vásárlás sikeresen befejeződött!", "success");
         } else {
             showMessage("Hiba történt a vásárlás során: " + (result.error || "Ismeretlen hiba"), "error");
