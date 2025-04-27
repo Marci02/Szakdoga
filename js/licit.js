@@ -667,25 +667,25 @@ function showProductDetails(title, description, imageUrl, originalPrice, price, 
   modalOverlay.appendChild(modal);
   document.body.appendChild(modalOverlay);
 
-  // Ellenőrzés: a felhasználó a legmagasabb licitáló-e
+  // Ellenőrzés: a felhasználó a legmagasabb licitáló-e vagy a termék feltöltője-e
   const isOwner = parseInt(userId) === parseInt(owner_id);
-const isHighestBidder = parseInt(userId) === parseInt(ho_id);
-console.log("isOwner:", isOwner, "isHighestBidder:", isHighestBidder, "userId:", userId, "ownerId:", owner_id, "ho_id:", ho_id);
+  const isHighestBidder = parseInt(userId) === parseInt(ho_id);
+  console.log("isOwner:", isOwner, "isHighestBidder:", isHighestBidder, "userId:", userId, "ownerId:", owner_id, "ho_id:", ho_id);
 
-const bidButton = modal.querySelector("#bidButton");
-if (isOwner && bidButton) {
-  bidButton.disabled = true;
-  bidButton.style.cursor = "not-allowed";
-  bidButton.style.opacity = "0.6";
-  bidButton.textContent = "Nem licitálhatsz a saját termékedre";
-} else if (isHighestBidder && bidButton) {
-  bidButton.disabled = true;
-  bidButton.style.cursor = "not-allowed";
-  bidButton.style.opacity = "0.6";
-  bidButton.textContent = "Tied a legmagasabb licit";
-} else if (!bidButton) {
-  console.error("A 'bidButton' elem nem található!");
-}
+  const bidButton = modal.querySelector("#bidButton");
+  if (isOwner && bidButton) {
+    bidButton.disabled = true;
+    bidButton.style.cursor = "not-allowed";
+    bidButton.style.opacity = "0.6";
+    bidButton.textContent = "Nem licitálhatsz a saját termékedre";
+  } else if (isHighestBidder && bidButton) {
+    bidButton.disabled = true;
+    bidButton.style.cursor = "not-allowed";
+    bidButton.style.opacity = "0.6";
+    bidButton.textContent = "Tied a legmagasabb licit";
+  } else if (!bidButton) {
+    console.error("A 'bidButton' elem nem található!");
+  }
 }
 
 function closeProductModal() {
