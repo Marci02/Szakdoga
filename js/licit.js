@@ -30,15 +30,16 @@ function search() {
 
   // Filter products based on the search term
   const filteredProducts = allProducts.filter(product =>
-      product.name.toLowerCase().includes(searchTerm)
+    product.name.toLowerCase().includes(searchTerm)
   );
 
-  // Display the search results in a popup
-  showSearchResultsPopup(filteredProducts);
+  // Render the filtered products
+  renderProducts(filteredProducts);
 
   // Display a message if no products match the search term
+  const productList = document.querySelector(".product-list");
   if (filteredProducts.length === 0) {
-      showMessage(`Nincs találat a(z) "${searchTerm}" keresésre.`, 'error');
+    productList.innerHTML = `<p style="text-align: center; color: #555;">Nincs találat a(z) "${searchTerm}" keresésre.</p>`;
   }
 }
 
@@ -120,61 +121,46 @@ function showSearchResultsPopup(products) {
 }
 
 function renderProducts(products) {
-    const productList = document.querySelector(".product-list");
-    productList.innerHTML = ""; // Clear the product list
+  const productList = document.querySelector(".product-list");
+  productList.innerHTML = ""; // Clear the product list
 
-    if (products.length === 0) {
-        productList.innerHTML = "<p>Nincs találat a szűrési feltételek alapján.</p>";
-        return;
-    }
+  if (products.length === 0) {
+    productList.innerHTML = "<p>Nincs találat a szűrési feltételek alapján.</p>";
+    return;
+  }
 
-    products.forEach(product => {
-        const productCard = document.createElement("div");
-        productCard.className = "product-card card-appear";
-        productCard.style.animation = "cardAppear 0.5s ease-out";
-        productCard.style.cursor = "pointer";
+  products.forEach(product => {
+    const productCard = document.createElement("div");
+    productCard.className = "product-card";
+    productCard.style.cursor = "pointer";
 
-        // Add click event listener to the card
-        productCard.addEventListener("click", () => {
-            showProductDetails(
-                product.name,
-                product.description || "Nincs leírás.",
-                product.img_url,
-                product.original_price,
-                product.price,
-                product.stair,
-                product.size,
-                product.condition,
-                product.brand,
-                product.id,
-                product.user_id,
-                product.owner_id
-            );
-        });
-
-        productCard.innerHTML = `
-            <h3 style="font-size: 1.4em; font-weight: bold; color: #333; text-align: center; margin-top: 10px;">${auction.name}</h3>
-            <div style="text-align: center; margin-bottom: 15px;">
-              <img src="${auction.img_url}" alt="${auction.name}" class="product-image" style="width: 100%; height: 200px; object-fit: cover; border-radius: 15px;">
-            </div>
-            <div style="text-align: left">
-              <div style="font-size: 1em; font-weight: bold; color: #555; margin-top: 10px;">
-              </div>
-              <div class="product-info">
-              <p id="price-${auction.auction_id}" style="font-size: 1.3em;"> 
-              ${formatPrice(auction.price)} Ft
-              </p> <!-- Az aktuális ár (ho) jelenik meg -->
-              <p style="font-size: 1em;">Licit lépcső: ${formatPrice(auction.stair)} Ft</p>
-              <p>Méret: ${auction.size || 'N/A'}</p>
-              </div>
-              <div style="font-size: 1em; color: #e74c3c; margin-top: 15px;">
-              <p>Licit vége: <span class="countdown" id="countdown-${auction.auction_id}">Számolás...</span></p>
-              </div>
-              </div>
-          `;
-
-        productList.appendChild(productCard);
+    productCard.addEventListener("click", () => {
+      showProductDetails(
+        product.name,
+        product.description || "Nincs leírás.",
+        product.img_url,
+        product.original_price,
+        product.price,
+        product.stair,
+        product.size,
+        product.condition,
+        product.brand,
+        product.id,
+        product.user_id,
+        product.owner_id
+      );
     });
+
+    productCard.innerHTML = `
+      <img src="${product.img_url}" alt="${product.name}" class="product-image">
+      <h3>${product.name}</h3>
+      <p>Méret: ${product.size || "N/A"}</p>
+      <p>Állapot: ${product.condition || "N/A"}</p>
+      <p>${formatPrice(product.price)} Ft</p>
+    `;
+
+    productList.appendChild(productCard);
+  });
 }
 
 function fetchProducts() {
@@ -195,7 +181,6 @@ document.addEventListener("DOMContentLoaded", fetchProducts);
 
 document.getElementById("searchbuttonToSearchBar").addEventListener("click", search);
 
-// Optionally, trigger search on Enter key press
 document.getElementById("search").addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
     search();
@@ -502,7 +487,6 @@ function fetchAllAuctions() {
             card.style.transform = "scale(1)";
           });
 
-          // Frissített HTML, hogy az aktuális ár (ho) jelenjen meg
           card.innerHTML = `
             <h3 style="font-size: 1.4em; font-weight: bold; color: #333; text-align: center; margin-top: 10px;">${auction.name}</h3>
             <div style="text-align: center; margin-bottom: 15px;">
