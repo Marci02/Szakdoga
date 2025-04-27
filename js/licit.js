@@ -23,9 +23,12 @@ function stickyNav() {
 
 window.addEventListener("scroll", stickyNav);
 
-
-
 function search() {
+  if (!allProducts || allProducts.length === 0) {
+    console.error("❌ A termékek még nem töltődtek be.");
+    return;
+  }
+
   const searchTerm = document.getElementById("search").value.toLowerCase();
 
   // Szűrjük az összes terméket a keresési kifejezés alapján
@@ -46,6 +49,7 @@ function search() {
   currentPage = 1; // Visszaállítjuk az első oldalra
   renderPaginatedProducts(filteredProducts);
 }
+
 function showSearchResultsPopup(products) {
   // Remove any existing popup
   const existingPopup = document.getElementById("searchResultsPopup");
@@ -199,7 +203,8 @@ function renderPaginatedProducts(products, loggedInUserId) {
         auction.brand_name,
         auction.auction_id, // auctionId
         loggedInUserId, // userId
-        auction.owner_id
+        auction.owner_id,
+        auction.ho_id
       );
     });
 
@@ -533,22 +538,18 @@ function startCountdown(bidEndTime, auctionId) {
   }, 1000);
 }
 
+let loggedInUserId; // Globális változó a bejelentkezett felhasználó ID-jához
+
 function fetchAllAuctions() {
   fetch("backend/licitlekero.php")
     .then(response => response.json())
     .then(data => {
-      console.log("🎯 Aukciók lekérve:", data);
+      console.log("🎯 Backend válasz:", data);
 
       if (data.status === "success" && Array.isArray(data.data)) {
-        const loggedInUserId = data.loggedInUserId; // Bejelentkezett felhasználó ID-ja
         allProducts = data.data; // Az összes termék tárolása
-        filteredProducts = []; // Alapértelmezés szerint nincs szűrés
-
-        const productList = document.querySelector(".product-list");
-        productList.innerHTML = ""; // Előző elemek törlése, ha újra betölt
-
-        // Lapozott termékek megjelenítése
-        renderPaginatedProducts(allProducts, loggedInUserId);
+        loggedInUserId = data.loggedInUserId; // Bejelentkezett felhasználó ID-jának tárolása
+        renderPaginatedProducts(allProducts, loggedInUserId); // Lapozott termékek megjelenítése
       } else {
         console.warn("❗ Nincsenek aukciók.");
         const productList = document.querySelector(".product-list");
@@ -559,7 +560,6 @@ function fetchAllAuctions() {
       console.error("❌ Hiba az aukciók lekérésekor:", error);
     });
 }
-
 
 
 function formatPrice(price) {
@@ -576,17 +576,23 @@ window.addEventListener("DOMContentLoaded", function () {
   fetchAllAuctions(); // Alapértelmezett betöltés
 
   // Szűrési események hozzáadása
-  document.querySelectorAll("#category1 input[type='checkbox'], #brand input[type='checkbox'], #size input[type='checkbox'], #condition input[type='checkbox']").forEach(checkbox => {
-    checkbox.addEventListener("change", applyFilters);
+  document.getElementById("prevPage").addEventListener("click", () => {
+    if (currentPage > 1) {
+      currentPage--;
+      renderPaginatedProducts(filteredProducts.length ? filteredProducts : allProducts);
+    }
   });
   
-  document.getElementById("price-range").addEventListener("input", () => {
-    document.getElementById("price-value").textContent = `${document.getElementById("price-range").value} Ft`;
-    applyFilters();
+  document.getElementById("nextPage").addEventListener("click", () => {
+    const totalPages = Math.ceil((filteredProducts.length ? filteredProducts : allProducts).length / itemsPerPage);
+    if (currentPage < totalPages) {
+      currentPage++;
+      renderPaginatedProducts(filteredProducts.length ? filteredProducts : allProducts);
+    }
   });
 });
 
-function showProductDetails(title, description, imageUrl, originalPrice, price, bidStep, size, condition, brand, auctionId, userId, owner_id) {
+function showProductDetails(title, description, imageUrl, originalPrice, price, bidStep, size, condition, brand, auctionId, userId, owner_id, ho_id) {
   // Ha már nyitva van modal, töröljük
   let existingModal = document.getElementById("productModalOverlay");
   if (existingModal) {
@@ -625,12 +631,6 @@ function showProductDetails(title, description, imageUrl, originalPrice, price, 
   modal.style.fontFamily = "Arial, sans-serif";
   modal.style.color = "#333";
 
-  // Az aktuális ár frissítése a kártyáról
-  const cardPriceElement = document.querySelector(`#price-${auctionId}`);
-  const currentPrice = cardPriceElement
-    ? parseInt(cardPriceElement.textContent.replace(/\D/g, ""))
-    : price; // Ha nincs kártya, használjuk az eredeti árat
-
   // Tartalom beszúrása
   modal.innerHTML = `
     <h2 style="text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 16px;">
@@ -648,7 +648,7 @@ function showProductDetails(title, description, imageUrl, originalPrice, price, 
     
     <textarea id="note" rows="5" style="width: 100%; resize: none; padding: 10px; margin-top: 10px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em; overflow-wrap: break-word; word-wrap: break-word; white-space: pre-wrap;" readonly>${description}</textarea>
     
-    <p style="margin: 0; font-size: 20px; margin-top:10px;"><strong>Aktuális ár:</strong> <span id="highestPrice">${formatPrice(currentPrice)}</span> Ft</p>
+    <p style="margin: 0; font-size: 20px; margin-top:10px;"><strong>Aktuális ár:</strong> <span id="highestPrice">${formatPrice(price)}</span> Ft</p>
     <div style="display: flex; gap: 12px; justify-content: space-between; margin-top: 12px;">
       <button id="bidButton" onclick="increaseModalPrice(${bidStep}, ${auctionId}, ${userId})"
         style="flex: 1; padding: 12px 0; background-color: #000; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
@@ -664,18 +664,26 @@ function showProductDetails(title, description, imageUrl, originalPrice, price, 
   // Hozzáadás a DOM-hoz
   modalOverlay.appendChild(modal);
   document.body.appendChild(modalOverlay);
-  const isOwner = parseInt(userId) === parseInt(owner_id);
-  console.log("isOwner:", isOwner, "userId:", userId, "ownerId:", owner_id);
 
-  const bidButton = modal.querySelector("#bidButton");
-  if (isOwner && bidButton) {
-    bidButton.disabled = true;
-    bidButton.style.cursor = "not-allowed";
-    bidButton.style.opacity = "0.6";
-    bidButton.textContent = "Nem licitálhatsz a saját termékedre";
-  } else if (!bidButton) {
-    console.error("A 'bidButton' elem nem található!");
-  }
+  // Ellenőrzés: a felhasználó a legmagasabb licitáló-e
+  const isOwner = parseInt(userId) === parseInt(owner_id);
+const isHighestBidder = parseInt(userId) === parseInt(ho_id);
+console.log("isOwner:", isOwner, "isHighestBidder:", isHighestBidder, "userId:", userId, "ownerId:", owner_id, "ho_id:", ho_id);
+
+const bidButton = modal.querySelector("#bidButton");
+if (isOwner && bidButton) {
+  bidButton.disabled = true;
+  bidButton.style.cursor = "not-allowed";
+  bidButton.style.opacity = "0.6";
+  bidButton.textContent = "Nem licitálhatsz a saját termékedre";
+} else if (isHighestBidder && bidButton) {
+  bidButton.disabled = true;
+  bidButton.style.cursor = "not-allowed";
+  bidButton.style.opacity = "0.6";
+  bidButton.textContent = "Tied a legmagasabb licit";
+} else if (!bidButton) {
+  console.error("A 'bidButton' elem nem található!");
+}
 }
 
 function closeProductModal() {
@@ -711,7 +719,6 @@ function increaseModalPrice(bidStep, auctionId, userId) {
     currentPrice += bidStep;
     console.log("Új ár (currentPrice + bidStep):", currentPrice);
 
-    // CSS animáció létrehozása
     const style = document.createElement("style");
     style.innerHTML = `
       @keyframes priceUpdate {
@@ -760,6 +767,7 @@ function increaseModalPrice(bidStep, auctionId, userId) {
     bidButton.style.cursor = "not-allowed";
     bidButton.style.opacity = "0.6";
 
+
     // Küldjük az adatokat a backendnek
     fetch("backend/updatePrice.php", {
       method: "POST",
@@ -776,6 +784,23 @@ function increaseModalPrice(bidStep, auctionId, userId) {
       .then((data) => {
         if (data.status === "success") {
           console.log("Ár és felhasználó sikeresen frissítve az adatbázisban.");
+
+          // Frissítjük az aktuális árat a modalban
+          highestPriceElement.textContent = `${data.updatedPrice.toLocaleString()} Ft`;
+
+          // Frissítjük a kártyán megjelenő árat
+          const cardPriceElement = document.querySelector(`#price-${auctionId}`);
+          if (cardPriceElement) {
+            cardPriceElement.textContent = `${data.updatedPrice.toLocaleString()} Ft`;
+          }
+
+          // Ellenőrizzük, hogy a felhasználó lett-e a legmagasabb licitáló
+          if (data.newHighestBidderId === userId) {
+            bidButton.disabled = true;
+            bidButton.style.cursor = "not-allowed";
+            bidButton.style.opacity = "0.6";
+            bidButton.textContent = "Tied a legmagasabb licit";
+          }
         } else {
           console.error("Hiba történt az ár frissítésekor:", data.message);
           // Ha hiba történt, engedélyezzük újra a gombot
@@ -795,6 +820,7 @@ function increaseModalPrice(bidStep, auctionId, userId) {
     console.error("Hiányzó elemek a licitáláshoz.");
   }
 }
+
 
 // Kép modal funkció
 function openImageModal(imageUrl) {
@@ -839,7 +865,7 @@ function showMessage(message, type = 'error', duration = 3000) {
 }
 
 
-function applyFilters() {
+function applyFilters(loggedInUserId) {
   const selectedCategories = [];
   const selectedBrands = [];
   const selectedSizes = [];
@@ -888,7 +914,7 @@ function applyFilters() {
     const matchesBrand = !selectedBrands.length || selectedBrands.includes(product.brand_name.toLowerCase());
     const matchesSize = !selectedSizes.length || selectedSizes.includes(product.size.toLowerCase());
     const matchesCondition = !selectedConditions.length || selectedConditions.includes(product.condition.toLowerCase());
-    const matchesPrice = !selectedPrice || parseInt(product.price) <= parseInt(selectedPrice);
+    const matchesPrice = !selectedPrice || parseInt(product.price) >= parseInt(selectedPrice);
 
     return matchesCategory && matchesBrand && matchesSize && matchesCondition && matchesPrice;
   });
@@ -897,9 +923,23 @@ function applyFilters() {
 
   // Lapozott termékek megjelenítése
   currentPage = 1; // Visszaállítjuk az első oldalra
-  renderPaginatedProducts(filteredProducts);
+  renderPaginatedProducts(filteredProducts, loggedInUserId);
 }
 
+window.addEventListener("DOMContentLoaded", function () {
+  console.log("🔄 Oldal betöltve, aukciók lekérése...");
+  fetchAllAuctions(); // Alapértelmezett betöltés
+
+  // Szűrési események hozzáadása
+  document.querySelectorAll("#category1 input[type='checkbox'], #brand input[type='checkbox'], #size input[type='checkbox'], #condition input[type='checkbox']").forEach(checkbox => {
+    checkbox.addEventListener("change", () => applyFilters(loggedInUserId));
+  });
+
+  document.getElementById("price-range").addEventListener("input", () => {
+    document.getElementById("price-value").textContent = `${document.getElementById("price-range").value} Ft`;
+    applyFilters(loggedInUserId);
+  });
+});
 
 function updatePriceValue() {
   const priceRange = document.getElementById("price-range");
