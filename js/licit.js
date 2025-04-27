@@ -548,6 +548,11 @@ function closeUploadModal() {
 
 function startCountdown(bidEndTime, auctionId) {
   const countdownElement = document.getElementById("countdown-" + auctionId);
+  if (!countdownElement) {
+    console.error(`Nem található a visszaszámláló elem az aukcióhoz: ${auctionId}`);
+    return;
+  }
+
   const endTime = new Date(bidEndTime).getTime();
 
   const interval = setInterval(function () {
