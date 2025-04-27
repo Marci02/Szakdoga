@@ -28,21 +28,24 @@ window.addEventListener("scroll", stickyNav);
 function search() {
   const searchTerm = document.getElementById("search").value.toLowerCase();
 
-  // Filter products based on the search term
-  const filteredProducts = allProducts.filter(product =>
+  // Szűrjük az összes terméket a keresési kifejezés alapján
+  filteredProducts = allProducts.filter(product =>
     product.name.toLowerCase().includes(searchTerm)
   );
 
-  // Render the filtered products
-  renderPaginatedProducts(allProducts);
+  console.log("🔍 Keresési eredmények:", filteredProducts);
 
-  // Display a message if no products match the search term
-  const productList = document.querySelector(".product-list");
+  // Ha nincs találat, üzenetet jelenítünk meg
   if (filteredProducts.length === 0) {
+    const productList = document.querySelector(".product-list");
     productList.innerHTML = `<p style="text-align: center; color: #555;">Nincs találat a(z) "${searchTerm}" keresésre.</p>`;
+    return;
   }
-}
 
+  // Lapozott termékek megjelenítése
+  currentPage = 1; // Visszaállítjuk az első oldalra
+  renderPaginatedProducts(filteredProducts);
+}
 function showSearchResultsPopup(products) {
   // Remove any existing popup
   const existingPopup = document.getElementById("searchResultsPopup");
