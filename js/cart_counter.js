@@ -23,7 +23,22 @@ function updateCart() {
                 data.sales.forEach(item => {
                     const itemElement = document.createElement("p");
                     itemElement.className = "dropdown-item";
-                    itemElement.innerHTML = `${item.product.name} -<br>${formatPrice(item.product.price)} Ft`;
+
+                    // Ellenőrizzük, hogy az item és a name létezik-e
+                    if (item.item && item.item.name) {
+                        itemElement.innerHTML = `
+                            ${item.item.name} -<br>
+                            ${formatPrice(item.item.price)} Ft<br>
+                            Mennyiség: ${item.quantity}
+                        `;
+                    } else {
+                        itemElement.innerHTML = `
+                            Ismeretlen termék -<br>
+                            Ár: N/A<br>
+                            Mennyiség: ${item.quantity}
+                        `;
+                    }
+
                     dropdownMenu.appendChild(itemElement);
                 });
 

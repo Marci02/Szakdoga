@@ -16,6 +16,7 @@ $query = "
         s.saler_id, 
         s.buyer_id, 
         s.product_id, 
+        s.auction_id, 
         s.quantity, 
         s.sold_at, 
         u1.firstname AS saler_firstname, 
@@ -24,21 +25,25 @@ $query = "
         u2.firstname AS buyer_firstname, 
         u2.lastname AS buyer_lastname, 
         u2.email AS buyer_email, 
-        p.name AS product_name, 
-        p.price AS product_price, 
-        p.size AS product_size, 
-        p.condition AS product_condition, 
-        p.description AS product_description, 
-        c.category_name AS product_category, 
-        b.brand_name AS product_brand, 
-        i.img_url AS product_image_url
+        IF(s.product_id IS NOT NULL, p.name, a.name) AS item_name, 
+        IF(s.product_id IS NOT NULL, p.price, a.price) AS item_price, 
+        IF(s.product_id IS NOT NULL, p.size, a.size) AS item_size, 
+        IF(s.product_id IS NOT NULL, p.condition, a.condition) AS item_condition, 
+        IF(s.product_id IS NOT NULL, p.description, a.description) AS item_description, 
+        IF(s.product_id IS NOT NULL, c.category_name, c2.category_name) AS item_category, 
+        IF(s.product_id IS NOT NULL, b.brand_name, b2.brand_name) AS item_brand, 
+        IF(s.product_id IS NOT NULL, i.img_url, i2.img_url) AS item_image_url
     FROM sales s
+    LEFT JOIN products p ON s.product_id = p.id
+    LEFT JOIN category c ON p.category_id = c.id
+    LEFT JOIN brand b ON p.brand_id = b.id
+    LEFT JOIN image i ON p.image_id = i.id
+    LEFT JOIN auction a ON s.auction_id = a.id
+    LEFT JOIN category c2 ON a.category_id = c2.id
+    LEFT JOIN brand b2 ON a.brand_id = b2.id
+    LEFT JOIN image i2 ON a.image_id = i2.id
     JOIN user u1 ON s.saler_id = u1.id
     JOIN user u2 ON s.buyer_id = u2.id
-    JOIN products p ON s.product_id = p.id
-    JOIN category c ON p.category_id = c.id
-    JOIN brand b ON p.brand_id = b.id
-    JOIN image i ON p.image_id = i.id
     WHERE s.buyer_id = ? AND s.sold_at IS NULL
     ORDER BY s.sold_at DESC
 ";
@@ -69,16 +74,16 @@ while ($row = $result->fetch_assoc()) {
             "lastname" => $row['buyer_lastname'],
             "email" => $row['buyer_email']
         ],
-        "product" => [
-            "id" => $row['product_id'],
-            "name" => $row['product_name'],
-            "price" => $row['product_price'],
-            "size" => $row['product_size'],
-            "condition" => $row['product_condition'],
-            "description" => $row['product_description'],
-            "category" => $row['product_category'],
-            "brand" => $row['product_brand'],
-            "image_url" => $row['product_image_url']
+        "item" => [
+            "id" => $row['product_id'] ?? $row['auction_id'], // Az ID lehet product_id vagy auction_id
+            "name" => $row['item_name'],
+            "price" => $row['item_price'],
+            "size" => $row['item_size'],
+            "condition" => $row['item_condition'],
+            "description" => $row['item_description'],
+            "category" => $row['item_category'],
+            "brand" => $row['item_brand'],
+            "image_url" => $row['item_image_url']
         ],
         "quantity" => $row['quantity'],
         "sold_at" => $row['sold_at']

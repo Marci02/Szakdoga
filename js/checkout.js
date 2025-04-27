@@ -77,15 +77,18 @@ function stickyNav() {
 
                 // Kosár elemek hozzáadása
                 cartItems.forEach(item => {
+                    const product = item.item || {}; // Ellenőrizzük, hogy az item létezik-e
+                    const productName = product.name || "Ismeretlen termék"; // Alapértelmezett név
+                    const productPrice = product.price || 0; // Alapértelmezett ár
+                
                     const itemRow = document.createElement("div");
                     itemRow.classList.add("item-row");
                     itemRow.innerHTML = `
-                        <span>${item.product.name}</span>
-                        <span>${formatPrice(item.product.price.toLocaleString("hu-HU"))} Ft</span>
+                        <span>${productName}</span>
+                        <span>${formatPrice(productPrice.toLocaleString("hu-HU"))} Ft</span>
                     `;
                     cartContainer.appendChild(itemRow);
                 });
-
                 // Szállítási költség hozzáadása (ha van)
                 const shippingCost = 1000; // Példa szállítási költség
                 const shippingRow = document.createElement("div");
@@ -97,7 +100,11 @@ function stickyNav() {
                 cartContainer.appendChild(shippingRow);
 
                 // Végösszeg kiszámítása
-                const totalCost = cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0) + shippingCost;
+                const totalCost = cartItems.reduce((sum, item) => {
+                    const product = item.item || {}; // Ellenőrizzük, hogy az item létezik-e
+                    const productPrice = product.price || 0; // Alapértelmezett ár
+                    return sum + productPrice * item.quantity;
+                }, 0) + shippingCost;
                 const totalRow = document.createElement("div");
                 totalRow.classList.add("total");
                 totalRow.innerHTML = `

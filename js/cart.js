@@ -187,26 +187,30 @@ function displayCartItems() {
       // Iterate through sales items
       sales.forEach(sale => {
         console.log("Eladás elem:", sale); // Debugging sale item
-
+    
+        // Ellenőrizzük, hogy az item és az image_url létezik-e
+        const product = sale.item || {};
+        const imageUrl = product.image_url || "default.jpg"; // Alapértelmezett kép, ha nincs megadva
+        const productName = product.name || "Ismeretlen termék";
+        const productPrice = product.price || 0;
+    
         // Create cart item element
         const itemDiv = document.createElement("div");
         itemDiv.classList.add("cart-item");
-        
-
+    
         itemDiv.innerHTML = `
-        <div class="itemHeader">
-          <img src="uploads/${sale.product.image_url}" alt="${sale.product.name}" style="width: 100px; height: auto;">
-          <h3>${sale.product.name}</h3>
-        </div>
-        <p>${parseInt(sale.product.price).toLocaleString("hu-HU")} Ft</p>
-        <input type="number" value="${sale.quantity}" style="width: 30px;" max="${sale.product.quantity}" onchange="updateQuantity(${sale.product.id}, this.value)">
-        <p class="cart-total">${(sale.quantity * sale.product.price).toLocaleString("hu-HU")} Ft</p>
-        <button class="cart-button" onclick="removeFromCart(${sale.product.id})">Eltávolítás</button>
-      `;
-
+            <div class="itemHeader">
+              <img src="uploads/${imageUrl}" alt="${productName}" style="width: 100px; height: auto;">
+              <h3>${productName}</h3>
+            </div>
+            <p>${parseInt(productPrice).toLocaleString("hu-HU")} Ft</p>
+            <input type="number" value="${sale.quantity}" style="width: 30px;" max="${product.quantity || 1}" onchange="updateQuantity(${product.id}, this.value)">
+            <p class="cart-total">${(sale.quantity * productPrice).toLocaleString("hu-HU")} Ft</p>
+            <button class="cart-button" onclick="removeFromCart(${product.id})">Eltávolítás</button>
+        `;
+    
         cartContainer.appendChild(itemDiv);
-      });
-
+    });
       // Update the total amount
       updateCartTotal(sales);
     })

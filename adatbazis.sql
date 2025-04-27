@@ -30,8 +30,7 @@ CREATE TABLE `sales` (
   `product_id` bigint NULL,
   `auction_id` bigint NULL,
   `quantity` int NOT NULL,
-  `sold_at` datetime NOT NULL,
-  PRIMARY KEY (`saler_id`, `buyer_id`, `product_id`),
+  `sold_at` datetime NOT NULL
 );
 
 CREATE TABLE `products` (
@@ -66,7 +65,7 @@ CREATE TABLE `image` (
 );
 
 CREATE TABLE `auction` (
-  `id` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `id` bigint PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `user_id` bigint NOT NULL,
   `name` varchar(255) NOT NULL,
   `price` int NOT NULL,
