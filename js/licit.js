@@ -153,12 +153,25 @@ function renderProducts(products) {
         });
 
         productCard.innerHTML = `
-            <img src="${product.img_url}" alt="${product.name}" class="product-image">
-            <h3>${product.name}</h3>
-            <p>Méret: ${product.size || "N/A"}</p>
-            <p>Állapot: ${product.condition || "N/A"}</p>
-            <p>${formatPrice(product.price)} Ft</p>
-        `;
+            <h3 style="font-size: 1.4em; font-weight: bold; color: #333; text-align: center; margin-top: 10px;">${auction.name}</h3>
+            <div style="text-align: center; margin-bottom: 15px;">
+              <img src="${auction.img_url}" alt="${auction.name}" class="product-image" style="width: 100%; height: 200px; object-fit: cover; border-radius: 15px;">
+            </div>
+            <div style="text-align: left">
+              <div style="font-size: 1em; font-weight: bold; color: #555; margin-top: 10px;">
+              </div>
+              <div class="product-info">
+              <p id="price-${auction.auction_id}" style="font-size: 1.3em;"> 
+              ${formatPrice(auction.price)} Ft
+              </p> <!-- Az aktuális ár (ho) jelenik meg -->
+              <p style="font-size: 1em;">Licit lépcső: ${formatPrice(auction.stair)} Ft</p>
+              <p>Méret: ${auction.size || 'N/A'}</p>
+              </div>
+              <div style="font-size: 1em; color: #e74c3c; margin-top: 15px;">
+              <p>Licit vége: <span class="countdown" id="countdown-${auction.auction_id}">Számolás...</span></p>
+              </div>
+              </div>
+          `;
 
         productList.appendChild(productCard);
     });
