@@ -19,14 +19,14 @@ a {
 }
 
 .nav {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   background-color: #22222a;
   transition: 0.4s;
   padding: 1.3rem 0; /* Match the padding from ossztermek.css */
-  z-index: 20;
+  z-index: 1000;
   margin: 0;
 }
 
@@ -53,6 +53,13 @@ a {
   font-size: 1rem;
   padding: 0 0.5rem;
   font-weight: 300;
+}
+
+.centered-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .menu-link.active {
@@ -352,6 +359,12 @@ nav.header-sticky {
     height: auto; /* A magasság automatikusan igazodik */
     margin-bottom: 20px; /* Távolság a terméklistától */
     top: 0; /* A navbar magasságának figyelmen kívül hagyása */
+  }
+  .showproductdetails {
+    max-height: 400px; /* Maximális magasság mobilon */
+    overflow-y: auto; /* Görgethetővé teszi, ha a tartalom túl hosszú */
+    padding: 10px; /* Csökkentett padding */
+    font-size: 14px; /* Kisebb betűméret */
   }
 }
 

@@ -6677,3 +6677,233 @@ SESSION: Array
     [name] => Konderla Sámuel
     [phone] => 06304843709
 )
+POST: Array
+(
+    [name] => 41234
+    [price] => 12000
+    [stair] => 12
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-27T13:21
+    [fileSize] => 43
+    [fileCondition] => Használt
+    [fileDesc] => 123123
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 11.jpg
+            [full_path] => 11.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php83A2.tmp
+            [error] => 0
+            [size] => 105420
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => dwadw
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 2659
+    [city] => Érsekvadkert
+    [county] => Nógrád megye
+    [image] => 
+    [created] => 2025-04-27 12:38:20
+    [street_address] => Petőfi Sándor út.
+    [house_number] => 79
+    [name] => Konderla Sámuel
+    [phone] => 06304843709
+)
+POST: Array
+(
+    [name] => 41234123
+    [price] => 12333
+    [stair] => 123
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-05-03T13:21
+    [fileSize] => 44
+    [fileCondition] => Új
+    [fileDesc] => 4231234123
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 10.jpg
+            [full_path] => 10.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php515A.tmp
+            [error] => 0
+            [size] => 108502
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => dwadw
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 2659
+    [city] => Érsekvadkert
+    [county] => Nógrád megye
+    [image] => 
+    [created] => 2025-04-27 12:38:20
+    [street_address] => Petőfi Sándor út.
+    [house_number] => 79
+    [name] => Konderla Sámuel
+    [phone] => 06304843709
+)
+POST: Array
+(
+    [name] => ert
+    [price] => 123412
+    [stair] => 341234
+    [fileCategory] => 2
+    [fileBrand] => 42134
+    [auction_end] => 2025-05-09T14:13
+    [fileSize] => 45
+    [fileCondition] => Új
+    [fileDesc] => 41234
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 10.jpg
+            [full_path] => 10.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpA1D.tmp
+            [error] => 0
+            [size] => 108502
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => dwadw
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 2659
+    [city] => Érsekvadkert
+    [county] => Nógrád megye
+    [image] => 
+    [created] => 2025-04-27 12:38:20
+    [street_address] => Petőfi Sándor út.
+    [house_number] => 79
+    [name] => Konderla Sámuel
+    [phone] => 06304843709
+)
+POST: Array
+(
+    [name] => 41234
+    [price] => 124312
+    [stair] => 12312
+    [fileCategory] => 1
+    [fileBrand] => Nike
+    [auction_end] => 2025-05-10T14:30
+    [fileSize] => S
+    [fileCondition] => Újszerű
+    [fileDesc] => 41234
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 10.jpg
+            [full_path] => 10.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpF542.tmp
+            [error] => 0
+            [size] => 108502
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => dwadw
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 2659
+    [city] => Érsekvadkert
+    [county] => Nógrád megye
+    [image] => 
+    [created] => 2025-04-27 12:38:20
+    [street_address] => Petőfi Sándor út.
+    [house_number] => 79
+    [name] => Konderla Sámuel
+    [phone] => 06304843709
+)
+POST: Array
+(
+    [name] => 412341
+    [price] => 12341
+    [stair] => 1222
+    [fileCategory] => 1
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-27T14:52
+    [fileSize] => XS
+    [fileCondition] => Újszerű
+    [fileDesc] => 1234
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => 10.jpg
+            [full_path] => 10.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php2167.tmp
+            [error] => 0
+            [size] => 108502
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => dwadw
+    [lastname] => Konderla
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 2659
+    [city] => Érsekvadkert
+    [county] => Nógrád megye
+    [image] => 
+    [created] => 2025-04-27 12:38:20
+    [street_address] => Petőfi Sándor út.
+    [house_number] => 79
+    [name] => Konderla Sámuel
+    [phone] => 06304843709
+)

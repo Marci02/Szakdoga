@@ -604,7 +604,7 @@ nav.header-sticky {
 
   .nav .menu {
     flex-direction: column;
-    width: 100%;
+    width: 0%;
     gap: 10px;
   }
 
@@ -696,6 +696,25 @@ nav.header-sticky {
 
   #searchbuttonToSearchBar {
     font-size: 0.9rem; /* Adjust button font size for tablets */
+  }
+
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+
+  .nav .menu {
+    flex-direction: column;
+    width: 0%;
+    gap: 10px;
+  }
+
+  .nav .menu-link {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    text-align: left;
+    width: 100%;
   }
 }
 
