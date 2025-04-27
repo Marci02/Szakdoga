@@ -125,13 +125,20 @@ function search() {
 
 // Search gomb megjelenítése/elrejtése
 function toggleSearch() {
-  var x = document.getElementById("searchBtn");
-  if (x.style.display === "none" || x.style.display === "") {
-    x.style.display = "block";
+  const searchBtn = document.getElementById("searchBtn");
+  const searchPopup = document.getElementById("searchResultsPopup");
+
+  if (searchBtn.style.display === "none" || searchBtn.style.display === "") {
+      searchBtn.style.display = "block";
   } else {
-    x.style.display = "none";
+      searchBtn.style.display = "none";
+
+      // Remove the search results popup if it exists
+      if (searchPopup) {
+          searchPopup.remove();
+      }
   }
-} 
+}
 
 function showSearchResultsPopup(products) {
   // Remove any existing popup

@@ -1,3 +1,12 @@
+function openNav() {
+  document.getElementById("menu").style.width = "300px";
+}
+
+function closeNav() {
+  document.getElementById("menu").style.width = "0";
+}
+
+
 function stickyNav() {
   const navbar = document.querySelector("nav");
   const headerHeight = document.querySelector(".container").offsetHeight / 2;
