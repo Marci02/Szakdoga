@@ -23,7 +23,7 @@ function stickyNav() {
 
 window.addEventListener("scroll", stickyNav);
 
-let allProducts = []; // Ensure this is declared globally to store all products
+
 
 function search() {
   const searchTerm = document.getElementById("search").value.toLowerCase();
@@ -34,7 +34,7 @@ function search() {
   );
 
   // Render the filtered products
-  renderProducts(filteredProducts);
+  renderPaginatedProducts(allProducts);
 
   // Display a message if no products match the search term
   const productList = document.querySelector(".product-list");
@@ -120,50 +120,110 @@ function showSearchResultsPopup(products) {
   document.body.appendChild(popup);
 }
 
-function renderProducts(products) {
-    const productList = document.querySelector(".product-list");
-    productList.innerHTML = ""; // Clear the product list
+let allProducts = []; // Az összes termék tárolása
+let filteredProducts = []; // A szűrt termékek tárolása
+let currentPage = 1; // Az aktuális oldal
+const itemsPerPage = 8; // Oldalankénti termékek száma
 
-    if (products.length === 0) {
-        productList.innerHTML = "<p>Nincs találat a szűrési feltételek alapján.</p>";
-        return;
-    }
+function renderPaginatedProducts(products, loggedInUserId) {
+  const productList = document.querySelector(".product-list");
+  productList.innerHTML = ""; // Töröljük az előző termékeket
 
-    products.forEach(product => {
-        const productCard = document.createElement("div");
-        productCard.className = "product-card card-appear";
-        productCard.style.animation = "cardAppear 0.5s ease-out";
-        productCard.style.cursor = "pointer";
+  // Számítsuk ki az aktuális oldalhoz tartozó termékeket
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedProducts = products.slice(startIndex, endIndex);
 
-        // Add click event listener to the card
-        productCard.addEventListener("click", () => {
-            showProductDetails(
-                product.name,
-                product.description || "Nincs leírás.",
-                product.img_url,
-                product.original_price,
-                product.price,
-                product.stair,
-                product.size,
-                product.condition,
-                product.brand,
-                product.id,
-                product.user_id,
-                product.owner_id
-            );
-        });
+  // Ha nincsenek termékek az aktuális oldalon
+  if (paginatedProducts.length === 0) {
+    productList.innerHTML = "<p>Nincs találat a szűrési feltételek alapján.</p>";
+    return;
+  }
+
+  // Megjelenítjük az aktuális oldal termékeit
+  paginatedProducts.forEach(auction => {
+    const productCard = document.createElement("div");
+    productCard.className = "product-card";
+    productCard.style.border = "1px solid #ddd";
+    productCard.style.borderRadius = "15px";
+    productCard.style.padding = "15px";
+    productCard.style.marginBottom = "20px";
+    productCard.style.boxShadow = "0 5px 15px rgba(0, 0, 0, 0.1)";
+    productCard.style.backgroundColor = "#fff";
+    productCard.style.cursor = "pointer"; // Mutatja, hogy kattintható
 
     productCard.innerHTML = `
-      <img src="${product.img_url}" alt="${product.name}" class="product-image">
-      <h3>${product.name}</h3>
-      <p>Méret: ${product.size || "N/A"}</p>
-      <p>Állapot: ${product.condition || "N/A"}</p>
-      <p>${formatPrice(product.price)} Ft</p>
+      <h3 style="font-size: 1.4em; font-weight: bold; color: #333; text-align: center; margin-top: 10px;">${auction.name}</h3>
+      <div style="text-align: center; margin-bottom: 15px;">
+        <img src="${auction.img_url}" alt="${auction.name}" class="product-image" style="width: 100%; height: 200px; object-fit: cover; border-radius: 15px;">
+      </div>
+      <div style="text-align: left">
+        <div class="product-info">
+          <p id="price-${auction.auction_id}" style="font-size: 1.3em;"> 
+            ${formatPrice(auction.price)} Ft
+          </p>
+          <p style="font-size: 1em;">Licit lépcső: ${formatPrice(auction.stair)} Ft</p>
+          <p>Méret: ${auction.size || 'N/A'}</p>
+        </div>
+        <div style="font-size: 1em; color: #e74c3c; margin-top: 15px;">
+          <p>Licit vége: <span class="countdown" id="countdown-${auction.auction_id}">Számolás...</span></p>
+        </div>
+      </div>
     `;
 
+    // Eseménykezelő hozzáadása a kártyához
+    productCard.addEventListener("click", () => {
+      showProductDetails(
+        auction.name,
+        auction.description || "Nincs leírás.",
+        auction.img_url,
+        auction.original_price,
+        auction.price, // Az aktuális ár (ho)
+        auction.stair,
+        auction.size,
+        auction.condition,
+        auction.brand_name,
+        auction.auction_id, // auctionId
+        loggedInUserId, // userId
+        auction.owner_id
+      );
+    });
+
     productList.appendChild(productCard);
+
+    // Indítsuk el a visszaszámlálást
+    startCountdown(auction.auction_end, auction.auction_id);
   });
+
+  // Frissítjük a lapozási információkat
+  updatePaginationInfo(products.length);
 }
+
+function updatePaginationInfo(totalItems) {
+  const paginationInfo = document.getElementById("pagination-info");
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  paginationInfo.textContent = `Oldal ${currentPage} / ${totalPages}`;
+
+  // Lapozási gombok engedélyezése/letiltása
+  document.getElementById("prevPage").disabled = currentPage === 1;
+  document.getElementById("nextPage").disabled = currentPage === totalPages;
+}
+
+document.getElementById("prevPage").addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderPaginatedProducts(filteredProducts.length ? filteredProducts : allProducts);
+  }
+});
+
+document.getElementById("nextPage").addEventListener("click", () => {
+  const totalPages = Math.ceil((filteredProducts.length ? filteredProducts : allProducts).length / itemsPerPage);
+  if (currentPage < totalPages) {
+    currentPage++;
+    renderPaginatedProducts(filteredProducts.length ? filteredProducts : allProducts);
+  }
+});
 
 function fetchProducts() {
   fetch("backend/licitlekero.php")
@@ -171,14 +231,13 @@ function fetchProducts() {
     .then(data => {
       if (data.status === "success" && Array.isArray(data.data)) {
         allProducts = data.data; // Store all products in the global array
-        renderProducts(allProducts); // Render all products initially
+        renderPaginatedProducts(allProducts); // Render paginated products initially
       } else {
         console.error("Hiba: Nem sikerült lekérni a termékeket.");
       }
     })
     .catch(error => console.error("Hiba a termékek lekérésekor:", error));
 }
-
 document.addEventListener("DOMContentLoaded", fetchProducts);
 
 document.getElementById("searchbuttonToSearchBar").addEventListener("click", search);
@@ -460,103 +519,29 @@ function startCountdown(bidEndTime, auctionId) {
   }, 1000);
 }
 
-function fetchAllAuctions(filters = {}) {
+function fetchAllAuctions() {
   fetch("backend/licitlekero.php")
-    .then((response) => response.json())
-    .then((data) => {
+    .then(response => response.json())
+    .then(data => {
       console.log("🎯 Aukciók lekérve:", data);
 
-      if (data.status === "success" && data.data.length > 0) {
+      if (data.status === "success" && Array.isArray(data.data)) {
         const loggedInUserId = data.loggedInUserId; // Bejelentkezett felhasználó ID-ja
+        allProducts = data.data; // Az összes termék tárolása
+        filteredProducts = []; // Alapértelmezés szerint nincs szűrés
+
         const productList = document.querySelector(".product-list");
         productList.innerHTML = ""; // Előző elemek törlése, ha újra betölt
 
-        // Szűrés alkalmazása, ha vannak szűrési feltételek
-        const filteredProducts = data.data.filter((auction) => {
-          const matchesCategory = !filters.categories || filters.categories.length === 0 || filters.categories.some(category => category === (auction.category_name || "").trim().toLowerCase());
-          const matchesBrand = !filters.brands || filters.brands.length === 0 || filters.brands.includes((auction.brand_name || "").trim().toLowerCase());
-          const matchesSize = !filters.sizes || filters.sizes.length === 0 || filters.sizes.includes((auction.size || "").trim().toLowerCase());
-          const matchesCondition = !filters.conditions || filters.conditions.length === 0 || filters.conditions.includes((auction.condition || "").trim().toLowerCase());
-          const matchesPrice = !filters.price || parseInt(auction.price) >= parseInt(filters.price);
-
-          return matchesCategory && matchesBrand && matchesSize && matchesCondition && matchesPrice;
-        });
-
-        console.log("📋 Szűrt termékek:", filteredProducts);
-
-        // Termékek megjelenítése
-        filteredProducts.forEach((auction) => {
-          const card = document.createElement("div");
-          card.className = "product-card card-appear";
-          card.style.animation = "cardAppear 0.5s ease-out";
-          card.style.borderRadius = "15px";
-          card.style.boxShadow = "0 10px 20px rgba(0, 0, 0, 0.1)";
-          card.style.marginBottom = "20px";
-          card.style.backgroundColor = "#fff";
-          card.style.overflow = "hidden";
-          card.style.cursor = "pointer";
-          card.style.transition = "transform 0.3s ease-in-out";
-
-          card.addEventListener("mouseover", function () {
-            card.style.transform = "scale(1.05)";
-          });
-          card.addEventListener("mouseout", function () {
-            card.style.transform = "scale(1)";
-          });
-
-          card.innerHTML = `
-            <h3 style="font-size: 1.4em; font-weight: bold; color: #333; text-align: center; margin-top: 10px;">${auction.name}</h3>
-            <div style="text-align: center; margin-bottom: 15px;">
-              <img src="${auction.img_url}" alt="${auction.name}" class="product-image" style="width: 100%; height: 200px; object-fit: cover; border-radius: 15px;">
-            </div>
-            <div style="text-align: left">
-              <div style="font-size: 1em; font-weight: bold; color: #555; margin-top: 10px;">
-              </div>
-              <div class="product-info">
-              <p id="price-${auction.auction_id}" style="font-size: 1.3em;"> 
-              ${formatPrice(auction.price)} Ft
-              </p> <!-- Az aktuális ár (ho) jelenik meg -->
-              <p style="font-size: 1em;">Licit lépcső: ${formatPrice(auction.stair)} Ft</p>
-              <p>Méret: ${auction.size || 'N/A'}</p>
-              </div>
-              <div style="font-size: 1em; color: #e74c3c; margin-top: 15px;">
-              <p>Licit vége: <span class="countdown" id="countdown-${auction.auction_id}">Számolás...</span></p>
-              </div>
-              </div>
-          `;
-
-          // Kattintás esemény a részletek megjelenítéséhez
-          card.addEventListener("click", function () {
-            showProductDetails(
-              auction.name,
-              auction.description || "Nincs leírás.",
-              auction.img_url,
-              auction.original_price,
-              auction.price,
-              auction.stair,
-              auction.size,
-              auction.condition,
-              auction.brand_name,
-              auction.auction_id,
-              loggedInUserId,
-              auction.owner_id
-            );
-          });
-
-          productList.appendChild(card);
-
-          // Ha van countdown funkciód
-          if (typeof startCountdown === "function") {
-            startCountdown(auction.auction_end, auction.auction_id, card);
-          }
-        });
+        // Lapozott termékek megjelenítése
+        renderPaginatedProducts(allProducts, loggedInUserId);
       } else {
         console.warn("❗ Nincsenek aukciók.");
         const productList = document.querySelector(".product-list");
         productList.innerHTML = "<p>Nincs találat a szűrési feltételek alapján.</p>";
       }
     })
-    .catch((error) => {
+    .catch(error => {
       console.error("❌ Hiba az aukciók lekérésekor:", error);
     });
 }
@@ -578,12 +563,12 @@ window.addEventListener("DOMContentLoaded", function () {
 
   // Szűrési események hozzáadása
   document.querySelectorAll("#category1 input[type='checkbox'], #brand input[type='checkbox'], #size input[type='checkbox'], #condition input[type='checkbox']").forEach(checkbox => {
-    checkbox.addEventListener("change", applyAuctionFilters);
+    checkbox.addEventListener("change", applyFilters);
   });
-
+  
   document.getElementById("price-range").addEventListener("input", () => {
     document.getElementById("price-value").textContent = `${document.getElementById("price-range").value} Ft`;
-    applyAuctionFilters();
+    applyFilters();
   });
 });
 
@@ -840,7 +825,7 @@ function showMessage(message, type = 'error', duration = 3000) {
 }
 
 
-function applyAuctionFilters() {
+function applyFilters() {
   const selectedCategories = [];
   const selectedBrands = [];
   const selectedSizes = [];
@@ -883,14 +868,22 @@ function applyAuctionFilters() {
     price: selectedPrice
   });
 
-  // Szűrési feltételek átadása a fetchAllAuctions függvénynek
-  fetchAllAuctions({
-    categories: selectedCategories,
-    brands: selectedBrands,
-    sizes: selectedSizes,
-    conditions: selectedConditions,
-    price: selectedPrice
+  // Szűrési feltételek alkalmazása
+  filteredProducts = allProducts.filter(product => {
+    const matchesCategory = !selectedCategories.length || selectedCategories.includes(product.category_name.toLowerCase());
+    const matchesBrand = !selectedBrands.length || selectedBrands.includes(product.brand_name.toLowerCase());
+    const matchesSize = !selectedSizes.length || selectedSizes.includes(product.size.toLowerCase());
+    const matchesCondition = !selectedConditions.length || selectedConditions.includes(product.condition.toLowerCase());
+    const matchesPrice = !selectedPrice || parseInt(product.price) <= parseInt(selectedPrice);
+
+    return matchesCategory && matchesBrand && matchesSize && matchesCondition && matchesPrice;
   });
+
+  console.log("🔍 Szűrt termékek:", filteredProducts);
+
+  // Lapozott termékek megjelenítése
+  currentPage = 1; // Visszaállítjuk az első oldalra
+  renderPaginatedProducts(filteredProducts);
 }
 
 

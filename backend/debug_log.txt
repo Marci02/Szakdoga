@@ -6907,3 +6907,138 @@ SESSION: Array
     [name] => Konderla Sámuel
     [phone] => 06304843709
 )
+POST: Array
+(
+    [name] => Nike Air force 1
+    [price] => 123
+    [stair] => 123
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-27T16:16
+    [fileSize] => 44
+    [fileCondition] => Újszerű
+    [fileDesc] => asdasdas das
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => adidas ultraboost.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php49F8.tmp
+            [error] => 0
+            [size] => 59588
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 2
+    [firstname] => Konderla
+    [lastname] => Sámuel
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 06203522651
+    [street] => Kossúth utca
+    [address] => 42.
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád Vármegye
+    [image] => 
+    [created] => 2025-04-27 14:31:04
+    [street_address] => Kossúth utca
+    [house_number] => 42.
+    [name] => Konderla Sámuel
+    [phone] => 06203522651
+)
+POST: Array
+(
+    [name] => Nike Air force 1
+    [price] => 123
+    [stair] => 123
+    [fileCategory] => 2
+    [fileBrand] => North Face
+    [auction_end] => 2025-04-27T16:23
+    [fileSize] => 45
+    [fileCondition] => Használt
+    [fileDesc] => asdasdasd
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => Air_Jordan.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php50CC.tmp
+            [error] => 0
+            [size] => 4331
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 2
+    [firstname] => Konderla
+    [lastname] => Sámuel
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 06203522651
+    [street] => Kossúth utca
+    [address] => 42.
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád Vármegye
+    [image] => 
+    [created] => 2025-04-27 14:31:04
+    [street_address] => Kossúth utca
+    [house_number] => 42.
+    [name] => Konderla Sámuel
+    [phone] => 06203522651
+)
+POST: Array
+(
+    [name] => Nike Air force 1
+    [price] => 123
+    [stair] => 1
+    [fileCategory] => 1
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-27T19:24
+    [fileSize] => M
+    [fileCondition] => Használt
+    [fileDesc] => dasdasdas
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => Air_Jordan.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php421F.tmp
+            [error] => 0
+            [size] => 4331
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 2
+    [firstname] => Konderla
+    [lastname] => Sámuel
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 06203522651
+    [street] => Kossúth utca
+    [address] => 42.
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád Vármegye
+    [image] => 
+    [created] => 2025-04-27 14:31:04
+    [street_address] => Kossúth utca
+    [house_number] => 42.
+    [name] => Konderla Sámuel
+    [phone] => 06203522651
+)
