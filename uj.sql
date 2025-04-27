@@ -91,7 +91,6 @@ INSERT INTO `brand` (`id`, `brand_name`) VALUES
 (10, 'Dior'),
 (11, 'Ralph Lauren'),
 (12, 'Zara'),
-(13, '4312431');
 
 -- --------------------------------------------------------
 
@@ -181,7 +180,17 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `user_id`, `name`, `category_id`, `brand_id`, `price`, `description`, `image_id`, `uploaded_at`, `quantity`, `size`, `condition`, `isSold`) VALUES
-(1, 1, 'Nike Air Force 1', 4, 1, 15000, 'Állapot: Közepesen használt, rendszeresen tisztítva, apró kopás a talpon.', 11, '2025-04-27 19:00:30', 1, '43', 'Használt', 0);
+(1, 1, 'Adidas UltraBoost', 4, 2, 312412, 'asdasd asd as dasd das d', 1, '2025-04-27 14:28:36', 1, '44', 'Újszerű', 1),
+(2, 1, 'Nike Air force 1', 4, 1, 132, 'asdasd as das', 2, '2025-04-27 14:55:53', 1, '44', 'Újszerű', 1),
+(3, 2, 'Nike Air force 1', 4, 1, 45000, 'Eladó egy szép állapotú Nike air Force 1.', 3, '2025-04-27 15:30:23', 1, '43', 'Újszerű', 0),
+(4, 2, 'Adidas UltraBoost', 4, 2, 54350, 'Eladó bontatlan adidas UltraBoost!', 4, '2025-04-27 15:30:54', 1, '40', 'Új', 0),
+(5, 2, 'North Face póló', 1, 13, 12000, 'Eladó North Face poló M-es méretben!', 5, '2025-04-27 15:31:22', 1, 'M', 'Újszerű', 0),
+(6, 2, 'Nike Air Jordan 1', 4, 1, 65500, 'Eladó Nike Air Jordan 1! 44-es minden tartozékkal', 6, '2025-04-27 15:32:01', 1, '44', 'Új', 0),
+(7, 2, 'Calvin Klein alsónemű', 3, 14, 16000, '4 darab Clavin Klein alsónemű eladó', 7, '2025-04-27 15:32:45', 1, '', 'Új', 0),
+(8, 2, 'Levi\'s skinny jeans eladó', 1, 15, 4000, 'Levi\'s Skinny Jeans eladó. Kicsit kopott azért ennyi az ára', 8, '2025-04-27 15:33:23', 1, 'L', 'Nagyon használt', 0),
+(9, 2, 'Gucci öv', 3, 5, 97000, 'Gucci öv eladó. Pár napot volt hordtam. Dobozzal együtt eladó', 9, '2025-04-27 15:34:07', 1, '', 'Újszerű', 0),
+(10, 2, 'Yeezy Slide', 4, 2, 25990, 'Nyár indító Akció! Yeezy Slide olcsón', 10, '2025-04-27 15:35:04', 1, '43', 'Újszerű', 0),
+(11, 2, 'Nike zoknik eladók', 3, 1, 14590, '6 pár nike zokni eladó bontatlan csomagolás', 11, '2025-04-27 15:35:40', 1, '', 'Új', 0);
 
 -- --------------------------------------------------------
 
