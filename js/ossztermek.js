@@ -275,7 +275,7 @@ function applyFilters() {
       const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(product.brand_name.toLowerCase());
       const matchesSize = selectedSizes.length === 0 || selectedSizes.includes(product.size.toLowerCase());
       const matchesCondition = selectedConditions.length === 0 || selectedConditions.includes(product.condition.toLowerCase());
-      const matchesPrice = !selectedPrice || product.price <= parseInt(selectedPrice);
+      const matchesPrice = !selectedPrice || product.price >= parseInt(selectedPrice);
 
       return matchesCategory && matchesBrand && matchesSize && matchesCondition && matchesPrice;
   });

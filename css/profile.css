@@ -236,7 +236,6 @@ a {
   .dropdown-menu {
     position: absolute;
     top: 100%;
-    left: 0;
     display: none;
     min-width: 200px;
     padding: 10px 0;
@@ -513,4 +512,10 @@ a {
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
+}
+
+@media screen and (max-width: 1020px){
+  .dropdown-menu{
+    right: 5px;
+  }
 }

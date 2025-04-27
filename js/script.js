@@ -155,9 +155,10 @@ function showSearchResultsPopup(products) {
   const popup = document.createElement("div");
   popup.id = "searchResultsPopup";
   popup.style.position = "absolute";
-  popup.style.top = `${searchBarRect.bottom + window.scrollY + 10}px`; // Position below the search bar
-  popup.style.left = `${searchBarRect.left + window.scrollX}px`; // Align with the search bar
+  popup.style.top = `${searchBarRect.bottom + window.scrollY + 35}px`; // Position below the search bar
+  popup.style.left = `${Math.min(searchBarRect.left + window.scrollX, window.innerWidth - 220)}px`; // Ensure it doesn't overflow the screen
   popup.style.width = "auto";
+  popup.style.maxWidth = "90%"; // Ensure it doesn't exceed 90% of the viewport width
   popup.style.backgroundColor = "#fff";
   popup.style.boxShadow = "0 5px 15px rgba(0, 0, 0, 0.3)";
   popup.style.borderRadius = "10px";
@@ -211,6 +212,15 @@ function showSearchResultsPopup(products) {
     noResults.style.textAlign = "center";
     noResults.style.color = "#555";
     popup.appendChild(noResults);
+  }
+
+  // Ensure the popup fits within the viewport
+  const popupRect = popup.getBoundingClientRect();
+  if (popupRect.right > window.innerWidth) {
+    popup.style.left = `${window.innerWidth - popupRect.width - 0.2}px`; // Adjust to fit within the viewport
+  }
+  if (popupRect.bottom > window.innerHeight) {
+    popup.style.maxHeight = `${window.innerHeight - popupRect.top - 10}px`; // Adjust height to fit within the viewport
   }
 
   // Append the popup to the body
