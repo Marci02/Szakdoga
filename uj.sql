@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Ápr 27. 20:39
+-- Létrehozás ideje: 2025. Ápr 27. 21:07
 -- Kiszolgáló verziója: 10.4.32-MariaDB
--- PHP verzió: 8.2.12
+-- PHP verzió: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -154,7 +154,16 @@ INSERT INTO `image` (`id`, `img_url`) VALUES
 (9, '1745772859_balenciaga.jpg'),
 (10, '1745772945_Palace.jpg'),
 (11, 'product_680e62ae0de90.jpg'),
-(12, '1745779108_Palace.jpg');
+(12, '1745779108_Palace.jpg'),
+(13, 'product_680e316fc4c9f.jpg'),
+(14, 'product_680e318ea89db.jpg'),
+(15, 'product_680e31aa300bf.jpg'),
+(16, 'product_680e31d15e5a7.jpg'),
+(17, 'product_680e31fdbad55.jpg'),
+(18, 'product_680e322357498.jpg'),
+(19, 'product_680e324fbd0be.jpg'),
+(20, 'product_680e3288dc0e6.jpg'),
+(21, 'product_680e32ac3013f.jpg');
 
 -- --------------------------------------------------------
 
@@ -185,15 +194,15 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`id`, `user_id`, `name`, `category_id`, `brand_id`, `price`, `description`, `image_id`, `uploaded_at`, `quantity`, `size`, `condition`, `isSold`) VALUES
 (1, 1, 'Adidas UltraBoost', 4, 2, 312412, 'asdasd asd as dasd das d', 1, '2025-04-27 14:28:36', 1, '44', 'Újszerű', 1),
 (2, 1, 'Nike Air force 1', 4, 1, 132, 'asdasd as das', 2, '2025-04-27 14:55:53', 1, '44', 'Újszerű', 1),
-(3, 2, 'Nike Air force 1', 4, 1, 45000, 'Eladó egy szép állapotú Nike air Force 1.', 3, '2025-04-27 15:30:23', 1, '43', 'Újszerű', 0),
-(4, 2, 'Adidas UltraBoost', 4, 2, 54350, 'Eladó bontatlan adidas UltraBoost!', 4, '2025-04-27 15:30:54', 1, '40', 'Új', 0),
-(5, 2, 'North Face póló', 1, 13, 12000, 'Eladó North Face poló M-es méretben!', 5, '2025-04-27 15:31:22', 1, 'M', 'Újszerű', 0),
-(6, 2, 'Nike Air Jordan 1', 4, 1, 65500, 'Eladó Nike Air Jordan 1! 44-es minden tartozékkal', 6, '2025-04-27 15:32:01', 1, '44', 'Új', 0),
-(7, 2, 'Calvin Klein alsónemű', 3, 14, 16000, '4 darab Clavin Klein alsónemű eladó', 7, '2025-04-27 15:32:45', 1, '', 'Új', 0),
-(8, 2, 'Levi\'s skinny jeans eladó', 1, 15, 4000, 'Levi\'s Skinny Jeans eladó. Kicsit kopott azért ennyi az ára', 8, '2025-04-27 15:33:23', 1, 'L', 'Nagyon használt', 0),
-(9, 2, 'Gucci öv', 3, 5, 97000, 'Gucci öv eladó. Pár napot volt hordtam. Dobozzal együtt eladó', 9, '2025-04-27 15:34:07', 1, '', 'Újszerű', 0),
-(10, 2, 'Yeezy Slide', 4, 2, 25990, 'Nyár indító Akció! Yeezy Slide olcsón', 10, '2025-04-27 15:35:04', 1, '43', 'Újszerű', 0),
-(11, 2, 'Nike zoknik eladók', 3, 1, 14590, '6 pár nike zokni eladó bontatlan csomagolás', 11, '2025-04-27 15:35:40', 1, '', 'Új', 0);
+(3, 2, 'Nike Air force 1', 4, 1, 45000, 'Eladó egy szép állapotú Nike air Force 1.', 13, '2025-04-27 15:30:23', 1, '43', 'Újszerű', 0),
+(4, 2, 'Adidas UltraBoost', 4, 2, 54350, 'Eladó bontatlan adidas UltraBoost!', 14, '2025-04-27 15:30:54', 1, '40', 'Új', 0),
+(5, 2, 'North Face póló', 1, 13, 12000, 'Eladó North Face poló M-es méretben!', 15, '2025-04-27 15:31:22', 1, 'M', 'Újszerű', 0),
+(6, 2, 'Nike Air Jordan 1', 4, 1, 65500, 'Eladó Nike Air Jordan 1! 44-es minden tartozékkal', 16, '2025-04-27 15:32:01', 1, '44', 'Új', 0),
+(7, 2, 'Calvin Klein alsónemű', 3, 14, 16000, '4 darab Clavin Klein alsónemű eladó', 17, '2025-04-27 15:32:45', 1, '', 'Új', 0),
+(8, 2, 'Levi\'s skinny jeans eladó', 1, 15, 4000, 'Levi\'s Skinny Jeans eladó. Kicsit kopott azért ennyi az ára', 18, '2025-04-27 15:33:23', 1, 'L', 'Nagyon használt', 0),
+(9, 2, 'Gucci öv', 3, 5, 97000, 'Gucci öv eladó. Pár napot volt hordtam. Dobozzal együtt eladó', 19, '2025-04-27 15:34:07', 1, '', 'Újszerű', 0),
+(10, 2, 'Yeezy Slide', 4, 2, 25990, 'Nyár indító Akció! Yeezy Slide olcsón', 20, '2025-04-27 15:35:04', 1, '43', 'Újszerű', 0),
+(11, 2, 'Nike zoknik eladók', 3, 1, 14590, '6 pár nike zokni eladó bontatlan csomagolás', 21, '2025-04-27 15:35:40', 1, '', 'Új', 0);
 
 -- --------------------------------------------------------
 
@@ -338,7 +347,7 @@ ALTER TABLE `auction`
 -- AUTO_INCREMENT a táblához `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT a táblához `category`
@@ -356,13 +365,13 @@ ALTER TABLE `counties`
 -- AUTO_INCREMENT a táblához `image`
 --
 ALTER TABLE `image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT a táblához `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT a táblához `settlement`
