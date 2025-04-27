@@ -99,11 +99,22 @@ function showSearchResultsPopup(products) {
           productCard.style.alignItems = "center";
 
           productCard.innerHTML = `
-              <img src="${product.img_url}" alt="${product.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px; margin-right: 10px;">
-              <div>
-                  <h4 style="margin: 0; font-size: 16px;">${product.name}</h4>
-                  <p style="margin: 0; font-size: 14px; color: #555;">${formatPrice(product.price)} Ft</p>
+                  <h3 style="font-size: 1.4em; font-weight: bold; color: #333; text-align: center; margin-top: 10px;">${auction.name}</h3>
+            <div style="text-align: center; margin-bottom: 15px;">
+              <img src="${auction.img_url}" alt="${auction.name}" class="product-image" style="width: 100%; height: 200px; object-fit: cover; border-radius: 15px;">
+            </div>
+            <div style="text-align: left">
+              <div class="product-info">
+                <p id="price-${auction.auction_id}" style="font-size: 1.3em;"> 
+                  ${formatPrice(auction.price)} Ft
+                </p>
+                <p style="font-size: 1em;">Licit lépcső: ${formatPrice(auction.stair)} Ft</p>
+                <p>Méret: ${auction.size || 'N/A'}</p>
               </div>
+              <div style="font-size: 1em; color: #e74c3c; margin-top: 15px;">
+                <p>Licit vége: <span class="countdown" id="countdown-${auction.auction_id}">Számolás...</span></p>
+              </div>
+            </div>
           `;
 
           popup.appendChild(productCard);
