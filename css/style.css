@@ -79,7 +79,7 @@ a {
   z-index: 1000;
   top: 0;
   left: 0;
-  background-color: #ffffff;
+  background-color: #e6e3e3;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -239,7 +239,6 @@ nav.header-sticky {
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
   display: none;
   min-width: 200px;
   padding: 10px 0;
@@ -331,18 +330,6 @@ body {
   width: 42%;
 }
 
-.item-image-container::before {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: 0;
-  width: 101%;
-  height: 101%;
-  background: #22222a;
-  opacity: 0;
-  z-index: 1;
-}
-
 .item-image {
   position: relative;
   width: 100%;
@@ -357,7 +344,7 @@ body {
 }
 
 .item.active .item-image-container::before {
-  opacity: 0.8;
+  opacity: 0.5;
 }
 
 .item-description {
@@ -400,12 +387,16 @@ body {
   font-size: medium;
 }
 
+.smallcontainer .vertical-part {
+  transition: 0.5s;
+}
+
 .item-header .vertical-part b {
   transition: 0.5s;
 }
 
 .item-description .vertical-part b {
-  transition: 0.5s;
+  transition: 0.7s;
 }
 
 .item.active .item-header .vertical-part b {
@@ -440,9 +431,16 @@ body {
   background: #6a6a77;
 }
 
-/*Search bar -------------------------------------------------------------------------------------*/
+@media screen and (max-width: 1025px) {
+  .menu a{
+    font-size: 1.1rem;
+  }
 
-/*responsive alignment ----------------------------------------------------------------------------*/
+  .dropdown-menu{
+    right: 5px;
+  }
+}
+
 @media screen and (max-width: 700px) {
   :root {
     --text-h0: 2.25rem;  
@@ -466,6 +464,14 @@ body {
     --input-gap: 0.75rem;
     --input-height: 2.75rem;
     --input-padding-inline: var(--spacing-4);
+  }
+
+  .item-header .vertical-part {
+    font-size: 5vw;
+  }
+
+  .dropdown-menu{
+    right: 5px;
   }
 
   .drawer {
@@ -528,7 +534,20 @@ body {
   width: 90%;
   margin-right: 60px;
 }
-  
+
+#search {
+  width: 80%; /* Adjust width for tablets */
+  font-size: 0.9rem; /* Slightly smaller font size */
+  padding: 8px; /* Adjust padding */
+}  
+
+.item-description .vertical-part b {
+  font-size: 0.8rem;
+}
+
+.item-header{
+  width: 200px;
+}
 }
 
 .message-box {
@@ -551,6 +570,16 @@ body {
 }
 .message-box.show {
   display: block; /* Megjelenítéshez */
+}
+
+#search {
+  width: 80%; /* Adjust width for tablets */
+  font-size: 0.9rem; /* Slightly smaller font size */
+  padding: 8px; /* Adjust padding */
+}
+
+#searchResultsPopup {
+  padding-right: 100px;
 }
 
 #searchResultsPopup h4 {

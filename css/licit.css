@@ -84,10 +84,10 @@ a {
   line-height: 40px;
   width: 0;
   position: fixed;
-  z-index: 1000;
+  z-index: 10000;
   top: 0;
   left: 0;
-  background-color: whitesmoke;
+  background-color: #e6e3e3;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -244,7 +244,6 @@ nav.header-sticky {
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
   display: none;
   min-width: 200px;
   padding: 10px 0;
@@ -549,6 +548,10 @@ nav.header-sticky {
   .product-list {
     grid-template-columns: repeat(3, 1fr); /* 3 oszlop nagyobb tableteken */
   }
+
+  .dropdown-menu{
+    right: 5px;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -559,6 +562,16 @@ nav.header-sticky {
   .sidebar-categories {
     width: 220px; /* Kisebb sidebar szélesség tableteken */
   }
+
+  .menu a{
+    font-size: 1.1rem;
+  }
+
+  #search {
+    width: 80%; /* Adjust width for tablets */
+    font-size: 0.9rem; /* Slightly smaller font size */
+    padding: 8px; /* Adjust padding */
+  }
 }
 
 /* Reszponzív elrendezés mobiltelefonokhoz */
@@ -568,6 +581,7 @@ nav.header-sticky {
     grid-template-columns: 1fr; /* 1 oszlop mobilon */
     width: 100%; /* A teljes szélességet kitölti */
   }
+
   .sidebar-categories {
     width: 40%; /* Make the sidebar take the full width of the screen */
     height: auto; /* Allow the height to adjust dynamically */
@@ -603,5 +617,11 @@ nav.header-sticky {
     overflow-y: auto; /* Görgethetővé teszi, ha a tartalom túl hosszú */
     padding: 10px; /* Csökkentett padding */
     font-size: 14px; /* Kisebb betűméret */
+  }
+
+  #search {
+    width: 80%; /* Adjust width for tablets */
+    font-size: 0.9rem; /* Slightly smaller font size */
+    padding: 8px; /* Adjust padding */
   }
 }

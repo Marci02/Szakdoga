@@ -88,7 +88,7 @@ a {
   z-index: 9999;
   top: 0;
   left: 0;
-  background-color: #ffffff;
+  background-color: #e6e3e3;
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
@@ -250,7 +250,6 @@ nav.header-sticky {
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
   display: none;
   min-width: 200px;
   padding: 10px 0;
@@ -505,7 +504,7 @@ a {
 }
 
 /* Tablet View (max-width: 1024px) */
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1025px) {
   .container {
     margin-top: 100px;
     display: flex;
@@ -515,6 +514,15 @@ a {
     height: auto;
     position: relative;
     z-index: 2;
+    gap: 10px; /* Add gap between items */
+  }
+
+  .menu a{
+    font-size: 1.1rem;
+  }
+
+  .dropdown-menu{
+    right: 5px;
   }
 
   .all {
@@ -534,6 +542,10 @@ a {
     width: 100%; /* Full width for the contact form */
     padding: 20px;
     box-shadow: none; /* Remove box shadow for simplicity */
+  }
+
+  .contact button {
+    padding: 5px;
   }
 }
 
@@ -561,6 +573,10 @@ a {
     padding: 15px;
     box-shadow: none; /* Remove box shadow for simplicity */
   }
+
+  .contact button {
+    padding: 5px;
+  }
 }
 
 /* Small Mobile View (max-width: 480px) */
@@ -583,6 +599,7 @@ a {
   .contact button{
     width: 330px; /* Full width for button */
     border-radius: 10px;
+    padding: 2px;
   }
 
   .map {
@@ -593,5 +610,81 @@ a {
     width: 100%; /* Shrink the contact form to fit the screen */
     padding: 10px;
     box-shadow: none; /* Remove box shadow for simplicity */
+  }
+}
+
+@media screen and (max-width: 360px){
+  .contact {
+    width: 100%; /* Shrink the contact form to fit the screen */
+    padding: 10px;
+    box-shadow: none; /* Remove box shadow for simplicity */
+  }
+
+  #name, #email, #message {
+    width: 256px; /* Full width for input fields */
+    border-radius: 10px;
+  }
+
+  .contact button{
+    width: 275px; /* Full width for button */
+    border-radius: 10px;
+    padding: 2px;
+  }
+}
+
+@media screen and (max-width: 390px){
+  .contact {
+    width: 100%; /* Shrink the contact form to fit the screen */
+    padding: 10px;
+    box-shadow: none; /* Remove box shadow for simplicity */
+  }
+
+  #name, #email, #message {
+    width: 282px; /* Full width for input fields */
+    border-radius: 10px;
+  }
+
+  .contact button{
+    width: 301px; /* Full width for button */
+    border-radius: 10px;
+    padding: 2px;
+  }
+}
+
+@media screen and (max-width: 375px){
+  .contact {
+    width: 100%; /* Shrink the contact form to fit the screen */
+    padding: 10px;
+    box-shadow: none; /* Remove box shadow for simplicity */
+  }
+
+  #name, #email, #message {
+    width: 271px; /* Full width for input fields */
+    border-radius: 10px;
+  }
+
+  .contact button{
+    width: 290px; /* Full width for button */
+    border-radius: 10px;
+    padding: 2px;
+  }
+}
+
+@media screen and (max-width: 344px){
+  .contact {
+    width: 100%; /* Shrink the contact form to fit the screen */
+    padding: 10px;
+    box-shadow: none; /* Remove box shadow for simplicity */
+  }
+
+  #name, #email, #message {
+    width: 243px; /* Full width for input fields */
+    border-radius: 10px;
+  }
+
+  .contact button{
+    width: 265px; /* Full width for button */
+    border-radius: 10px;
+    padding: 2px;
   }
 }

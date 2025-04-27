@@ -18,15 +18,15 @@ a {
 }
 
 .nav {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: #22222a;
-  transition: 0.4s;
-  padding: 1.3rem 0;
-  z-index: 10;
-  margin: 0;
+  position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #22222a;
+    transition: 0.4s;
+    padding: 1.3rem 0;
+    z-index: 1000;
+    margin: 0;
 }
 
 .product-card {
@@ -284,7 +284,7 @@ nav.header-sticky {
 .sidebar-list {
   text-decoration: none;
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   left: 0;
   right: 0;
   gap: 15px;
@@ -404,8 +404,8 @@ nav.header-sticky {
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
   display: none;
+  margin-right: 5px;
   min-width: 200px;
   padding: 10px 0;
   background-color: #f8f9fa;
@@ -530,16 +530,8 @@ nav.header-sticky {
     text-align: center;
   }
 
-  .nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #22222a;
-    transition: 0.4s;
-    padding: 1.3rem 0;
-    z-index: 10;
-    margin: 0;
+  #cartBtn{
+    padding-right: 50px;
   }
 
   .sidebar ul {
@@ -595,31 +587,16 @@ nav.header-sticky {
     margin-left: 0;
     padding: 10px;
   }
-
-  .nav {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem;
-  }
-
-  .nav .menu {
-    flex-direction: column;
-    width: 0%;
-    gap: 10px;
-  }
-
-  .nav .menu-link {
-    font-size: 0.9rem;
-    padding: 0.5rem;
-    text-align: left;
-    width: 100%;
-  }
 }
 
 @media screen and (max-width: 1025px) {
   .product-list {
     grid-template-columns: repeat(2, 1fr); /* Display 2 cards per row */
     gap: 15px; /* Reduce the gap between cards */
+  }
+
+  .sidebar-list{
+    margin-top: 10px;
   }
 
   .product-card {
@@ -638,6 +615,10 @@ nav.header-sticky {
 
   .product-image {
     height: 150px; /* Reduce image height for smaller screens */
+  }
+
+  .dropdown-menu{
+    right: 5px;
   }
 
   .sidebar-categories {
@@ -667,23 +648,8 @@ nav.header-sticky {
     font-size: 1rem;
   }
 
-  .nav {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem;
-  }
-
-  .nav .menu {
-    flex-direction: column;
-    width: 0;
-    gap: 10px;
-  }
-
-  .nav .menu-link {
-    font-size: 0.9rem;
-    padding: 0.5rem;
-    text-align: left;
-    width: 100%;
+  .menu a{
+    font-size: 1.1rem;
   }
 
   #searchResultsPopup {
@@ -696,25 +662,6 @@ nav.header-sticky {
 
   #searchbuttonToSearchBar {
     font-size: 0.9rem; /* Adjust button font size for tablets */
-  }
-
-  .nav {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem;
-  }
-
-  .nav .menu {
-    flex-direction: column;
-    width: 0%;
-    gap: 10px;
-  }
-
-  .nav .menu-link {
-    font-size: 0.9rem;
-    padding: 0.5rem;
-    text-align: left;
-    width: 100%;
   }
 }
 
