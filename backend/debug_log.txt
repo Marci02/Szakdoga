@@ -424,3 +424,423 @@ SESSION: Array
     [image] => 
     [created] => 2025-04-27 14:31:04
 )
+POST: Array
+(
+    [name] => Nike Air Jordan 1
+    [price] => 120000
+    [stair] => 1500
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-04-27T00:36
+    [fileSize] => 43
+    [fileCondition] => Újszerű
+    [fileDesc] => Nagyon jó állapotba lévő sneaker
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => jordan 12.jpg
+            [full_path] => jordan 12.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php130F.tmp
+            [error] => 0
+            [size] => 6115
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Konderla
+    [lastname] => mama
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-27 18:34:22
+)
+POST: Array
+(
+    [name] => Nike Air Jordan 1
+    [price] => 120000
+    [stair] => 1500
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-08-01T18:37
+    [fileSize] => 43
+    [fileCondition] => Újszerű
+    [fileDesc] => Nagyon szép állapotba lévő sneaker
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => jordan 12.jpg
+            [full_path] => jordan 12.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php6206.tmp
+            [error] => 0
+            [size] => 6115
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Konderla
+    [lastname] => mama
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-27 18:34:22
+)
+POST: Array
+(
+    [name] => Nike Air Jordan 4 
+    [price] => 45000
+    [stair] => 1000
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-08-01T18:38
+    [fileSize] => 43
+    [fileCondition] => Nagyon használt
+    [fileDesc] => Elégé használt
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => jordan 4.jpg
+            [full_path] => jordan 4.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php7DD7.tmp
+            [error] => 0
+            [size] => 5578
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Konderla
+    [lastname] => mama
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-27 18:34:22
+)
+POST: Array
+(
+    [name] => Zara farmer nadrág
+    [price] => 7000
+    [stair] => 300
+    [fileCategory] => 1
+    [fileBrand] => Zara
+    [auction_end] => 2025-08-01T18:40
+    [fileSize] => M
+    [fileCondition] => Új
+    [fileDesc] => Teljesen új, címkével
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => Zara nadrág.jpg
+            [full_path] => Zara nadrág.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php3329.tmp
+            [error] => 0
+            [size] => 4923
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Konderla
+    [lastname] => mama
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-27 18:34:22
+)
+POST: Array
+(
+    [name] => Bape pulcsi
+    [price] => 80000
+    [stair] => 1200
+    [fileCategory] => 1
+    [fileBrand] => Bape
+    [auction_end] => 2025-08-01T18:45
+    [fileSize] => XL
+    [fileCondition] => Új
+    [fileDesc] => Egyszer se volt rajtam
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => Bape.jpg
+            [full_path] => Bape.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpC12.tmp
+            [error] => 0
+            [size] => 9008
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Konderla
+    [lastname] => mama
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-27 18:34:22
+)
+POST: Array
+(
+    [name] => Nike papucs
+    [price] => 8000
+    [stair] => 200
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-08-01T18:47
+    [fileSize] => 40
+    [fileCondition] => Új
+    [fileDesc] => Teljesen új
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => letöltés.jpg
+            [full_path] => letöltés.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php8F77.tmp
+            [error] => 0
+            [size] => 8079
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Konderla
+    [lastname] => mama
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-27 18:34:22
+)
+POST: Array
+(
+    [name] => Supreme kabát
+    [price] => 40000
+    [stair] => 500
+    [fileCategory] => 1
+    [fileBrand] => Supreme
+    [auction_end] => 2025-08-01T18:49
+    [fileSize] => M
+    [fileCondition] => Használt
+    [fileDesc] => Tavaly egész télen hordtam, de semmi nagyobb baja nincsen
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => supreme.jpg
+            [full_path] => supreme.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php4E5E.tmp
+            [error] => 0
+            [size] => 6468
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Konderla
+    [lastname] => mama
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-27 18:34:22
+)
+POST: Array
+(
+    [name] => Nike Air Force 1
+    [price] => 40000
+    [stair] => 50
+    [fileCategory] => 2
+    [fileBrand] => Nike
+    [auction_end] => 2025-08-01T18:52
+    [fileSize] => 44
+    [fileCondition] => Új
+    [fileDesc] => Most vettem nem rég nikeból de sajna rossz lett a méret
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => Air Force.jpg
+            [full_path] => Air Force.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpF4A8.tmp
+            [error] => 0
+            [size] => 4779
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Konderla
+    [lastname] => mama
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-27 18:34:22
+)
+POST: Array
+(
+    [name] => Balenciaga pulcsi
+    [price] => 10000
+    [stair] => 1000
+    [fileCategory] => 1
+    [fileBrand] => Balenciaga
+    [auction_end] => 2025-08-01T18:54
+    [fileSize] => L
+    [fileCondition] => Nagyon használt
+    [fileDesc] => Szét van hordva
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => balenciaga.jpg
+            [full_path] => balenciaga.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpA45D.tmp
+            [error] => 0
+            [size] => 4685
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Konderla
+    [lastname] => mama
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-27 18:34:22
+)
+POST: Array
+(
+    [name] => Palace pulcsi
+    [price] => 40000
+    [stair] => 2000
+    [fileCategory] => 1
+    [fileBrand] => Palace
+    [auction_end] => 2025-07-01T18:55
+    [fileSize] => XXL
+    [fileCondition] => Újszerű
+    [fileDesc] => Nagyon szép állapotba van ahoz képest hogy sokszor volt rajtam, vigyáztam rá
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => Palace.jpg
+            [full_path] => Palace.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpF651.tmp
+            [error] => 0
+            [size] => 3767
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 1
+    [firstname] => Konderla
+    [lastname] => mama
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 
+    [street] => 
+    [address] => 
+    [postcode] => 
+    [city] => 
+    [county] => 
+    [image] => 
+    [created] => 2025-04-27 18:34:22
+)
