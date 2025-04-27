@@ -174,8 +174,20 @@
                             <button onclick="saveProductChanges()" class="save-button">Mentés</button>
                         </div>
                     </div>
+
                 </div>
-                
+                <div id="buyer-address-modal-new" class="modal-new">
+                    <div class="modal-content-new">
+                        <span class="close-new" onclick="closeBuyerAddressModalNew()">&times;</span>
+                        <h2>Vásárló szállítási címe</h2>
+                        <p><strong>Név:</strong> <span id="buyer-name-new"></span></p>
+                        <p><strong>Irányítószám:</strong> <span id="buyer-postcode-new"></span></p>
+                        <p><strong>Város:</strong> <span id="buyer-city-new"></span></p>
+                        <p><strong>Utca:</strong> <span id="buyer-street-new"></span></p>
+                        <p><strong>Házszám:</strong> <span id="buyer-house-number-new"></span></p>
+                        <button onclick="closeBuyerAddressModalNew()" class="close-button-new">Bezárás</button>
+                    </div>
+                </div>
                 
 
                 <div class="buttons">
@@ -183,6 +195,7 @@
                     <button class="otherButton deleteProfile">Fiók törlése</button>
                 </div>
             </div>
+
         </div>
         <script src="js/profile.js"></script>
         <script src="js/logout.js"></script>
