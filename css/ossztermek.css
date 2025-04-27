@@ -211,9 +211,74 @@ nav.header-sticky {
   justify-content: flex-start;
 }
 
+/* Search Bar Styles */
 #search {
-  border-radius: 10px;
+  width: 100%; /* Make the search bar take the full width of its container */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Search Button */
+#searchbuttonToSearchBar {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #333;
+  color: white;
   border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+#searchbuttonToSearchBar:hover {
+  background-color: #555;
+}
+
+/* Popup Window Styles */
+#searchResultsPopup {
+  position: absolute;
+  top: 100%; /* Position below the search bar */
+  left: 0;
+  width: 100%; /* Match the width of the search bar */
+  max-height: 300px; /* Limit the height of the popup */
+  overflow-y: auto; /* Add scroll if content overflows */
+  background-color: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  z-index: 1000;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Popup Item Styles */
+#searchResultsPopup a {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
+
+#searchResultsPopup a:hover {
+  background-color: #f9f9f9;
+}
+
+#searchResultsPopup img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+#searchResultsPopup p {
+  margin: 0;
+  font-size: 14px;
+  color: #555;
 }
 
 .sidebar-list {
@@ -530,34 +595,49 @@ nav.header-sticky {
     margin-left: 0;
     padding: 10px;
   }
-}
-
-@media screen and (max-width: 1024px) {
-  .header {
-    padding: 1rem 3rem;
-    text-align: center;
-  }
 
   .nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #22222a;
-    transition: 0.4s;
-    padding: 1.3rem 0;
-    z-index: 10;
-    margin: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
   }
 
-  .sidebar ul {
-    text-align: center;
-    padding-left: 0;
+  .nav .menu {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
   }
 
-  .sidebar ul li {
-    display: block;
-    margin-bottom: 10px;
+  .nav .menu-link {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    text-align: left;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  .product-list {
+    grid-template-columns: repeat(2, 1fr); /* Display 2 cards per row */
+    gap: 15px; /* Reduce the gap between cards */
+  }
+
+  .product-card {
+    width: 100%; /* Make the card take the full width of its grid column */
+    height: auto; /* Allow the height to adjust dynamically */
+    padding: 10px; /* Reduce padding for smaller screens */
+  }
+
+  .product-card h3 {
+    font-size: 18px; /* Adjust font size for smaller screens */
+  }
+
+  .product-card p {
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+
+  .product-image {
+    height: 150px; /* Reduce image height for smaller screens */
   }
 
   .sidebar-categories {
@@ -565,7 +645,6 @@ nav.header-sticky {
     background-color: #f8f9fa;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
-    overflow-y: auto;
     top: 60px; 
     left: 0;
     height: auto;
@@ -588,89 +667,96 @@ nav.header-sticky {
     font-size: 1rem;
   }
 
-  .product-list{
-    grid-template-columns: repeat(3, 1fr);
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
   }
 
-  .content {
-    margin-left: 0;
-    padding: 10px;
+  .nav .menu {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .nav .menu-link {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    text-align: left;
+    width: 100%;
+  }
+
+  #searchResultsPopup {
+    max-height: 250px; /* Reduce height for tablets */
+  }
+
+  #search {
+    font-size: 0.9rem; /* Adjust font size for tablets */
+  }
+
+  #searchbuttonToSearchBar {
+    font-size: 0.9rem; /* Adjust button font size for tablets */
   }
 }
 
-@media screen and (max-width: 480px) {
-  .header {
-    padding: 1rem 3rem;
-    text-align: center;
-  }
-
-  .nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: #22222a;
-    transition: 0.4s;
-    padding: 1.3rem 0;
-    z-index: 10;
-    margin: 0;
-  }
-
-  .sidebar ul {
-    text-align: center;
-    padding-left: 0;
-  }
-
-  .sidebar ul li {
-    display: block;
-    margin-bottom: 10px;
-  }
-
+@media screen and (max-width: 767px) {
   .sidebar-categories {
-    width: 40%;
-    background-color: #f8f9fa;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    top: 60px; 
-    left: 0;
-    height: auto;
-    padding-top: 20px;
-  }
-  
-  .sidebar-categories a{
-    text-decoration: none;
-    color: #333;
-    display: block;
-    padding: 10px 0;
-  }
-
-  .sidebar-categories ul {
-    display: block; 
+    width: 40%; /* Make the sidebar take the full width of the screen */
+    height: auto; /* Allow the height to adjust dynamically */
+    position: relative; /* Remove fixed positioning for smaller screens */
+    top: 0; /* Reset top positioning */
+    left: 0; /* Reset left positioning */
+    margin-bottom: 20px; /* Add spacing below the sidebar */
+    padding: 15px; /* Adjust padding for smaller screens */
+    box-shadow: none; /* Remove box shadow for a cleaner look */
   }
 
   .sidebar-categories ul li a {
     padding: 15px 10px;
-    font-size: small;
-  }
-
-  .subcategory label{
     font-size: 0.7rem;
   }
 
-  #price-value{
-    font-size: 0.8rem;
+  .upload-button {
+    width: 100%; /* Make the button take the full width of the sidebar */
+    padding: 10px; /* Adjust padding for smaller screens */
+    font-size: 0.7rem; /* Adjust font size for smaller screens */
   }
 
-  .product-list{
-    grid-template-columns: repeat(1, 1fr);
+  .product-list {
+    grid-template-columns: repeat(1, 1fr); /* Display 1 card per row */
+    gap: 10px; /* Reduce the gap between cards */
   }
 
-  .content {
-    margin-left: 0;
-    padding: 10px;
+  .product-card {
+    width: 100%; /* Make the card take the full width of its grid column */
+    height: auto; /* Allow the height to adjust dynamically */
+    padding: 8px; /* Reduce padding for smaller screens */
+  }
+
+  .product-card h3 {
+    font-size: 16px; /* Adjust font size for smaller screens */
+  }
+
+  .product-card p {
+    font-size: 12px; /* Adjust font size for smaller screens */
+  }
+
+  .product-image {
+    height: 120px; /* Reduce image height for smaller screens */
+  }
+
+  #searchResultsPopup {
+    max-height: 200px; /* Reduce height for mobile */
+  }
+
+  #search {
+    font-size: 0.8rem; /* Adjust font size for mobile */
+  }
+
+  #searchbuttonToSearchBar {
+    font-size: 0.8rem; /* Adjust button font size for mobile */
   }
 }
-
 
 .message-box {
   position: fixed;

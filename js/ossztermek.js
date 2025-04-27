@@ -1,3 +1,12 @@
+function openNav() {
+  document.getElementById("menu").style.width = "300px";
+}
+
+function closeNav() {
+  document.getElementById("menu").style.width = "0";
+}
+
+
 function stickyNav() {
   const navbar = document.querySelector("nav");
   const headerHeight = document.querySelector(".container").offsetHeight / 2;
@@ -224,6 +233,111 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch(error => console.error("Hiba a termék lekérésekor:", error));
   }
 });
+
+function applyFilters() {
+  const selectedCategories = [];
+  const selectedBrands = [];
+  const selectedSizes = [];
+  const selectedConditions = [];
+  const selectedPrice = document.getElementById("price-range").value;
+
+  // Collect selected categories
+  document.querySelectorAll("#category1 input[type='checkbox']").forEach(checkbox => {
+      if (checkbox.checked) {
+          selectedCategories.push(checkbox.parentElement.textContent.trim().toLowerCase());
+      }
+  });
+
+  // Collect selected brands
+  document.querySelectorAll("#brand input[type='checkbox']").forEach(checkbox => {
+      if (checkbox.checked) {
+          selectedBrands.push(checkbox.parentElement.textContent.trim().toLowerCase());
+      }
+  });
+
+  // Collect selected sizes
+  document.querySelectorAll("#size input[type='checkbox']").forEach(checkbox => {
+      if (checkbox.checked) {
+          selectedSizes.push(checkbox.value.toLowerCase());
+      }
+  });
+
+  // Collect selected conditions
+  document.querySelectorAll("#condition input[type='checkbox']").forEach(checkbox => {
+      if (checkbox.checked) {
+          selectedConditions.push(checkbox.parentElement.textContent.trim().toLowerCase());
+      }
+  });
+
+  // Filter products based on selected filters
+  const filteredProducts = allProducts.filter(product => {
+      const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(product.category_name.toLowerCase());
+      const matchesBrand = selectedBrands.length === 0 || selectedBrands.includes(product.brand_name.toLowerCase());
+      const matchesSize = selectedSizes.length === 0 || selectedSizes.includes(product.size.toLowerCase());
+      const matchesCondition = selectedConditions.length === 0 || selectedConditions.includes(product.condition.toLowerCase());
+      const matchesPrice = !selectedPrice || product.price <= parseInt(selectedPrice);
+
+      return matchesCategory && matchesBrand && matchesSize && matchesCondition && matchesPrice;
+  });
+
+  // Render the filtered products
+  renderPaginatedProducts(filteredProducts);
+}
+
+document.querySelectorAll(".subcategory input[type='checkbox']").forEach(checkbox => {
+  checkbox.addEventListener("change", applyFilters);
+});
+
+// Attach event listener for the price range slider
+document.getElementById("price-range").addEventListener("input", applyFilters);
+
+function renderPaginatedProducts(products) {
+  const productList = document.querySelector(".product-list");
+  productList.innerHTML = ""; // Clear the product list
+
+  // Calculate the current page's products
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentProducts = products.slice(startIndex, endIndex);
+
+  if (currentProducts.length === 0) {
+      productList.innerHTML = "<p>Nincs találat a szűrési feltételek alapján.</p>";
+      return;
+  }
+
+  currentProducts.forEach(product => {
+      const productCard = document.createElement("div");
+      productCard.className = "product-card";
+      productCard.dataset.productId = product.id;
+      productCard.dataset.productName = product.name;
+      productCard.dataset.productDescription = product.description;
+      productCard.dataset.productPrice = product.price;
+      productCard.dataset.productSize = product.size || "N/A";
+      productCard.dataset.productCondition = product.condition || "N/A";
+      productCard.dataset.productImage = product.img_url;
+      productCard.dataset.productBrand = product.brand_name || "Ismeretlen";
+      productCard.dataset.productCategory = product.category_name || "Ismeretlen";
+
+      const formattedPrice = formatPrice(product.price);
+
+      productCard.innerHTML = `
+          <img src="${product.img_url}" alt="${product.name}" class="product-image">
+          <h3>${product.name}</h3>
+          <p>Méret: ${product.size || "Nincs megadva!"}</p>
+          <p>Állapot: ${product.condition || "Nincs megadva!"}</p>
+          <p id="price">${formattedPrice} Ft</p>
+      `;
+
+      productCard.addEventListener("click", function () {
+          openProductModal(this);
+      });
+
+      productList.appendChild(productCard);
+  });
+
+  // Update pagination buttons
+  updatePagination(products.length);
+}
 
 function uploadFile() {
   const fileInput = document.querySelector("#fileInput");
@@ -488,3 +602,7 @@ function showMessage(message, type = 'error', duration = 3000) {
   }, duration);
 }
 
+function updatePriceValue() {
+  const priceValue = document.getElementById("price-range").value;
+  document.getElementById("price-value").textContent = `${priceValue} Ft`;
+}

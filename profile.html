@@ -36,25 +36,6 @@
             <a href="index.html" class="logo">PremSelect</a>
             <div class="sidebar">
                 <ul class="sidebar-list">
-                    <li class="nav-item dropdown-search">
-                        <button class="dropdown-toggle-search" type="button" id="dropdownSearchButton" onclick="toggleSearch()" aria-expanded="false">
-                            <span class="sr-only"></span>
-                            <svg stroke-width="2" focusable="false" width="22" height="22" class="">
-                                <circle cx="11" cy="10" r="7" fill="none" stroke="white"></circle>
-                                <path d="m16 15 3 3" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                        </button>
-                    
-                        <!-- Dropdown Menu -->
-                        <div class="dropdown-menu-search" id="searchBtn" aria-labelledby="dropdownSearchButton">
-                            <p class="dropdown-item-search">
-                                <input type="text" id="search" placeholder="Keresés..." style="padding: 4px;">
-                                <button id="searchbuttonToSearchBar">Keresés</button>
-                                <p id="output"></p>
-                            </p>
-                        </div>
-                    </li>
-
                     <li><a href="#" class="sidebar-btn" id="profileButton">
                             <span class="sr-only"></span><svg stroke-width="2" focusable="false" width="22" height="22"
                                 class="">
@@ -193,8 +174,20 @@
                             <button onclick="saveProductChanges()" class="save-button">Mentés</button>
                         </div>
                     </div>
+
                 </div>
-                
+                <div id="buyer-address-modal-new" class="modal-new">
+                    <div class="modal-content-new">
+                        <span class="close-new" onclick="closeBuyerAddressModalNew()">&times;</span>
+                        <h2>Vásárló szállítási címe</h2>
+                        <p><strong>Név:</strong> <span id="buyer-name-new"></span></p>
+                        <p><strong>Irányítószám:</strong> <span id="buyer-postcode-new"></span></p>
+                        <p><strong>Város:</strong> <span id="buyer-city-new"></span></p>
+                        <p><strong>Utca:</strong> <span id="buyer-street-new"></span></p>
+                        <p><strong>Házszám:</strong> <span id="buyer-house-number-new"></span></p>
+                        <button onclick="closeBuyerAddressModalNew()" class="close-button-new">Bezárás</button>
+                    </div>
+                </div>
                 
 
                 <div class="buttons">
@@ -202,6 +195,7 @@
                     <button class="otherButton deleteProfile">Fiók törlése</button>
                 </div>
             </div>
+
         </div>
         <script src="js/profile.js"></script>
         <script src="js/logout.js"></script>

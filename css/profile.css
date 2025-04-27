@@ -196,6 +196,10 @@ a {
     right: 0;
     gap: 15px;
   }
+
+  .sidebar-list li {
+    list-style: none;
+}
   
   #cart-count {
     text-decoration: none;
