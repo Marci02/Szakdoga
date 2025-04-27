@@ -266,7 +266,7 @@ function renderPaginatedProducts(products, loggedInUserId) {
 
 setInterval(() => {
   fetchAllAuctions();
-}, 500); // 10 másodpercenként frissít
+}, 5000); // 10 másodpercenként frissít
 
 function updatePaginationInfo(totalItems) {
   const paginationInfo = document.getElementById("pagination-info");
