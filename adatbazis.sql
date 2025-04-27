@@ -27,10 +27,11 @@ CREATE TABLE `counties` (
 CREATE TABLE `sales` (
   `saler_id` bigint NOT NULL,
   `buyer_id` bigint NOT NULL,
-  `product_id` bigint NOT NULL,
+  `product_id` bigint NULL,
+  `auction_id` bigint NULL,
   `quantity` int NOT NULL,
   `sold_at` datetime NOT NULL,
-  PRIMARY KEY (`saler_id`, `buyer_id`, `product_id`)
+  PRIMARY KEY (`saler_id`, `buyer_id`, `product_id`),
 );
 
 CREATE TABLE `products` (
@@ -86,6 +87,10 @@ CREATE TABLE `auction` (
 ALTER TABLE `auction` 
 ADD CONSTRAINT `fk_auction_ho_id_user_id`
 FOREIGN KEY (`ho_id`) REFERENCES `user` (`id`);
+
+ALTER TABLE `sales`
+ADD CONSTRAINT `fk_sales_auction_id`
+FOREIGN KEY (`auction_id`) REFERENCES `auction` (`id`);
 
 ALTER TABLE `user` ADD FOREIGN KEY (`city_id`) REFERENCES `settlement` (`id`);
 

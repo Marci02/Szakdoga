@@ -393,33 +393,45 @@ function closeUploadModal() {
 }
 
 
-function startCountdown(bidEndTime, productTitle, productCard) {
-  var countdownElement = document.getElementById("countdown-" + productTitle);
-  var endTime = new Date(bidEndTime).getTime();
+function startCountdown(bidEndTime, auctionId) {
+  const countdownElement = document.getElementById("countdown-" + auctionId);
+  const endTime = new Date(bidEndTime).getTime();
 
-  var interval = setInterval(function () {
-      var now = new Date().getTime();
-      var timeLeft = endTime - now;
+  const interval = setInterval(function () {
+    const now = new Date().getTime();
+    const timeLeft = endTime - now;
 
-      if (timeLeft <= 0) {
-          clearInterval(interval);
-          countdownElement.innerHTML = "Licit vége";
+    if (timeLeft <= 0) {
+      clearInterval(interval);
+      countdownElement.innerHTML = "Licit vége";
 
-          // 10 másodperccel a licit vége után eltüntetjük a kártyát
-          setTimeout(function() {
-              productCard.style.display = 'none'; 
-          }, 10000); // 10 másodperc után eltűnik az egész kártya
-      } else {
-          var hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
-          var minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
-          var seconds = Math.floor((timeLeft / 1000) % 60);
-          countdownElement.innerHTML = hours + " óra " + minutes + " perc " + seconds + " másodperc";
-      }
-
-      // Kattintás letiltása a licit vége után 10 másodpercig
-      if (timeLeft <= 0) {
-          productCard.style.pointerEvents = 'none'; // Kattintás letiltása
-      }
+      // Küldés a backendnek, hogy a terméket hozzáadja a sales táblához
+      fetch("backend/licitLejart.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          auction_id: auctionId,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            console.log(data.message);
+          } else {
+            console.error(data.error);
+          }
+        })
+        .catch((error) => {
+          console.error("Hiba a licit lejáratának kezelése során:", error);
+        });
+    } else {
+      const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+      const seconds = Math.floor((timeLeft / 1000) % 60);
+      countdownElement.innerHTML = `${hours} óra ${minutes} perc ${seconds} másodperc`;
+    }
   }, 1000);
 }
 
@@ -464,7 +476,7 @@ function fetchAllAuctions() {
               </div>
               <div class="product-info">
               <p id="price-${auction.auction_id}" style="font-size: 1.3em;"> 
-              <strong>Jelenlegi ár: </strong>${formatPrice(auction.price)} Ft
+              ${formatPrice(auction.price)} Ft
               </p> <!-- Az aktuális ár (ho) jelenik meg -->
               <p style="font-size: 1em;">Licit lépcső: ${formatPrice(auction.stair)} Ft</p>
               <p>Méret: ${auction.size || 'N/A'}</p>
@@ -687,7 +699,7 @@ function increaseModalPrice(bidStep, auctionId, userId) {
     if (cardPriceElement) {
       cardPriceElement.classList.add("price-update");
       setTimeout(() => {
-        cardPriceElement.textContent = `${currentPrice.toLocaleString()}`;
+        cardPriceElement.textContent = `${currentPrice.toLocaleString()} Ft`;
         cardPriceElement.classList.remove("price-update");
       }, 500); // Az animáció időtartamával szinkronban
     }
