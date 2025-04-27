@@ -30,15 +30,16 @@ function search() {
 
   // Filter products based on the search term
   const filteredProducts = allProducts.filter(product =>
-      product.name.toLowerCase().includes(searchTerm)
+    product.name.toLowerCase().includes(searchTerm)
   );
 
-  // Display the search results in a popup
-  showSearchResultsPopup(filteredProducts);
+  // Render the filtered products
+  renderProducts(filteredProducts);
 
   // Display a message if no products match the search term
+  const productList = document.querySelector(".product-list");
   if (filteredProducts.length === 0) {
-      showMessage(`Nincs találat a(z) "${searchTerm}" keresésre.`, 'error');
+    productList.innerHTML = `<p style="text-align: center; color: #555;">Nincs találat a(z) "${searchTerm}" keresésre.</p>`;
   }
 }
 
@@ -120,13 +121,37 @@ function showSearchResultsPopup(products) {
 }
 
 function renderProducts(products) {
-  const productList = document.querySelector(".product-list");
-  productList.innerHTML = ""; // Clear the product list
+    const productList = document.querySelector(".product-list");
+    productList.innerHTML = ""; // Clear the product list
 
-  products.forEach(product => {
-    const productCard = document.createElement("div");
-    productCard.className = "product-card";
-    productCard.dataset.productName = product.name;
+    if (products.length === 0) {
+        productList.innerHTML = "<p>Nincs találat a szűrési feltételek alapján.</p>";
+        return;
+    }
+
+    products.forEach(product => {
+        const productCard = document.createElement("div");
+        productCard.className = "product-card card-appear";
+        productCard.style.animation = "cardAppear 0.5s ease-out";
+        productCard.style.cursor = "pointer";
+
+        // Add click event listener to the card
+        productCard.addEventListener("click", () => {
+            showProductDetails(
+                product.name,
+                product.description || "Nincs leírás.",
+                product.img_url,
+                product.original_price,
+                product.price,
+                product.stair,
+                product.size,
+                product.condition,
+                product.brand,
+                product.id,
+                product.user_id,
+                product.owner_id
+            );
+        });
 
     productCard.innerHTML = `
       <img src="${product.img_url}" alt="${product.name}" class="product-image">
@@ -158,7 +183,6 @@ document.addEventListener("DOMContentLoaded", fetchProducts);
 
 document.getElementById("searchbuttonToSearchBar").addEventListener("click", search);
 
-// Optionally, trigger search on Enter key press
 document.getElementById("search").addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
     search();
