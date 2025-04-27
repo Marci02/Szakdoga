@@ -219,3 +219,208 @@ SESSION: Array
     [image] => 
     [created] => 2025-04-27 14:27:31
 )
+POST: Array
+(
+    [name] => asdasd
+    [price] => 123
+    [stair] => 123
+    [fileCategory] => 1
+    [fileBrand] => asdasd
+    [auction_end] => 2025-04-27T22:48
+    [fileSize] => M
+    [fileCondition] => Használt
+    [fileDesc] => dasdas
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => black_air.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpAF78.tmp
+            [error] => 0
+            [size] => 2370
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 2
+    [firstname] => Konderla
+    [lastname] => Sámuel
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 06203522651
+    [street] => Kossúth utca
+    [address] => 42.
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád Vármegye
+    [image] => 
+    [created] => 2025-04-27 14:31:04
+)
+POST: Array
+(
+    [name] => Nike Air force 1
+    [price] => 12312312
+    [stair] => 124
+    [fileCategory] => 3
+    [fileBrand] => Gucci
+    [auction_end] => 2025-04-27T21:48
+    [fileSize] => 
+    [fileCondition] => Használt
+    [fileDesc] => asdasdasd as
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => Levis_Jeans.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php2C9.tmp
+            [error] => 0
+            [size] => 393194
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 2
+    [firstname] => Konderla
+    [lastname] => Sámuel
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 06203522651
+    [street] => Kossúth utca
+    [address] => 42.
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád Vármegye
+    [image] => 
+    [created] => 2025-04-27 14:31:04
+)
+POST: Array
+(
+    [name] => fasfasdasdas 
+    [price] => 123
+    [stair] => 1
+    [fileCategory] => 2
+    [fileBrand] => Adidas
+    [auction_end] => 2025-04-27T21:44
+    [fileSize] => 43
+    [fileCondition] => Újszerű
+    [fileDesc] => asdasd
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => nikesocks.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php43BB.tmp
+            [error] => 0
+            [size] => 2809
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 2
+    [firstname] => Konderla
+    [lastname] => Sámuel
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 06203522651
+    [street] => Kossúth utca
+    [address] => 42.
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád Vármegye
+    [image] => 
+    [created] => 2025-04-27 14:31:04
+)
+POST: Array
+(
+    [name] => wertewrtdf
+    [price] => 312
+    [stair] => 12
+    [fileCategory] => 3
+    [fileBrand] => Calvin Klein
+    [auction_end] => 2025-04-27T22:48
+    [fileSize] => 
+    [fileCondition] => Újszerű
+    [fileDesc] => asdasda
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => north_faceKabat.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\php870E.tmp
+            [error] => 0
+            [size] => 4922
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 2
+    [firstname] => Konderla
+    [lastname] => Sámuel
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 06203522651
+    [street] => Kossúth utca
+    [address] => 42.
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád Vármegye
+    [image] => 
+    [created] => 2025-04-27 14:31:04
+)
+POST: Array
+(
+    [name] => asdas
+    [price] => 142
+    [stair] => 1
+    [fileCategory] => 2
+    [fileBrand] => Gucci
+    [auction_end] => 2025-04-27T17:46
+    [fileSize] => 44
+    [fileCondition] => Használt
+    [fileDesc] => asdasd
+)
+
+FILES: Array
+(
+    [image] => Array
+        (
+            [name] => adidas ultraboost.jpg
+            [type] => image/jpeg
+            [tmp_name] => C:\xampp\tmp\phpD95.tmp
+            [error] => 0
+            [size] => 59588
+        )
+
+)
+
+SESSION: Array
+(
+    [user_id] => 2
+    [firstname] => Konderla
+    [lastname] => Sámuel
+    [email] => samuelkonderla@gmail.com
+    [phone_number] => 06203522651
+    [street] => Kossúth utca
+    [address] => 42.
+    [postcode] => 2660
+    [city] => Balassagyarmat
+    [county] => Nógrád Vármegye
+    [image] => 
+    [created] => 2025-04-27 14:31:04
+)

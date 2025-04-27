@@ -29,10 +29,20 @@ if (isset($_POST["send"])) {
         $mail->isHTML(true);
         $mail->Subject = 'Kapcsolati űrlap üzenet';
         $mail->Body = "
-            <h3>Kapcsolati űrlap üzenet</h3>
-            <p><b>Név:</b> {$_POST["name"]}</p>
-            <p><b>Email:</b> {$_POST["email"]}</p>
-            <p><b>Üzenet:</b><br>{$_POST["message"]}</p>
+            <div style='font-family: Arial, sans-serif; line-height: 1.6; color: #333;'>
+                <h2 style='background-color: #4CAF50; color: white; padding: 10px; text-align: center; border-radius: 5px;'>Kapcsolati űrlap üzenet</h2>
+                <div style='border: 1px solid #ddd; padding: 15px; border-radius: 5px;'>
+                    <p style='margin: 0;'><strong>Név:</strong> " . htmlspecialchars($_POST["name"]) . "</p>
+                    <p style='margin: 0;'><strong>Email:</strong> " . htmlspecialchars($_POST["email"]) . "</p>
+                    <p style='margin-top: 10px;'><strong>Üzenet:</strong></p>
+                    <div style='background-color: #f9f9f9; padding: 10px; border-radius: 5px; border: 1px solid #ddd;'>
+                        " . nl2br(htmlspecialchars($_POST["message"])) . "
+                    </div>
+                </div>
+                <footer style='margin-top: 20px; text-align: center; font-size: 12px; color: #777;'>
+                    <p>Ez az üzenet a PremSelect weboldal kapcsolatfelvételi űrlapján keresztül érkezett.</p>
+                </footer>
+            </div>
         ";
 
         // E-mail küldése
