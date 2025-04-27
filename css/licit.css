@@ -328,6 +328,51 @@ nav.header-sticky {
   height: auto; /* A magasság automatikusan igazodik a tartalomhoz */
 }
 
+/* Reszponzív elrendezés tabletekhez */
+@media (max-width: 1200px) {
+  .product-list {
+    grid-template-columns: repeat(3, 1fr); /* 3 oszlop nagyobb tableteken */
+  }
+}
+
+@media (max-width: 1024px) {
+  .product-list {
+    grid-template-columns: repeat(2, 1fr); /* 2 oszlop kisebb tableteken */
+    margin-left: 220px; /* A sidebar szélessége kisebb tableteken */
+  }
+  .sidebar-categories {
+    width: 220px; /* Kisebb sidebar szélesség tableteken */
+  }
+}
+
+/* Reszponzív elrendezés mobiltelefonokhoz */
+@media (max-width: 768px) {
+  .product-list {
+    margin-left: 0; /* A sidebar eltűnik, így nincs margó */
+    grid-template-columns: 1fr; /* 1 oszlop mobilon */
+    width: 100%; /* A teljes szélességet kitölti */
+    margin-bottom: 20px; /* Hely a lapozónak */
+    height: auto; /* A magasság automatikusan igazodik a tartalomhoz */
+  }
+  .sidebar-categories {
+    position: relative; /* A sidebar már nem fixált */
+    width: 50%; /* A teljes szélességet kitölti */
+    height: auto; /* A magasság automatikusan igazodik */
+    margin-bottom: 20px; /* Távolság a terméklistától */
+    top: 0; /* A navbar magasságának figyelmen kívül hagyása */
+  }
+  .showproductdetails {
+    max-height: 400px; /* Maximális magasság mobilon */
+    overflow-y: auto; /* Görgethetővé teszi, ha a tartalom túl hosszú */
+    padding: 10px; /* Csökkentett padding */
+    font-size: 14px; /* Kisebb betűméret */
+  }
+  .pagination {
+    margin-top: 0; /* Távolság eltávolítása mobilon */
+    width: 100%; /* A teljes szélességet kitölti */
+  }
+}
+
 .upload-button {
   background-color: black;
   color: white;
@@ -380,7 +425,7 @@ nav.header-sticky {
   margin: 10px;
   width: auto;
   box-sizing: border-box;
-  height: 450px;
+  height: 625px;
   display: flex;
   flex-direction: column;
   transition: transform 0.2s;
@@ -542,6 +587,7 @@ nav.header-sticky {
   background-color: #ccc;
   cursor: not-allowed;
 }
+
 
 /* Reszponzív elrendezés tabletekhez */
 @media (max-width: 1200px) {
