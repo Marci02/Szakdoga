@@ -162,11 +162,11 @@ function renderPaginatedProducts(products, loggedInUserId) {
   paginatedProducts.forEach(auction => {
     const productCard = document.createElement("div");
     productCard.className = "product-card";
-    productCard.style.border = "1px solid #ddd";
+    productCard.style.border = "none";
     productCard.style.borderRadius = "15px";
     productCard.style.padding = "15px";
     productCard.style.marginBottom = "20px";
-    productCard.style.boxShadow = "0 5px 15px rgba(0, 0, 0, 0.1)";
+    productCard.style.boxShadow = "0px 8px 16px rgba(0, 0, 0, 0.2)";
     productCard.style.backgroundColor = "#fff";
     productCard.style.cursor = "pointer"; // Mutatja, hogy kattintható
 

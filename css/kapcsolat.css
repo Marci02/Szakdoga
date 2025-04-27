@@ -294,6 +294,11 @@ nav.header-sticky {
 .container {
   margin-top: 100px;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  position: relative;
+  z-index: 2;
 }
 
 .all {
@@ -304,15 +309,6 @@ nav.header-sticky {
   align-items: center;
   position: relative;
   background-color: #22222a;
-}
-
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  position: relative;
-  z-index: 2;
 }
 
 body:before {
@@ -506,4 +502,96 @@ a {
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
+}
+
+/* Tablet View (max-width: 1024px) */
+@media screen and (max-width: 1024px) {
+  .container {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 85%; /* Adjust width for tablet view */
+    height: auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .all {
+    flex: 1 1 100%; /* Make items take full width */
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .map {
+    width: 100%; /* Full width for the map */
+    margin-right: 0; /* Remove margin */
+    margin-bottom: 20px; /* Add spacing below */
+  }
+
+  .contact {
+    width: 100%; /* Full width for the contact form */
+    padding: 20px;
+    box-shadow: none; /* Remove box shadow for simplicity */
+  }
+}
+
+/* Mobile View (max-width: 768px) */
+/* Mobile View (max-width: 768px) */
+@media screen and (max-width: 768px) {
+  .container {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .map {
+    width: 100%; /* Full width for the map */
+    margin-right: 0; /* Remove margin */
+    margin-bottom: 15px; /* Add spacing below */
+  }
+
+  .contact {
+    width: 100%; /* Full width for the contact form */
+    padding: 15px;
+    box-shadow: none; /* Remove box shadow for simplicity */
+  }
+}
+
+/* Small Mobile View (max-width: 480px) */
+@media screen and (max-width: 480px) {
+  .container {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  #name, #email, #message {
+    width: 310px; /* Full width for input fields */
+    border-radius: 10px;
+  }
+
+  .contact button{
+    width: 330px; /* Full width for button */
+    border-radius: 10px;
+  }
+
+  .map {
+    visibility: hidden;
+  }
+
+  .contact {
+    width: 100%; /* Shrink the contact form to fit the screen */
+    padding: 10px;
+    box-shadow: none; /* Remove box shadow for simplicity */
+  }
 }
