@@ -60,8 +60,7 @@ INSERT INTO `auction` (`id`, `user_id`, `name`, `price`, `stair`, `image_id`, `u
 (7, 1, 'Supreme kabát', 40000, 500, 7, '2025-04-27 18:49:35', '2025-04-27 18:49:35', '2025-08-01 18:49:00', 1, 8, 'M', 'Tavaly egész télen hordtam, de semmi nagyobb baja nincsen', 'Használt', 41000, 3),
 (8, 1, 'Nike Air Force 1', 40000, 50, 8, '2025-04-27 18:52:28', '2025-04-27 18:52:28', '2025-08-01 18:52:00', 2, 1, '44', 'Most vettem nem rég nikeból de sajna rossz lett a méret', 'Új', 40150, 3),
 (9, 1, 'Balenciaga pulcsi', 10000, 1000, 9, '2025-04-27 18:54:19', '2025-04-27 18:54:19', '2025-08-01 18:54:00', 1, 4, 'L', 'Szét van hordva', 'Nagyon használt', 17000, 2),
-(10, 1, 'Palace pulcsi', 40000, 2000, 10, '2025-04-27 18:55:45', '2025-04-27 18:55:45', '2025-07-01 18:55:00', 1, 7, 'XXL', 'Nagyon szép állapotba van ahoz képest hogy sokszor volt rajtam, vigyáztam rá', 'Újszerű', 84000, 2),
-(11, 3, '41234', 123421, 341234, 12, '2025-04-27 20:38:28', '2025-04-27 20:38:28', '2025-04-27 20:42:00', 2, 13, '47', '41234', 'Újszerű', 123421, 3);
+(10, 1, 'Palace pulcsi', 40000, 2000, 10, '2025-04-27 18:55:45', '2025-04-27 18:55:45', '2025-07-01 18:55:00', 1, 7, 'XXL', 'Nagyon szép állapotba van ahoz képest hogy sokszor volt rajtam, vigyáztam rá', 'Újszerű', 84000, 2);
 
 -- --------------------------------------------------------
 
@@ -91,6 +90,10 @@ INSERT INTO `brand` (`id`, `brand_name`) VALUES
 (10, 'Dior'),
 (11, 'Ralph Lauren'),
 (12, 'Zara'),
+(13, 'North Face'),
+(14, 'Calvin Klein'),
+(15, 'Levi\'s'),
+(16, 'asdasd');
 
 -- --------------------------------------------------------
 
