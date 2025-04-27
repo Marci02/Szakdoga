@@ -92,8 +92,7 @@ INSERT INTO `brand` (`id`, `brand_name`) VALUES
 (12, 'Zara'),
 (13, 'North Face'),
 (14, 'Calvin Klein'),
-(15, 'Levi\'s'),
-(16, 'asdasd');
+(15, 'Levi\'s');
 
 -- --------------------------------------------------------
 
@@ -192,17 +191,15 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `user_id`, `name`, `category_id`, `brand_id`, `price`, `description`, `image_id`, `uploaded_at`, `quantity`, `size`, `condition`, `isSold`) VALUES
-(1, 1, 'Adidas UltraBoost', 4, 2, 312412, 'asdasd asd as dasd das d', 1, '2025-04-27 14:28:36', 1, '44', 'Újszerű', 1),
-(2, 1, 'Nike Air force 1', 4, 1, 132, 'asdasd as das', 2, '2025-04-27 14:55:53', 1, '44', 'Újszerű', 1),
-(3, 2, 'Nike Air force 1', 4, 1, 45000, 'Eladó egy szép állapotú Nike air Force 1.', 13, '2025-04-27 15:30:23', 1, '43', 'Újszerű', 0),
-(4, 2, 'Adidas UltraBoost', 4, 2, 54350, 'Eladó bontatlan adidas UltraBoost!', 14, '2025-04-27 15:30:54', 1, '40', 'Új', 0),
-(5, 2, 'North Face póló', 1, 13, 12000, 'Eladó North Face poló M-es méretben!', 15, '2025-04-27 15:31:22', 1, 'M', 'Újszerű', 0),
-(6, 2, 'Nike Air Jordan 1', 4, 1, 65500, 'Eladó Nike Air Jordan 1! 44-es minden tartozékkal', 16, '2025-04-27 15:32:01', 1, '44', 'Új', 0),
-(7, 2, 'Calvin Klein alsónemű', 3, 14, 16000, '4 darab Clavin Klein alsónemű eladó', 17, '2025-04-27 15:32:45', 1, '', 'Új', 0),
-(8, 2, 'Levi\'s skinny jeans eladó', 1, 15, 4000, 'Levi\'s Skinny Jeans eladó. Kicsit kopott azért ennyi az ára', 18, '2025-04-27 15:33:23', 1, 'L', 'Nagyon használt', 0),
-(9, 2, 'Gucci öv', 3, 5, 97000, 'Gucci öv eladó. Pár napot volt hordtam. Dobozzal együtt eladó', 19, '2025-04-27 15:34:07', 1, '', 'Újszerű', 0),
-(10, 2, 'Yeezy Slide', 4, 2, 25990, 'Nyár indító Akció! Yeezy Slide olcsón', 20, '2025-04-27 15:35:04', 1, '43', 'Újszerű', 0),
-(11, 2, 'Nike zoknik eladók', 3, 1, 14590, '6 pár nike zokni eladó bontatlan csomagolás', 21, '2025-04-27 15:35:40', 1, '', 'Új', 0);
+(1, 2, 'Nike Air force 1', 4, 1, 45000, 'Eladó egy szép állapotú Nike air Force 1.', 13, '2025-04-27 15:30:23', 1, '43', 'Újszerű', 0),
+(2, 2, 'Adidas UltraBoost', 4, 2, 54350, 'Eladó bontatlan adidas UltraBoost!', 14, '2025-04-27 15:30:54', 1, '40', 'Új', 0),
+(3, 2, 'North Face póló', 1, 13, 12000, 'Eladó North Face poló M-es méretben!', 15, '2025-04-27 15:31:22', 1, 'M', 'Újszerű', 0),
+(4, 2, 'Nike Air Jordan 1', 4, 1, 65500, 'Eladó Nike Air Jordan 1! 44-es minden tartozékkal', 16, '2025-04-27 15:32:01', 1, '44', 'Új', 0),
+(5, 2, 'Calvin Klein alsónemű', 3, 14, 16000, '4 darab Clavin Klein alsónemű eladó', 17, '2025-04-27 15:32:45', 1, '', 'Új', 0),
+(6, 2, 'Levi\'s skinny jeans eladó', 1, 15, 4000, 'Levi\'s Skinny Jeans eladó. Kicsit kopott azért ennyi az ára', 18, '2025-04-27 15:33:23', 1, 'L', 'Nagyon használt', 0),
+(7, 2, 'Gucci öv', 3, 5, 97000, 'Gucci öv eladó. Pár napot volt hordtam. Dobozzal együtt eladó', 19, '2025-04-27 15:34:07', 1, '', 'Újszerű', 0),
+(8, 2, 'Yeezy Slide', 4, 2, 25990, 'Nyár indító Akció! Yeezy Slide olcsón', 20, '2025-04-27 15:35:04', 1, '43', 'Újszerű', 0),
+(9, 2, 'Nike zoknik eladók', 3, 1, 14590, '6 pár nike zokni eladó bontatlan csomagolás', 21, '2025-04-27 15:35:40', 1, '', 'Új', 0);
 
 -- --------------------------------------------------------
 
