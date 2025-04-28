@@ -514,8 +514,16 @@ a {
   white-space: normal;
 }
 
-@media screen and (max-width: 1020px){
+@media screen and (max-width: 1024px){
   .dropdown-menu{
     right: 5px;
+  }
+
+  .menu a{
+    font-size: 1.1rem;
+  }
+
+  .otherButton{
+    font-size: 13px;
   }
 }

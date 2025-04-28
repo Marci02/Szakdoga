@@ -463,6 +463,7 @@ function openProductModal(card) {
   modal.style.borderRadius = "20px";
   modal.style.maxWidth = "500px";
   modal.style.width = "90%";
+  modal.style.maxHeight = "90vh";
   modal.style.padding = "24px";
   modal.style.boxShadow = "0 20px 50px rgba(0,0,0,0.25)";
   modal.style.fontFamily = "Arial, sans-serif";
@@ -488,7 +489,7 @@ function openProductModal(card) {
 
       
       <textarea id="note" rows="5" style="width: 100%; resize: none; padding: 10px; margin-top: 10px; border-radius: 8px; border: 2px solid #ddd; background-color: #f9f9f9; font-size: 1em; overflow-wrap: break-word; word-wrap: break-word; white-space: pre-wrap;" readonly>${card.dataset.productDescription}</textarea>
-      <div style="display: flex; gap: 12px; justify-content: space-between; margin-top: 24px;">
+      <div style="display: flex; gap: 12px; justify-content: space-between; margin-top: 7px;">
       <button onclick="addToCart(${card.dataset.productId})"
       style="flex: 1; padding: 12px 0; background-color: #4b5563; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
       Kosárba

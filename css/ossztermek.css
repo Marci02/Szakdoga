@@ -651,6 +651,10 @@ nav.header-sticky {
   #searchbuttonToSearchBar {
     font-size: 0.9rem; 
   }
+
+  #productModal{
+    font-size: 0.6rem;
+  }
 }
 
 @media screen and (max-width: 767px) {
