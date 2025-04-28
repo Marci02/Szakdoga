@@ -211,9 +211,8 @@ nav.header-sticky {
   justify-content: flex-start;
 }
 
-/* Search Bar Styles */
 #search {
-  width: 100%; /* Make the search bar take the full width of its container */
+  width: 100%; 
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -221,7 +220,6 @@ nav.header-sticky {
   box-sizing: border-box;
 }
 
-/* Search Button */
 #searchbuttonToSearchBar {
   margin-top: 10px;
   padding: 10px 15px;
@@ -237,14 +235,13 @@ nav.header-sticky {
   background-color: #555;
 }
 
-/* Popup Window Styles */
 #searchResultsPopup {
   position: absolute;
-  top: 100%; /* Position below the search bar */
+  top: 100%; 
   left: 0;
-  width: 100%; /* Match the width of the search bar */
-  max-height: 300px; /* Limit the height of the popup */
-  overflow-y: auto; /* Add scroll if content overflows */
+  width: 100%; 
+  max-height: 300px; 
+  overflow-y: auto; 
   background-color: #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
@@ -253,7 +250,6 @@ nav.header-sticky {
   box-sizing: border-box;
 }
 
-/* Popup Item Styles */
 #searchResultsPopup a {
   display: flex;
   align-items: center;
@@ -291,9 +287,9 @@ nav.header-sticky {
 }
 
 .sidebar-categories p {
-  word-wrap: break-word; /* Ha túl hosszú egy szó, törjön */
+  word-wrap: break-word; 
   overflow: hidden;
-  text-overflow: ellipsis; /* Hosszú szövegek levágása, ha nem fér el */
+  text-overflow: ellipsis; 
 }
 
 .sidebar-categories a{
@@ -304,14 +300,14 @@ nav.header-sticky {
 }
 
 .sidebar-categories {
-  width: 270px; /* A sidebar szélessége */
+  width: 270px; 
   background-color: #f8f9fa;
   padding: 20px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  overflow-y: auto; /* Görgethetővé teszi, ha túl hosszú */
-  height: calc(100vh - 87.59px); /* A navbar magasságának levonása */
-  top: 87.59px; /* A navbar magassága */
+  overflow-y: auto; 
+  height: calc(100vh - 87.59px); 
+  top: 87.59px; 
   left: 0;
 }
 
@@ -339,12 +335,10 @@ nav.header-sticky {
   color: #555;
 }
 
-/* Kategóriák legördülése */
 .category-item.open .subcategory {
   display: block;
 }
 
-/* Ár csúszka */
 #price-range {
   width: 100%;
 }
@@ -354,7 +348,6 @@ nav.header-sticky {
   margin-top: 10px;
 }
 
-/* Alap gomb stílus */
 .upload-button {
   background-color: #333;
   color: white;
@@ -376,8 +369,6 @@ nav.header-sticky {
   cursor: default;
   font-size: 13px;
 }
-
-/* Navbar dropdown */
 
 .dropdown {
   position: relative;
@@ -429,18 +420,15 @@ nav.header-sticky {
   display: block;
 }
 
-/* On hover, change the color to a bit darker while the cursor changes to pointer */
 .dropdown-menu button:hover {
   cursor: pointer;
   background-color: rgb(218, 218, 218);
 }
 
-/* On clicking the button, while being clicked the color will turn an even darker gray */
 .dropdown-menu button:active {
   background-color: gray;
 }
 
-/* Show the dropdown on hover */
 .dropdown:hover .dropdown-menu {
   display: block;
 }
@@ -591,8 +579,8 @@ nav.header-sticky {
 
 @media screen and (max-width: 1025px) {
   .product-list {
-    grid-template-columns: repeat(2, 1fr); /* Display 2 cards per row */
-    gap: 15px; /* Reduce the gap between cards */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 15px; 
   }
 
   .sidebar-list{
@@ -600,21 +588,21 @@ nav.header-sticky {
   }
 
   .product-card {
-    width: 100%; /* Make the card take the full width of its grid column */
-    height: auto; /* Allow the height to adjust dynamically */
-    padding: 10px; /* Reduce padding for smaller screens */
+    width: 100%; 
+    height: auto; 
+    padding: 10px; 
   }
 
   .product-card h3 {
-    font-size: 18px; /* Adjust font size for smaller screens */
+    font-size: 18px; 
   }
 
   .product-card p {
-    font-size: 14px; /* Adjust font size for smaller screens */
+    font-size: 14px; 
   }
 
   .product-image {
-    height: 150px; /* Reduce image height for smaller screens */
+    height: 150px; 
   }
 
   .dropdown-menu{
@@ -653,27 +641,27 @@ nav.header-sticky {
   }
 
   #searchResultsPopup {
-    max-height: 250px; /* Reduce height for tablets */
+    max-height: 250px; 
   }
 
   #search {
-    font-size: 0.9rem; /* Adjust font size for tablets */
+    font-size: 0.9rem; 
   }
 
   #searchbuttonToSearchBar {
-    font-size: 0.9rem; /* Adjust button font size for tablets */
+    font-size: 0.9rem; 
   }
 }
 
 @media screen and (max-width: 767px) {
   .sidebar-categories {
-    width: 40%; /* Make the sidebar take the full width of the screen */
-    height: auto; /* Allow the height to adjust dynamically */
-    position: relative; /* Remove fixed positioning for smaller screens */
-    top: 0; /* Reset top positioning */
-    left: 0; /* Reset left positioning */
-    margin-bottom: 20px; /* Add spacing below the sidebar */
-    padding: 15px; /* Adjust padding for smaller screens */
+    width: 40%; 
+    height: auto; 
+    position: relative; 
+    top: 0; 
+    left: 0;
+    margin-bottom: 20px;
+    padding: 15px;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   }
 
@@ -683,45 +671,45 @@ nav.header-sticky {
   }
 
   .upload-button {
-    width: 100%; /* Make the button take the full width of the sidebar */
-    padding: 10px; /* Adjust padding for smaller screens */
-    font-size: 0.7rem; /* Adjust font size for smaller screens */
+    width: 100%; 
+    padding: 10px; 
+    font-size: 0.7rem; 
   }
 
   .product-list {
-    grid-template-columns: repeat(1, 1fr); /* Display 1 card per row */
-    gap: 10px; /* Reduce the gap between cards */
+    grid-template-columns: repeat(1, 1fr); 
+    gap: 10px; 
   }
 
   .product-card {
-    width: 100%; /* Make the card take the full width of its grid column */
-    height: auto; /* Allow the height to adjust dynamically */
-    padding: 8px; /* Reduce padding for smaller screens */
+    width: 100%; 
+    height: auto; 
+    padding: 8px; 
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   }
 
   .product-card h3 {
-    font-size: 16px; /* Adjust font size for smaller screens */
+    font-size: 16px; 
   }
 
   .product-card p {
-    font-size: 12px; /* Adjust font size for smaller screens */
+    font-size: 12px; 
   }
 
   .product-image {
-    height: 120px; /* Reduce image height for smaller screens */
+    height: 120px;
   }
 
   #searchResultsPopup {
-    max-height: 200px; /* Reduce height for mobile */
+    max-height: 200px; 
   }
 
   #search {
-    font-size: 0.8rem; /* Adjust font size for mobile */
+    font-size: 0.8rem; 
   }
 
   #searchbuttonToSearchBar {
-    font-size: 0.8rem; /* Adjust button font size for mobile */
+    font-size: 0.8rem; 
   }
 }
 
@@ -736,7 +724,7 @@ nav.header-sticky {
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  display: none; /* Alapértelmezés szerint rejtve */
+  display: none; 
 }
 .message-box.success {
   background-color: #d4edda;
@@ -744,7 +732,7 @@ nav.header-sticky {
   border-color: #c3e6cb;
 }
 .message-box.show {
-  display: block; /* Megjelenítéshez */
+  display: block; 
 }
 
 .pagination {
