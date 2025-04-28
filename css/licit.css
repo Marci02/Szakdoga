@@ -574,6 +574,7 @@ nav.header-sticky {
     grid-template-columns: repeat(2, 1fr); 
     margin-left: 220px;
   }
+
   .sidebar-categories {
     width: 220px; 
   }
@@ -594,7 +595,7 @@ nav.header-sticky {
 
   .sidebar-categories ul li a {
     padding: 15px 10px;
-    font-size: 0.7rem;
+    font-size: 1.1rem;
   }
 }
 
@@ -619,7 +620,7 @@ nav.header-sticky {
 
   .sidebar-categories ul li a {
     padding: 15px 10px;
-    font-size: 0.7rem;
+    font-size: 1.1rem;
   }
 
   .subcategory label{
@@ -633,7 +634,7 @@ nav.header-sticky {
   .upload-button {
     width: 100%; 
     padding: 10px;
-    font-size: 0.7rem;
+    font-size: 1.1rem;
   }
 
   .showproductdetails {
