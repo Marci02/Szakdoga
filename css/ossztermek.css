@@ -100,7 +100,7 @@ a {
   line-height: 40px;
   width: 0;
   position: fixed;
-  z-index: 1000;
+  z-index: 10000;
   top: 0;
   left: 0;
   background-color: #e6e3e3;
