@@ -213,7 +213,7 @@ nav.header-sticky {
 
 /* Search Bar Styles */
 #search {
-  width: 100%; /* Make the search bar take the full width of its container */
+  width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -221,7 +221,6 @@ nav.header-sticky {
   box-sizing: border-box;
 }
 
-/* Search Button */
 #searchbuttonToSearchBar {
   margin-top: 10px;
   padding: 10px 15px;
@@ -522,6 +521,13 @@ nav.header-sticky {
 
 .hidden {
   display: none;
+}
+
+@media screen and (max-width: 1300px) {
+  .dropdown-menu{
+    right: 5px;
+  }
+  
 }
 
 @media screen and (max-width: 1020px) {

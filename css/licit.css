@@ -165,7 +165,7 @@ nav.header-sticky {
   top: 0;
   left: 0;
   width: 100%;
-  height: 87.59px; /* Match the height from ossztermek.css */
+  height: 87.59px;
   padding-top: 1.4rem;
   background-color: #22222a;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -196,8 +196,23 @@ nav.header-sticky {
 }
 
 #search {
-  border-radius: 10px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+#searchbuttonToSearchBar {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #333;
+  color: white;
   border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
 .sidebar-list {
@@ -268,32 +283,26 @@ nav.header-sticky {
   display: block;
 }
 
-/*On hover, change the color to a bit darker while the cursor changes to pointer*/
+
 .dropdown-menu button:hover{
   cursor: pointer;
   background-color: rgb(218, 218, 218);
 }
 
-/*On clicking the button, while being clicked the color will turn an even darker gray*/
+
 .dropdown-menu button:active{
   background-color: gray;
 }
 
-/* Show the dropdown on hover */
+
 .dropdown:hover .dropdown-menu {
   display: block;
 }
 
-
-
-/* Reszponzív beállítások a sidebarhoz */
-
-
-/* Szövegkezelés a sidebarban, hogy ne lógjon ki */
 .sidebar-categories p {
-  word-wrap: break-word; /* Ha túl hosszú egy szó, törjön */
+  word-wrap: break-word; 
   overflow: hidden;
-  text-overflow: ellipsis; /* Hosszú szövegek levágása, ha nem fér el */
+  text-overflow: ellipsis; 
 }
 
 .sidebar-categories a{
@@ -304,73 +313,28 @@ nav.header-sticky {
 }
 
 .sidebar-categories {
-  width: 270px; /* A sidebar szélessége */
+  width: 270px; 
   background-color: #f8f9fa;
   padding: 20px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
-  overflow-y: auto; /* Görgethetővé teszi, ha túl hosszú */
-  height: calc(100vh - 87.59px); /* A navbar magasságának levonása */
-  position: fixed; /* Fixált pozíció */
-  top: 87.59px; /* A navbar magassága */
+  overflow-y: auto; 
+  height: calc(100vh - 87.59px);
+  position: fixed; 
+  top: 87.59px; 
   left: 0;
-  z-index: 10; /* A navbar mögé kerülés elkerülése */
+  z-index: 10; 
 }
 
-/* Product list stílus */
+
 .product-list {
-  margin-left: 270px; /* A sidebar szélességének megfelelő margó */
+  margin-left: 270px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 oszlop teljes képernyőn */
+  grid-template-columns: repeat(4, 1fr); 
   padding: 20px;
   width: calc(100% - 270px);
   box-sizing: border-box;
-  height: auto; /* A magasság automatikusan igazodik a tartalomhoz */
-}
-
-/* Reszponzív elrendezés tabletekhez */
-@media (max-width: 1200px) {
-  .product-list {
-    grid-template-columns: repeat(3, 1fr); /* 3 oszlop nagyobb tableteken */
-  }
-}
-
-@media (max-width: 1024px) {
-  .product-list {
-    grid-template-columns: repeat(2, 1fr); /* 2 oszlop kisebb tableteken */
-    margin-left: 220px; /* A sidebar szélessége kisebb tableteken */
-  }
-  .sidebar-categories {
-    width: 220px; /* Kisebb sidebar szélesség tableteken */
-  }
-}
-
-/* Reszponzív elrendezés mobiltelefonokhoz */
-@media (max-width: 768px) {
-  .product-list {
-    margin-left: 0; /* A sidebar eltűnik, így nincs margó */
-    grid-template-columns: 1fr; /* 1 oszlop mobilon */
-    width: 100%; /* A teljes szélességet kitölti */
-    margin-bottom: 20px; /* Hely a lapozónak */
-    height: auto; /* A magasság automatikusan igazodik a tartalomhoz */
-  }
-  .sidebar-categories {
-    position: relative; /* A sidebar már nem fixált */
-    width: 50%; /* A teljes szélességet kitölti */
-    height: auto; /* A magasság automatikusan igazodik */
-    margin-bottom: 20px; /* Távolság a terméklistától */
-    top: 0; /* A navbar magasságának figyelmen kívül hagyása */
-  }
-  .showproductdetails {
-    max-height: 400px; /* Maximális magasság mobilon */
-    overflow-y: auto; /* Görgethetővé teszi, ha a tartalom túl hosszú */
-    padding: 10px; /* Csökkentett padding */
-    font-size: 14px; /* Kisebb betűméret */
-  }
-  .pagination {
-    margin-top: 0; /* Távolság eltávolítása mobilon */
-    width: 100%; /* A teljes szélességet kitölti */
-  }
+  height: auto; 
 }
 
 .upload-button {
@@ -558,7 +522,7 @@ nav.header-sticky {
     border-color: #c3e6cb;
 }
 .message-box.show {
-    display: block; /* Megjelenítéshez */
+    display: block; 
 }
 
 .pagination {
@@ -567,10 +531,10 @@ nav.header-sticky {
   align-items: center;
   margin-top: 20px;
   gap: 10px;
-  clear: both; /* Biztosítja, hogy a lapozó a termékek alatt legyen */
-  position: relative; /* Alapértelmezett pozíció */
-  z-index: 1; /* Biztosítja, hogy a lapozó ne kerüljön a termékek mögé */
-  width: 100%; /* A teljes szélességet kitölti */
+  clear: both; 
+  position: relative; 
+  z-index: 1; 
+  width: 100%; 
 }
 
 .pagination-btn {
@@ -589,10 +553,15 @@ nav.header-sticky {
 }
 
 
-/* Reszponzív elrendezés tabletekhez */
+@media screen and (max-width: 1300px) {
+  .dropdown-menu{
+    right: 5px;
+  }
+}
+
 @media (max-width: 1200px) {
   .product-list {
-    grid-template-columns: repeat(3, 1fr); /* 3 oszlop nagyobb tableteken */
+    grid-template-columns: repeat(3, 1fr); 
   }
 
   .dropdown-menu{
@@ -602,11 +571,11 @@ nav.header-sticky {
 
 @media (max-width: 1024px) {
   .product-list {
-    grid-template-columns: repeat(2, 1fr); /* 2 oszlop kisebb tableteken */
-    margin-left: 220px; /* A sidebar szélessége kisebb tableteken */
+    grid-template-columns: repeat(2, 1fr); 
+    margin-left: 220px;
   }
   .sidebar-categories {
-    width: 220px; /* Kisebb sidebar szélesség tableteken */
+    width: 220px; 
   }
 
   .menu a{
@@ -614,28 +583,37 @@ nav.header-sticky {
   }
 
   #search {
-    width: 80%; /* Adjust width for tablets */
-    font-size: 0.9rem; /* Slightly smaller font size */
-    padding: 8px; /* Adjust padding */
-  }
-}
-
-/* Reszponzív elrendezés mobiltelefonokhoz */
-@media (max-width: 768px) {
-  .product-list {
-    margin-left: 0; /* A sidebar eltűnik, így nincs margó */
-    grid-template-columns: 1fr; /* 1 oszlop mobilon */
-    width: 100%; /* A teljes szélességet kitölti */
+    width: 80%; 
+    font-size: 0.9rem;
+    padding: 8px; 
   }
 
   .sidebar-categories {
-    width: 40%; /* Make the sidebar take the full width of the screen */
-    height: auto; /* Allow the height to adjust dynamically */
-    position: relative; /* Remove fixed positioning for smaller screens */
-    top: 0; /* Reset top positioning */
-    left: 0; /* Reset left positioning */
-    margin-bottom: 20px; /* Add spacing below the sidebar */
-    padding: 15px; /* Adjust padding for smaller screens */
+    width: 220px;
+  }
+
+  .sidebar-categories ul li a {
+    padding: 15px 10px;
+    font-size: 0.7rem;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .product-list {
+    margin-left: 0; 
+    grid-template-columns: 1fr;
+    width: 100%; 
+  }
+
+  .sidebar-categories {
+    width: 40%; 
+    height: auto; 
+    position: relative; 
+    top: 0; 
+    left: 0; 
+    margin-bottom: 20px; 
+    padding: 15px; 
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   }
 
@@ -649,25 +627,25 @@ nav.header-sticky {
   }
 
   #price-value {
-    font-size: 0.8rem; /* Adjust font size for smaller screens */
+    font-size: 0.8rem; 
   }
 
   .upload-button {
-    width: 100%; /* Make the button take the full width of the sidebar */
-    padding: 10px; /* Adjust padding for smaller screens */
-    font-size: 0.7rem; /* Adjust font size for smaller screens */
+    width: 100%; 
+    padding: 10px;
+    font-size: 0.7rem;
   }
 
   .showproductdetails {
-    max-height: 400px; /* Maximális magasság mobilon */
-    overflow-y: auto; /* Görgethetővé teszi, ha a tartalom túl hosszú */
-    padding: 10px; /* Csökkentett padding */
-    font-size: 14px; /* Kisebb betűméret */
+    max-height: 400px; 
+    overflow-y: auto; 
+    padding: 10px; 
+    font-size: 14px; 
   }
 
   #search {
-    width: 80%; /* Adjust width for tablets */
-    font-size: 0.9rem; /* Slightly smaller font size */
-    padding: 8px; /* Adjust padding */
+    width: 80%; 
+    font-size: 0.9rem; 
+    padding: 8px; 
   }
 }

@@ -76,7 +76,7 @@ a {
   line-height: 40px;
   width: 0;
   position: fixed;
-  z-index: 1000;
+  z-index: 10000;
   top: 0;
   left: 0;
   background-color: #e6e3e3;
@@ -168,17 +168,42 @@ nav.header-sticky {
   cursor: pointer;
 }
 
+.sidebar-categories {
+  width: 270px; /* A sidebar szélessége */
+  background-color: #f8f9fa;
+  padding: 20px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  overflow-y: auto; /* Görgethetővé teszi, ha túl hosszú */
+  height: calc(100vh - 87.59px); /* A navbar magasságának levonása */
+  top: 87.59px; /* A navbar magassága */
+  left: 0;
+}
+
 #Searchbar{
   margin-top: 30px;
   display: flex;
   align-items: center;
 }
 
-#searchbuttonToSearchBar{
-  background-color: white;
-  width: 85px;
-  height: 35px;
+#search {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+#searchbuttonToSearchBar {
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
 .dropdown-menu-search, .dropdown-menu {
@@ -190,11 +215,6 @@ nav.header-sticky {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-}
-
-#search {
-  border-radius: 10px;
-  border: none;
 }
 
 .sidebar-list {
@@ -407,7 +427,6 @@ body {
   transform: translateY(0);
 }
 
-/* Controls ----------------------------------------------------------------------*/
 .controls {
   position: relative;
   text-align: right;
@@ -439,6 +458,22 @@ body {
   .dropdown-menu{
     right: 5px;
   }
+
+  .sidebar-categories {
+    width: 40%; 
+    height: auto; 
+    position: relative; 
+    top: 0; 
+    left: 0; 
+    margin-bottom: 20px; 
+    padding: 15px; 
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .sidebar-categories ul li a {
+    padding: 15px 10px;
+    font-size: 0.7rem;
+  }
 }
 
 @media screen and (max-width: 700px) {
@@ -464,6 +499,22 @@ body {
     --input-gap: 0.75rem;
     --input-height: 2.75rem;
     --input-padding-inline: var(--spacing-4);
+  }
+
+  .sidebar-categories {
+    width: 40%; /* Make the sidebar take the full width of the screen */
+    height: auto; /* Allow the height to adjust dynamically */
+    position: relative; /* Remove fixed positioning for smaller screens */
+    top: 0; /* Reset top positioning */
+    left: 0; /* Reset left positioning */
+    margin-bottom: 20px; /* Add spacing below the sidebar */
+    padding: 15px; /* Adjust padding for smaller screens */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .sidebar-categories ul li a {
+    padding: 15px 10px;
+    font-size: 0.7rem;
   }
 
   .item-header .vertical-part {

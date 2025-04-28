@@ -76,7 +76,7 @@ a {
     line-height: 40px;
     width: 0;
     position: fixed;
-    z-index: 1000;
+    z-index: 10000;
     top: 0;
     left: 0;
     background-color: #e6e3e3;
@@ -517,5 +517,9 @@ a {
 @media screen and (max-width: 1020px){
   .dropdown-menu{
     right: 5px;
+  }
+
+  .menu a{
+    font-size: 1.1rem;
   }
 }

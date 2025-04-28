@@ -31,7 +31,6 @@ function stickyNav() {
     searchBtn.style.display = searchBtn.style.display === "none" ? "block" : "none";
   }
   
-  document.getElementById("searchBtn").style.display = "none";
   document.getElementById("cartBtn").style.display = "none";
   
   const cartBtn = document.getElementById("cartBtn");
